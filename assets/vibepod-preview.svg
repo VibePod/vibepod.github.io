@@ -1,0 +1,68 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">VibePod CLI Preview</title>
+  <desc id="desc">A stylized terminal preview showing VibePod CLI setup, help output, and containerized execution logs.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="88" y1="40" x2="1112" y2="738" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE5B4"/>
+      <stop offset="0.52" stop-color="#FFD29A"/>
+      <stop offset="1" stop-color="#FFF8F1"/>
+    </linearGradient>
+    <linearGradient id="windowGrad" x1="126" y1="122" x2="1048" y2="642" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172642"/>
+      <stop offset="1" stop-color="#0B1832"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="190" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F97316"/>
+      <stop offset="1" stop-color="#DC5B0C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="760" rx="28" fill="url(#bgGrad)"/>
+  <circle cx="1010" cy="122" r="110" fill="#0EA5B7" fill-opacity="0.14"/>
+  <circle cx="170" cy="88" r="78" fill="#F97316" fill-opacity="0.2"/>
+
+  <rect x="112" y="92" width="976" height="574" rx="26" fill="url(#windowGrad)" stroke="#2A3A5C" stroke-width="2"/>
+  <rect x="112" y="92" width="976" height="56" rx="26" fill="#223257"/>
+  <rect x="140" y="113" width="12" height="12" rx="6" fill="#FF7C6B"/>
+  <rect x="160" y="113" width="12" height="12" rx="6" fill="#FFC04E"/>
+  <rect x="180" y="113" width="12" height="12" rx="6" fill="#74D47A"/>
+
+  <rect x="232" y="106" width="258" height="28" rx="14" fill="#1A2847"/>
+  <rect x="250" y="116" width="124" height="9" rx="4.5" fill="#8EA0C2"/>
+  <rect x="990" y="104" width="76" height="32" rx="16" fill="url(#accentGrad)"/>
+
+  <rect x="152" y="172" width="896" height="122" rx="14" fill="#101F3C" stroke="#243557"/>
+  <rect x="176" y="196" width="192" height="10" rx="5" fill="#B7C6E2"/>
+  <rect x="176" y="218" width="352" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="240" width="288" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="262" width="236" height="10" rx="5" fill="#8EA0C2"/>
+
+  <rect x="152" y="320" width="430" height="318" rx="14" fill="#101F3C" stroke="#243557"/>
+  <rect x="176" y="344" width="138" height="10" rx="5" fill="#78D18C"/>
+  <rect x="176" y="366" width="268" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="388" width="216" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="410" width="282" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="442" width="98" height="10" rx="5" fill="#78D18C"/>
+  <rect x="176" y="464" width="298" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="486" width="264" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="508" width="306" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="540" width="126" height="10" rx="5" fill="#78D18C"/>
+  <rect x="176" y="562" width="226" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="176" y="584" width="188" height="10" rx="5" fill="#8EA0C2"/>
+
+  <rect x="616" y="320" width="432" height="318" rx="14" fill="#101F3C" stroke="#243557"/>
+  <rect x="640" y="344" width="170" height="10" rx="5" fill="#78D18C"/>
+  <rect x="640" y="366" width="306" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="640" y="388" width="286" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="640" y="410" width="324" height="10" rx="5" fill="#8EA0C2"/>
+
+  <rect x="640" y="446" width="188" height="30" rx="15" fill="#173B35" stroke="#2A675C"/>
+  <rect x="658" y="457" width="152" height="9" rx="4.5" fill="#A6DACD"/>
+
+  <rect x="640" y="496" width="376" height="118" rx="12" fill="#0B1832" stroke="#223257"/>
+  <rect x="662" y="520" width="182" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="662" y="542" width="324" height="10" rx="5" fill="#8EA0C2"/>
+  <rect x="662" y="564" width="298" height="10" rx="5" fill="#8EA0C2"/>
+
+  <rect x="744" y="608" width="210" height="24" rx="12" fill="url(#accentGrad)"/>
+</svg>

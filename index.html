@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VibePod CLI | Containerized AI Coding Agents via PyPI</title>
-  <meta name="description" content="Install VibePod CLI from PyPI with pip and run containerized AI coding-agent workflows from one command surface.">
+  <title>VibePod CLI | Run and Switch AI Agents Locally</title>
+  <meta name="description" content="Install VibePod CLI from PyPI, run coding agents locally, and switch between agents from one command surface.">
   <meta name="theme-color" content="#fff7ed">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VibePod CLI | Containerized AI Coding Agents via PyPI">
-  <meta property="og:description" content="Install from PyPI and run coding agents in containerized, automation-friendly workflows.">
+  <meta property="og:title" content="VibePod CLI | Run and Switch AI Agents Locally">
+  <meta property="og:description" content="Install from PyPI, run coding agents locally, and switch agents without leaving your workflow.">
   <meta property="og:url" content="https://vibepod.github.io/">
   <meta property="og:image" content="https://vibepod.github.io/assets/vibepod-preview.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VibePod CLI | Containerized AI Coding Agents via PyPI">
-  <meta name="twitter:description" content="pip install vibepod, then run container-first agent workflows.">
+  <meta name="twitter:title" content="VibePod CLI | Run and Switch AI Agents Locally">
+  <meta name="twitter:description" content="pip install vibepod, run agents locally, and switch between them fast.">
   <meta name="twitter:image" content="https://vibepod.github.io/assets/vibepod-preview.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
       "name": "vibepod",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Cross-platform",
-      "description": "A CLI for containerized AI coding agent workflows, available on PyPI.",
+      "description": "A CLI to run coding agents locally and switch between agents quickly from one interface.",
       "url": "https://vibepod.github.io/",
       "downloadUrl": "https://pypi.org/project/vibepod/",
       "offers": {
@@ -53,7 +53,10 @@
         <a href="#quickstart">Quickstart</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
     </div>
   </header>
 
@@ -61,8 +64,8 @@
     <section class="hero shell" data-reveal>
       <div class="hero-copy">
         <p class="eyebrow">Open-source CLI</p>
-        <h1>One CLI for containerized AI coding agents.</h1>
-        <p class="hero-lead">Install VibePod from PyPI and run coding agents in isolated containers for safer, repeatable, automation-friendly workflows.</p>
+        <h1>One local CLI to run and switch coding agents.</h1>
+        <p class="hero-lead">Install VibePod from PyPI, run coding agents locally, and switch between agents without breaking flow.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">View on GitHub</a>
@@ -70,42 +73,42 @@
         </div>
         <ul class="hero-proof" role="list">
           <li>Published on PyPI</li>
-          <li>Container-first execution</li>
-          <li>Single CLI interface</li>
+          <li>Local-first execution</li>
+          <li>Fast agent switching</li>
           <li>Ready for scripts and CI</li>
         </ul>
       </div>
       <figure class="hero-visual">
         <img
-          src="assets/vibepod-preview.svg"
-          alt="Terminal-style preview of VibePod CLI running containerized coding-agent commands."
+          src="screenshots/tool.png"
+          alt="Screenshot of the VibePod CLI tool interface."
           width="1200"
           height="760"
           fetchpriority="high">
-        <figcaption>CLI-first workflow preview for local and automated environments.</figcaption>
+        <figcaption>CLI-first local workflow with quick agent switching.</figcaption>
       </figure>
     </section>
 
     <section class="value-strip" aria-label="Core value" data-reveal>
       <div class="shell value-grid">
         <article>
-          <h2>Safer execution</h2>
-          <p>Run coding agents in isolated containers instead of directly on host environments.</p>
+          <h2>Local control</h2>
+          <p>Run coding agents on your machine with a predictable local workflow.</p>
         </article>
         <article>
-          <h2>Repeatable results</h2>
-          <p>Keep workflows consistent across machines, teammates, and CI pipelines.</p>
+          <h2>Fast switching</h2>
+          <p>Move from one agent to another without changing your core command flow.</p>
         </article>
         <article>
-          <h2>Faster integration</h2>
-          <p>Use one CLI entrypoint that fits existing developer toolchains.</p>
+          <h2>One command surface</h2>
+          <p>Use one CLI entrypoint across local dev, scripts, and team workflows.</p>
         </article>
       </div>
     </section>
 
     <section class="section shell" id="how-it-works" data-reveal>
       <p class="eyebrow">How it works</p>
-      <h2>Three steps to agent execution</h2>
+      <h2>Three steps to local agent switching</h2>
       <ol class="steps" role="list">
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">1</span>
@@ -114,44 +117,44 @@
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">2</span>
-          <h3>Choose task context</h3>
-          <p>Select your repository and preferred coding-agent workflow from a unified CLI surface.</p>
+          <h3>Pick an agent</h3>
+          <p>Start with the agent that fits your current task and repository context.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">3</span>
-          <h3>Run in isolation</h3>
-          <p>Execute agent tasks inside container boundaries and review output confidently.</p>
+          <h3>Switch and continue</h3>
+          <p>Swap to another agent when needed and continue locally without restarting your workflow.</p>
         </li>
       </ol>
     </section>
 
     <section class="section shell" id="features" data-reveal>
       <p class="eyebrow">Core features</p>
-      <h2>CLI-first workflow control</h2>
+      <h2>CLI-first local workflow control</h2>
       <div class="feature-grid">
         <article class="feature-card" data-reveal>
-          <h3>Unified command surface</h3>
-          <p>Use one CLI to standardize agent workflows across local and shared setups.</p>
-          <p class="proof">Proof point: single entrypoint design for coding-agent tasks.</p>
+          <h3>Unified local command surface</h3>
+          <p>Use one CLI to run and manage multiple coding agents in the same local flow.</p>
+          <p class="proof">Proof point: single entrypoint design for multi-agent tasks.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Containerized isolation</h3>
-          <p>Separate agent execution from your host machine for safer iteration.</p>
-          <p class="proof">Proof point: container boundaries reduce environment bleed-through.</p>
+          <h3>Switch agents quickly</h3>
+          <p>Move from one coding agent to another in seconds when the task changes.</p>
+          <p class="proof">Proof point: less context churn between tools and prompts.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Reproducible runtime</h3>
-          <p>Keep behavior predictable by running agents in controlled container contexts.</p>
-          <p class="proof">Proof point: environment consistency across developers and CI jobs.</p>
+          <h3>Consistent local runtime</h3>
+          <p>Keep behavior predictable by using the same local CLI flow across projects.</p>
+          <p class="proof">Proof point: repeatable commands across developer machines.</p>
         </article>
         <article class="feature-card" data-reveal>
           <h3>Automation-ready commands</h3>
-          <p>Script workflows directly from shell tooling and pipeline jobs.</p>
+          <p>Script local agent runs and switching workflows directly from shell tooling.</p>
           <p class="proof">Proof point: CLI ergonomics map naturally to automation systems.</p>
         </article>
         <article class="feature-card" data-reveal>
           <h3>Developer-centric flow</h3>
-          <p>Keep onboarding focused: install, verify, and start running tasks quickly.</p>
+          <p>Install once, run locally, and keep switching agents without friction.</p>
           <p class="proof">Proof point: terminal-first interaction cuts UI overhead.</p>
         </article>
         <article class="feature-card" data-reveal>
@@ -202,8 +205,8 @@
       <div class="shell demo-grid">
         <div>
           <p class="eyebrow">Quickstart</p>
-          <h2>Install, verify, and begin</h2>
-          <p class="section-lead">Install directly from PyPI, then use the GitHub README for deeper workflow examples and flags.</p>
+      <h2>Install, verify, and switch locally</h2>
+      <p class="section-lead">Install from PyPI, verify your setup, then use the README to run and switch agents in local workflows.</p>
           <pre class="code-block"><code>python -m pip install vibepod
 vibepod --help</code></pre>
           <p class="install-hint">Tip: pin versions in automation with <code>python -m pip install vibepod==&lt;version&gt;</code>.</p>
@@ -211,13 +214,11 @@ vibepod --help</code></pre>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli#readme" target="_blank" rel="noreferrer">Open README</a>
         </div>
         <figure class="demo-frame">
-          <img
-            src="assets/vibepod-preview.svg"
-            alt="VibePod CLI terminal output preview with setup and execution commands."
-            width="1200"
-            height="760"
-            loading="lazy">
-          <figcaption>Static preview asset for fast loading on slower networks.</figcaption>
+          <pre class="code-block"><code>$ vp version
+VibePod CLI: 0.2.1
+Python:      3.12.3
+Docker:      28.1.1</code></pre>
+          <figcaption>Live-style local runtime preview.</figcaption>
         </figure>
       </div>
     </section>
@@ -230,27 +231,27 @@ vibepod --help</code></pre>
         <p>Install from PyPI using <code>python -m pip install vibepod</code>, then use the README for command examples.</p>
       </details>
       <details>
-        <summary>Do I need a container runtime?</summary>
-        <p>Yes, containerized execution is the core model, so a compatible runtime is typically required for full functionality.</p>
+        <summary>Can I use it for local workflows?</summary>
+        <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine.</p>
       </details>
       <details>
         <summary>Can this run in CI or automation pipelines?</summary>
-        <p>Yes. The CLI-first interface is designed to fit shell scripts and CI/CD jobs.</p>
+        <p>Yes. The same CLI flow used locally can be scripted for CI/CD jobs.</p>
       </details>
       <details>
-        <summary>Which coding agents are supported?</summary>
-        <p>The project is positioned as one CLI for containerized AI coding agents. Confirm current provider support in the repo docs.</p>
+        <summary>Which coding agents can I switch between?</summary>
+        <p>VibePod is built for switching across supported coding agents from one CLI. Confirm current support in the repo docs.</p>
       </details>
       <details>
         <summary>Where can I track roadmap and issues?</summary>
-        <p>Use the GitHub repository issues and discussions to follow changes and request features.</p>
+        <p>Use the GitHub <a href="https://github.com/VibePod/vibepod-cli/issues" target="_blank" rel="noreferrer">issues</a> page to follow changes and request features.</p>
       </details>
     </section>
 
     <section class="section final-shell" data-reveal>
       <div class="shell final-cta">
-        <h2>Run coding agents with safer, repeatable CLI workflows.</h2>
-        <p>Install from PyPI, verify locally, then adapt the GitHub examples to your team’s environment.</p>
+        <h2>Run and switch coding agents locally from one CLI.</h2>
+        <p>Install from PyPI, verify once, and keep moving between agents as your task evolves.</p>
         <div class="hero-actions">
           <a class="button button-primary pulse" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install vibepod</a>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Open GitHub Repo</a>
@@ -270,6 +271,13 @@ vibepod --help</code></pre>
       </div>
     </div>
   </footer>
+
+  <div class="lightbox" id="agent-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lightbox-close" type="button" aria-label="Close enlarged image">Close</button>
+    <figure class="lightbox-frame">
+      <img class="lightbox-image" alt="" src="">
+    </figure>
+  </div>
 
   <script src="script.js" defer></script>
 </body>

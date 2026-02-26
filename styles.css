@@ -379,20 +379,22 @@ p {
 }
 
 .value-grid article {
-  padding: var(--space-5);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
+  padding: var(--space-3) var(--space-2) 0;
+  background: transparent;
+  border: 0;
+  border-top: 2px solid rgba(249, 115, 22, 0.35);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .value-grid h2 {
   font-size: 1.05rem;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .value-grid p {
   color: var(--text-muted);
+  max-width: 30ch;
 }
 
 .section {

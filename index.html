@@ -47,10 +47,10 @@
         <span class="brand-text">VibePod CLI</span>
       </a>
       <nav class="main-nav" aria-label="Primary">
+        <a href="#quickstart">Quickstart</a>
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
-        <a href="#quickstart">Quickstart</a>
         <a href="#faq">FAQ</a>
       </nav>
       <div class="header-actions">
@@ -89,41 +89,46 @@
       </figure>
     </section>
 
-    <section class="value-strip" aria-label="Core value" data-reveal>
-      <div class="shell value-grid">
-        <article>
-          <h2>Local control</h2>
-          <p>Run coding agents on your machine with a predictable local workflow.</p>
-        </article>
-        <article>
-          <h2>Fast switching</h2>
-          <p>Move from one agent to another without changing your core command flow.</p>
-        </article>
-        <article>
-          <h2>One command surface</h2>
-          <p>Use one CLI entrypoint across local dev, scripts, and team workflows.</p>
-        </article>
+    <section class="section demo-section" id="quickstart" data-reveal>
+      <div class="shell demo-grid">
+        <div>
+          <p class="eyebrow">Quickstart</p>
+          <h2>Install, verify, and switch locally</h2>
+          <p class="section-lead">Install from PyPI, verify your setup, then use the README to run and switch agents in local workflows.</p>
+          <pre class="code-block"><code>python -m pip install vibepod
+vibepod --help</code></pre>
+          <p class="install-hint">Tip: pin versions in automation with <code>python -m pip install vibepod==&lt;version&gt;</code>.</p>
+          <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Open PyPI</a>
+          <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli#readme" target="_blank" rel="noreferrer">Open README</a>
+        </div>
+        <figure class="demo-frame">
+          <pre class="code-block"><code>$ vp version
+VibePod CLI: 0.2.1
+Python:      3.12.3
+Docker:      28.1.1</code></pre>
+          <figcaption>Live-style local runtime preview.</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="section shell" id="how-it-works" data-reveal>
       <p class="eyebrow">How it works</p>
-      <h2>Three steps to local agent switching</h2>
+      <h2>Three commands for local agent switching</h2>
       <ol class="steps" role="list">
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">1</span>
-          <h3>Install and verify</h3>
-          <p>Install from PyPI with <code>python -m pip install vibepod</code>, then verify with <code>vibepod --help</code>.</p>
+          <h3>List available agents</h3>
+          <p>Run <code>vp list</code> to see which agents are available in your local setup.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">2</span>
-          <h3>Pick an agent</h3>
-          <p>Start with the agent that fits your current task and repository context.</p>
+          <h3>Run the agent you want</h3>
+          <p>Start work with <code>vp run AGENT</code> and switch agents by rerunning the command with a different agent.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">3</span>
-          <h3>Switch and continue</h3>
-          <p>Swap to another agent when needed and continue locally without restarting your workflow.</p>
+          <h3>Open the local interface</h3>
+          <p>Use <code>vp ui</code> when you want a local UI to monitor and manage your active workflow.</p>
         </li>
       </ol>
     </section>
@@ -197,28 +202,6 @@
         <figure class="tool-card" data-reveal>
           <img src="screenshots/opencode.png" alt="Screenshot of VibePod workflow with OpenCode." loading="lazy" width="1256" height="871">
           <figcaption>OpenCode</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="section demo-section" id="quickstart" data-reveal>
-      <div class="shell demo-grid">
-        <div>
-          <p class="eyebrow">Quickstart</p>
-      <h2>Install, verify, and switch locally</h2>
-      <p class="section-lead">Install from PyPI, verify your setup, then use the README to run and switch agents in local workflows.</p>
-          <pre class="code-block"><code>python -m pip install vibepod
-vibepod --help</code></pre>
-          <p class="install-hint">Tip: pin versions in automation with <code>python -m pip install vibepod==&lt;version&gt;</code>.</p>
-          <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Open PyPI</a>
-          <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli#readme" target="_blank" rel="noreferrer">Open README</a>
-        </div>
-        <figure class="demo-frame">
-          <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.2.1
-Python:      3.12.3
-Docker:      28.1.1</code></pre>
-          <figcaption>Live-style local runtime preview.</figcaption>
         </figure>
       </div>
     </section>

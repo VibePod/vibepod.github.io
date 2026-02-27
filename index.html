@@ -119,16 +119,18 @@ Docker:      28.1.1</code></pre>
           <span class="step-number" aria-hidden="true">1</span>
           <h3>List available agents</h3>
           <p>Run <code>vp list</code> to see which agents are available in your local setup.</p>
+          <p>Note: <code>vp list</code> also shows active workspaces.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">2</span>
           <h3>Run the agent you want</h3>
           <p>Start work with <code>vp run AGENT</code> and switch agents by rerunning the command with a different agent.</p>
+          <p>Note: the current folder is used as the active agent workspace.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">3</span>
           <h3>Open the local interface</h3>
-          <p>Use <code>vp ui</code> when you want a local UI to monitor and manage your active workflow.</p>
+          <p>Use <code>vp ui</code> when you want a local UI to monitor and manage your active workflow; it opens automatically in your default browser.</p>
         </li>
       </ol>
     </section>
@@ -173,7 +175,7 @@ Docker:      28.1.1</code></pre>
     <section class="section shell tool-section" id="screenshots" data-reveal>
       <p class="eyebrow">Tool screenshots</p>
       <h2>Real captures from every supported tool</h2>
-      <p class="section-lead">These are the screenshots you added for Auggie, Claude Code, GitHub Copilot, Gemini, Mistral, OpenAI Codex, and OpenCode.</p>
+      <p class="section-lead">Included screenshots cover Auggie, Claude Code, GitHub Copilot, Gemini, Mistral, OpenAI Codex, and OpenCode.</p>
       <div class="tool-grid">
         <figure class="tool-card" data-reveal>
           <img src="screenshots/augment%20auggie.png" alt="Screenshot of VibePod workflow with Augment Auggie." loading="lazy" width="1256" height="871">
@@ -216,6 +218,14 @@ Docker:      28.1.1</code></pre>
       <details>
         <summary>Can I use it for local workflows?</summary>
         <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine.</p>
+      </details>
+      <details>
+        <summary>Does VibePod CLI support auto-complete?</summary>
+        <p>Yes. Run <code>vp --install-completion</code> to enable auto-complete and speed up command entry and agent selection.</p>
+      </details>
+      <details>
+        <summary>Which folder is used as the agent workspace?</summary>
+        <p>The current working directory where commands are run is used as the active agent workspace.</p>
       </details>
       <details>
         <summary>Can this run in CI or automation pipelines?</summary>

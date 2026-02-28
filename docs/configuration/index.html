@@ -720,10 +720,9 @@
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="nt">proxy</span><span class="p">:</span>
 <a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vibepod/proxy:latest</span>
-<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">  </span><span class="nt">db_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/proxy.db</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="w">  </span><span class="nt">ca_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="w">  </span><span class="nt">ca_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy/mitmproxy-ca-cert.pem</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="w">  </span><span class="nt">db_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/proxy.db</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">  </span><span class="nt">ca_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="w">  </span><span class="nt">ca_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy/mitmproxy-ca-cert.pem</span>
 </code></pre></div>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <p>These variables override the corresponding config keys without editing any file:</p>
@@ -760,11 +759,6 @@
 <td><code>VP_DATASETTE_PORT</code></td>
 <td><code>logging.ui_port</code></td>
 <td><code>VP_DATASETTE_PORT=9001</code></td>
-</tr>
-<tr>
-<td><code>VP_PROXY_PORT</code></td>
-<td><code>proxy.port</code></td>
-<td><code>VP_PROXY_PORT=9090</code></td>
 </tr>
 <tr>
 <td><code>VP_PROXY_ENABLED</code></td>
@@ -842,6 +836,7 @@
 <p>Commit this file to share project defaults with your team.</p>
 <h2 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h2>
 <p>VibePod starts a <code>vibepod-proxy</code> container alongside every agent. It acts as an HTTP(S) MITM proxy and logs all outbound requests to a SQLite database viewable in the Datasette UI (<code>vp logs start</code>).</p>
+<p>The proxy is reachable inside the Docker network as <code>http://vibepod-proxy:8080</code>. It is not published on a host port.</p>
 <p>To disable the proxy globally:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">proxy</span><span class="p">:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>

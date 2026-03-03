@@ -436,6 +436,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-customization-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image customization workflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Image customization workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-extend-an-existing-image-for-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Extend an existing image for an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-a-new-image-for-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add a new image for an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#passing-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -684,6 +723,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-customization-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image customization workflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Image customization workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-extend-an-existing-image-for-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Extend an existing image for an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-a-new-image-for-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add a new image for an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#passing-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -903,56 +981,105 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
+<h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>). Image customization means changing the image used for one of those IDs.</p>
+<h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
+<p>Example: add tools to the default Claude image.</p>
+<ol>
+<li>Create a Dockerfile that extends the current base image.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># Dockerfile.claude</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">nezhar/claude-container:latest</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c"># Add project-specific utilities.</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ripgrep<span class="w"> </span>jq<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+</code></pre></div>
+<ol>
+<li>Build and tag the derived image.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.claude<span class="w"> </span>-t<span class="w"> </span>myorg/claude-container:with-tools<span class="w"> </span>.
+</code></pre></div>
+<ol>
+<li>Run with the new image (one-off) or set it in config (persistent).</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># one-off</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/claude-container:with-tools<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (or .vibepod/config.yaml)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/claude-container:with-tools</span>
+</code></pre></div>
+<h3 id="2-add-a-new-image-for-an-agent">2. Add a new image for an agent<a class="headerlink" href="#2-add-a-new-image-for-an-agent" title="Permanent link">&para;</a></h3>
+<p>Example: point <code>opencode</code> at a newly published internal image.</p>
+<ol>
+<li>Build/publish your image to a registry (for example <code>registry.example.com/team/opencode:2026-03-01</code>).</li>
+<li>Attach that image to the target agent in config.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.example.com/team/opencode:2026-03-01</span>
+</code></pre></div>
+<ol>
+<li>Start the agent.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode
+</code></pre></div>
+<p>You can also test quickly without editing config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">VP_IMAGE_OPENCODE</span><span class="o">=</span>registry.example.com/team/opencode:2026-03-01<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>opencode
+</code></pre></div>
 <h2 id="passing-environment-variables">Passing environment variables<a class="headerlink" href="#passing-environment-variables" title="Permanent link">&para;</a></h2>
 <p>Use <code>-e</code> / <code>--env</code> to inject variables at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
 </code></pre></div>
 <p>Persistent per-agent env vars can also be set in config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
 </code></pre></div>
 <h2 id="init-scripts-before-startup">Init scripts before startup<a class="headerlink" href="#init-scripts-before-startup" title="Permanent link">&para;</a></h2>
 <p>Use <code>agents.&lt;agent&gt;.init</code> to run shell commands in the container before the agent launches. This is useful for installing extra tools in a custom image workflow.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
 </code></pre></div>
 <p>The <code>init</code> commands run on every <code>vp run</code> for that agent and must be idempotent.</p>
 <h2 id="connecting-to-a-docker-compose-network">Connecting to a Docker Compose network<a class="headerlink" href="#connecting-to-a-docker-compose-network" title="Permanent link">&para;</a></h2>
 <p>When your workspace contains a <code>docker-compose.yml</code> or <code>compose.yml</code>, VibePod detects it and offers to connect the agent container to an existing network so it can reach your running services.</p>
 <p>You can also specify the network explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
 </code></pre></div>
 <h2 id="individual-agents">Individual agents<a class="headerlink" href="#individual-agents" title="Permanent link">&para;</a></h2>
 <h3 id="claude-anthropic">Claude (Anthropic)<a class="headerlink" href="#claude-anthropic" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
 </code></pre></div>
 <p>Credentials are stored in <code>~/.config/vibepod/agents/claude/</code>. On first run, Claude's interactive setup will guide you through API key configuration.</p>
 <h3 id="gemini-google">Gemini (Google)<a class="headerlink" href="#gemini-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
 </code></pre></div>
 <h3 id="opencode-openai">OpenCode (OpenAI)<a class="headerlink" href="#opencode-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
 <h3 id="devstral-mistral">Devstral (Mistral)<a class="headerlink" href="#devstral-mistral" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Devstral runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
 </div>
 <h3 id="auggie-augment-code">Auggie (Augment Code)<a class="headerlink" href="#auggie-augment-code" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
 </code></pre></div>
 <h3 id="copilot-github">Copilot (GitHub)<a class="headerlink" href="#copilot-github" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
 </code></pre></div>
 <h3 id="codex-openai">Codex (OpenAI)<a class="headerlink" href="#codex-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
 </code></pre></div>
 
 

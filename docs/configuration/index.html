@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
@@ -825,24 +825,31 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># pulls myorg/claude-container:latest</span>
 </code></pre></div>
 <h2 id="project-level-config">Project-level config<a class="headerlink" href="#project-level-config" title="Permanent link">&para;</a></h2>
-<p>Create <code>.vibepod/config.yaml</code> in your repository to apply settings that only take effect inside that project. Only the keys you specify are merged — everything else falls through to the global config and defaults.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># .vibepod/config.yaml</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">default_agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencode</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://my-internal-proxy/v1</span>
+<p>Use <code>vp config init</code> in your repository to create <code>.vibepod/config.yaml</code> automatically when it does not already exist:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+</code></pre></div>
+<p>If <code>.vibepod/config.yaml</code> already exists, this command exits without modifying it; run <code>vp config init --force</code> to replace the file.</p>
+<p>This writes a minimal starter file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+<p>Then add only the keys you want to override. Project config is merged on top of global config and defaults.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">default_agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencode</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://my-internal-proxy/v1</span>
 </code></pre></div>
 <p>Commit this file to share project defaults with your team.</p>
 <h2 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h2>
 <p>VibePod starts a <code>vibepod-proxy</code> container alongside every agent. It acts as an HTTP(S) MITM proxy and logs all outbound requests to a SQLite database viewable in the Datasette UI (<code>vp logs start</code>).</p>
 <p>The proxy is reachable inside the Docker network as <code>http://vibepod-proxy:8080</code>. It is not published on a host port.</p>
 <p>To disable the proxy globally:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">proxy</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">proxy</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Or at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 
 

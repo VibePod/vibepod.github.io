@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
@@ -501,6 +501,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#path" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -834,6 +845,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#path" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1138,152 +1160,160 @@
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp config [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
+<h5 id="init">init<a class="headerlink" href="#init" title="Permanent link">&para;</a></h5>
+<p>Create a minimal project config in the current directory.</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp config init [OPTIONS]
+</code></pre></div>
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>  --force  Overwrite existing project config if present
+</code></pre></div>
 <h5 id="path">path<a class="headerlink" href="#path" title="Permanent link">&para;</a></h5>
 <p>Show config and logs paths.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp config path [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp config path [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>  --global   Show global config path only
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  --project  Show project config path only
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  --global   Show global config path only
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  --project  Show project config path only
 </code></pre></div>
 <h5 id="show">show<a class="headerlink" href="#show" title="Permanent link">&para;</a></h5>
 <p>Show effective merged config.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp config show [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp config show [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  --json  Output as JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  --json  Output as JSON
 </code></pre></div>
 <h4 id="d">d<a class="headerlink" href="#d" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run devstral</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp d [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp d [OPTIONS]
 </code></pre></div>
 <h4 id="g">g<a class="headerlink" href="#g" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run gemini</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp g [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp g [OPTIONS]
 </code></pre></div>
 <h4 id="list">list<a class="headerlink" href="#list" title="Permanent link">&para;</a></h4>
 <p>List available agents and running containers.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp list [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp list [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  -r, --running  Show only running agents
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  --json         Output JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  -r, --running  Show only running agents
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  --json         Output JSON
 </code></pre></div>
 <h4 id="logs">logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h4>
 <p>View logs and traffic UI</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp logs [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp logs [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="start">start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h5>
 <p>Start or reuse Datasette for session and proxy logs.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>vp logs start [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp logs start [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>  --port INTEGER  Datasette host port
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  --no-open       Do not open browser
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  --port INTEGER  Datasette host port
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  --no-open       Do not open browser
 </code></pre></div>
 <h5 id="status">status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h5>
 <p>Show Datasette container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp logs status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp logs status [OPTIONS]
 </code></pre></div>
 <h5 id="stop">stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h5>
 <p>Stop the Datasette container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp logs stop [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp logs stop [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>  -f, --force  Force stop
 </code></pre></div>
 <h5 id="ui">ui<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h5>
 <p>Alias for <code>vp logs start</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp logs ui [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp logs ui [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>  --port INTEGER  Datasette host port
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  --no-open       Do not open browser
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>  --port INTEGER  Datasette host port
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>  --no-open       Do not open browser
 </code></pre></div>
 <h4 id="o">o<a class="headerlink" href="#o" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run opencode</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp o [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp o [OPTIONS]
 </code></pre></div>
 <h4 id="p">p<a class="headerlink" href="#p" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run copilot</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>vp p [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp p [OPTIONS]
 </code></pre></div>
 <h4 id="proxy">proxy<a class="headerlink" href="#proxy" title="Permanent link">&para;</a></h4>
 <p>Manage the HTTP(S) proxy</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="start_1">start<a class="headerlink" href="#start_1" title="Permanent link">&para;</a></h5>
 <p>Start the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp proxy start [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp proxy start [OPTIONS]
 </code></pre></div>
 <h5 id="status_1">status<a class="headerlink" href="#status_1" title="Permanent link">&para;</a></h5>
 <p>Show proxy container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp proxy status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp proxy status [OPTIONS]
 </code></pre></div>
 <h5 id="stop_1">stop<a class="headerlink" href="#stop_1" title="Permanent link">&para;</a></h5>
 <p>Stop the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp proxy stop [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp proxy stop [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h4>
 <p>Start an agent container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp run [OPTIONS] [AGENT]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp run [OPTIONS] [AGENT]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  [AGENT]               Agent to run
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  -w, --workspace PATH  Workspace directory  [default: .]
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>  --pull                Pull latest image before run
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>  -d, --detach          Run container in background
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>  -e, --env TEXT        Environment variable KEY=VALUE
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>  --name TEXT           Custom container name
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>  --network TEXT        Additional Docker network to connect the container to
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  [AGENT]               Agent to run
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>  --pull                Pull latest image before run
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>  -d, --detach          Run container in background
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>  --name TEXT           Custom container name
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>  --network TEXT        Additional Docker network to connect the container to
 </code></pre></div>
 <h4 id="stop_2">stop<a class="headerlink" href="#stop_2" title="Permanent link">&para;</a></h4>
 <p>Stop one agent container, or all managed containers.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp stop [OPTIONS] [AGENT]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp stop [OPTIONS] [AGENT]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  [AGENT]      Agent to stop
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  -a, --all    Stop all VibePod managed containers
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>  [AGENT]      Agent to stop
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>  -a, --all    Stop all VibePod managed containers
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="ui_1">ui<a class="headerlink" href="#ui_1" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp logs start</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp ui [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp ui [OPTIONS]
 </code></pre></div>
 <h4 id="version">version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h4>
 <p>Show version and runtime information.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>vp version [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>vp version [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>  --json  Output as JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>  --json  Output as JSON
 </code></pre></div>
 <h4 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run codex</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>vp x [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>vp x [OPTIONS]
 </code></pre></div>
 
 

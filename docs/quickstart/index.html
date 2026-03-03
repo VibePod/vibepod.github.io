@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
@@ -404,6 +404,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bootstrap-a-project-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap a project config
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#run-in-the-background" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -634,6 +645,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bootstrap-a-project-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap a project config
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#run-in-the-background" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -730,16 +752,23 @@
 <p>Use <code>-w</code> / <code>--workspace</code> to target any directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
 </code></pre></div>
+<h2 id="bootstrap-a-project-config">Bootstrap a project config<a class="headerlink" href="#bootstrap-a-project-config" title="Permanent link">&para;</a></h2>
+<p>Create a project-level config file that you can extend later:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+</code></pre></div>
+<p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
 <h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
 </code></pre></div>
 <p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
 </code></pre></div>
 <h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
 <p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
 </code></pre></div>
 <p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>

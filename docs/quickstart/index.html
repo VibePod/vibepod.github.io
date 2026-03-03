@@ -759,16 +759,20 @@
 <p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
+<p>Add a specific agent block into the project config with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
+</code></pre></div>
+<p>If that agent is already configured under <code>agents</code>, the command exits without changing the file.</p>
 <h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
 </code></pre></div>
 <p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
 </code></pre></div>
 <h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
 <p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
 </code></pre></div>
 <p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>

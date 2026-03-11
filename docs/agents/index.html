@@ -425,6 +425,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#auto-pulling-the-latest-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-pulling the latest image
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overriding-the-image" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -520,10 +531,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#customizing-the-container-before-starting-the-agent" class="md-nav__link">
+  <a href="#interacting-with-a-detached-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Customizing the container before starting the agent
+        Interacting with a detached container
       
     </span>
   </a>
@@ -773,6 +784,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#auto-pulling-the-latest-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-pulling the latest image
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overriding-the-image" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -868,10 +890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#customizing-the-container-before-starting-the-agent" class="md-nav__link">
+  <a href="#interacting-with-a-detached-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Customizing the container before starting the agent
+        Interacting with a detached container
       
     </span>
   </a>
@@ -1094,14 +1116,34 @@
 </table>
 <h2 id="first-run-authentication">First run &amp; authentication<a class="headerlink" href="#first-run-authentication" title="Permanent link">&para;</a></h2>
 <p>Start any agent for the first time with <code>vp run &lt;agent&gt;</code>. The container will prompt you to authenticate (browser OAuth, API key entry, or device flow depending on the provider). Once authenticated, credentials are written to the persisted config directory and reused on subsequent runs.</p>
+<h2 id="auto-pulling-the-latest-image">Auto-pulling the latest image<a class="headerlink" href="#auto-pulling-the-latest-image" title="Permanent link">&para;</a></h2>
+<p>VibePod automatically pulls the latest image for an agent before every run. This ensures you always start with the most up-to-date container without manual intervention.</p>
+<p>To disable auto-pull globally:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<p>Or for a specific agent only:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">devstral</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<p>Per-agent <code>auto_pull</code> takes precedence over the global setting. For example, you can disable it globally but keep it on for a specific agent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">          </span><span class="c1"># skip pull by default</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># except claude — always pull</span>
+</code></pre></div>
+<p>You can also force a one-off pull via the CLI flag regardless of config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--pull
+</code></pre></div>
+<p>The resolution order is: <code>--pull</code> flag &gt; per-agent <code>auto_pull</code> &gt; global <code>auto_pull</code>.</p>
 <h2 id="overriding-the-image">Overriding the image<a class="headerlink" href="#overriding-the-image" title="Permanent link">&para;</a></h2>
 <p>You can point VibePod at a custom image via an environment variable:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/my-claude:dev<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/my-claude:dev<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <p>Or permanently via your <a href="../configuration/">global config</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
 <p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>). Image customization means changing the image used for one of those IDs.</p>
@@ -1110,29 +1152,29 @@
 <ol>
 <li>Create a Dockerfile that extends the current base image.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># Dockerfile.claude</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">nezhar/claude-container:latest</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c"># Add project-specific utilities.</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ripgrep<span class="w"> </span>jq<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># Dockerfile.claude</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">nezhar/claude-container:latest</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c"># Add project-specific utilities.</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ripgrep<span class="w"> </span>jq<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
 </code></pre></div>
 <ol>
 <li>Build and tag the derived image.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.claude<span class="w"> </span>-t<span class="w"> </span>myorg/claude-container:with-tools<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.claude<span class="w"> </span>-t<span class="w"> </span>myorg/claude-container:with-tools<span class="w"> </span>.
 </code></pre></div>
 <ol>
 <li>Run with the new image (one-off) or set it in config (persistent).</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># one-off</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/claude-container:with-tools<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># one-off</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/claude-container:with-tools<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (or .vibepod/config.yaml)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/claude-container:with-tools</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (or .vibepod/config.yaml)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/claude-container:with-tools</span>
 </code></pre></div>
 <h3 id="2-add-a-new-image-for-an-agent">2. Add a new image for an agent<a class="headerlink" href="#2-add-a-new-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: point <code>opencode</code> at a newly published internal image.</p>
@@ -1140,82 +1182,65 @@
 <li>Build/publish your image to a registry (for example <code>registry.example.com/team/opencode:2026-03-01</code>).</li>
 <li>Attach that image to the target agent in config.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.example.com/team/opencode:2026-03-01</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.example.com/team/opencode:2026-03-01</span>
 </code></pre></div>
 <ol>
 <li>Start the agent.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode
 </code></pre></div>
 <p>You can also test quickly without editing config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">VP_IMAGE_OPENCODE</span><span class="o">=</span>registry.example.com/team/opencode:2026-03-01<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>opencode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">VP_IMAGE_OPENCODE</span><span class="o">=</span>registry.example.com/team/opencode:2026-03-01<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>opencode
 </code></pre></div>
 <h2 id="passing-environment-variables">Passing environment variables<a class="headerlink" href="#passing-environment-variables" title="Permanent link">&para;</a></h2>
 <p>Use <code>-e</code> / <code>--env</code> to inject variables at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
 </code></pre></div>
 <p>Persistent per-agent env vars can also be set in config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
 </code></pre></div>
 <h2 id="init-scripts-before-startup">Init scripts before startup<a class="headerlink" href="#init-scripts-before-startup" title="Permanent link">&para;</a></h2>
 <p>Use <code>agents.&lt;agent&gt;.init</code> to run shell commands in the container before the agent launches. This is useful for installing extra tools in a custom image workflow.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
 </code></pre></div>
 <p>The <code>init</code> commands run on every <code>vp run</code> for that agent and must be idempotent.</p>
 <h2 id="detached-mode">Detached mode<a class="headerlink" href="#detached-mode" title="Permanent link">&para;</a></h2>
-<p>Use <code>-d</code> / <code>--detach</code> to start an agent container in the background without attaching your terminal. This is useful when you want to customise the container environment before launching the agent interactively.</p>
+<p>Use <code>-d</code> / <code>--detach</code> to start an agent container in the background without attaching your terminal. The agent process starts immediately inside the container — <code>-d</code> only controls whether VibePod attaches your terminal to it.</p>
 <h3 id="basic-usage">Basic usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># ✓ Started vibepod-claude-a1b2c3d4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># ✓ Started vibepod-claude-a1b2c3d4</span>
 </code></pre></div>
 <p>The command prints the container name and returns immediately. You can also find it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
 </code></pre></div>
-<h3 id="customizing-the-container-before-starting-the-agent">Customizing the container before starting the agent<a class="headerlink" href="#customizing-the-container-before-starting-the-agent" title="Permanent link">&para;</a></h3>
-<p>A common workflow is to start detached, exec into the container to make adjustments, and then start the agent manually:</p>
-<ol>
-<li>
-<p><strong>Start the container in detached mode.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># ✓ Started vibepod-claude-a1b2c3d4</span>
+<h3 id="interacting-with-a-detached-container">Interacting with a detached container<a class="headerlink" href="#interacting-with-a-detached-container" title="Permanent link">&para;</a></h3>
+<p>The agent is already running inside the container. You can exec into it to inspect state, install extra tools, or interact with the agent alongside its running process:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w"> </span>bash
 </code></pre></div>
-</li>
-<li>
-<p><strong>Exec into the running container.</strong></p>
-<p>Use the container name printed above (or grab it from <code>vp list</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w"> </span>bash
-</code></pre></div>
-</li>
-<li>
-<p><strong>Apply your customizations</strong> — install packages, edit config files, set environment variables, etc.</p>
-</li>
-<li>
-<p><strong>Start the agent process</strong> from inside the container when you are ready.</p>
-</li>
-</ol>
+<p>Use the container name printed by <code>vp run -d</code> or shown in <code>vp list</code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you find yourself running the same setup steps every time, consider using <a href="#init-scripts-before-startup"><code>agents.&lt;agent&gt;.init</code></a> commands or <a href="#image-customization-workflows">extending the base image</a> instead.</p>
+<p>If you need to run setup commands <strong>before</strong> the agent launches, use <a href="#init-scripts-before-startup"><code>agents.&lt;agent&gt;.init</code></a> or <a href="#image-customization-workflows">extend the base image</a> instead — these run inside the container before the agent process starts.</p>
 </div>
 <h3 id="managing-detached-containers">Managing detached containers<a class="headerlink" href="#managing-detached-containers" title="Permanent link">&para;</a></h3>
 <p>Check running agents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>list<span class="w">              </span><span class="c1"># shows running + configured agents</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">    </span><span class="c1"># shows only running agents</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>vp<span class="w"> </span>list<span class="w"> </span>--json<span class="w">       </span><span class="c1"># machine-readable output</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>list<span class="w">              </span><span class="c1"># shows running + configured agents</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">    </span><span class="c1"># shows only running agents</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>vp<span class="w"> </span>list<span class="w"> </span>--json<span class="w">       </span><span class="c1"># machine-readable output</span>
 </code></pre></div>
 <p>Stop a specific agent or all agents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w">       </span><span class="c1"># graceful stop (10 s timeout)</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w"> </span>-f<span class="w">    </span><span class="c1"># force stop immediately</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>vp<span class="w"> </span>stop<span class="w"> </span>--all<span class="w">        </span><span class="c1"># stop every VibePod container</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w">       </span><span class="c1"># graceful stop (10 s timeout)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w"> </span>-f<span class="w">    </span><span class="c1"># force stop immediately</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>vp<span class="w"> </span>stop<span class="w"> </span>--all<span class="w">        </span><span class="c1"># stop every VibePod container</span>
 </code></pre></div>
 <h3 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1226,34 +1251,34 @@
 <h2 id="connecting-to-a-docker-compose-network">Connecting to a Docker Compose network<a class="headerlink" href="#connecting-to-a-docker-compose-network" title="Permanent link">&para;</a></h2>
 <p>When your workspace contains a <code>docker-compose.yml</code> or <code>compose.yml</code>, VibePod detects it and offers to connect the agent container to an existing network so it can reach your running services.</p>
 <p>You can also specify the network explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
 </code></pre></div>
 <h2 id="individual-agents">Individual agents<a class="headerlink" href="#individual-agents" title="Permanent link">&para;</a></h2>
 <h3 id="claude-anthropic">Claude (Anthropic)<a class="headerlink" href="#claude-anthropic" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
 </code></pre></div>
 <p>Credentials are stored in <code>~/.config/vibepod/agents/claude/</code>. On first run, Claude's interactive setup will guide you through API key configuration.</p>
 <h3 id="gemini-google">Gemini (Google)<a class="headerlink" href="#gemini-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
 </code></pre></div>
 <h3 id="opencode-openai">OpenCode (OpenAI)<a class="headerlink" href="#opencode-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
 <h3 id="devstral-mistral">Devstral (Mistral)<a class="headerlink" href="#devstral-mistral" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Devstral runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
 </div>
 <h3 id="auggie-augment-code">Auggie (Augment Code)<a class="headerlink" href="#auggie-augment-code" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
 </code></pre></div>
 <h3 id="copilot-github">Copilot (GitHub)<a class="headerlink" href="#copilot-github" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
 </code></pre></div>
 <h3 id="codex-openai">Codex (OpenAI)<a class="headerlink" href="#codex-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
 </code></pre></div>
 
 

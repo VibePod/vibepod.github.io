@@ -672,7 +672,7 @@
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nt">agents</span><span class="p">:</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nezhar/claude-container:latest</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vibepod/claude:latest</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">  </span><span class="c1"># Per-agent override: true/false, or null to use global auto_pull</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w">       </span><span class="c1"># Extra environment variables passed to the container</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">   </span><span class="c1"># Reserved for future use</span>
@@ -831,7 +831,7 @@
 </table>
 <p>Set <code>VP_IMAGE_NAMESPACE</code> to change the prefix for all default images at once:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">VP_IMAGE_NAMESPACE</span><span class="o">=</span>myorg<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># pulls myorg/claude-container:latest</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># pulls myorg/claude:latest</span>
 </code></pre></div>
 <p>For end-to-end examples (extending a base image and assigning a brand-new image to an agent), see <a href="../agents/#image-customization-workflows">Agents &gt; Image customization workflows</a>.</p>
 <h2 id="project-level-config">Project-level config<a class="headerlink" href="#project-level-config" title="Permanent link">&para;</a></h2>

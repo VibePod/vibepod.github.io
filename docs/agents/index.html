@@ -1074,7 +1074,7 @@
 <td><code>claude</code></td>
 <td>Anthropic</td>
 <td><code>vp c</code></td>
-<td><code>nezhar/claude-container:latest</code></td>
+<td><code>vibepod/claude:latest</code></td>
 </tr>
 <tr>
 <td><code>gemini</code></td>
@@ -1153,7 +1153,7 @@
 <li>Create a Dockerfile that extends the current base image.</li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># Dockerfile.claude</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">nezhar/claude-container:latest</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">vibepod/claude:latest</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c"># Add project-specific utilities.</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>

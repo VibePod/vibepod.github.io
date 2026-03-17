@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://vibepod.dev/docs/quickstart/">
+        <link rel="canonical" href="https://vibepod.dev/docs/llm/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../configuration/">
       
       
-        <link rel="next" href="../development/">
+        <link rel="next" href="../cli-reference/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Quickstart - VibePod</title>
+        <title>LLM Integration - VibePod</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quickstart" class="md-skip">
+        <a href="#using-oss-models-via-ollama-vllm-and-other-llm-servers" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quickstart
+              LLM Integration
             
           </span>
         </div>
@@ -286,37 +286,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quickstart
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
         
   
   
@@ -332,125 +305,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-your-first-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run your first agent
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#shortcuts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Shortcuts
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#point-at-a-different-workspace" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Point at a different workspace
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bootstrap-a-project-config" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bootstrap a project config
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-in-the-background" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run in the background
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#view-the-session-log-ui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        View the session log UI
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Next Steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -540,10 +394,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../llm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Integration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -559,6 +440,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start-with-ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start with Ollama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick start with Ollama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-ollama-and-pull-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start Ollama and pull a model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-vibepod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configure VibePod
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Run an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-vllm-or-other-openai-compatible-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using vLLM or other OpenAI-compatible servers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-agent-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-agent overrides
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -617,10 +623,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#supported-agents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Supported agents
       
     </span>
   </a>
@@ -628,10 +634,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
+  <a href="#quick-start-with-ollama" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install
+        Quick start with Ollama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick start with Ollama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-ollama-and-pull-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start Ollama and pull a model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-vibepod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configure VibePod
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-an-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Run an agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using environment variables
       
     </span>
   </a>
@@ -639,10 +695,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-your-first-agent" class="md-nav__link">
+  <a href="#using-vllm-or-other-openai-compatible-servers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run your first agent
+        Using vLLM or other OpenAI-compatible servers
       
     </span>
   </a>
@@ -650,10 +706,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shortcuts" class="md-nav__link">
+  <a href="#per-agent-overrides" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Shortcuts
+        Per-agent overrides
       
     </span>
   </a>
@@ -661,54 +717,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#point-at-a-different-workspace" class="md-nav__link">
+  <a href="#disabling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Point at a different workspace
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bootstrap-a-project-config" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bootstrap a project config
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-in-the-background" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run in the background
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#view-the-session-log-ui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        View the session log UI
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Next Steps
+        Disabling
       
     </span>
   </a>
@@ -732,7 +744,7 @@
 
 
   
-    <a href="https://github.com/VibePod/vibepod-cli/edit/main/docs/quickstart.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/VibePod/vibepod-cli/edit/main/docs/llm.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -740,74 +752,105 @@
   
 
 
-<h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h1>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Python 3.10+</li>
-<li>Docker (running)</li>
-</ul>
-<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vibepod
+<h1 id="using-oss-models-via-ollama-vllm-and-other-llm-servers">Using OSS Models via Ollama, vLLM, and other LLM servers<a class="headerlink" href="#using-oss-models-via-ollama-vllm-and-other-llm-servers" title="Permanent link">&para;</a></h1>
+<p>VibePod can connect agents to external LLM servers that expose OpenAI- or Anthropic-compatible APIs. This lets you run agents like Claude Code and Codex against open-source models served by <a href="https://ollama.com">Ollama</a>, <a href="https://docs.vllm.ai">vLLM</a>, or any compatible endpoint.</p>
+<h2 id="supported-agents">Supported agents<a class="headerlink" href="#supported-agents" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Env vars injected</th>
+<th>CLI flags appended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>claude</td>
+<td><code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_API_KEY</code></td>
+<td><code>--model &lt;model&gt;</code></td>
+</tr>
+<tr>
+<td>codex</td>
+<td><code>CODEX_OSS_BASE_URL</code></td>
+<td><code>--oss -m &lt;model&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Other agents do not yet have LLM mapping and will not receive any LLM configuration.</p>
+<h2 id="quick-start-with-ollama">Quick start with Ollama<a class="headerlink" href="#quick-start-with-ollama" title="Permanent link">&para;</a></h2>
+<h3 id="1-start-ollama-and-pull-a-model">1. Start Ollama and pull a model<a class="headerlink" href="#1-start-ollama-and-pull-a-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ollama<span class="w"> </span>pull<span class="w"> </span>qwen3:14b
 </code></pre></div>
-<p>Verify the installation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>version
+<h3 id="2-configure-vibepod">2. Configure VibePod<a class="headerlink" href="#2-configure-vibepod" title="Permanent link">&para;</a></h3>
+<p>Add the following to your global or project config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ~/.config/vibepod/config.yaml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">llm</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://host.docker.internal:11434&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ollama&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen3:14b&quot;</span>
 </code></pre></div>
-<h2 id="run-your-first-agent">Run your first agent<a class="headerlink" href="#run-your-first-agent" title="Permanent link">&para;</a></h2>
-<p>Navigate to the project you want to work on, then run an agent:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-project
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code>host.docker.internal</code> (not <code>localhost</code>) so the Docker container can reach Ollama on the host machine.</p>
+</div>
+<h3 id="3-run-an-agent">3. Run an agent<a class="headerlink" href="#3-run-an-agent" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Starts Claude Code with:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">#   ANTHROPIC_BASE_URL=http://host.docker.internal:11434</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">#   ANTHROPIC_API_KEY=ollama</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">#   claude --model qwen3:14b</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>vp<span class="w"> </span>run<span class="w"> </span>codex
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Starts Codex with:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">#   CODEX_OSS_BASE_URL=http://host.docker.internal:11434</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">#   codex --oss -m qwen3:14b</span>
 </code></pre></div>
-<p>VibePod will:</p>
-<ol>
-<li>Pull the agent image if not already present.</li>
-<li>Create a dedicated Docker network (<code>vibepod-network</code>).</li>
-<li>Mount your current directory as the workspace inside the container.</li>
-<li>Start the agent container and attach your terminal to it.</li>
-</ol>
-<p>Press <strong>Ctrl+C</strong> to stop the container when you are done.</p>
-<h2 id="shortcuts">Shortcuts<a class="headerlink" href="#shortcuts" title="Permanent link">&para;</a></h2>
-<p>You can start agents with either the full name or a single-letter shortcut:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>vp<span class="w"> </span>c<span class="w">        </span><span class="c1"># shortcut</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>vp<span class="w"> </span>run<span class="w"> </span>c<span class="w">    </span><span class="c1"># shortcut with run also works</span>
+<h2 id="using-environment-variables">Using environment variables<a class="headerlink" href="#using-environment-variables" title="Permanent link">&para;</a></h2>
+<p>You can also configure LLM settings at runtime without editing config files.</p>
+<p><strong>Claude Code with a remote Ollama server:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VP_LLM_ENABLED</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="nv">VP_LLM_MODEL</span><span class="o">=</span>qwen3.5:9b<span class="w"> </span><span class="nv">VP_LLM_BASE_URL</span><span class="o">=</span>https://ollama.example.com<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
-<h2 id="point-at-a-different-workspace">Point at a different workspace<a class="headerlink" href="#point-at-a-different-workspace" title="Permanent link">&para;</a></h2>
-<p>Use <code>-w</code> / <code>--workspace</code> to target any directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
+<p><strong>Codex with a remote Ollama server (note the <code>/v1</code> suffix):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">VP_LLM_ENABLED</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="nv">VP_LLM_MODEL</span><span class="o">=</span>qwen3.5:9b<span class="w"> </span><span class="nv">VP_LLM_BASE_URL</span><span class="o">=</span>https://ollama.example.com/v1<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>codex
 </code></pre></div>
-<h2 id="bootstrap-a-project-config">Bootstrap a project config<a class="headerlink" href="#bootstrap-a-project-config" title="Permanent link">&para;</a></h2>
-<p>Create a project-level config file that you can extend later:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+<p><strong>Local Ollama with an API key:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">VP_LLM_ENABLED</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="nv">VP_LLM_BASE_URL</span><span class="o">=</span>http://host.docker.internal:11434<span class="w"> </span><span class="nv">VP_LLM_API_KEY</span><span class="o">=</span>ollama<span class="w"> </span><span class="nv">VP_LLM_MODEL</span><span class="o">=</span>qwen3:14b<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
-<p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Claude Code uses the Anthropic-compatible endpoint (no <code>/v1</code> suffix), while Codex uses the OpenAI-compatible endpoint (with <code>/v1</code> suffix). Adjust <code>VP_LLM_BASE_URL</code> accordingly, or use per-agent overrides if you need both agents to work from the same config.</p>
+</div>
+<p>See <a href="../configuration/#environment-variables">Configuration &gt; Environment variables</a> for the full list.</p>
+<h2 id="using-vllm-or-other-openai-compatible-servers">Using vLLM or other OpenAI-compatible servers<a class="headerlink" href="#using-vllm-or-other-openai-compatible-servers" title="Permanent link">&para;</a></h2>
+<p>Point <code>base_url</code> at any server that speaks the OpenAI or Anthropic API:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">llm</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://my-vllm-server:8000/v1&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-api-key&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;meta-llama/Llama-3-8B-Instruct&quot;</span>
 </code></pre></div>
-<p>Add a specific agent block into the project config with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
+<h2 id="per-agent-overrides">Per-agent overrides<a class="headerlink" href="#per-agent-overrides" title="Permanent link">&para;</a></h2>
+<p>If you need different LLM settings for a specific agent, use the per-agent <code>env</code> config. Per-agent env vars take precedence over the <code>llm</code> section:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">llm</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://host.docker.internal:11434&quot;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ollama&quot;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen3:14b&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://different-server:11434&quot;</span>
 </code></pre></div>
-<p>If that agent is already configured under <code>agents</code>, the command exits without changing the file.</p>
-<h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
-<p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<h2 id="disabling">Disabling<a class="headerlink" href="#disabling" title="Permanent link">&para;</a></h2>
+<p>To turn off LLM injection without removing the config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">llm</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
-<p>Check which agents are running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<p>Or at runtime:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">VP_LLM_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
-<p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
-</code></pre></div>
-<p>For more details on detached mode workflows, see <a href="../agents/#detached-mode">Agents &gt; Detached mode</a>.</p>
-<h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
-<p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
-</code></pre></div>
-<p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
-<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../agents/">Configure an agent</a> — set API keys and per-agent options.</li>
-<li><a href="../configuration/">Configuration reference</a> — tune defaults, the proxy, and logging.</li>
-<li><a href="../cli-reference/">CLI Reference</a> — every command and flag.</li>
-</ul>
 
 
 

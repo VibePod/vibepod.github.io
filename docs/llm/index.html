@@ -766,7 +766,7 @@
 <tbody>
 <tr>
 <td>claude</td>
-<td><code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_API_KEY</code></td>
+<td><code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_API_KEY</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, <code>ANTHROPIC_MODEL</code>, <code>ANTHROPIC_DEFAULT_OPUS_MODEL</code>, <code>ANTHROPIC_DEFAULT_SONNET_MODEL</code>, <code>ANTHROPIC_DEFAULT_HAIKU_MODEL</code></td>
 <td><code>--model &lt;model&gt;</code></td>
 </tr>
 <tr>
@@ -799,12 +799,17 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Starts Claude Code with:</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">#   ANTHROPIC_BASE_URL=http://host.docker.internal:11434</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">#   ANTHROPIC_API_KEY=ollama</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">#   claude --model qwen3:14b</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>vp<span class="w"> </span>run<span class="w"> </span>codex
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Starts Codex with:</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">#   CODEX_OSS_BASE_URL=http://host.docker.internal:11434</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">#   codex --oss -m qwen3:14b</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">#   ANTHROPIC_AUTH_TOKEN=ollama</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1">#   ANTHROPIC_MODEL=qwen3:14b</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">#   ANTHROPIC_DEFAULT_OPUS_MODEL=qwen3:14b</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">#   ANTHROPIC_DEFAULT_SONNET_MODEL=qwen3:14b</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">#   ANTHROPIC_DEFAULT_HAIKU_MODEL=qwen3:14b</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">#   claude --model qwen3:14b</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>vp<span class="w"> </span>run<span class="w"> </span>codex
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># Starts Codex with:</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1">#   CODEX_OSS_BASE_URL=http://host.docker.internal:11434</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1">#   codex --oss -m qwen3:14b</span>
 </code></pre></div>
 <h2 id="using-environment-variables">Using environment variables<a class="headerlink" href="#using-environment-variables" title="Permanent link">&para;</a></h2>
 <p>You can also configure LLM settings at runtime without editing config files.</p>

@@ -611,6 +611,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Claude (Anthropic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-lived-token-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Long-lived token (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-an-api-key-instead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using an API key instead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-workaround-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this workaround exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1008,6 +1058,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Claude (Anthropic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-lived-token-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Long-lived token (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-an-api-key-instead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using an API key instead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-workaround-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this workaround exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1351,28 +1451,240 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
 </code></pre></div>
 <p>Credentials are stored in <code>~/.config/vibepod/agents/claude/</code>. On first run, Claude's interactive setup will guide you through API key configuration.</p>
+<h4 id="long-lived-token-recommended">Long-lived token (recommended)<a class="headerlink" href="#long-lived-token-recommended" title="Permanent link">&para;</a></h4>
+<p>Claude Code has a known upstream bug where OAuth access tokens (~8 h TTL) are not automatically refreshed from disk, forcing users to run <code>/login</code> roughly once per day. See <a href="#why-this-workaround-exists">Why this workaround exists</a> below for the full bug history and links.</p>
+<p>VibePod works around this by storing a ~1-year long-lived token on the host and injecting it as <code>CLAUDE_CODE_OAUTH_TOKEN</code> on every run. This sidesteps the refresh path entirely.</p>
+<div class="admonition info">
+<p class="admonition-title">This is an official authentication method</p>
+<p><code>claude setup-token</code> and the <code>CLAUDE_CODE_OAUTH_TOKEN</code> environment variable are both documented by Anthropic as a supported authentication path for CI pipelines, scripts, and other environments where an interactive browser login isn't available. See the <a href="https://code.claude.com/docs/en/authentication#long-lived-tokens">official Claude Code authentication docs</a> and the <a href="https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md"><code>claude-code-action</code> setup guide</a>. VibePod just automates the storage and injection.</p>
+</div>
+<p><strong>One-time setup:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>setup-token
+</code></pre></div>
+<p>This starts the container with <code>claude setup-token</code>, which opens Anthropic's OAuth flow in your browser. After you authorise, the container prints a token. VibePod then prompts you to paste it and saves it to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>~/.config/vibepod/agents/claude/oauth-token   (mode 0600)
+</code></pre></div>
+<p><strong>Subsequent runs:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+</code></pre></div>
+<p>VibePod detects the stored token and injects <code>CLAUDE_CODE_OAUTH_TOKEN</code> automatically. Look for <code>Using stored Claude OAuth token</code> in the startup output to confirm.</p>
+<p><strong>Precedence</strong> (first match wins):</p>
+<ol>
+<li><code>-e ANTHROPIC_API_KEY=...</code> or <code>-e CLAUDE_CODE_OAUTH_TOKEN=...</code> passed on the CLI</li>
+<li><code>ANTHROPIC_API_KEY</code> or <code>CLAUDE_CODE_OAUTH_TOKEN</code> set in your per-agent <code>env:</code> config</li>
+<li>Stored <code>oauth-token</code> file</li>
+<li>Interactive OAuth via <code>.credentials.json</code> (subject to the refresh bug)</li>
+</ol>
+<p><strong>Verifying the token is stored:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>doctor<span class="w"> </span>claude
+</code></pre></div>
+<p>Shows credentials state, stored-token presence and mtime, and which auth mode the next run will use. You can also inspect the file directly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="c1"># or to view contents (treat as a secret — do not share):</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>nano<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
+</code></pre></div>
+<p><strong>Verifying the token works:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;say ok&quot;</span>
+</code></pre></div>
+<p><code>-p</code> runs Claude Code in headless mode — one API call, one response. If you see "ok", the token is valid.</p>
+<p><strong>Caveats:</strong></p>
+<ul>
+<li>The long-lived token is <strong>inference-only</strong> — it cannot establish <a href="https://code.claude.com/docs/en/remote-control">Remote Control</a> sessions (steering a container from claude.ai/code or the mobile app).</li>
+<li><code>claude setup-token</code> requires a <strong>Pro, Max, Team, or Enterprise</strong> plan. Console (pay-per-token) accounts should use <code>ANTHROPIC_API_KEY</code> instead.</li>
+<li>The token rotates roughly once a year. When it expires, just run <code>vp run claude setup-token</code> again.</li>
+</ul>
+<h4 id="using-an-api-key-instead">Using an API key instead<a class="headerlink" href="#using-an-api-key-instead" title="Permanent link">&para;</a></h4>
+<p>If you're on a Console (pay-per-token) account, set <code>ANTHROPIC_API_KEY</code> and skip the setup-token flow entirely:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>sk-ant-...
+</code></pre></div>
+<p>Or permanently in config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+</code></pre></div>
+<h4 id="diagnostics">Diagnostics<a class="headerlink" href="#diagnostics" title="Permanent link">&para;</a></h4>
+<p><code>vp doctor claude</code> is the first tool to reach for when auth misbehaves. It reports:</p>
+<ul>
+<li><code>.credentials.json</code> — file owner/mode, <code>expiresAt</code>, presence of <code>refreshToken</code>, scopes, subscription type</li>
+<li><code>.claude.json</code> — mtime cross-check</li>
+<li>Stored long-lived token state</li>
+<li>Which host env vars (<code>ANTHROPIC_API_KEY</code>, <code>CLAUDE_CODE_OAUTH_TOKEN</code>, <code>CLAUDE_CONFIG_DIR</code>) are set</li>
+<li><strong>Effective auth mode</strong> — what the next <code>vp run claude</code> will actually use</li>
+</ul>
+<p>Exit codes: <code>0</code> healthy, <code>1</code> config dir missing, <code>2</code> OAuth token expired (useful in scripts).</p>
+<h4 id="why-this-workaround-exists">Why this workaround exists<a class="headerlink" href="#why-this-workaround-exists" title="Permanent link">&para;</a></h4>
+<p>The root cause is in Claude Code itself, not in VibePod. The OAuth <code>refreshToken</code> is stored in <code>.credentials.json</code> but never used: the access token is loaded from disk, sent as-is until it 401s, and nothing is written back when a refresh would have succeeded. The bug affects native Linux, WSL, macOS, and every container-based deployment equally.</p>
+<p>Community forensics (<a href="https://github.com/anthropics/claude-code/issues/33995#issuecomment-2718892341">#33995 comment</a>):</p>
+<blockquote>
+<p>Set <code>expiresAt</code> in <code>~/.claude/.credentials.json</code> to <code>Date.now()</code> to force expiry. Send a message — Claude processes it successfully, meaning the in-memory token refresh worked. Check <code>~/.claude/.credentials.json</code> afterward — file was never written. Conclusion: <code>refreshOAuthToken</code> succeeds and returns new tokens, but the credential store's <code>update()</code> is never called (or silently fails) after a successful refresh. The new token lives only in memory. Next session launch reads the stale expired token from disk and requires re-login.</p>
+</blockquote>
+<p>The community-validated workaround (<a href="https://github.com/anthropics/claude-code/issues/24317#issuecomment-2664923815">#24317 comment</a>) is exactly what VibePod implements:</p>
+<blockquote>
+<p>I worked around this using <code>claude setup-token</code> and then feeding it in as the <code>CLAUDE_CODE_OAUTH_TOKEN</code> environment variable. It skips all the "OAuth tokens invalidating each other", but has the downside that it doesn't allow <code>/usage</code>.</p>
+</blockquote>
+<p><code>claude setup-token</code> itself is an <strong>officially supported</strong> Claude Code authentication path, documented for exactly this kind of non-interactive deployment. See Anthropic's <a href="https://code.claude.com/docs/en/authentication#long-lived-tokens">authentication guide</a> and the <a href="https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md"><code>claude-code-action</code> setup guide</a> — the same mechanism used by Anthropic's own GitHub Action.</p>
+<p><strong>Upstream tracking issues — core bug (access-token not refreshed from disk):</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Status</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/50743">#50743</a></td>
+<td>open · <code>has repro</code> · <code>area:auth</code></td>
+<td>Newest and cleanest repro on headless Linux — <code>refreshToken</code> ignored</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/42904">#42904</a></td>
+<td>closed as duplicate</td>
+<td>Canonical "daily re-login required for subscription users" report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/40985">#40985</a></td>
+<td>open · <code>stale</code></td>
+<td>"Auth tokens expire too frequently" — confirms ~8 h TTL</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/33995">#33995</a></td>
+<td>closed not-planned</td>
+<td>Best technical forensics (quoted above); proves write-back is the broken step</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/21765">#21765</a></td>
+<td>closed not-planned</td>
+<td>First clear statement: "Claude Code doesn't use refresh tokens to get new access tokens"</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/12447">#12447</a></td>
+<td>open</td>
+<td>OAuth expiry disrupts autonomous workflows; refresh token handling needed</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/37402">#37402</a></td>
+<td>open</td>
+<td><code>--print</code> / automation mode also affected</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Multi-session race condition</strong> (why a shared <code>.credentials.json</code> across simultaneous sessions makes things worse):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Status</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/24317">#24317</a></td>
+<td>open · <code>has repro</code> · 18 comments</td>
+<td>Canonical thread; documents refresh-token rotation and single-use semantics</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/48786">#48786</a></td>
+<td>closed as dup of #24317</td>
+<td>Independent reproduction</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/27933">#27933</a></td>
+<td>closed</td>
+<td>Early race-condition report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/45129">#45129</a></td>
+<td>closed as dup</td>
+<td>Agent worktree subprocesses hit this constantly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Container / headless specifically:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Status</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/22066">#22066</a></td>
+<td>closed as duplicate</td>
+<td>OAuth authentication not persisting in Docker</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/34917">#34917</a></td>
+<td>closed</td>
+<td>OAuth "Redirect URI not supported" in headless/Docker</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/34141">#34141</a></td>
+<td>closed</td>
+<td>Claude Code ignores <code>ANTHROPIC_API_KEY</code> when OAuth redirect fails in devcontainers</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/7100">#7100</a></td>
+<td>closed not-planned</td>
+<td>Request for official headless-auth documentation</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/22992">#22992</a></td>
+<td>open</td>
+<td>Feature request: RFC 8628 device-code flow for headless</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Proxy / Cloudflare interaction</strong> (relevant if you run vibepod behind the built-in mitmproxy):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Status</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/47754">#47754</a></td>
+<td>open · <code>area:auth</code> · <code>platform:linux</code></td>
+<td>Cloudflare WAF blocks OAuth token refresh from headless Linux servers</td>
+</tr>
+<tr>
+<td><a href="https://github.com/anthropics/claude-code/issues/33269">#33269</a></td>
+<td>open</td>
+<td>Cloudflare challenge race during <code>auth login</code> / <code>setup-token</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Anthropic's posture:</strong> most reports are auto-closed as duplicates by a bot; the core issues (#21765, #33995) were closed as "not planned." A changelog line for Claude Code v2.1.44 mentioned "Fixed auth refresh errors" but users report the same behaviour on every later version (v2.1.62, 2.1.74, 2.1.116 observed). No committed fix has landed as of this writing.</p>
 <h3 id="gemini-google">Gemini (Google)<a class="headerlink" href="#gemini-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
 </code></pre></div>
 <h3 id="opencode-openai">OpenCode (OpenAI)<a class="headerlink" href="#opencode-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
 <h3 id="devstral-vibe-mistral">Devstral / Vibe (Mistral)<a class="headerlink" href="#devstral-vibe-mistral" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Devstral runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
 </div>
 <h3 id="auggie-augment-code">Auggie (Augment Code)<a class="headerlink" href="#auggie-augment-code" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
 </code></pre></div>
 <h3 id="copilot-github">Copilot (GitHub)<a class="headerlink" href="#copilot-github" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
 </code></pre></div>
 <h3 id="codex-openai">Codex (OpenAI)<a class="headerlink" href="#codex-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
 </code></pre></div>
 
 

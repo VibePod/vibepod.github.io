@@ -665,6 +665,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#doctor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        doctor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="doctor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#claude_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        claude
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#g" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1119,6 +1147,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#doctor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        doctor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="doctor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#claude_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        claude
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#g" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1398,7 +1454,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp a [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  --bound-agent TEXT  [default: auggie]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="auggie">auggie<a class="headerlink" href="#auggie" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run auggie</code>.</p>
@@ -1406,7 +1471,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp auggie [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  --bound-agent TEXT  [default: auggie]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="c">c<a class="headerlink" href="#c" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run claude</code>.</p>
@@ -1414,7 +1488,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp c [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  --bound-agent TEXT  [default: claude]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="claude">claude<a class="headerlink" href="#claude" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run claude</code>.</p>
@@ -1422,7 +1505,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp claude [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  --bound-agent TEXT  [default: claude]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="codex">codex<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run codex</code>.</p>
@@ -1430,7 +1522,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp codex [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  --bound-agent TEXT  [default: codex]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="config">config<a class="headerlink" href="#config" title="Permanent link">&para;</a></h4>
 <p>Manage configuration</p>
@@ -1490,7 +1591,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp copilot [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>  --bound-agent TEXT  [default: copilot]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="d">d<a class="headerlink" href="#d" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run devstral</code>.</p>
@@ -1498,7 +1608,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp d [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>  --bound-agent TEXT  [default: devstral]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="devstral">devstral<a class="headerlink" href="#devstral" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run devstral</code>.</p>
@@ -1506,164 +1625,239 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp devstral [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  --bound-agent TEXT  [default: devstral]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>                        permission prompts
+</code></pre></div>
+<h4 id="doctor">doctor<a class="headerlink" href="#doctor" title="Permanent link">&para;</a></h4>
+<p>Inspect agent auth and config state</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp doctor [OPTIONS] COMMAND [ARGS]...
+</code></pre></div>
+<h5 id="claude_1">claude<a class="headerlink" href="#claude_1" title="Permanent link">&para;</a></h5>
+<p>Inspect Claude Code credential state for diagnosing auth/refresh issues.</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>vp doctor claude [OPTIONS]
 </code></pre></div>
 <h4 id="g">g<a class="headerlink" href="#g" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run gemini</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp g [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp g [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  --bound-agent TEXT  [default: gemini]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="gemini">gemini<a class="headerlink" href="#gemini" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run gemini</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp gemini [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp gemini [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>  --bound-agent TEXT  [default: gemini]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="list">list<a class="headerlink" href="#list" title="Permanent link">&para;</a></h4>
 <p>List available agents and running containers.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp list [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>vp list [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>  -r, --running  Show only running agents
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>  --json         Output JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>  -r, --running  Show only running agents
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  --json         Output JSON
 </code></pre></div>
 <h4 id="logs">logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h4>
 <p>View logs and traffic UI</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>vp logs [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>vp logs [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="start">start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h5>
 <p>Start or reuse Datasette for session and proxy logs.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>vp logs start [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp logs start [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>  --port INTEGER  Datasette host port
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>  --no-open       Do not open browser
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>  --port INTEGER  Datasette host port
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>  --no-open       Do not open browser
 </code></pre></div>
 <h5 id="status">status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h5>
 <p>Show Datasette container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp logs status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>vp logs status [OPTIONS]
 </code></pre></div>
 <h5 id="stop">stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h5>
 <p>Stop the Datasette container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>vp logs stop [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp logs stop [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  -f, --force  Force stop
 </code></pre></div>
 <h5 id="ui">ui<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h5>
 <p>Alias for <code>vp logs start</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp logs ui [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>vp logs ui [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  --port INTEGER  Datasette host port
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>  --no-open       Do not open browser
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>  --port INTEGER  Datasette host port
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>  --no-open       Do not open browser
 </code></pre></div>
 <h4 id="o">o<a class="headerlink" href="#o" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run opencode</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>vp o [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>vp o [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>  --bound-agent TEXT  [default: opencode]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="opencode">opencode<a class="headerlink" href="#opencode" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run opencode</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>vp opencode [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>vp opencode [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  --bound-agent TEXT  [default: opencode]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="p">p<a class="headerlink" href="#p" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run copilot</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>vp p [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp p [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>  --bound-agent TEXT  [default: copilot]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>                        permission prompts
 </code></pre></div>
 <h4 id="proxy">proxy<a class="headerlink" href="#proxy" title="Permanent link">&para;</a></h4>
 <p>Manage the HTTP(S) proxy</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="start_1">start<a class="headerlink" href="#start_1" title="Permanent link">&para;</a></h5>
 <p>Start the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp proxy start [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>vp proxy start [OPTIONS]
 </code></pre></div>
 <h5 id="status_1">status<a class="headerlink" href="#status_1" title="Permanent link">&para;</a></h5>
 <p>Show proxy container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp proxy status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>vp proxy status [OPTIONS]
 </code></pre></div>
 <h5 id="stop_1">stop<a class="headerlink" href="#stop_1" title="Permanent link">&para;</a></h5>
 <p>Stop the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>vp proxy stop [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>vp proxy stop [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h4>
 <p>Start an agent container.</p>
+<p>Any trailing arguments after the agent name are forwarded to the agent's
+command inside the container, e.g. <code>vp run claude setup-token</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>vp run [OPTIONS] [AGENT]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp run [OPTIONS] [AGENT]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>  [AGENT]               Agent to run
-<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>  -w, --workspace PATH  Workspace directory  [default: .]
-<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>  --pull                Pull latest image before run
-<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>  -d, --detach          Run container in background
-<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>  -e, --env TEXT        Environment variable KEY=VALUE
-<a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>  --name TEXT           Custom container name
-<a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a>  --network TEXT        Additional Docker network to connect the container to
-<a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a>                        DISPLAY to be set)
-<a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
-<a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a>                        permission prompts
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>  [AGENT]               Agent to run
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>  --pull                Pull latest image before run
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>  -d, --detach          Run container in background
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a>  --name TEXT           Custom container name
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a>                        DISPLAY to be set)
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a>                        permission prompts
 </code></pre></div>
 <h4 id="stop_2">stop<a class="headerlink" href="#stop_2" title="Permanent link">&para;</a></h4>
 <p>Stop one agent container, or all managed containers.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp stop [OPTIONS] [AGENT]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>vp stop [OPTIONS] [AGENT]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>  [AGENT]      Agent to stop
-<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>  -a, --all    Stop all VibePod managed containers
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>  [AGENT]      Agent to stop
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>  -a, --all    Stop all VibePod managed containers
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="ui_1">ui<a class="headerlink" href="#ui_1" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp logs start</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>vp ui [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>vp ui [OPTIONS]
 </code></pre></div>
 <h4 id="version">version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h4>
 <p>Show version and runtime information.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>vp version [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp version [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>  --json  Output as JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>  --json  Output as JSON
 </code></pre></div>
 <h4 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run codex</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp x [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>vp x [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>  --bound-agent TEXT  [default: codex]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>  -w, --workspace PATH  Workspace directory  [default: .]
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>  --pull                Pull latest image before run
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>  -d, --detach          Run container in background
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>  -e, --env TEXT        Environment variable KEY=VALUE
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a>  --name TEXT           Custom container name
+<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a>  --network TEXT        Additional Docker network to connect the container to
+<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>  --paste-images        Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a>                        DISPLAY to be set)
+<a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a>  --ikwid               I Know What I&#39;m Doing: enable auto-approval / skip
+<a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a>                        permission prompts
 </code></pre></div>
 
 

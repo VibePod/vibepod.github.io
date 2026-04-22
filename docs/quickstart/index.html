@@ -787,6 +787,10 @@
 <li>Start the agent container and attach your terminal to it.</li>
 </ol>
 <p>Press <strong>Ctrl+C</strong> to stop the container when you are done.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Closing the terminal window does not stop the container — the agent keeps running in the background. Use <code>vp list --running</code> to see it and <code>vp attach &lt;container&gt;</code> to rejoin the session. See <a href="../agents/#reattaching-a-terminal">Reattaching a terminal</a> for details.</p>
+</div>
 <h2 id="shortcuts">Shortcuts<a class="headerlink" href="#shortcuts" title="Permanent link">&para;</a></h2>
 <p>You can start agents with either the full name or a single-letter shortcut:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>

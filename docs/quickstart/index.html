@@ -404,6 +404,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pass-arguments-to-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass arguments to the agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#bootstrap-a-project-config" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -672,6 +683,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pass-arguments-to-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass arguments to the agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#bootstrap-a-project-config" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -775,31 +797,38 @@
 <p>Use <code>-w</code> / <code>--workspace</code> to target any directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
 </code></pre></div>
+<h2 id="pass-arguments-to-the-agent">Pass arguments to the agent<a class="headerlink" href="#pass-arguments-to-the-agent" title="Permanent link">&para;</a></h2>
+<p>Arguments after the agent name are forwarded to the agent command inside the container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
+</code></pre></div>
+<p>When forwarding flags to the agent, use <code>--</code> to stop VibePod option parsing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
+</code></pre></div>
 <h2 id="bootstrap-a-project-config">Bootstrap a project config<a class="headerlink" href="#bootstrap-a-project-config" title="Permanent link">&para;</a></h2>
 <p>Create a project-level config file that you can extend later:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
 </code></pre></div>
 <p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
 <p>Add a specific agent block into the project config with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
 </code></pre></div>
 <p>If that agent is already configured under <code>agents</code>, the command exits without changing the file.</p>
 <h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
 </code></pre></div>
 <p>Check which agents are running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
 </code></pre></div>
 <p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
 </code></pre></div>
 <p>For more details on detached mode workflows, see <a href="../agents/#detached-mode">Agents &gt; Detached mode</a>.</p>
 <h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
 <p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
 </code></pre></div>
 <p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>

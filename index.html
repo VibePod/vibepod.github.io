@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VibePod CLI | Run and Switch AI Agents Locally</title>
-  <meta name="description" content="Install VibePod CLI from PyPI, run coding agents locally, and switch between agents from one command surface.">
+  <title>VibePod CLI | Zero-Config AI Coding Agents in Docker</title>
+  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, and OpenCode locally in isolated Docker containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VibePod CLI | Run and Switch AI Agents Locally">
-  <meta property="og:description" content="Install from PyPI, run coding agents locally, and switch agents without leaving your workflow.">
-  <meta property="og:url" content="https://vibepod.github.io/">
-  <meta property="og:image" content="https://vibepod.github.io/assets/vibepod-preview.svg">
+  <meta property="og:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker">
+  <meta property="og:description" content="Run major coding agents locally with no required config, reusable skills, optional YAML overrides, and a built-in analytics dashboard.">
+  <link rel="canonical" href="https://vibepod.dev/">
+  <meta property="og:url" content="https://vibepod.dev/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VibePod CLI | Run and Switch AI Agents Locally">
-  <meta name="twitter:description" content="pip install vibepod, run agents locally, and switch between them fast.">
-  <meta name="twitter:image" content="https://vibepod.github.io/assets/vibepod-preview.svg">
+  <meta name="twitter:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker">
+  <meta name="twitter:description" content="pip install vibepod, run agents locally in Docker, add reusable skills, and track usage from a local dashboard.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -26,8 +27,8 @@
       "name": "vibepod",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Cross-platform",
-      "description": "A CLI to run coding agents locally and switch between agents quickly from one interface.",
-      "url": "https://vibepod.github.io/",
+      "description": "A zero-config-by-default CLI to run coding agents locally in isolated Docker containers with reusable skills, optional YAML configuration, and a built-in analytics dashboard.",
+      "url": "https://vibepod.dev/",
       "downloadUrl": "https://pypi.org/project/vibepod/",
       "offers": {
         "@type": "Offer",
@@ -51,6 +52,7 @@
         <a href="#how-it-works">How it works</a>
         <a href="docs/">Docs</a>
         <a href="#features">Features</a>
+        <a href="#why-vibepod">Why VibePod</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -64,19 +66,20 @@
   <main id="main-content">
     <section class="hero shell" data-reveal>
       <div class="hero-copy">
-        <p class="eyebrow">Open-source CLI</p>
-        <h1>One local CLI to run and switch coding agents.</h1>
-        <p class="hero-lead">Install VibePod from PyPI, run coding agents locally, and switch between agents without breaking flow.</p>
+        <p class="eyebrow">Zero-config local agents</p>
+        <h1>The zero-config CLI for running AI coding agents locally.</h1>
+        <p class="hero-lead">No YAML required. No setup file required. Just <code>vp run claude</code> in Docker, with reusable skills and a built-in analytics dashboard.</p>
+        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, or OpenCode in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">View on GitHub</a>
           <a class="button button-ghost" href="#quickstart">See Quickstart</a>
         </div>
         <ul class="hero-proof" role="list">
-          <li>Published on PyPI</li>
-          <li>Local-first execution</li>
-          <li>Fast agent switching</li>
-          <li>Ready for scripts and CI</li>
+          <li>Zero config by default</li>
+          <li>Reusable skills</li>
+          <li>Optional YAML overrides</li>
+          <li>Isolated Docker containers</li>
         </ul>
       </div>
       <figure class="hero-visual">
@@ -86,27 +89,73 @@
           width="1200"
           height="760"
           fetchpriority="high">
-        <figcaption>CLI-first local workflow with quick agent switching.</figcaption>
+        <figcaption>Run preconfigured coding agents locally from one CLI.</figcaption>
       </figure>
+    </section>
+
+    <section class="section zero-config-band" id="zero-config" data-reveal>
+      <div class="shell config-grid">
+        <div>
+          <p class="eyebrow">Zero config by default</p>
+          <h2>No config required. YAML when you want it.</h2>
+          <p class="section-lead">VibePod ships with major coding agents pre-configured. Start immediately, then add global or project YAML later for overrides your team wants to share.</p>
+        </div>
+        <div class="comparison-table-wrap" aria-label="Configuration comparison">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Manual setup</th>
+                <th scope="col">VibePod</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Write YAML before first run</td>
+                <td>Skip it; defaults are built in</td>
+              </tr>
+              <tr>
+                <td>Choose and configure a model upfront</td>
+                <td>Use agent defaults, or set LLM routing later</td>
+              </tr>
+              <tr>
+                <td>Wire up tools and servers</td>
+                <td>Optional env vars, init scripts, and custom images</td>
+              </tr>
+              <tr>
+                <td>Share project defaults</td>
+                <td><code>vp config init</code></td>
+              </tr>
+              <tr>
+                <td>Run your agent</td>
+                <td><code>vp run claude</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <section class="section demo-section" id="quickstart" data-reveal>
       <div class="shell demo-grid">
         <div>
           <p class="eyebrow">Quickstart</p>
-          <h2>Install, verify, and switch locally</h2>
-          <p class="section-lead">Install from PyPI, verify your setup, then use the README to run and switch agents in local workflows.</p>
+          <h2>Install and run an agent</h2>
+          <p class="section-lead">Install from PyPI, run any supported agent with no project config, then start the dashboard when you want local metrics.</p>
           <pre class="code-block"><code>python -m pip install vibepod
-vibepod --help</code></pre>
+vp run claude
+vp logs start</code></pre>
           <p class="install-hint">Tip: pin versions in automation with <code>python -m pip install vibepod==&lt;version&gt;</code>.</p>
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Open PyPI</a>
           <a class="button button-ghost" href="docs/quickstart/">Open Docs Quickstart</a>
         </div>
         <figure class="demo-frame">
           <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.2.1
+VibePod CLI: 0.12.0
 Python:      3.12.3
-Docker:      28.1.1</code></pre>
+Docker:      28.1.1
+
+$ vp run claude
+Starting claude with image vibepod/claude:latest</code></pre>
           <figcaption>Live-style local runtime preview.</figcaption>
         </figure>
       </div>
@@ -114,7 +163,7 @@ Docker:      28.1.1</code></pre>
 
     <section class="section shell" id="how-it-works" data-reveal>
       <p class="eyebrow">How it works</p>
-      <h2>Three commands for local agent switching</h2>
+      <h2>Three commands from run to analytics</h2>
       <ol class="steps" role="list">
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">1</span>
@@ -125,59 +174,143 @@ Docker:      28.1.1</code></pre>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">2</span>
           <h3>Run the agent you want</h3>
-          <p>Start work with <code>vp run AGENT</code> and switch agents by rerunning the command with a different agent.</p>
+          <p>Start work with <code>vp run claude</code>, then switch agents by rerunning the command with a different name.</p>
           <p>Note: the current folder is used as the active agent workspace.</p>
         </li>
         <li class="step-card" data-reveal>
           <span class="step-number" aria-hidden="true">3</span>
-          <h3>Open the local interface</h3>
-          <p>Use <code>vp ui</code> when you want a local UI to monitor and manage your active workflow; it opens automatically in your default browser.</p>
+          <h3>Open the analytics dashboard</h3>
+          <p>Run <code>vp logs start</code> to launch the local dashboard. It shows HTTP traffic, usage metrics, and lets you compare agents side by side.</p>
         </li>
       </ol>
     </section>
 
     <section class="section shell" id="features" data-reveal>
       <p class="eyebrow">Core features</p>
-      <h2>CLI-first local workflow control</h2>
+      <h2>Zero-config local agent operations</h2>
       <div class="feature-grid">
         <article class="feature-card" data-reveal>
-          <h3>Unified local command surface</h3>
-          <p>Use one CLI to run and manage multiple coding agents in the same local flow.</p>
-          <p class="proof">Proof point: single entrypoint design for multi-agent tasks.</p>
+          <h3>Zero config by default</h3>
+          <p>No project file is needed to start. Claude, Gemini, Codex, Devstral, Copilot, Auggie, and OpenCode are ready out of the box.</p>
+          <p class="proof">Proof point: run an agent with <code>vp run &lt;agent&gt;</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Switch agents quickly</h3>
-          <p>Move from one coding agent to another in seconds when the task changes.</p>
-          <p class="proof">Proof point: less context churn between tools and prompts.</p>
+          <h3>Optional project config</h3>
+          <p>Add <code>.vibepod/config.yaml</code> only when you want team defaults for images, env vars, init scripts, proxy, logging, or LLM settings.</p>
+          <p class="proof">Proof point: create a starter with <code>vp config init</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Consistent local runtime</h3>
-          <p>Keep behavior predictable by using the same local CLI flow across projects.</p>
-          <p class="proof">Proof point: repeatable commands across developer machines.</p>
+          <h3>Local analytics dashboard</h3>
+          <p>Track HTTP traffic, usage, and activity per agent from a browser-based dashboard.</p>
+          <p class="proof">Proof point: launch it with <code>vp logs start</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Automation-ready commands</h3>
-          <p>Script local agent runs and switching workflows directly from shell tooling.</p>
-          <p class="proof">Proof point: CLI ergonomics map naturally to automation systems.</p>
+          <h3>Built-in traffic proxy</h3>
+          <p>VibePod can start a local mitmproxy container alongside agents and write captured HTTP(S) traffic to SQLite.</p>
+          <p class="proof">Proof point: disable it with <code>VP_PROXY_ENABLED=false</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Developer-centric flow</h3>
-          <p>Install once, run locally, and keep switching agents without friction.</p>
-          <p class="proof">Proof point: terminal-first interaction cuts UI overhead.</p>
+          <h3>Reusable skills</h3>
+          <p>Install prompt recipes per user or per project, then mount them into supported agents automatically.</p>
+          <p class="proof">Proof point: <code>vp skills add github:vibepod/vibepod-skills//skills/researcher</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
-          <h3>Open-source extensibility</h3>
-          <p>Adopt the default flow or customize around your team’s processes.</p>
-          <p class="proof">Proof point: GitHub-based development and contribution model.</p>
+          <h3>Detach and reattach</h3>
+          <p>Keep long-running containers alive after a terminal closes, then reconnect to a managed container when needed.</p>
+          <p class="proof">Proof point: <code>vp attach &lt;container&gt;</code>.</p>
+        </article>
+        <article class="feature-card" data-reveal>
+          <h3>Custom images and startup hooks</h3>
+          <p>Override an agent image for a one-off run or persist it in config, and run idempotent shell commands before startup.</p>
+          <p class="proof">Proof point: set <code>VP_IMAGE_CLAUDE=myorg/claude:dev</code>.</p>
+        </article>
+        <article class="feature-card" data-reveal>
+          <h3>OSS and remote LLM routing</h3>
+          <p>Route Claude or Codex to Ollama, vLLM, or another compatible endpoint with config or runtime environment variables.</p>
+          <p class="proof">Proof point: set <code>VP_LLM_ENABLED=true</code>.</p>
+        </article>
+        <article class="feature-card" data-reveal>
+          <h3>Compose-aware workspaces</h3>
+          <p>When a workspace has Compose files, VibePod can connect an agent container to the right Docker network.</p>
+          <p class="proof">Proof point: use <code>vp run claude --network my-net</code>.</p>
         </article>
       </div>
     </section>
 
+    <section class="section compare-section" id="why-vibepod" data-reveal>
+      <div class="shell">
+        <p class="eyebrow">Why VibePod?</p>
+        <h2>Less setup, more local visibility</h2>
+        <div class="comparison-table-wrap wide">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Workflow need</th>
+                <th scope="col">Manual setup</th>
+                <th scope="col">VibePod</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Agent configuration</td>
+                <td>Write YAML before first run</td>
+                <td>Pre-configured; YAML is optional</td>
+              </tr>
+              <tr>
+                <td>Switch agents</td>
+                <td>Rewrite config and rerun</td>
+                <td><code>vp run &lt;agent&gt;</code></td>
+              </tr>
+              <tr>
+                <td>Container isolation</td>
+                <td>Manual Docker setup</td>
+                <td>Built in</td>
+              </tr>
+              <tr>
+                <td>Project defaults</td>
+                <td>Hand-maintain setup docs</td>
+                <td>Commit <code>.vibepod/config.yaml</code></td>
+              </tr>
+              <tr>
+                <td>Usage tracking</td>
+                <td>Bring your own tooling</td>
+                <td>Local dashboard</td>
+              </tr>
+              <tr>
+                <td>HTTP traffic logging</td>
+                <td>Manual proxy setup</td>
+                <td>Built in</td>
+              </tr>
+              <tr>
+                <td>Reusable prompts</td>
+                <td>Copy instructions between tools manually</td>
+                <td><code>vp skills add</code></td>
+              </tr>
+              <tr>
+                <td>Agent comparison</td>
+                <td>Manual notes</td>
+                <td>Side-by-side dashboard views</td>
+              </tr>
+              <tr>
+                <td>Data privacy</td>
+                <td>Depends on vendor and tooling</td>
+                <td>Metrics stored locally</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <section class="section shell tool-section" id="screenshots" data-reveal>
-      <p class="eyebrow">Tool screenshots</p>
-      <h2>Real captures from every supported tool</h2>
-      <p class="section-lead">Included screenshots cover Auggie, Claude Code, GitHub Copilot, Gemini, Mistral, OpenAI Codex, and OpenCode.</p>
+      <p class="eyebrow">Product screenshots</p>
+      <h2>Dashboard and supported tools</h2>
+      <p class="section-lead">Included screenshots cover the analytics dashboard plus Auggie, Claude Code, GitHub Copilot, Gemini, Mistral, OpenAI Codex, and OpenCode.</p>
       <div class="tool-grid">
+        <figure class="tool-card tool-card-wide" data-reveal>
+          <img src="screenshots/dashboard.png" alt="Screenshot of the VibePod analytics dashboard with token usage charts." loading="lazy" width="1905" height="966">
+          <figcaption>VibePod analytics dashboard - compare agents by usage, HTTP traffic, and activity over time.</figcaption>
+        </figure>
         <figure class="tool-card" data-reveal>
           <img src="screenshots/augment%20auggie.png" alt="Screenshot of VibePod workflow with Augment Auggie." loading="lazy" width="1256" height="871">
           <figcaption>Augment Auggie</figcaption>
@@ -217,8 +350,20 @@ Docker:      28.1.1</code></pre>
         <p>Install from PyPI using <code>python -m pip install vibepod</code>, then use the README for command examples.</p>
       </details>
       <details>
+        <summary>Do I need to configure anything before running an agent?</summary>
+        <p>No. VibePod comes pre-configured for Claude, Gemini, Codex, Devstral, Copilot, Auggie, and OpenCode. Run <code>vp run &lt;agent&gt;</code> and it starts from the default image.</p>
+      </details>
+      <details>
+        <summary>Can I use YAML config files?</summary>
+        <p>Yes. YAML is optional. Use global config at <code>~/.config/vibepod/config.yaml</code> or project config at <code>.vibepod/config.yaml</code> to override defaults, share team settings, set custom images, inject env vars, run init scripts, or configure LLM routing.</p>
+      </details>
+      <details>
+        <summary>What does the analytics dashboard show?</summary>
+        <p>The dashboard tracks HTTP traffic, usage over time, and activity per agent. Start it with <code>vp logs start</code>; it opens in your browser and stores data locally.</p>
+      </details>
+      <details>
         <summary>Can I use it for local workflows?</summary>
-        <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine.</p>
+        <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine in isolated Docker containers.</p>
       </details>
       <details>
         <summary>Does VibePod CLI support auto-complete?</summary>
@@ -234,7 +379,7 @@ Docker:      28.1.1</code></pre>
       </details>
       <details>
         <summary>Which coding agents can I switch between?</summary>
-        <p>VibePod is built for switching across supported coding agents from one CLI. Confirm current support in the repo docs.</p>
+        <p>VibePod currently supports Claude, Gemini, OpenCode, Devstral, Auggie, GitHub Copilot, and OpenAI Codex.</p>
       </details>
       <details>
         <summary>Where can I track roadmap and issues?</summary>
@@ -244,8 +389,8 @@ Docker:      28.1.1</code></pre>
 
     <section class="section final-shell" data-reveal>
       <div class="shell final-cta">
-        <h2>Run and switch coding agents locally from one CLI.</h2>
-        <p>Install from PyPI, verify once, and keep moving between agents as your task evolves.</p>
+        <h2>Run AI coding agents locally with zero required setup.</h2>
+        <p>Install from PyPI, start a preconfigured agent, and add YAML only when your team needs shared defaults or deeper customization.</p>
         <div class="hero-actions">
           <a class="button button-primary pulse" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install vibepod</a>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Open GitHub Repo</a>

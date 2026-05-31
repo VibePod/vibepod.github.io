@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repositories | VibePod CLI</title>
+  <meta name="description" content="Explore the VibePod repositories for the CLI, agent Docker images, Datasette dashboard, proxy addon, website, Homebrew formula, and reusable skills.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../assets/icon.png">
+  <link rel="apple-touch-icon" href="../assets/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Repositories | VibePod CLI">
+  <meta property="og:description" content="A map of the VibePod repositories and what each one owns.">
+  <link rel="canonical" href="https://vibepod.dev/repositories/">
+  <meta property="og:url" content="https://vibepod.dev/repositories/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Repositories | VibePod CLI">
+  <meta name="twitter:description" content="A map of the VibePod repositories and what each one owns.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../" aria-label="VibePod CLI home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">VibePod CLI</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../#quickstart">Quickstart</a>
+        <a href="../docs/">Docs</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Repositories</p>
+      <h1>The VibePod ecosystem in one map.</h1>
+      <p class="hero-lead">VibePod is split across focused repositories so the CLI, container images, dashboard, proxy, website, packaging, and skills can evolve independently while staying connected through releases and news posts.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://github.com/orgs/VibePod/repositories" target="_blank" rel="noreferrer">Browse all on GitHub</a>
+        <a class="button button-ghost" href="../news/">Read news</a>
+      </div>
+    </section>
+
+    <section class="section page-section" aria-labelledby="repository-map">
+      <div class="shell section-heading-row">
+        <div>
+          <p class="eyebrow">Repository map</p>
+          <h2 id="repository-map">What each repository owns</h2>
+          <p class="section-lead">Use this page as the public entry point for cross-repository work and future release notes.</p>
+        </div>
+      </div>
+      <div class="shell repo-grid">
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">CLI · Python package · Docs</p>
+          <h3>vibepod-cli</h3>
+          <p>The main Python package and command-line interface. It owns <code>vp run</code>, configuration, skills commands, docs source, and package releases.</p>
+          <a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Agents · Docker images</p>
+          <h3>vibepod-agents</h3>
+          <p>Docker image definitions and automation for supported coding agents such as Claude, Gemini, OpenCode, Codex, Copilot, Auggie, Devstral, and Pi.</p>
+          <a href="https://github.com/VibePod/vibepod-agents" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Dashboard · Datasette</p>
+          <h3>vibepod-datasette</h3>
+          <p>The local analytics dashboard container and plugins used to inspect session logs, usage, and proxied HTTP activity.</p>
+          <a href="https://github.com/VibePod/vibepod-datasette" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Proxy · Logging</p>
+          <h3>vibepod-proxy</h3>
+          <p>The mitmproxy addon that extracts proxy data for local logging and dashboard analysis.</p>
+          <a href="https://github.com/VibePod/vibepod-proxy" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Website · Static pages</p>
+          <h3>vibepod.github.io</h3>
+          <p>The public website, generated docs output, news pages, screenshots, and repository directory.</p>
+          <a href="https://github.com/VibePod/vibepod.github.io" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Packaging · Homebrew</p>
+          <h3>homebrew-vibepod</h3>
+          <p>The Homebrew formula repository for installing VibePod through Homebrew workflows.</p>
+          <a href="https://github.com/VibePod/homebrew-vibepod" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Skills · Prompt recipes</p>
+          <h3>vibepod-skills</h3>
+          <p>Reusable skill bundles and prompt recipes that can be installed into VibePod-supported agents.</p>
+          <a href="https://github.com/VibePod/vibepod-skills" target="_blank" rel="noreferrer">Open repository</a>
+        </article>
+        <article class="repo-card" data-reveal>
+          <p class="repo-meta">Organization · All repositories</p>
+          <h3>VibePod on GitHub</h3>
+          <p>Browse every public VibePod repository, including future projects that may not be listed here yet.</p>
+          <a href="https://github.com/orgs/VibePod/repositories" target="_blank" rel="noreferrer">Browse organization</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links">
+        <a href="../docs/">Docs</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+        <a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

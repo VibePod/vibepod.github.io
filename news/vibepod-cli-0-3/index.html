@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.3: Docker networks, PyPI docs, and proxy polish | VibePod CLI</title>
+  <meta name="description" content="VibePod CLI 0.3.0 added custom Docker network support, compose-network detection, PyPI install docs, and the first MkDocs documentation workflow.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.3: Docker networks, PyPI docs, and proxy polish">
+  <meta property="og:description" content="VibePod CLI 0.3.0 added custom Docker network support, compose-network detection, PyPI install docs, and the first MkDocs documentation workflow.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-3/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.3: Docker networks, PyPI docs, and proxy polish">
+  <meta name="twitter:description" content="VibePod CLI 0.3.0 added custom Docker network support, compose-network detection, PyPI install docs, and the first MkDocs documentation workflow.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Networking</p>
+      <h1>VibePod CLI 0.3: Docker networks, PyPI docs, and proxy polish</h1>
+      <p class="hero-lead">VibePod CLI 0.3.0 added custom Docker network support, compose-network detection, PyPI install docs, and the first MkDocs documentation workflow.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-02-28 · Release · CLI · Networking</p>
+      <h2>Network-aware local workflows</h2>
+      <p>VibePod 0.3.0 added a <code>--network</code> option to <code>vp run</code>, letting an agent container join an additional Docker network. It also added compose-file detection: when a workspace contains <code>docker-compose.yml</code> or <code>compose.yml</code>, the CLI can prompt for a running project network and connect the agent container to it.</p>
+      <p>This made local agent sessions more useful for real projects, because the agent could run beside databases, app containers, and other services already running through Docker Compose.</p>
+<h2>Documentation and packaging polish</h2>
+      <p>The release added PyPI installation guidance to the README and introduced the first MkDocs documentation structure, including quickstart, agents, configuration, CLI reference, and development pages. It also added GitHub workflows for CI and docs publishing, then refined the CI matrix and repository paths.</p>
+<h2>What 0.3.1 fixed</h2>
+      <p>The 0.3.1 patch added README shields, extended the docs publishing workflow, and removed direct port binding from the proxy container so the proxy setup fit better into VibePod's Docker-network model.</p>
+      <h2>Example commands</h2>
+      <p>The 0.3 line made agent containers easier to connect to project networks and documented PyPI installation.</p>
+      <pre class="code-block"><code>pip install vibepod
+
+# Attach an agent container to a known Docker network:
+vp run claude --network my-compose-network
+
+# In a workspace with docker-compose.yml or compose.yml, VibePod can prompt
+# for a running project network interactively.
+vp run claude</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

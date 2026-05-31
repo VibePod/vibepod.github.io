@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homebrew packaging tracks CLI releases | VibePod CLI</title>
+  <meta name="description" content="The homebrew-vibepod repository packages VibePod for users who prefer Homebrew-based installation workflows.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Homebrew packaging tracks CLI releases">
+  <meta property="og:description" content="The homebrew-vibepod repository packages VibePod for users who prefer Homebrew-based installation workflows.">
+  <link rel="canonical" href="https://vibepod.dev/news/homebrew-vibepod-packaging/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Homebrew packaging tracks CLI releases">
+  <meta name="twitter:description" content="The homebrew-vibepod repository packages VibePod for users who prefer Homebrew-based installation workflows.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Ecosystem · Packaging</p>
+      <h1>Homebrew packaging tracks CLI releases</h1>
+      <p class="hero-lead">The homebrew-vibepod repository packages VibePod for users who prefer Homebrew-based installation workflows.</p>
+      <div class="hero-actions"><a class="button button-primary" href="https://github.com/VibePod/homebrew-vibepod">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-05-24 · Ecosystem · Packaging</p>
+      <h2>Formula updates</h2>
+      <p>The formula has tracked CLI releases including 0.10.0, 0.11.0, and 0.12.0, with workflow and permission fixes to support automated updates.</p>
+<h2>Why it matters</h2>
+      <p>Keeping packaging in a separate repository lets release automation update install channels without mixing packaging details into the CLI source tree.</p>
+      <h2>Example commands</h2>
+      <p>The Homebrew tap tracks released CLI versions for users who prefer Homebrew-managed installs.</p>
+      <pre class="code-block"><code>brew tap VibePod/vibepod
+brew install vibepod
+vp version
+
+# After a formula update:
+brew upgrade vibepod</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

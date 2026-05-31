@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.13: Pi agent support | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.13.0 adds Pi as a supported coding agent, fixes Pi config/storage paths, refreshes docs and screenshots, and includes a Typer passthrough compatibility fix.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.13: Pi agent support">
+  <meta property="og:description" content="VibePod 0.13.0 adds Pi as a supported coding agent, fixes Pi config/storage paths, refreshes docs and screenshots, and includes a Typer passthrough compatibility fix.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-13/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.13: Pi agent support">
+  <meta name="twitter:description" content="VibePod 0.13.0 adds Pi as a supported coding agent, fixes Pi config/storage paths, refreshes docs and screenshots, and includes a Typer passthrough compatibility fix.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.13: Pi agent support</h1>
+      <p class="hero-lead">VibePod 0.13.0 adds Pi as a supported coding agent, fixes Pi config/storage paths, refreshes docs and screenshots, and includes a Typer passthrough compatibility fix.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-05-31 · Release · CLI · Agents</p>
+      <h2>Pi joins the agent matrix</h2>
+      <p>VibePod 0.13.0 adds <code>pi</code> to the supported agent IDs. Pi is provided by Earendil, runs through the same isolated container workflow as the other agents, and uses the default image <code>vibepod/pi:latest</code>.</p>
+      <p>The release documents Pi alongside Claude, Gemini, OpenCode, Devstral, Auggie, Copilot, and Codex. Because <code>vp p</code> is already Copilot's shortcut, Pi uses the full command alias <code>vp pi</code> and the standard run form <code>vp run pi</code>.</p>
+<h2>Runtime and compatibility fixes</h2>
+      <p>The CLI work includes Pi-specific config and storage path fixes so credentials and configuration persist under <code>~/.config/vibepod/agents/pi/</code>. It also includes a Typer passthrough compatibility fix for command parsing.</p>
+<h2>Docs and website refresh</h2>
+      <p>The update adds <code>VP_IMAGE_PI</code> image override documentation, README updates, agent docs, generated website docs, Pi screenshot assets, and the 0.13.0 version bump.</p>
+      <h2>Example commands</h2>
+      <p>The 0.13 line added Pi as a supported agent. Pi uses `vp pi` as the full command alias because `vp p` belongs to Copilot.</p>
+      <pre class="code-block"><code>vp run pi
+vp pi
+
+# Override the Pi image for custom builds:
+VP_IMAGE_PI=vibepod/pi:latest vp run pi
+
+# Pi is not currently an IKWID-supported agent:
+vp run pi --help</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

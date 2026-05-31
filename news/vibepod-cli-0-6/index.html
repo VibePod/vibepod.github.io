@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.6: latest images, X11 paste, and README refresh | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.6 refined image-pull behavior and added practical local UX improvements.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.6: latest images, X11 paste, and README refresh">
+  <meta property="og:description" content="VibePod 0.6 refined image-pull behavior and added practical local UX improvements.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-6/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.6: latest images, X11 paste, and README refresh">
+  <meta name="twitter:description" content="VibePod 0.6 refined image-pull behavior and added practical local UX improvements.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · UX</p>
+      <h1>VibePod CLI 0.6: latest images, X11 paste, and README refresh</h1>
+      <p class="hero-lead">VibePod 0.6 refined image-pull behavior and added practical local UX improvements.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-03-15 · Release · CLI · UX</p>
+      <h2>Smarter image pulling</h2>
+      <p>Agent container auto-pull behavior was restricted to <code>latest</code> tags, while proxy and Datasette images gained latest-image auto-pull support.</p>
+<h2>Local workflow improvements</h2>
+      <p>The release added an X11 clipboard path for image pasting, refreshed the README, and added the MIT license.</p>
+      <h2>Example commands</h2>
+      <p>The 0.6 release refined latest-tag image pulling and added optional X11 clipboard forwarding for image-paste workflows.</p>
+      <pre class="code-block"><code>vp run claude --paste-images
+
+# Requires DISPLAY on Linux desktop sessions:
+echo $DISPLAY
+
+# Services using latest tags were checked for updates automatically:
+vp logs start
+vp run codex</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

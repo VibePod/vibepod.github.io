@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | VibePod CLI</title>
+  <meta name="description" content="VibePod news, release notes, feature updates, and ecosystem updates across the VibePod CLI, agent images, dashboard, proxy, website, and packaging repositories.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../assets/icon.png">
+  <link rel="apple-touch-icon" href="../assets/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="News | VibePod CLI">
+  <meta property="og:description" content="Release notes, feature updates, and cross-repository VibePod news.">
+  <link rel="canonical" href="https://vibepod.dev/news/">
+  <meta property="og:url" content="https://vibepod.dev/news/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="News | VibePod CLI">
+  <meta name="twitter:description" content="Release notes, feature updates, and cross-repository VibePod news.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../" aria-label="VibePod CLI home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">VibePod CLI</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../#quickstart">Quickstart</a>
+        <a href="../docs/">Docs</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">News</p>
+      <h1>VibePod release notes and ecosystem updates.</h1>
+      <p class="hero-lead">News covers CLI releases, feature walkthroughs, and changes from the repositories that make up VibePod: agent images, the Datasette dashboard, proxy logging, website updates, packaging, and reusable skills.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://github.com/VibePod/vibepod-cli/releases" target="_blank" rel="noreferrer">CLI releases</a>
+        <a class="button button-ghost" href="../repositories/">Browse repositories</a>
+      </div>
+    </section>
+
+    <section class="section page-section" aria-labelledby="latest-news">
+      <div class="shell section-heading-row">
+        <div>
+          <p class="eyebrow">Latest</p>
+          <h2 id="latest-news">Latest updates</h2>
+          <p class="section-lead">Short notes for releases and feature work. Longer posts can link out to the repository, release, or documentation page where the change lives.</p>
+        </div>
+      </div>
+      <div class="shell news-grid">
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 31, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.13: Pi agent support</h3>
+          <p>Pi joins the supported agent matrix, with updated docs, screenshots, image mapping, and website release notes.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>CLI</span><span>Agents</span></div>
+          <a class="card-link" href="vibepod-cli-0-13/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 30, 2026 · Ecosystem · Agents</p>
+          <h3>Agent image pipeline and Pi image support</h3>
+          <p>The agent image repository owns Docker targets, build automation, and recent Pi image support.</p>
+          <div class="tag-row" aria-label="Tags"><span>Agents</span><span>Docker</span><span>Pi</span></div>
+          <a class="card-link" href="vibepod-agents-image-pipeline/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 24, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.12: attach workflows and reusable skills</h3>
+          <p>Skills management arrived alongside attach/stop workflow improvements and exit handling fixes.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Skills</span><span>CLI</span></div>
+          <a class="card-link" href="vibepod-cli-0-12/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 24, 2026 · Ecosystem · Packaging</p>
+          <h3>Homebrew packaging tracks CLI releases</h3>
+          <p>The Homebrew tap follows CLI releases and keeps packaging automation separate from the CLI source.</p>
+          <div class="tag-row" aria-label="Tags"><span>Packaging</span><span>Homebrew</span><span>Release</span></div>
+          <a class="card-link" href="homebrew-vibepod-packaging/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Apr 22, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.11: startup args and Claude setup tokens</h3>
+          <p>Agent-specific startup argument forwarding and Claude setup-token workflows improved advanced usage.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Claude</span><span>CLI</span></div>
+          <a class="card-link" href="vibepod-cli-0-11/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Apr 10, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.10: Linux Ollama routing and packaging polish</h3>
+          <p>Ollama/Linux integration, explicit permissions, and PyPI rendering polish landed in the 0.10 release.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>LLM</span><span>Linux</span></div>
+          <a class="card-link" href="vibepod-cli-0-10/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 30, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.9: image namespace, Gemini fixes, icons, and broader docs</h3>
+          <p>The 0.9 line polished agent support, project identity, screenshots, and IKWID documentation.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Agents</span><span>Docs</span></div>
+          <a class="card-link" href="vibepod-cli-0-9/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 17, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.8: local and remote LLM server routing</h3>
+          <p>Agents gained routing to Ollama, vLLM, and compatible local or remote LLM servers.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>LLM</span><span>Ollama</span></div>
+          <a class="card-link" href="vibepod-cli-0-8/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 17, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.7: IKWID mode</h3>
+          <p>IKWID mode introduced auto-approval workflows for supported agents.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>IKWID</span><span>Agents</span></div>
+          <a class="card-link" href="vibepod-cli-0-7/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 15, 2026 · Ecosystem · Dashboard</p>
+          <h3>Dashboard and proxy foundations for local observability</h3>
+          <p>Datasette dashboards and proxy capture provide the local observability layer behind VibePod logs.</p>
+          <div class="tag-row" aria-label="Tags"><span>Dashboard</span><span>Proxy</span><span>Logs</span></div>
+          <a class="card-link" href="vibepod-datasette-proxy-foundations/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 15, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.6: latest images, X11 paste, and README refresh</h3>
+          <p>The 0.6 release refined image pull behavior and added practical local workflow improvements.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Images</span><span>UX</span></div>
+          <a class="card-link" href="vibepod-cli-0-6/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 13, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.5: image automation and dashboard readiness</h3>
+          <p>Automatic image fetching, image validation, and a smoother Datasette startup flow landed in 0.5.x.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Images</span><span>Dashboard</span></div>
+          <a class="card-link" href="vibepod-cli-0-5/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Mar 3, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.4: project config and better discovery</h3>
+          <p>Project config bootstrap, agent init scripts, short names, and workspace listing improved daily usage.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Config</span><span>CLI</span></div>
+          <a class="card-link" href="vibepod-cli-0-4/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Feb 28, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.3: Docker networks, PyPI docs, and proxy polish</h3>
+          <p>Custom Docker network support, PyPI install docs, and proxy-port polish shaped local integration.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Networking</span><span>PyPI</span></div>
+          <a class="card-link" href="vibepod-cli-0-3/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Feb 23, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.2: proxy logging and early container fixes</h3>
+          <p>Session capture, request/response logging, and early container credential fixes started the logging story.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>Proxy</span><span>Logging</span></div>
+          <a class="card-link" href="vibepod-cli-0-2/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Feb 22, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.1: initial release</h3>
+          <p>The first release established the project and added early Copilot and Codex agent support.</p>
+          <div class="tag-row" aria-label="Tags"><span>Release</span><span>CLI</span><span>Agents</span></div>
+          <a class="card-link" href="vibepod-cli-0-1/">Read post</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links">
+        <a href="../docs/">Docs</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+        <a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

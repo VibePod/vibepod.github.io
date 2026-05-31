@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.2: proxy logging and early container fixes | VibePod CLI</title>
+  <meta name="description" content="VibePod CLI 0.2.0 introduced session and HTTP capture, proxy support, log UI startup, and source-container attribution.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.2: proxy logging and early container fixes">
+  <meta property="og:description" content="VibePod CLI 0.2.0 introduced session and HTTP capture, proxy support, log UI startup, and source-container attribution.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-2/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.2: proxy logging and early container fixes">
+  <meta name="twitter:description" content="VibePod CLI 0.2.0 introduced session and HTTP capture, proxy support, log UI startup, and source-container attribution.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Proxy</p>
+      <h1>VibePod CLI 0.2: proxy logging and early container fixes</h1>
+      <p class="hero-lead">VibePod CLI 0.2.0 introduced session and HTTP capture, proxy support, log UI startup, and source-container attribution. The 0.2.1 patch followed with container credential and startup fixes.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-02-23 · Release · CLI · Proxy</p>
+      <h2>What shipped in 0.2.0</h2>
+      <p>VibePod 0.2.0 was the first observability-focused release. It added capture of agent sessions and messages, then extended that into HTTP request/response capture through a proxy flow.</p>
+      <p>The release also introduced the proxy command group, changed the quick UI alias from <code>vp logs ui</code> to <code>vp logs start</code>, added default images for the Datasette log UI and proxy containers, and recorded source-container attribution for proxied traffic.</p>
+      <p>A follow-up commit in the same release line handled proxy file-permission issues and added tests around proxy permissions, making the logging stack safer to run from local Docker containers.</p>
+<h2>What 0.2.1 fixed</h2>
+      <p>The 0.2.1 patch release tightened credential handling for Auggie and Copilot containers and added startup fixes for Mistral Vibe / Devstral containers.</p>
+      <h2>Example commands</h2>
+      <p>The 0.2 line introduced the local logging/proxy workflow. Users could start the dashboard, run an agent, and inspect captured activity locally.</p>
+      <pre class="code-block"><code>vp logs start
+vp run claude
+vp logs status
+vp logs stop
+
+# 0.2.1 focused on container fixes, so existing run commands became smoother:
+vp run auggie
+vp run copilot
+vp run devstral</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

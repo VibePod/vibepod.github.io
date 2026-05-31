@@ -6,6 +6,8 @@
   <title>VibePod CLI | Zero-Config AI Coding Agents in Docker</title>
   <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, and Pi locally in isolated Docker containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker">
   <meta property="og:description" content="Run major coding agents locally with no required config, reusable skills, optional YAML overrides, and a built-in analytics dashboard.">
@@ -49,12 +51,9 @@
       </a>
       <nav class="main-nav" aria-label="Primary">
         <a href="#quickstart">Quickstart</a>
-        <a href="#how-it-works">How it works</a>
         <a href="docs/">Docs</a>
-        <a href="#features">Features</a>
-        <a href="#why-vibepod">Why VibePod</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#faq">FAQ</a>
+        <a href="news/">News</a>
+        <a href="repositories/">Repositories</a>
       </nav>
       <div class="header-actions">
         <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
@@ -72,8 +71,8 @@
         <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, or Pi in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
-          <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">View on GitHub</a>
-          <a class="button button-ghost" href="#quickstart">See Quickstart</a>
+          <a class="button button-primary" href="docs/">Docs</a>
+          <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Source</a>
         </div>
         <ul class="hero-proof" role="list">
           <li>Zero config by default</li>
@@ -91,6 +90,31 @@
           fetchpriority="high">
         <figcaption>Run preconfigured coding agents locally from one CLI.</figcaption>
       </figure>
+    </section>
+
+    <section class="section news-preview" id="news" data-reveal>
+      <div class="shell section-heading-row">
+        <div>
+          <p class="eyebrow">Latest News</p>
+          <h2>Release notes, feature updates, and ecosystem stories.</h2>
+          <p class="section-lead">Follow VibePod releases and cross-repository work across the CLI, agent images, dashboard, proxy, website, and packaging repositories.</p>
+        </div>
+        <a class="button button-ghost" href="news/">View all news</a>
+      </div>
+      <div class="shell news-grid compact">
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 31, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.13: Pi agent support</h3>
+          <p>Pi joins the supported agent matrix, with updated docs, screenshots, image mapping, and website release notes.</p>
+          <a class="card-link" href="news/vibepod-cli-0-13/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">May 30, 2026 · Ecosystem · Agents</p>
+          <h3>Agent image pipeline and Pi image support</h3>
+          <p>The agent image repository owns Docker targets, build automation, and recent Pi image support.</p>
+          <a class="card-link" href="news/vibepod-agents-image-pipeline/">Read post</a>
+        </article>
+      </div>
     </section>
 
     <section class="section zero-config-band" id="zero-config" data-reveal>
@@ -408,9 +432,10 @@ Starting claude with image vibepod/claude:latest</code></pre>
     <div class="shell footer-shell">
       <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
       <div class="footer-links">
+        <a href="docs/">Docs</a>
+        <a href="news/">News</a>
+        <a href="repositories/">Repositories</a>
         <a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a>
-        <a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="#quickstart">Quickstart</a>
       </div>
     </div>
   </footer>

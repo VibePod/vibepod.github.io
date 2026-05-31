@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent image pipeline and Pi image support | VibePod CLI</title>
+  <meta name="description" content="The vibepod-agents repository owns Docker image definitions and release automation for supported coding agents.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agent image pipeline and Pi image support">
+  <meta property="og:description" content="The vibepod-agents repository owns Docker image definitions and release automation for supported coding agents.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-agents-image-pipeline/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent image pipeline and Pi image support">
+  <meta name="twitter:description" content="The vibepod-agents repository owns Docker image definitions and release automation for supported coding agents.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Ecosystem · Agents · Docker</p>
+      <h1>Agent image pipeline and Pi image support</h1>
+      <p class="hero-lead">The vibepod-agents repository owns Docker image definitions and release automation for supported coding agents.</p>
+      <div class="hero-actions"><a class="button button-primary" href="https://github.com/VibePod/vibepod-agents">Read docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-05-30 · Ecosystem · Agents · Docker</p>
+      <h2>Image build automation</h2>
+      <p>The repository added a pipeline for building container images and tracking agent versions, then refined cache and force-recreate behavior for image updates.</p>
+<h2>Pi image support</h2>
+      <p>Recent work added the Pi agent image target and documentation so the CLI can launch Pi with the same zero-config style as other agents.</p>
+      <h2>Example commands</h2>
+      <p>The agents repository is Docker-focused. These examples show the kind of validation/build workflow used around agent image definitions.</p>
+      <pre class="code-block"><code>cd vibepod-agents
+docker compose config --services
+
+IMAGE_TAG=0.13.0 docker compose build pi
+IMAGE_TAG=0.13.0 docker compose build claude</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

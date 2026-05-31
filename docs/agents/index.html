@@ -1448,6 +1448,12 @@
 <td><code>vp x</code></td>
 <td><code>vibepod/codex:latest</code></td>
 </tr>
+<tr>
+<td><code>pi</code></td>
+<td>Earendil</td>
+<td><code>vp pi</code></td>
+<td><code>vibepod/pi:latest</code></td>
+</tr>
 </tbody>
 </table>
 <p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>.</p>
@@ -1483,7 +1489,7 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -1595,6 +1601,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 </tr>
 <tr>
 <td><code>auggie</code></td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td><code>pi</code></td>
 <td>Not supported</td>
 </tr>
 </tbody>

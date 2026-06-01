@@ -48,7 +48,7 @@
   <main id="main-content">
     <section class="page-hero shell" data-reveal>
       <p class="eyebrow">Release history</p>
-      <h1>VibePod releases so far: from first agents to Pi support.</h1>
+      <h1>VibePod releases so far: from first agents to Codex OAuth support.</h1>
       <p class="hero-lead">VibePod has grown from a simple local launcher into a small ecosystem for running coding agents in isolated containers, recording activity locally, adding reusable skills, and sharing updates across multiple repositories.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="../../docs/">Read docs</a>
@@ -61,7 +61,7 @@
       <p>This post summarizes the CLI release line so far, based on the repository history and release tags. It is meant as a human-readable map of what changed, not a replacement for the commit log.</p>
 
       <h2>The arc so far</h2>
-      <p>The early releases focused on making local agent containers easy to start. Later releases added logging, project configuration, image automation, IKWID mode, LLM routing, long-lived setup workflows, attach/stop improvements, and reusable skills. The current 0.13.0 work adds Pi as another supported coding agent and updates the public website and documentation around it.</p>
+      <p>The early releases focused on making local agent containers easy to start. Later releases added logging, project configuration, image automation, IKWID mode, LLM routing, long-lived setup workflows, attach/stop improvements, reusable skills, Pi support, and Codex browser OAuth support in containers.</p>
 
       <div class="release-list">
         <article>
@@ -114,7 +114,11 @@
         </article>
         <article>
           <h3>0.13.0 — Pi agent support and website/docs refresh</h3>
-          <p>The latest work adds Pi as a supported agent, fixes Pi-specific config and storage paths, updates image mappings and environment variable docs, adds a Pi screenshot, and refreshes the website and generated docs.</p>
+          <p>This release added Pi as a supported agent, fixed Pi-specific config and storage paths, updated image mappings and environment variable docs, added a Pi screenshot, and refreshed the website and generated docs.</p>
+        </article>
+        <article>
+          <h3>0.14.0 — Codex OAuth login forwarding</h3>
+          <p>The latest work makes <code>vp run codex login</code> work with browser OAuth from inside Docker by publishing the host callback port and forwarding it to Codex's loopback-only login server in the container.</p>
         </article>
       </div>
 

@@ -1925,8 +1925,20 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <h3 id="codex-openai">Codex (OpenAI)<a class="headerlink" href="#codex-openai" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
 </code></pre></div>
+<p>For browser OAuth login, run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login
+</code></pre></div>
+<p>Codex binds its OAuth callback server to <code>127.0.0.1:1455</code> inside the container.
+During <code>codex login</code>, VibePod publishes the expected host callback port and enables
+a small container forwarder so the host browser can complete the redirect back to
+Codex.</p>
+<p>Device-code and API-key flows do not need the browser callback, so they skip the
+forwarder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--device-auth
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--with-api-key
+</code></pre></div>
 <h3 id="pi-earendil">Pi (Earendil)<a class="headerlink" href="#pi-earendil" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w">   </span><span class="c1"># or: vp pi</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w">   </span><span class="c1"># or: vp pi</span>
 </code></pre></div>
 <p>Pi runs the Pi coding agent from Earendil in the same isolated VibePod container workflow. Credentials and configuration are persisted under <code>~/.config/vibepod/agents/pi/</code>.</p>
 

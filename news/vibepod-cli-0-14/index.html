@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.14: Codex OAuth login forwarding | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.14.0 makes Codex browser OAuth login work from the container by forwarding the localhost callback through VibePod.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.14: Codex OAuth login forwarding">
+  <meta property="og:description" content="VibePod 0.14.0 makes Codex browser OAuth login work from the container by forwarding the localhost callback through VibePod.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-14/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.14: Codex OAuth login forwarding">
+  <meta name="twitter:description" content="VibePod 0.14.0 makes Codex browser OAuth login work from the container by forwarding the localhost callback through VibePod.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Codex</p>
+      <h1>VibePod CLI 0.14: Codex OAuth login forwarding</h1>
+      <p class="hero-lead">VibePod 0.14.0 makes Codex browser OAuth login work from the container by forwarding the localhost callback through VibePod.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/">Read agent docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-06-01 · Release · CLI · Codex</p>
+      <h2>Browser login from a container</h2>
+      <p>Codex's browser OAuth flow listens on <code>127.0.0.1:1455</code> inside the container, while the host browser redirects to <code>http://localhost:1455/auth/callback</code>. Docker port publishing cannot reach a service bound only to container loopback, so VibePod now detects <code>vp run codex login</code>, publishes the callback port on the host, and enables a small forwarder in the Codex image.</p>
+      <p>The Codex container forwards the published bridge port to its loopback-only login server. Device-code and API-key login modes skip this path because they do not need the browser callback.</p>
+      <h2>Example commands</h2>
+      <pre class="code-block"><code>vp run codex login
+
+# Device-code and API-key flows continue to avoid the callback forwarder:
+vp run codex login --device-auth
+vp run codex login --with-api-key</code></pre>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="../../docs/quickstart/">Quickstart</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

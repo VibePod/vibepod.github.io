@@ -1618,15 +1618,15 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>--dangerously-bypass-approvals-and-sandbox</code></td>
 </tr>
 <tr>
+<td><code>pi</code></td>
+<td><code>--approve</code></td>
+</tr>
+<tr>
 <td><code>opencode</code></td>
 <td>Not supported</td>
 </tr>
 <tr>
 <td><code>auggie</code></td>
-<td>Not supported</td>
-</tr>
-<tr>
-<td><code>pi</code></td>
 <td>Not supported</td>
 </tr>
 </tbody>
@@ -1941,6 +1941,12 @@ forwarder:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w">   </span><span class="c1"># or: vp pi</span>
 </code></pre></div>
 <p>Pi runs the Pi coding agent from Earendil in the same isolated VibePod container workflow. Credentials and configuration are persisted under <code>~/.config/vibepod/agents/pi/</code>.</p>
+<p>Pi has a per-project <strong>trust/approval system</strong>: before loading project-local extensions and settings, it asks you to trust the project once. Inside VibePod:</p>
+<ul>
+<li>Interactive: run <code>/trust</code> to save the decision. It is written to <code>PI_CODING_AGENT_DIR</code> (<code>/config/.pi/agent/trust.json</code>), which lives inside the persisted config mount, so the trust survives container restarts.</li>
+<li><code>--ikwid</code>: appends <code>--approve</code>, trusting project-local files for that run (see <a href="#ikwid-mode---ikwid">IKWID mode</a>).</li>
+<li>Non-interactive modes (<code>-p</code>, <code>--mode json</code>, <code>--mode rpc</code>) show no prompt and fall back to <code>defaultProjectTrust</code> in <code>/config/.pi/agent/settings.json</code> (<code>ask</code> | <code>always</code> | <code>never</code>). Pre-seed this file if you need unattended runs to trust projects automatically.</li>
+</ul>
 
 
 

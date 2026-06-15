@@ -845,6 +845,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#agy-antigravity-google" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agy / Antigravity (Google)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1551,6 +1562,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#agy-antigravity-google" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agy / Antigravity (Google)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1642,6 +1664,12 @@
 <td><code>vp pi</code></td>
 <td><code>vibepod/pi:latest</code></td>
 </tr>
+<tr>
+<td><code>agy</code> (Antigravity)</td>
+<td>Google</td>
+<td><code>vp n</code></td>
+<td><code>vibepod/agy:latest</code></td>
+</tr>
 </tbody>
 </table>
 <p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>.</p>
@@ -1677,7 +1705,7 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -1786,6 +1814,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <tr>
 <td><code>pi</code></td>
 <td><code>--approve</code></td>
+</tr>
+<tr>
+<td><code>agy</code></td>
+<td><code>--dangerously-skip-permissions</code></td>
 </tr>
 <tr>
 <td><code>opencode</code></td>
@@ -2180,6 +2212,15 @@ forwarder:</p>
 <li><code>--ikwid</code>: appends <code>--approve</code>, trusting project-local files for that run (see <a href="#ikwid-mode---ikwid">IKWID mode</a>).</li>
 <li>Non-interactive modes (<code>-p</code>, <code>--mode json</code>, <code>--mode rpc</code>) show no prompt and fall back to <code>defaultProjectTrust</code> in <code>/config/.pi/agent/settings.json</code> (<code>ask</code> | <code>always</code> | <code>never</code>). Pre-seed this file if you need unattended runs to trust projects automatically.</li>
 </ul>
+<h3 id="agy-antigravity-google">Agy / Antigravity (Google)<a class="headerlink" href="#agy-antigravity-google" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w">   </span><span class="c1"># or: vp n</span>
+</code></pre></div>
+<p>Agy runs Google's Antigravity CLI in the same isolated VibePod container
+workflow. Credentials and configuration are persisted under
+<code>~/.config/vibepod/agents/agy/</code> and mounted at <code>/home/agy</code> inside the container.</p>
+<p>Use <code>--ikwid</code> to append Agy's permission-skip flag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
+</code></pre></div>
 
 
 

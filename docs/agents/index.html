@@ -1876,6 +1876,7 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1">#   follow:    vp task logs 9f1e8a20b4c1 --follow</span>
 </code></pre></div>
 <p>The command starts a detached container, writes a row to <code>~/.config/vibepod/tasks.db</code>, and returns a task id. The container is <strong>not</strong> auto-removed, so you can inspect logs and exit status after it finishes.</p>
+<p>Task mode applies a finite timeout by default: <strong>2 hours</strong>. Override it per task with <code>--timeout 30m</code>, <code>--timeout 4h</code>, or another <code>s</code>/<code>m</code>/<code>h</code> duration. Use <code>--timeout none</code> only when you explicitly want an unlimited background task.</p>
 <h3 id="supported-agents-v1">Supported agents (v1)<a class="headerlink" href="#supported-agents-v1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1918,6 +1919,8 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <h3 id="passing-agent-flags">Passing agent flags<a class="headerlink" href="#passing-agent-flags" title="Permanent link">&para;</a></h3>
 <p>Anything after <code>--</code> is forwarded to the agent's command after the prompt, matching the CLI's documented form (<code>claude -p "..." --allowedTools ...</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;review staged changes&quot;</span><span class="w"> </span>--<span class="w"> </span>--output-format<span class="w"> </span>json
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>30m<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;run the fast audit&quot;</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>none<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;wait for the external job&quot;</span>
 </code></pre></div>
 <h3 id="auto-approval-for-automation">Auto-approval for automation<a class="headerlink" href="#auto-approval-for-automation" title="Permanent link">&para;</a></h3>
 <p>Headless tasks typically need to run without permission prompts. Pass <code>--ikwid</code> to apply the agent's documented auto-approve flag (e.g., <code>--dangerously-skip-permissions</code> for Claude):</p>
@@ -1933,6 +1936,7 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <ul>
 <li><strong>No <code>--resume</code> in v1.</strong> Task mode starts a fresh session every time. Use the agent's own resume flag via passthrough (<code>-- --resume &lt;session_id&gt;</code> for Claude) if you need continuity.</li>
 <li><strong>LLM config model flag is skipped in task mode.</strong> <code>llm.base_url</code> / <code>llm.api_key</code> / <code>llm.model</code> are still injected as env vars, but the <code>--model</code>-style CLI flag is not appended — different agents place it differently relative to subcommands. Pass an explicit model via <code>--</code>.</li>
+<li><strong>Default timeout: 2 hours.</strong> On timeout, VibePod gracefully stops the container and records the task as failed. Pass <code>--timeout none</code> to opt out for one task.</li>
 <li><strong>Task containers are not auto-removed.</strong> Run <code>vp task rm &lt;id&gt;</code> when you're done inspecting one task, or <code>vp task rm --all -f</code> to clean up every recorded task and its container.</li>
 </ul>
 <h2 id="reattaching-a-terminal">Reattaching a terminal<a class="headerlink" href="#reattaching-a-terminal" title="Permanent link">&para;</a></h2>

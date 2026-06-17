@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VibePod CLI | Zero-Config AI Coding Agents in Docker</title>
-  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, and Pi locally in isolated Docker containers. No config required; reusable skills supported.">
+  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, and Antigravity locally in isolated Docker containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
@@ -68,7 +68,7 @@
         <p class="eyebrow">Zero-config local agents</p>
         <h1>The zero-config CLI for running AI coding agents locally.</h1>
         <p class="hero-lead">No YAML required. No setup file required. Just <code>vp run claude</code> in Docker, with reusable skills and a built-in analytics dashboard.</p>
-        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, or Pi in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
+        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, or Antigravity in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
           <a class="button button-primary" href="docs/">Docs</a>
@@ -103,16 +103,22 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Jun 17, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.15: Antigravity CLI support</h3>
+          <p>Antigravity joins the supported agent matrix as <code>agy</code>, with shortcut, image override, IKWID, docs, and screenshot coverage.</p>
+          <a class="card-link" href="news/vibepod-cli-0-15/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Jun 1, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.14: Codex OAuth login forwarding</h3>
+          <p>Codex browser login now works from the container by forwarding its localhost callback through VibePod.</p>
+          <a class="card-link" href="news/vibepod-cli-0-14/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">May 31, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.13: Pi agent support</h3>
           <p>Pi joins the supported agent matrix, with updated docs, screenshots, image mapping, and website release notes.</p>
           <a class="card-link" href="news/vibepod-cli-0-13/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">May 30, 2026 · Ecosystem · Agents</p>
-          <h3>Agent image pipeline and Pi image support</h3>
-          <p>The agent image repository owns Docker targets, build automation, and recent Pi image support.</p>
-          <a class="card-link" href="news/vibepod-agents-image-pipeline/">Read post</a>
         </article>
       </div>
     </section>
@@ -173,8 +179,8 @@ vp logs start</code></pre>
           <a class="button button-ghost" href="docs/quickstart/">Open Docs Quickstart</a>
         </div>
         <figure class="demo-frame">
-          <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.14.0
+<pre class="code-block"><code>$ vp version
+VibePod CLI: 0.15.0
 Python:      3.12.3
 Docker:      28.1.1
 

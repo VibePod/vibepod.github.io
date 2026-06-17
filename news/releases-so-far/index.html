@@ -118,7 +118,11 @@
         </article>
         <article>
           <h3>0.14.0 — Codex OAuth login forwarding</h3>
-          <p>The latest work makes <code>vp run codex login</code> work with browser OAuth from inside Docker by publishing the host callback port and forwarding it to Codex's loopback-only login server in the container.</p>
+          <p>This release made <code>vp run codex login</code> work with browser OAuth from inside Docker by publishing the host callback port and forwarding it to Codex's loopback-only login server in the container.</p>
+        </article>
+        <article>
+          <h3>0.15.0 — Antigravity CLI support</h3>
+          <p>The latest work adds Google's Antigravity CLI as <code>agy</code>, with the <code>vp n</code> shortcut, <code>vibepod/agy:latest</code> image mapping, <code>VP_IMAGE_AGY</code> override, IKWID support, docs, and screenshot assets.</p>
         </article>
       </div>
 
@@ -127,12 +131,12 @@
       <p>That means future news posts can cover a CLI release, a new agent image, a dashboard parsing improvement, a proxy data extraction change, a Homebrew update, or a reusable skills bundle. The <a href="../../repositories/">Repositories page</a> is the directory for those pieces.</p>
 
       <h2>Example commands</h2>
-      <p>Across the release line, these commands show the through-line: install VibePod, run an agent, inspect logs, add skills, and switch to Pi.</p>
+      <p>Across the release line, these commands show the through-line: install VibePod, run an agent, inspect logs, add skills, and switch to Antigravity.</p>
       <pre class="code-block"><code>pip install vibepod
 vp run claude
 vp logs start
 vp skills list
-vp run pi</code></pre>
+vp run agy</code></pre>
 
       <h2>What to read next</h2>
       <ul>

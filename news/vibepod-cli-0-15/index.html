@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.15: Antigravity CLI support | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.15.0 adds Google's Antigravity CLI as the agy agent, with shortcut, image override, IKWID, docs, and screenshot coverage.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.15: Antigravity CLI support">
+  <meta property="og:description" content="VibePod 0.15.0 adds Google's Antigravity CLI as the agy agent, with shortcut, image override, IKWID, docs, and screenshot coverage.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-15/">
+  <meta property="og:image" content="https://vibepod.dev/screenshots/agy.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.15: Antigravity CLI support">
+  <meta name="twitter:description" content="VibePod 0.15.0 adds Google's Antigravity CLI as the agy agent, with shortcut, image override, IKWID, docs, and screenshot coverage.">
+  <meta name="twitter:image" content="https://vibepod.dev/screenshots/agy.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Antigravity</p>
+      <h1>VibePod CLI 0.15: Antigravity CLI support</h1>
+      <p class="hero-lead">VibePod 0.15.0 adds Google's Antigravity CLI as the <code>agy</code> agent, with a shortcut, image override, IKWID mode, docs, and screenshot coverage.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/">Read agent docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-06-17 · Release · CLI · Antigravity</p>
+      <h2>Antigravity in the agent matrix</h2>
+      <p>The new <code>agy</code> agent runs Google's Antigravity CLI in the same isolated VibePod container workflow as the other supported tools. Credentials and configuration persist under <code>~/.config/vibepod/agents/agy/</code> on the host and mount at <code>/home/agy</code> inside the container.</p>
+      <p>The default image is <code>vibepod/agy:latest</code>. Use <code>VP_IMAGE_AGY</code> for one-off image overrides or the normal per-agent config block for persistent image customization.</p>
+      <h2>Example commands</h2>
+      <pre class="code-block"><code>vp run agy
+vp n
+vp run agy --ikwid
+
+VP_IMAGE_AGY=vibepod/agy:latest vp run agy</code></pre>
+      <h2>Release details</h2>
+      <p>VibePod 0.15.0 documents the <code>vp n</code> shortcut, the <code>--dangerously-skip-permissions</code> IKWID flag for Antigravity, the <code>VP_IMAGE_AGY</code> override, and the new Antigravity screenshot asset used across docs and the website.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/agy.png" alt="Screenshot of Antigravity CLI running in a VibePod container." width="805" height="535">
+        <figcaption>Antigravity CLI running through VibePod.</figcaption>
+      </figure>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/agents/">Agent documentation</a></li>
+        <li><a href="../../docs/configuration/">Configuration reference</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

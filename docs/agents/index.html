@@ -2178,6 +2178,7 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <h3 id="opencode-openai">OpenCode (OpenAI)<a class="headerlink" href="#opencode-openai" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
+<p>Credentials and settings are persisted to <code>~/.config/vibepod/agents/opencode/</code> on the host and mounted at <code>/config</code> inside the container. In addition, the XDG data and config directories (<code>/root/.local/share/opencode</code> and <code>/root/.config/opencode</code>) are bind-mounted from the host so that authentication state is preserved across container restarts.</p>
 <h3 id="devstral-vibe-mistral">Devstral / Vibe (Mistral)<a class="headerlink" href="#devstral-vibe-mistral" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>

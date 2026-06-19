@@ -1093,6 +1093,13 @@
 <p>Or at runtime:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Podman users</p>
+<p>The proxy relies on container-name DNS resolution over the <code>vibepod-network</code>
+network. If you use Podman with the CNI backend, install the <code>dnsname</code>
+plugin (e.g. <code>podman-plugins</code> on Fedora, <code>golang-github-containernetworking-plugin-dnsname</code>
+on Debian/Ubuntu) and recreate the network. See <a href="../quickstart/#using-podman-instead-of-docker">Quickstart — Using Podman</a> for full instructions.</p>
+</div>
 
 
 

@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VibePod CLI | Zero-Config AI Coding Agents in Docker</title>
-  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, and Antigravity locally in isolated Docker containers. No config required; reusable skills supported.">
+  <title>VibePod CLI | Zero-Config AI Coding Agents in Docker or Podman</title>
+  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, and Antigravity locally in isolated Docker or Podman containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker">
+  <meta property="og:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker or Podman">
   <meta property="og:description" content="Run major coding agents locally with no required config, reusable skills, optional YAML overrides, and a built-in analytics dashboard.">
   <link rel="canonical" href="https://vibepod.dev/">
   <meta property="og:url" content="https://vibepod.dev/">
   <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker">
+  <meta name="twitter:title" content="VibePod CLI | Zero-Config AI Coding Agents in Docker or Podman">
   <meta name="twitter:description" content="pip install vibepod, run agents locally in Docker, add reusable skills, and track usage from a local dashboard.">
   <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
       "name": "vibepod",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Cross-platform",
-      "description": "A zero-config-by-default CLI to run coding agents locally in isolated Docker containers with reusable skills, optional YAML configuration, and a built-in analytics dashboard.",
+      "description": "A zero-config-by-default CLI to run coding agents locally in isolated Docker or Podman containers with reusable skills, optional YAML configuration, and a built-in analytics dashboard.",
       "url": "https://vibepod.dev/",
       "downloadUrl": "https://pypi.org/project/vibepod/",
       "offers": {
@@ -67,7 +67,7 @@
       <div class="hero-copy">
         <p class="eyebrow">Zero-config local agents</p>
         <h1>The zero-config CLI for running AI coding agents locally.</h1>
-        <p class="hero-lead">No YAML required. No setup file required. Just <code>vp run claude</code> in Docker, with reusable skills and a built-in analytics dashboard.</p>
+        <p class="hero-lead">No YAML required. No setup file required. Just <code>vp run claude</code> in Docker or Podman, with reusable skills and a built-in analytics dashboard.</p>
         <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, or Antigravity in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
@@ -78,7 +78,7 @@
           <li>Zero config by default</li>
           <li>Reusable skills</li>
           <li>Optional YAML overrides</li>
-          <li>Isolated Docker containers</li>
+          <li>Isolated Docker or Podman containers</li>
         </ul>
       </div>
       <figure class="hero-visual">
@@ -103,6 +103,12 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Jun 20, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.16: Rootless Podman support</h3>
+          <p>Run agents with rootless Podman using automatic <code>keep-id</code> handling and documented container DNS setup.</p>
+          <a class="card-link" href="news/vibepod-cli-0-16/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">Jun 17, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.15: Antigravity CLI support</h3>
           <p>Antigravity joins the supported agent matrix as <code>agy</code>, with shortcut, image override, IKWID, docs, and screenshot coverage.</p>
@@ -113,12 +119,6 @@
           <h3>VibePod CLI 0.14: Codex OAuth login forwarding</h3>
           <p>Codex browser login now works from the container by forwarding its localhost callback through VibePod.</p>
           <a class="card-link" href="news/vibepod-cli-0-14/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">May 31, 2026 · Release · CLI</p>
-          <h3>VibePod CLI 0.13: Pi agent support</h3>
-          <p>Pi joins the supported agent matrix, with updated docs, screenshots, image mapping, and website release notes.</p>
-          <a class="card-link" href="news/vibepod-cli-0-13/">Read post</a>
         </article>
       </div>
     </section>
@@ -180,7 +180,7 @@ vp logs start</code></pre>
         </div>
         <figure class="demo-frame">
 <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.15.0
+VibePod CLI: 0.16.0
 Python:      3.12.3
 Docker:      28.1.1
 
@@ -261,7 +261,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
         </article>
         <article class="feature-card" data-reveal>
           <h3>Compose-aware workspaces</h3>
-          <p>When a workspace has Compose files, VibePod can connect an agent container to the right Docker network.</p>
+          <p>When a workspace has Compose files, VibePod can connect an agent container to the right Docker or Podman network.</p>
           <p class="proof">Proof point: use <code>vp run claude --network my-net</code>.</p>
         </article>
       </div>
@@ -293,7 +293,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
               </tr>
               <tr>
                 <td>Container isolation</td>
-                <td>Manual Docker setup</td>
+                <td>Manual Docker or Podman setup</td>
                 <td>Built in</td>
               </tr>
               <tr>
@@ -401,7 +401,11 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </details>
       <details>
         <summary>Can I use it for local workflows?</summary>
-        <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine in isolated Docker containers.</p>
+        <p>Yes. The core workflow is local CLI usage so you can run and switch coding agents from your machine in isolated Docker or Podman containers.</p>
+      </details>
+      <details>
+        <summary>Do I need Docker, or can I use Podman?</summary>
+        <p>Either. VibePod auto-detects rootless Podman and applies the right user-namespace settings, so <code>vp run &lt;agent&gt;</code> works the same way under Docker or Podman. See the <a href="news/vibepod-cli-0-16/">0.16 release notes</a> and the <a href="docs/quickstart/#using-podman-instead-of-docker">Podman quickstart</a>.</p>
       </details>
       <details>
         <summary>Does VibePod CLI support auto-complete?</summary>

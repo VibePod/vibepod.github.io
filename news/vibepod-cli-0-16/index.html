@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.16: Rootless Podman support | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.16.0 adds rootless Podman support with automatic keep-id user namespaces, correct host UID/GID handling, and documented container-network DNS setup.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.16: Rootless Podman support">
+  <meta property="og:description" content="VibePod 0.16.0 adds rootless Podman support with automatic keep-id user namespaces, correct host UID/GID handling, and documented container-network DNS setup.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-16/">
+  <meta property="og:image" content="https://vibepod.dev/screenshots/agy.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.16: Rootless Podman support">
+  <meta name="twitter:description" content="VibePod 0.16.0 adds rootless Podman support with automatic keep-id user namespaces, correct host UID/GID handling, and documented container-network DNS setup.">
+  <meta name="twitter:image" content="https://vibepod.dev/screenshots/agy.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Podman</p>
+      <h1>VibePod CLI 0.16: Rootless Podman support</h1>
+      <p class="hero-lead">VibePod 0.16.0 adds rootless Podman support with automatic
+      <code>keep-id</code> user namespaces, correct host UID/GID handling, and documented
+      container-network DNS setup.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/quickstart/#using-podman-instead-of-docker">Read Podman quickstart</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-06-20 · Release · CLI · Podman</p>
+      <h2>Rootless detection, not root</h2>
+      <p>VibePod now auto-detects a rootless Podman runtime and adapts container
+      launches accordingly, so the same <code>vp run &lt;agent&gt;</code> and
+      <code>vp task</code> commands work under Podman exactly as they do under Docker.
+      When rootless Podman is detected, VibePod passes the <code>keep-id</code>
+      user-namespace mode so the container user maps to your host user instead of root.
+      Files created inside agent and task containers are therefore owned by your real
+      host UID and GID, avoiding the "everything is root" problem that usually bites
+      rootless workflows.</p>
+      <h2>Pointing VibePod at the Podman socket</h2>
+      <p>Podman exposes its runtime over a Unix socket. Set
+      <code>DOCKER_HOST</code> to that socket path and VibePod will talk to Podman
+      exactly as it talks to the Docker daemon:</p>
+      <pre class="code-block"><code># Rootless Podman socket (typical path)
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+
+vp run claude
+vp logs start</code></pre>
+      <p>Because VibePod uses the standard container API, the Docker runtime label is
+      preserved in CLI output; only the underlying engine changes.</p>
+      <h2>Container-network DNS: dnsname vs Netavark</h2>
+      <p>Agent and task containers frequently need to resolve service names from a
+      Compose network. DNS handling depends on the Podman network backend:</p>
+      <ul>
+        <li><strong>CNI backend</strong> (older Podman): install the
+        <code>dnsname</code> plugin so containers on a named network resolve one
+        another. Without it, short service names will not resolve even though the
+        network exists.</li>
+        <li><strong>Netavark backend</strong> (Podman 4.0+, the default on newer
+        installs): DNS is included out of the box, so no extra plugin is required.</li>
+      </ul>
+      <p>See the Quickstart for the recommended setup for your Podman version and the
+      <code>INSERT</code>-free detection flow.</p>
+      <h2>Example commands</h2>
+      <pre class="code-block"><code>export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+vp run claude
+vp task create --image vibepod/claude:latest
+vp logs start</code></pre>
+      <h2>Release details</h2>
+      <p>VibePod 0.16.0 wires rootless Podman detection into the run and task paths,
+      propagates host UID/GID into agent and task containers via
+      <code>keep-id</code>, and documents Podman socket configuration
+      (<code>DOCKER_HOST</code>) and container-network DNS for both the CNI
+      <code>dnsname</code> plugin and the Netavark backend.</p>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/quickstart/#using-podman-instead-of-docker">Quickstart: Using Podman instead of Docker</a></li>
+        <li><a href="../../docs/configuration/">Configuration reference</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.16.0" target="_blank" rel="noreferrer">0.16.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

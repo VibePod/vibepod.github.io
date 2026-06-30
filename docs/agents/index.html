@@ -1604,7 +1604,7 @@
 
 
 <h1 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h1>
-<p>VibePod manages each agent as a Docker container. Credentials and config are persisted to <code>~/.config/vibepod/agents/&lt;agent&gt;/</code> on your host and mounted into the container on every run, so you only need to authenticate once.</p>
+<p>VibePod manages each agent as a Docker or Podman container. Credentials and config are persisted to <code>~/.config/vibepod/agents/&lt;agent&gt;/</code> on your host and mounted into the container on every run, so you only need to authenticate once.</p>
 <h2 id="supported-agents">Supported Agents<a class="headerlink" href="#supported-agents" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1676,7 +1676,7 @@
 <h2 id="first-run-authentication">First run &amp; authentication<a class="headerlink" href="#first-run-authentication" title="Permanent link">&para;</a></h2>
 <p>Start any agent for the first time with <code>vp run &lt;agent&gt;</code>. The container will prompt you to authenticate (browser OAuth, API key entry, or device flow depending on the provider). Once authenticated, credentials are written to the persisted config directory and reused on subsequent runs.</p>
 <h2 id="auto-pulling-the-latest-image">Auto-pulling the latest image<a class="headerlink" href="#auto-pulling-the-latest-image" title="Permanent link">&para;</a></h2>
-<p>VibePod automatically pulls the latest image for an agent before every run. This ensures you always start with the most up-to-date container without manual intervention.</p>
+<p>VibePod automatically pulls the latest image for an agent before every run and shows pull progress while layers download. This ensures you always start with the most up-to-date container without manual intervention.</p>
 <p>To disable auto-pull globally:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>

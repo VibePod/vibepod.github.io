@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.17: Pull progress and Python 3.14 polish | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.17.0 adds image-pull progress for agent and helper images, clearer Podman socket setup docs, and quieter Python 3.14 client-close handling.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.17: Pull progress and Python 3.14 polish">
+  <meta property="og:description" content="VibePod 0.17.0 adds image-pull progress for agent and helper images, clearer Podman socket setup docs, and quieter Python 3.14 client-close handling.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-17/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.17: Pull progress and Python 3.14 polish">
+  <meta name="twitter:description" content="Image pulls now show progress, Podman setup docs are clearer, and Python 3.14 shutdown handling is quieter.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · UX</p>
+      <h1>VibePod CLI 0.17: Pull progress and Python 3.14 polish</h1>
+      <p class="hero-lead">VibePod 0.17.0 makes image pulls easier to follow, clarifies
+      Podman socket setup, and handles Python 3.14 client-close noise more gracefully.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/#auto-pulling-the-latest-image">Read image pull docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-06-30 · Release · CLI · UX</p>
+      <h2>Image-pull progress is visible now</h2>
+      <p>When VibePod needs a fresh container image, 0.17.0 shows image-pull progress
+      instead of leaving the terminal quiet during a large download. The progress UI
+      covers the images users wait on most often: agent images for <code>vp run</code>,
+      the skills-engine helper image for <code>vp skills</code>, and the Datasette
+      helper image used by <code>vp logs start</code>.</p>
+      <p>This keeps the zero-config workflow intact while making first runs and image
+      refreshes easier to trust. You can still disable automatic pulls globally or per
+      agent when you want reproducible image pinning.</p>
+      <h2>Podman socket setup is clearer</h2>
+      <p>The previous release added rootless Podman support. This release tightens the
+      setup documentation around the Docker-compatible Podman socket, including the
+      common rootless path and the <code>DOCKER_HOST</code> export VibePod reads when
+      talking to Podman.</p>
+      <pre class="code-block"><code>systemctl --user enable --now podman.socket
+export DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock
+vp run claude</code></pre>
+      <p>The quickstart also keeps the network DNS guidance for CNI <code>dnsname</code>
+      and Netavark so agent containers can resolve the proxy and project services by
+      container name.</p>
+      <h2>Python 3.14 shutdowns are quieter</h2>
+      <p>Python 3.14 changed how some client-close paths surface during terminal
+      shutdown. VibePod 0.17.0 handles those client-close errors so normal exits do not
+      look like noisy application failures. This is a compatibility polish release for
+      users trying newer Python versions and for CI that already includes Python 3.14.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Added loading bars for agent, skills-engine, and Datasette image downloads.</li>
+        <li>Extended Podman socket setup documentation for rootless users.</li>
+        <li>Handled Python 3.14 client-close errors during CLI shutdown.</li>
+        <li>Bumped the package version to <code>0.17.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/agents/#auto-pulling-the-latest-image">Agents docs: Auto-pulling the latest image</a></li>
+        <li><a href="../../docs/quickstart/#using-podman-instead-of-docker">Quickstart: Using Podman instead of Docker</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.17.0" target="_blank" rel="noreferrer">0.17.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

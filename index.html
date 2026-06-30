@@ -103,6 +103,12 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Jun 30, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.17: Pull progress and Python 3.14 polish</h3>
+          <p>Image pulls now show progress for agents and helper images, Podman socket setup is clearer, and Python 3.14 client-close handling is quieter.</p>
+          <a class="card-link" href="news/vibepod-cli-0-17/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">Jun 20, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.16: Rootless Podman support</h3>
           <p>Run agents with rootless Podman using automatic <code>keep-id</code> handling and documented container DNS setup.</p>
@@ -113,12 +119,6 @@
           <h3>VibePod CLI 0.15: Antigravity CLI support</h3>
           <p>Antigravity joins the supported agent matrix as <code>agy</code>, with shortcut, image override, IKWID, docs, and screenshot coverage.</p>
           <a class="card-link" href="news/vibepod-cli-0-15/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">Jun 1, 2026 · Release · CLI</p>
-          <h3>VibePod CLI 0.14: Codex OAuth login forwarding</h3>
-          <p>Codex browser login now works from the container by forwarding its localhost callback through VibePod.</p>
-          <a class="card-link" href="news/vibepod-cli-0-14/">Read post</a>
         </article>
       </div>
     </section>
@@ -180,7 +180,7 @@ vp logs start</code></pre>
         </div>
         <figure class="demo-frame">
 <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.16.0
+VibePod CLI: 0.17.0
 Python:      3.12.3
 Docker:      28.1.1
 

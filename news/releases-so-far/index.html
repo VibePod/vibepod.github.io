@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VibePod releases so far | VibePod CLI</title>
-  <meta name="description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, and rootless Podman.">
+  <meta name="description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, rootless Podman, pull progress, and Python 3.14 polish.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="../../assets/icon.png">
   <link rel="apple-touch-icon" href="../../assets/icon.png">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="VibePod releases so far: from first agents to rootless Podman">
-  <meta property="og:description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, and rootless Podman.">
+  <meta property="og:title" content="VibePod releases so far: from first agents to pull progress">
+  <meta property="og:description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, rootless Podman, pull progress, and Python 3.14 polish.">
   <link rel="canonical" href="https://vibepod.dev/news/releases-so-far/">
   <meta property="og:url" content="https://vibepod.dev/news/releases-so-far/">
   <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VibePod releases so far: from first agents to rootless Podman">
-  <meta name="twitter:description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, and rootless Podman.">
+  <meta name="twitter:title" content="VibePod releases so far: from first agents to pull progress">
+  <meta name="twitter:description" content="A release-history post covering VibePod CLI releases from the first agent support through skills, LLM routing, attach workflows, Pi support, Codex OAuth, rootless Podman, pull progress, and Python 3.14 polish.">
   <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
   <main id="main-content">
     <section class="page-hero shell" data-reveal>
       <p class="eyebrow">Release history</p>
-      <h1>VibePod releases so far: from first agents to rootless Podman support.</h1>
+      <h1>VibePod releases so far: from first agents to pull progress and Python 3.14 polish.</h1>
       <p class="hero-lead">VibePod has grown from a simple local launcher into a small ecosystem for running coding agents in isolated Docker or Podman containers, recording activity locally, adding reusable skills, and sharing updates across multiple repositories.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="../../docs/">Read docs</a>
@@ -57,11 +57,11 @@
     </section>
 
     <article class="shell post-article" data-reveal>
-      <p class="news-meta">2026-06-20 · CLI · Release notes</p>
+      <p class="news-meta">2026-06-30 · CLI · Release notes</p>
       <p>This post summarizes the CLI release line so far, based on the repository history and release tags. It is meant as a human-readable map of what changed, not a replacement for the commit log.</p>
 
       <h2>The arc so far</h2>
-      <p>The early releases focused on making local agent containers easy to start. Later releases added logging, project configuration, image automation, IKWID mode, LLM routing, long-lived setup workflows, attach/stop improvements, reusable skills, Pi support, Codex browser OAuth support in containers, and rootless Podman support with automatic <code>keep-id</code> handling.</p>
+      <p>The early releases focused on making local agent containers easy to start. Later releases added logging, project configuration, image automation, IKWID mode, LLM routing, long-lived setup workflows, attach/stop improvements, reusable skills, Pi support, Codex browser OAuth support in containers, rootless Podman support with automatic <code>keep-id</code> handling, visible image-pull progress, and Python 3.14 shutdown polish.</p>
 
       <div class="release-list">
         <article>
@@ -129,6 +129,12 @@
           <p>This release added rootless Podman detection, automatic <code>keep-id</code>
           user namespaces, host UID/GID propagation for agent and task containers, and
           setup guidance for Podman sockets and container-network DNS.</p>
+        </article>
+        <article>
+          <h3>0.17.0 — Pull progress and Python 3.14 polish</h3>
+          <p>This release added visible image-pull progress for agent and helper images,
+          clarified rootless Podman socket setup documentation, and handled Python 3.14
+          client-close errors during normal CLI shutdown.</p>
         </article>
       </div>
 

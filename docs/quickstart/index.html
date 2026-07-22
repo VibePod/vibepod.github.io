@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -971,10 +971,30 @@
 <p>VibePod can use Podman's Docker-compatible API socket and applies the
 necessary rootless user-namespace settings (<code>keep-id</code>) so workspace file
 permissions work correctly.</p>
-<p>Start Podman's user socket and point VibePod at it with <code>DOCKER_HOST</code>:</p>
+<p>Start Podman's Docker-compatible socket and point VibePod at it with
+<code>DOCKER_HOST</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Linux</label><label for="__tabbed_1_2">macOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman.socket
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>unix:///run/user/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>/podman/podman.sock
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>podman<span class="w"> </span>machine<span class="w"> </span>init<span class="w">   </span><span class="c1"># first time only</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>podman<span class="w"> </span>machine<span class="w"> </span>start
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DOCKER_HOST</span><span class="o">=</span><span class="s2">&quot;unix://</span><span class="k">$(</span>podman<span class="w"> </span>machine<span class="w"> </span>inspect<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.ConnectionInfo.PodmanSocket.Path}}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">The socket path is dynamic</p>
+<p>The Podman machine socket lives under <code>$TMPDIR</code>, which changes between
+machine starts — a hardcoded <code>DOCKER_HOST</code> will break after a reboot.
+Always compute it via <code>podman machine inspect</code> as above, and add the
+<code>export</code> line to your <code>~/.zshrc</code> so every shell picks it up.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Container DNS required</p>
 <p>VibePod routes agent traffic through a <code>vibepod-proxy</code> container. The agent
@@ -983,29 +1003,29 @@ which requires <strong>DNS</strong> to be enabled.</p>
 <p>If your Podman installation uses the <strong>CNI</strong> network backend, you must
 install the <code>dnsname</code> plugin — otherwise DNS is disabled and the proxy
 will be unreachable.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Fedora / RHEL</label><label for="__tabbed_1_2">Ubuntu / Debian</label><label for="__tabbed_1_3">Arch</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Fedora / RHEL</label><label for="__tabbed_2_2">Ubuntu / Debian</label><label for="__tabbed_2_3">Arch</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>podman-plugins
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>podman-plugins
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>golang-github-containernetworking-plugin-dnsname
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>golang-github-containernetworking-plugin-dnsname
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>podman-dnsname
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>podman-dnsname
 </code></pre></div>
 </div>
 </div>
 </div>
 <p>After installing, recreate the network so DNS takes effect:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>podman<span class="w"> </span>network<span class="w"> </span>rm<span class="w"> </span>vibepod-network<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>podman<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>vibepod-network
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>podman<span class="w"> </span>network<span class="w"> </span>rm<span class="w"> </span>vibepod-network<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>podman<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>vibepod-network
 </code></pre></div>
 <p>Verify with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>podman<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>vibepod-network<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.DNSEnabled}}&#39;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Should print: true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>podman<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>vibepod-network<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.DNSEnabled}}&#39;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># Should print: true</span>
 </code></pre></div>
 <p><strong>Alternatively</strong>, switch to the <a href="https://github.com/containers/netavark">Netavark</a>
 network backend (Podman 4.0+), which includes DNS out of the box. See
@@ -1013,15 +1033,15 @@ network backend (Podman 4.0+), which includes DNS out of the box. See
 backend.</p>
 </div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vibepod
 </code></pre></div>
 <p>Verify the installation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>version
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>vp<span class="w"> </span>version
 </code></pre></div>
 <h2 id="run-your-first-agent">Run your first agent<a class="headerlink" href="#run-your-first-agent" title="Permanent link">&para;</a></h2>
 <p>Navigate to the project you want to work on, then run an agent:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-project
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-project
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <p>VibePod will:</p>
 <ol>
@@ -1039,47 +1059,47 @@ backend.</p>
 <p>You can start agents with the full agent command. Most agents also have a single-letter
 shortcut; Pi uses <code>vp pi</code> because <code>vp p</code> is assigned to Copilot, and Agy uses
 <code>vp n</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>vp<span class="w"> </span>c<span class="w">        </span><span class="c1"># shortcut</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>vp<span class="w"> </span>run<span class="w"> </span>c<span class="w">    </span><span class="c1"># shortcut with run also works</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>vp<span class="w"> </span>c<span class="w">        </span><span class="c1"># shortcut</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>vp<span class="w"> </span>run<span class="w"> </span>c<span class="w">    </span><span class="c1"># shortcut with run also works</span>
 </code></pre></div>
 <h2 id="point-at-a-different-workspace">Point at a different workspace<a class="headerlink" href="#point-at-a-different-workspace" title="Permanent link">&para;</a></h2>
 <p>Use <code>-w</code> / <code>--workspace</code> to target any directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
 </code></pre></div>
 <h2 id="pass-arguments-to-the-agent">Pass arguments to the agent<a class="headerlink" href="#pass-arguments-to-the-agent" title="Permanent link">&para;</a></h2>
 <p>Arguments after the agent name are forwarded to the agent command inside the container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
 </code></pre></div>
 <p>When forwarding flags to the agent, use <code>--</code> to stop VibePod option parsing:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
 </code></pre></div>
 <h2 id="bootstrap-a-project-config">Bootstrap a project config<a class="headerlink" href="#bootstrap-a-project-config" title="Permanent link">&para;</a></h2>
 <p>Create a project-level config file that you can extend later:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
 </code></pre></div>
 <p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
 <p>Add a specific agent block into the project config with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
 </code></pre></div>
 <p>If that agent is already configured under <code>agents</code>, the command exits without changing the file.</p>
 <h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
 </code></pre></div>
 <p>Check which agents are running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
 </code></pre></div>
 <p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
 </code></pre></div>
 <p>For more details on detached mode workflows, see <a href="../agents/#detached-mode">Agents &gt; Detached mode</a>.</p>
 <h2 id="add-reusable-skills">Add reusable skills<a class="headerlink" href="#add-reusable-skills" title="Permanent link">&para;</a></h2>
 <p>Skills are reusable prompt/recipe folders that supported agents can discover at
 runtime. Install one with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>github:vibepod/vibepod-skills//skills/researcher<span class="w"> </span>--scope<span class="w"> </span>user
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>github:vibepod/vibepod-skills//skills/researcher<span class="w"> </span>--scope<span class="w"> </span>user
 </code></pre></div>
 <p>Use <code>--scope local</code> to install into the current project, or omit it to use the
 normal scope auto-detection. See <a href="../skills/">Skills</a> for scopes, GitHub
@@ -1088,7 +1108,7 @@ URL installs, bundles, and update/sync behavior.</p>
 <a href="https://github.com/VibePod/vibepod-skills"><code>VibePod/vibepod-skills</code></a>.</p>
 <h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
 <p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
 </code></pre></div>
 <p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
@@ -1156,7 +1176,7 @@ URL installs, bundles, and update/sync behavior.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

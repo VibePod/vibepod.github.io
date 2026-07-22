@@ -26,7 +26,7 @@
   --space-6: 32px;
   --space-7: 48px;
   --space-8: 64px;
-  --hero: clamp(2rem, 4vw, 4rem);
+  --hero: clamp(1.5rem, 2.4vw, 2.1rem);
   --h2: clamp(1.6rem, 3vw, 2.5rem);
   --h3: clamp(1.1rem, 2.2vw, 1.35rem);
   --body: 1rem;
@@ -264,6 +264,11 @@ details summary:focus-visible {
   gap: var(--space-6);
   align-items: center;
   grid-template-columns: 1.1fr 1fr;
+}
+
+.hero-copy h1 {
+  max-width: 30ch;
+  text-wrap: balance;
 }
 
 .eyebrow {
@@ -1276,5 +1281,381 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Header star pill (extends .button .button-sm .button-outline) */
+.star-button {
+  gap: var(--space-2);
+}
+
+/* Gold star glyph — legible on light and dark surfaces */
+.star-icon {
+  color: #e8b34b;
+}
+
+/* Star count badge inside the pill */
+.star-count-badge {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Final CTA star line */
+.cta-star-line {
+  margin-top: var(--space-5);
+  color: var(--text-muted);
+  font-size: var(--caption);
+  max-width: none;
+}
+
+.cta-star-line a {
+  color: var(--accent-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cta-star-line a:hover,
+.cta-star-line a:focus-visible {
+  text-decoration: underline;
+}
+
+/* Dark theme: soft accent surface matching the .tag-row span treatment;
+   --accent-ink already flips to a light tone in dark mode. */
+[data-theme="dark"] .star-count-badge {
+  background: rgba(255, 143, 61, 0.14);
+}
+
+
+.eco-grid {
+  margin-top: var(--space-6);
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.eco-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.eco-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(249, 115, 22, 0.45);
+  box-shadow: var(--shadow-mid);
+}
+
+.eco-card:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 2px;
+}
+
+.eco-repo {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--accent-deep);
+  overflow-wrap: anywhere;
+}
+
+.eco-desc {
+  flex: 1;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.eco-card code {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.88em;
+  padding: 0.08em 0.32em;
+  border-radius: 6px;
+  background: rgba(19, 33, 57, 0.08);
+  color: #2c3d59;
+}
+
+.eco-lang {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--caption);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.eco-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  /* Language color set per card via inline --dot; falls back to a muted
+     token color for language-less repos (e.g. Markdown). */
+  background: var(--dot, var(--text-muted));
+}
+
+[data-theme="dark"] .eco-repo {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .eco-card code {
+  background: rgba(236, 242, 255, 0.1);
+  color: #e9f2ff;
+}
+
+/* ---- MERGE INTO EXISTING MEDIA QUERIES (or keep as-is below the rules above) ---- */
+
+@media (max-width: 980px) {
+  .eco-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .eco-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Hero install widget + animated hero terminal
+   Append to styles.css. Uses existing custom properties; the
+   command bar and terminal use the site's fixed dark-navy code
+   palette (see .code-block: #11213f / #2b3854) so they read as
+   "terminal dark" in BOTH light and dark themes.
+   ============================================================ */
+
+/* ---------- Component 1: install widget ---------- */
+
+.install-widget {
+  margin-top: var(--space-5);
+  max-width: 460px;
+}
+
+.install-tabs {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.install-tab {
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.install-tab:hover {
+  color: var(--text);
+}
+
+.install-tab:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 2px;
+}
+
+/* Active tab visually fuses with the dark bar below it. */
+.install-tab.is-active,
+.install-tab.is-active:hover {
+  background: #11213f;
+  border-color: #11213f;
+  color: #ff8f3d;
+}
+
+.install-bar {
+  display: flex;
+  align-items: center;
+  background: #11213f;
+  border: 1px solid #2b3854;
+  border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4);
+  box-shadow: var(--shadow-soft);
+}
+
+.install-prompt {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.9rem;
+  color: #ff8f3d;
+}
+
+/* Specificity note: .install-widget .install-cmd must beat
+   .hero-copy code (and its dark-theme override), hence the
+   three-class selector. */
+.hero-copy .install-widget .install-cmd {
+  flex: 1;
+  padding: var(--space-3);
+  background: transparent;
+  border-radius: 0;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.9rem;
+  color: #e7edf7;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.install-copy {
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(130deg, var(--accent), var(--accent-deep));
+  color: #ffffff;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.install-copy:hover {
+  filter: brightness(1.08);
+}
+
+.install-copy:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 2px;
+}
+
+/* Dark theme: give the fused tab a visible edge against the dark page. */
+[data-theme="dark"] .install-tab.is-active,
+[data-theme="dark"] .install-tab.is-active:hover {
+  background: #11213f;
+  border-color: #2b3854;
+  color: #ff8f3d;
+}
+
+[data-theme="dark"] .hero-copy .install-widget .install-cmd {
+  background: transparent;
+  color: #e7edf7;
+}
+
+/* ---------- Component 2: animated hero terminal ---------- */
+
+/* The figure keeps the existing .hero-visual gradient frame; the
+   .hero-terminal window sits where the screenshot <img> was. */
+.hero-terminal {
+  border-radius: calc(var(--radius-lg) - 6px);
+  border: 1px solid #2b3854;
+  background: #11213f;
+  padding: var(--space-2);
+  overflow: hidden;
+}
+
+.hero-terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1) var(--space-2) var(--space-2);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.term-dot-red {
+  background: #ff5f57;
+}
+
+.term-dot-yellow {
+  background: #febc2e;
+}
+
+.term-dot-green {
+  background: #28c840;
+}
+
+.hero-terminal-path {
+  margin-left: var(--space-2);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.75rem;
+  color: #6f84a8;
+}
+
+.hero-terminal-body {
+  background: #0b1830;
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-5);
+  height: 340px;
+  overflow: hidden;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.84rem;
+  line-height: 1.9;
+  color: #e7edf7;
+}
+
+.hero-terminal-body .term-prompt {
+  color: #ff8f3d;
+}
+
+.hero-terminal-body .term-cmd {
+  color: #e7edf7;
+}
+
+.hero-terminal-body .term-out {
+  color: #c7d3e8;
+}
+
+.hero-terminal-body .term-ok {
+  color: #5fd38a;
+}
+
+.hero-terminal-body .term-dim {
+  color: #7d8fad;
+}
+
+.term-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  background: #ff8f3d;
+  vertical-align: text-bottom;
+  animation: term-blink 1.06s steps(1) infinite;
+}
+
+@keyframes term-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* Dark theme: the terminal is already dark; only soften the frame
+   so it matches the dark hero-visual gradient. */
+[data-theme="dark"] .hero-terminal {
+  border-color: rgba(42, 63, 96, 0.95);
+}
+
+@media (max-width: 480px) {
+  .hero-terminal-body {
+    padding: var(--space-3);
+    font-size: 0.78rem;
   }
 }

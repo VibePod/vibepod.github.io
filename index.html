@@ -56,6 +56,11 @@
         <a href="repositories/">Repositories</a>
       </nav>
       <div class="header-actions">
+        <a class="button button-sm button-outline star-button" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer" aria-label="Star VibePod CLI on GitHub">
+          <span class="star-icon" aria-hidden="true">&#9733;</span>
+          <span>Star</span>
+          <span class="star-count-badge" data-star-count>74</span>
+        </a>
         <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
         <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
       </div>
@@ -66,9 +71,20 @@
     <section class="hero shell" data-reveal>
       <div class="hero-copy">
         <p class="eyebrow">Zero-config local agents</p>
-        <h1>The zero-config CLI for running AI coding agents locally.</h1>
-        <p class="hero-lead">No YAML required. No setup file required. Just <code>vp run claude</code> in Docker or Podman, with reusable skills and a built-in analytics dashboard.</p>
+        <h1>One CLI for AI coding agents in isolated containers.</h1>
+        <p class="hero-lead">Built-in local metrics, HTTP traffic tracking, and an analytics dashboard to see what your agents do. Zero config &mdash; just <code>vp run claude</code> in Docker or Podman.</p>
         <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, or Antigravity in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
+        <div class="install-widget">
+          <div class="install-tabs" role="group" aria-label="Choose an install method">
+            <button type="button" class="install-tab is-active" data-install="pip" aria-pressed="true">pip</button>
+            <button type="button" class="install-tab" data-install="brew" aria-pressed="false">brew</button>
+          </div>
+          <div class="install-bar">
+            <span class="install-prompt" aria-hidden="true">$</span>
+            <code class="install-cmd" id="install-cmd">pip install vibepod</code>
+            <button type="button" class="install-copy" id="install-copy" aria-label="Copy install command to clipboard">Copy</button>
+          </div>
+        </div>
         <div class="hero-actions">
           <a class="button button-primary" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">Install from PyPI</a>
           <a class="button button-primary" href="docs/">Docs</a>
@@ -81,13 +97,16 @@
           <li>Isolated Docker or Podman containers</li>
         </ul>
       </div>
-      <figure class="hero-visual">
-        <img
-          src="screenshots/tool.png"
-          alt="Screenshot of the VibePod CLI tool interface."
-          width="1200"
-          height="760"
-          fetchpriority="high">
+      <figure class="hero-visual hero-terminal-visual">
+        <div class="hero-terminal">
+          <div class="hero-terminal-header" aria-hidden="true">
+            <span class="term-dot term-dot-red"></span>
+            <span class="term-dot term-dot-yellow"></span>
+            <span class="term-dot term-dot-green"></span>
+            <span class="hero-terminal-path">~/projects/my-app</span>
+          </div>
+          <div class="hero-terminal-body" id="hero-terminal-body" aria-hidden="true"></div>
+        </div>
         <figcaption>Run preconfigured coding agents locally from one CLI.</figcaption>
       </figure>
     </section>
@@ -332,6 +351,49 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </div>
     </section>
 
+    <section class="section eco-section" id="ecosystem" data-reveal>
+      <div class="shell section-heading-row">
+        <div>
+          <p class="eyebrow">Ecosystem</p>
+          <h2>Built in public, across six repositories</h2>
+          <p class="section-lead">Everything is MIT-licensed and open on GitHub &mdash; from the CLI to the agent images built and published automatically via CI.</p>
+        </div>
+        <a class="button button-ghost" href="https://github.com/VibePod" target="_blank" rel="noreferrer">github.com/VibePod</a>
+      </div>
+      <div class="shell eco-grid">
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">vibepod-cli</h3>
+          <p class="eco-desc">The main CLI (<code>vp</code>). Install via pip, run any agent with a single command in an isolated container.</p>
+          <p class="eco-lang"><span class="eco-dot" style="--dot: #3572A5;" aria-hidden="true"></span>Python</p>
+        </a>
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/vibepod-agents" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">vibepod-agents</h3>
+          <p class="eco-desc">Container definitions for all supported agents, built and published to Docker Hub automatically via CI.</p>
+          <p class="eco-lang"><span class="eco-dot" style="--dot: #f1e05a;" aria-hidden="true"></span>JavaScript</p>
+        </a>
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/vibepod-proxy" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">vibepod-proxy</h3>
+          <p class="eco-desc">HTTP proxy that captures all outbound traffic from agent containers and logs it to SQLite.</p>
+          <p class="eco-lang"><span class="eco-dot" style="--dot: #3572A5;" aria-hidden="true"></span>Python</p>
+        </a>
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/vibepod-datasette" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">vibepod-datasette</h3>
+          <p class="eco-desc">Analytics dashboard for browsing captured metrics and logs via Datasette.</p>
+          <p class="eco-lang"><span class="eco-dot" style="--dot: #3572A5;" aria-hidden="true"></span>Python</p>
+        </a>
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/vibepod-skills" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">vibepod-skills</h3>
+          <p class="eco-desc">Curated reusable skills that can be installed with <code>vp skills</code> for supported agents.</p>
+          <p class="eco-lang"><span class="eco-dot" aria-hidden="true"></span>Markdown</p>
+        </a>
+        <a class="eco-card" data-reveal href="https://github.com/VibePod/homebrew-vibepod" target="_blank" rel="noreferrer">
+          <h3 class="eco-repo">homebrew-vibepod</h3>
+          <p class="eco-desc">Official Homebrew tap, so macOS and Linux users can install the CLI with a single <code>brew</code> command.</p>
+          <p class="eco-lang"><span class="eco-dot" style="--dot: #701516;" aria-hidden="true"></span>Ruby</p>
+        </a>
+      </div>
+    </section>
+
     <section class="section shell tool-section" id="screenshots" data-reveal>
       <p class="eyebrow">Product screenshots</p>
       <h2>Dashboard and supported tools</h2>
@@ -438,6 +500,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
           <a class="button button-ghost" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Open GitHub Repo</a>
           <a class="button button-ghost" href="#quickstart">Read Quickstart</a>
         </div>
+        <p class="cta-star-line">Enjoying VibePod? <a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">Star it on GitHub</a> &mdash; it helps other developers find the project. <span class="star-icon" aria-hidden="true">&#9733;</span> <span data-star-count>74</span> and counting.</p>
       </div>
     </section>
   </main>

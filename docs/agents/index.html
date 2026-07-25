@@ -856,6 +856,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tau-hugging-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tau (Hugging Face)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1573,6 +1584,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tau-hugging-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tau (Hugging Face)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1670,6 +1692,12 @@
 <td><code>vp n</code></td>
 <td><code>vibepod/agy:latest</code></td>
 </tr>
+<tr>
+<td><code>tau</code></td>
+<td>Hugging Face</td>
+<td><code>vp t</code></td>
+<td><code>vibepod/tau:latest</code></td>
+</tr>
 </tbody>
 </table>
 <p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>.</p>
@@ -1705,7 +1733,7 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -1827,6 +1855,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>auggie</code></td>
 <td>Not supported</td>
 </tr>
+<tr>
+<td><code>tau</code></td>
+<td>Not supported</td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
@@ -1897,6 +1929,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <tr>
 <td><code>auggie</code></td>
 <td><code>auggie --print "&lt;prompt&gt;"</code></td>
+</tr>
+<tr>
+<td><code>tau</code></td>
+<td><code>tau -p "&lt;prompt&gt;"</code></td>
 </tr>
 </tbody>
 </table>
@@ -2227,6 +2263,74 @@ workflow. Credentials and configuration are persisted under
 <p>Use <code>--ikwid</code> to append Agy's permission-skip flag:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
 </code></pre></div>
+<h3 id="tau-hugging-face">Tau (Hugging Face)<a class="headerlink" href="#tau-hugging-face" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w">   </span><span class="c1"># or: vp t</span>
+</code></pre></div>
+<p>Tau is Hugging Face's minimalist, Pi-inspired terminal coding agent, written in
+Python. It is the first non-Node agent in the VibePod matrix. Credentials and
+configuration are persisted under <code>~/.config/vibepod/agents/tau/</code>, mounted at
+<code>/config</code> inside the container, where Tau finds them as <code>~/.tau/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config/.tau/credentials.json</code></td>
+<td>Provider credentials written by <code>/login</code> (mode <code>0600</code>)</td>
+</tr>
+<tr>
+<td><code>/config/.tau/providers.json</code></td>
+<td>Default provider, per-provider settings, scoped models</td>
+</tr>
+<tr>
+<td><code>/config/.tau/catalog.toml</code></td>
+<td>Your own providers and models, overlaid on Tau's built-in catalog</td>
+</tr>
+<tr>
+<td><code>/config/.tau/sessions/</code></td>
+<td>Durable JSONL session history (resume and branching)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Start Tau and run the <code>/login</code> slash command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>/login              # pick a provider interactively
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>/login openai
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>/login openai-codex # OpenAI Codex subscription auth
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>/model              # choose a model
+</code></pre></div>
+<p>Tau supports OpenAI, Anthropic, the Codex subscription, OpenRouter, Hugging
+Face, and any custom OpenAI-compatible endpoint. Saved credentials take
+precedence over environment variables and survive container restarts because
+they live in the persisted mount.</p>
+<p>API keys can also be injected instead of using <code>/login</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="w">  </span><span class="nt">tau</span><span class="p">:</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="w">      </span><span class="nt">HF_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf_...</span>
+</code></pre></div>
+<p>Or per run: <code>vp run tau -e OPENAI_API_KEY=sk-...</code>.</p>
+<p><strong>Custom models.</strong> Drop a <code>catalog.toml</code> into
+<code>~/.config/vibepod/agents/tau/.tau/catalog.toml</code> on the host to add providers
+and models; it is overlaid on Tau's bundled catalog (scalar fields replace,
+<code>models</code> merge with your entries first). Tau deliberately ignores project-level
+<code>.tau/catalog.toml</code>, so a repository cannot redirect your model traffic.</p>
+<p><strong>Proxy and TLS.</strong> Tau uses <code>httpx</code>, not Node. VibePod's proxy env applies as
+usual: <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> route traffic through <code>vibepod-proxy</code>, and
+<code>SSL_CERT_FILE</code> points at the mounted mitmproxy CA, which <code>httpx</code> honors for its
+verification context. Streaming responses pass through unchanged.</p>
+<p><strong>Non-interactive mode.</strong> Tau's print mode works with both <code>vp run</code> and task
+mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;explain this repo&quot;</span>
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">&quot;Summarize the README&quot;</span>
+</code></pre></div>
+<p><strong>Skills.</strong> Tau scans <code>~/.agents/skills/</code>, so skills installed via <code>vp skills</code>
+are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
+<p>Tau has no auto-approval flag, so <code>--ikwid</code> is not supported for it.</p>
 
 
 

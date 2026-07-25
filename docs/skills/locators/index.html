@@ -858,12 +858,24 @@ branch/ref and subpath are unambiguous.</p>
 <h2 id="local">Local<a class="headerlink" href="#local" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;relative-or-absolute-path&gt;
 </code></pre></div>
-<p>There is no <code>file:</code> scheme — bare paths only. Local locators are distinguished
-from other sources by a leading <code>.</code> or <code>/</code>.</p>
+<p>There is no <code>file:</code> scheme — bare paths only. Any locator that carries no scheme
+is treated as a filesystem path.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./skills/researcher
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>/abs/path/to/skill
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>skills/researcher
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>./skills/researcher
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>../shared/skills/researcher
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>/abs/path/to/skill
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>.
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>~/skills/researcher
 </code></pre></div>
+<p>A leading <code>~</code> is expanded on your machine before the engine container starts.
+Locators that look like a scheme but are not supported — <code>ftp://…</code>, <code>mailto:…</code> —
+are rejected with <code>Unrecognized locator</code>. A directory whose first path segment
+contains a colon must therefore be written with a leading <code>./</code>.</p>
+<p>The one scheme-less exception is an scp-style Git remote — <code>user@host:path</code>,
+such as <code>git@git.example.com:org/repo.git//skills/foo</code>. That shape needs both
+the <code>@</code> and the <code>:</code> separator, so a directory named <code>git@my-skill</code> is still
+treated as a path.</p>
 <p>Use <code>--link</code> for symlink installs while authoring a skill:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>./skills/researcher<span class="w"> </span>--link<span class="w"> </span>--scope<span class="w"> </span><span class="nb">local</span>
 </code></pre></div>

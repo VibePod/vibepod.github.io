@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.18: Tau agent, local skills, and Podman auto-detect | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.18.0 adds Hugging Face Tau as the tau agent, installs skills from local files and directories, auto-detects the Podman socket, and cleans up dangling images after pulls.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.18: Tau agent, local skills, and Podman auto-detect">
+  <meta property="og:description" content="VibePod 0.18.0 adds Hugging Face Tau as the tau agent, installs skills from local files and directories, auto-detects the Podman socket, and cleans up dangling images after pulls.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-18/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.18: Tau agent, local skills, and Podman auto-detect">
+  <meta name="twitter:description" content="Tau joins the agent matrix, skills install from local paths, and Podman setup gets easier.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.18: Tau agent, local skills, and Podman auto-detect</h1>
+      <p class="hero-lead">VibePod 0.18.0 adds Hugging Face Tau to the agent matrix,
+      installs skills straight from local paths, finds the Podman socket on its own,
+      and keeps your image list tidy after pulls.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/#tau-hugging-face">Read the Tau docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-07-26 · Release · CLI · Agents</p>
+      <h2>Tau joins the agent matrix</h2>
+      <p>Tau is Hugging Face's minimalist, Pi-inspired terminal coding agent. It is the
+      first Python-based agent VibePod ships, so the image is built on
+      <code>python:3.12-slim</code> instead of Node. Start it with the full name or the
+      new <code>vp t</code> shortcut:</p>
+      <pre class="code-block"><code>vp run tau
+vp t
+vp run tau -- -p "explain this repo"</code></pre>
+      <p>Credentials, provider preferences, the model catalog, and session history are
+      persisted to <code>~/.config/vibepod/agents/tau/</code> on your host and mounted so
+      Tau sees them as <code>~/.tau/</code>. Authenticate once with Tau's
+      <code>/login</code> flow — OpenAI, Anthropic, the OpenAI Codex subscription,
+      OpenRouter, Hugging Face, and custom OpenAI-compatible endpoints are all
+      supported — and the credentials survive container restarts. API keys can also be
+      injected through <code>agents.tau.env</code> or <code>-e</code>.</p>
+      <p>Tau also reads skills from <code>~/.agents/skills/</code>, so anything installed
+      with <code>vp skills</code> is available to it, and its print mode works in task
+      mode via <code>vp task create tau "…"</code>.</p>
+      <h2>Skills install from local files and directories</h2>
+      <p>Skills no longer have to come from a remote locator. Point
+      <code>vp skills add</code> at a path on disk and VibePod installs it into the
+      selected scope, which shortens the loop when you are writing a skill instead of
+      consuming one.</p>
+      <pre class="code-block"><code>vp skills add ./my-skill
+vp skills add ../shared/skills/review --scope user</code></pre>
+      <h2>Podman setup gets out of your way</h2>
+      <p>When <code>DOCKER_HOST</code> is not set, VibePod now asks Podman where its
+      socket lives instead of failing with a confusing connection error. That matters
+      most on macOS, where the machine socket path changes between machine starts, so a
+      hardcoded <code>DOCKER_HOST</code> breaks after a reboot. Setting
+      <code>DOCKER_HOST</code> explicitly still works and still takes precedence. The
+      quickstart gained a macOS Podman machine setup walkthrough to match.</p>
+      <h2>Cleaner images and working image pasting</h2>
+      <p>Every pull that replaces a <code>vibepod/</code> image now sweeps the dangling
+      leftovers it created, so repeated <code>latest</code> pulls stop accumulating
+      untagged layers. You can turn this off with <code>auto_clean: false</code>.</p>
+      <p><code>--paste-images</code> works again: VibePod rewrites the host X authority
+      cookie to the wildcard address family before mounting it, which is what the X
+      server needs from a container that does not share your hostname. The flag is now
+      documented, including its <code>DISPLAY</code> and <code>xauth</code>
+      requirements.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Added Tau (<code>tau</code>, shortcut <code>vp t</code>, image <code>vibepod/tau:latest</code>, override <code>VP_IMAGE_TAU</code>).</li>
+        <li>Added skill installs from local files and directories.</li>
+        <li>Auto-detected the Podman socket when <code>DOCKER_HOST</code> is unset.</li>
+        <li>Documented macOS Podman machine setup.</li>
+        <li>Removed dangling <code>vibepod/</code> images after pulling new ones.</li>
+        <li>Fixed <code>--paste-images</code> by mounting a rewritten X11 auth cookie.</li>
+        <li>Extended the CLI test environments in CI.</li>
+        <li>Bumped the package version to <code>0.18.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/agents/#tau-hugging-face">Agents docs: Tau (Hugging Face)</a></li>
+        <li><a href="../../docs/skills/">Skills docs</a></li>
+        <li><a href="../../docs/quickstart/#using-podman-instead-of-docker">Quickstart: Using Podman instead of Docker</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.18.0" target="_blank" rel="noreferrer">0.18.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

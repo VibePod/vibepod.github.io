@@ -335,7 +335,8 @@ if (lightbox) {
     { cmd: "codex", name: "OpenAI Codex" },
     { cmd: "copilot", name: "GitHub Copilot" },
     { cmd: "opencode", name: "OpenCode" },
-    { cmd: "agy", name: "Google Antigravity" }
+    { cmd: "agy", name: "Google Antigravity" },
+    { cmd: "tau", name: "Hugging Face Tau" }
   ];
 
   const buildScript = (agent) => [

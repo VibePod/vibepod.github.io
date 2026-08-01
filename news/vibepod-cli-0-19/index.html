@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.19.0 adds committable project overlays for agent images, wires agents into herdr panes with live state, publishes container ports via per-agent config, and adds Jcode as the jcode agent.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode">
+  <meta property="og:description" content="VibePod 0.19.0 adds committable project overlays for agent images, wires agents into herdr panes with live state, publishes container ports via per-agent config, and adds Jcode as the jcode agent.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-19/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode">
+  <meta name="twitter:description" content="Extend agent images with committed Dockerfile fragments, report live agent state to herdr, publish ports, and run Jcode.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode</h1>
+      <p class="hero-lead">VibePod 0.19.0 lets a project extend its agent images with a
+      committed Dockerfile fragment, reports live agent state to herdr panes,
+      publishes container ports straight from per-agent config, and adds Jcode to
+      the agent matrix.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/overlays/">Read the overlay docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-07-31 · Release · CLI · Agents</p>
+      <h2>Project overlays: extend agent images from the repo</h2>
+      <p>A project can now extend the agent image it runs in — extra apt packages,
+      language toolchains, CLIs — by committing a <code>FROM</code>-less Dockerfile
+      fragment under <code>.vibepod/overlay/</code>. A shared fragment applies to every
+      agent; a per-agent fragment like <code>.vibepod/overlay/claude/Dockerfile</code>
+      wins for that agent.</p>
+      <pre class="code-block"><code># .vibepod/overlay/Dockerfile — no FROM line
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends jq \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt</code></pre>
+      <p>On <code>vp run</code> (and <code>vp task create</code>) the fragment is appended
+      to the agent's base image and built as a workspace-local, content-addressed image.
+      Unchanged overlays never rebuild, switching branches just switches images, and a
+      newer base image rebuilds the overlay on top. The overlay directory is the build
+      context, so fragments can <code>COPY</code> files committed next to them — the
+      whole team shares the environment. Opt out with <code>--no-overlay</code>, force a
+      clean rebuild with <code>--rebuild-overlay</code>, or set
+      <code>agents.&lt;agent&gt;.overlay: false</code>.</p>
+      <h2>Herdr integration: live agent state in your multiplexer</h2>
+      <p><a href="https://herdr.dev/" target="_blank" rel="noreferrer">herdr</a> is a
+      terminal multiplexer for coding agents. When <code>vp run</code> starts inside a
+      herdr pane, VibePod detects it automatically, mounts the herdr socket into the
+      container, forwards <code>HERDR_*</code> variables, and injects a lifecycle
+      integration into the agent's config directory. The agent then shows up in herdr
+      with a <code>vp:&lt;agent&gt;</code> identity and live working / blocked / idle
+      state.</p>
+      <p>Built-in state reporting ships for Claude, Codex, Copilot, OpenCode, Pi, and
+      Tau; other agents still appear with pane identity and initial state. No setup is
+      needed, custom agents can be wired through <code>herdr.integrations</code> in the
+      config, <code>vp doctor herdr</code> diagnoses the whole chain, and
+      <code>--no-herdr</code> or <code>herdr: false</code> opts out.</p>
+      <h2>Publish container ports</h2>
+      <p>Agent containers can now publish ports to the host using
+      <code>docker run -p</code> syntax, validated up front:</p>
+      <pre class="code-block"><code>agents:
+  claude:
+    ports:
+      - "8000:8000"
+      - "127.0.0.1:5173:5173"</code></pre>
+      <p>That makes dev servers started by an agent reachable from the host browser
+      without leaving the container's isolation model.</p>
+      <h2>Jcode joins the agent matrix</h2>
+      <p>Jcode is 1jehuang's resource-focused terminal coding agent written in Rust and
+      shipped as a single static binary. It talks to Anthropic, OpenAI (including the
+      Codex subscription), Gemini, GitHub Copilot, OpenRouter, Azure, Ollama, LM Studio,
+      and custom OpenAI-compatible endpoints. Start it with the full name or the new
+      <code>vp j</code> shortcut:</p>
+      <pre class="code-block"><code>vp run jcode
+vp j
+vp run jcode -- login --provider claude</code></pre>
+      <p>Credentials, configuration, MCP servers, and session history persist under
+      <code>~/.config/vibepod/agents/jcode/</code> and survive container restarts.
+      OAuth logins support <code>--no-browser</code> for the containerized flow, and API
+      keys can be injected via <code>agents.jcode.env</code>.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Added project overlays: committable <code>.vibepod/overlay/</code> Dockerfile fragments, content-addressed builds, <code>--no-overlay</code> / <code>--rebuild-overlay</code>, automatic cleanup of superseded images.</li>
+        <li>Added herdr integration with automatic pane detection, live state reporting for six agents, data-driven custom integrations, and <code>vp doctor herdr</code>.</li>
+        <li>Added per-agent <code>ports</code> config with <code>docker run -p</code> syntax and validation.</li>
+        <li>Added Jcode (<code>jcode</code>, shortcut <code>vp j</code>, image <code>vibepod/jcode:latest</code>, override <code>VP_IMAGE_JCODE</code>).</li>
+        <li>Added pre-commit with ruff, pyupgrade, and actionlint, enforced in CI.</li>
+        <li>Bumped the package version to <code>0.19.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/overlays/">Project overlays docs</a></li>
+        <li><a href="../../docs/herdr/">Herdr integration docs</a></li>
+        <li><a href="../../docs/agents/#jcode-1jehuang">Agents docs: Jcode (1jehuang)</a></li>
+        <li><a href="../../docs/configuration/">Configuration docs: ports</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.19.0" target="_blank" rel="noreferrer">0.19.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

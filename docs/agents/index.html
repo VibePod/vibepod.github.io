@@ -889,6 +889,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#freebuff-codebuffai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Freebuff (CodebuffAI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qwen-code-qwen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qwen Code (Qwen)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1693,6 +1715,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#freebuff-codebuffai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Freebuff (CodebuffAI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qwen-code-qwen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qwen Code (Qwen)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1802,9 +1846,22 @@
 <td><code>vp j</code></td>
 <td><code>vibepod/jcode:latest</code></td>
 </tr>
+<tr>
+<td><code>freebuff</code></td>
+<td>CodebuffAI</td>
+<td><code>vp fb</code></td>
+<td><code>vibepod/freebuff:latest</code></td>
+</tr>
+<tr>
+<td><code>qwen</code></td>
+<td>Qwen (Alibaba)</td>
+<td><code>vp q</code></td>
+<td><code>vibepod/qwen:latest</code></td>
+</tr>
 </tbody>
 </table>
-<p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>.</p>
+<p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>, and <code>vp run qwen-cli</code>
+resolves to <code>vp run qwen</code>.</p>
 <h2 id="first-run-authentication">First run &amp; authentication<a class="headerlink" href="#first-run-authentication" title="Permanent link">&para;</a></h2>
 <p>Start any agent for the first time with <code>vp run &lt;agent&gt;</code>. The container will prompt you to authenticate (browser OAuth, API key entry, or device flow depending on the provider). Once authenticated, credentials are written to the persisted config directory and reused on subsequent runs.</p>
 <h2 id="auto-pulling-the-latest-image">Auto-pulling the latest image<a class="headerlink" href="#auto-pulling-the-latest-image" title="Permanent link">&para;</a></h2>
@@ -1837,7 +1894,7 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>). The CLI also supports the alias <code>vibe</code>, which resolves to <code>devstral</code>. Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>) and <code>qwen-cli</code> (→ <code>qwen</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -1967,6 +2024,14 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>jcode</code></td>
 <td>Not supported</td>
 </tr>
+<tr>
+<td><code>freebuff</code></td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td><code>qwen</code></td>
+<td><code>--approval-mode=yolo</code></td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
@@ -2031,7 +2096,7 @@ cookie to the wildcard address family and mounts it read-only at
 </ul>
 <h2 id="task-mode-headless">Task mode (headless)<a class="headerlink" href="#task-mode-headless" title="Permanent link">&para;</a></h2>
 <p>Run an agent non-interactively as a background task. Claude calls this "headless mode"; codex and auggie expose equivalent flags. VibePod wraps them in a uniform <code>vp task</code> command.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;Summarize the README&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"Summarize the README"</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1"># ✓ Task started: 9f1e8a20b4c14e2f89d7f6a1c3e42b99</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">#   container: vibepod-claude-abcdef12</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1">#   follow:    vp task logs 9f1e8a20b4c1 --follow</span>
@@ -2067,6 +2132,10 @@ cookie to the wildcard address family and mounts it read-only at
 <td><code>jcode</code></td>
 <td><code>jcode run "&lt;prompt&gt;"</code></td>
 </tr>
+<tr>
+<td><code>qwen</code></td>
+<td><code>qwen -p "&lt;prompt&gt;"</code></td>
+</tr>
 </tbody>
 </table>
 <p>Other agents error with a clear message; support can be added by setting <code>headless_prefix</code> on their <code>AgentSpec</code>.</p>
@@ -2088,18 +2157,18 @@ cookie to the wildcard address family and mounts it read-only at
 <p>Task ids can be abbreviated to any unique prefix (e.g., the first 12 chars shown by <code>vp task list</code>).</p>
 <h3 id="passing-agent-flags">Passing agent flags<a class="headerlink" href="#passing-agent-flags" title="Permanent link">&para;</a></h3>
 <p>Anything after <code>--</code> is forwarded to the agent's command after the prompt, matching the CLI's documented form (<code>claude -p "..." --allowedTools ...</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;review staged changes&quot;</span><span class="w"> </span>--<span class="w"> </span>--output-format<span class="w"> </span>json
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>30m<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;run the fast audit&quot;</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>none<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;wait for the external job&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"review staged changes"</span><span class="w"> </span>--<span class="w"> </span>--output-format<span class="w"> </span>json
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>30m<span class="w"> </span>claude<span class="w"> </span><span class="s2">"run the fast audit"</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>none<span class="w"> </span>claude<span class="w"> </span><span class="s2">"wait for the external job"</span>
 </code></pre></div>
 <h3 id="auto-approval-for-automation">Auto-approval for automation<a class="headerlink" href="#auto-approval-for-automation" title="Permanent link">&para;</a></h3>
 <p>Headless tasks typically need to run without permission prompts. Pass <code>--ikwid</code> to apply the agent's documented auto-approve flag (e.g., <code>--dangerously-skip-permissions</code> for Claude):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">&quot;fix the failing test in auth.py&quot;</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"fix the failing test in auth.py"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 <h3 id="codex-task-authentication">Codex task authentication<a class="headerlink" href="#codex-task-authentication" title="Permanent link">&para;</a></h3>
 <p><code>codex exec</code> reuses saved Codex login state from the mounted config directory when available. For automation and smoke tests, pass <code>CODEX_API_KEY</code> explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>-e<span class="w"> </span><span class="nv">CODEX_API_KEY</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OPENAI_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span>--ikwid<span class="w"> </span>codex<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="s2">&quot;Print exactly TASK_OK_CODEX and exit.&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>-e<span class="w"> </span><span class="nv">CODEX_API_KEY</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OPENAI_API_KEY</span><span class="s2">"</span><span class="w"> </span>--ikwid<span class="w"> </span>codex<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="s2">"Print exactly TASK_OK_CODEX and exit."</span>
 </code></pre></div>
 <p>For compatibility, Codex task mode also maps an explicitly supplied <code>OPENAI_API_KEY</code> to <code>CODEX_API_KEY</code> when <code>CODEX_API_KEY</code> is not already set.</p>
 <h3 id="caveats_1">Caveats<a class="headerlink" href="#caveats_1" title="Permanent link">&para;</a></h3>
@@ -2162,7 +2231,7 @@ cookie to the wildcard address family and mounts it read-only at
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>nano<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
 </code></pre></div>
 <p><strong>Verifying the token works:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;say ok&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">"say ok"</span>
 </code></pre></div>
 <p><code>-p</code> runs Claude Code in headless mode — one API call, one response. If you see "ok", the token is valid.</p>
 <p><strong>Caveats:</strong></p>
@@ -2458,8 +2527,8 @@ usual: <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> route traffic through <c
 verification context. Streaming responses pass through unchanged.</p>
 <p><strong>Non-interactive mode.</strong> Tau's print mode works with both <code>vp run</code> and task
 mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;explain this repo&quot;</span>
-<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">&quot;Summarize the README&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Tau scans <code>~/.agents/skills/</code>, so skills installed via <code>vp skills</code>
 are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
@@ -2528,8 +2597,8 @@ persisted mount.</p>
 traffic routes through <code>vibepod-proxy</code> with the mounted mitmproxy CA.</p>
 <p><strong>Non-interactive mode.</strong> Jcode's <code>run</code> subcommand works with both <code>vp run</code>
 and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;explain this repo&quot;</span>
-<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">&quot;Summarize the README&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Jcode scans <code>~/.agents/skills/</code>, so skills installed via
 <code>vp skills</code> are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up
@@ -2537,6 +2606,126 @@ automatically.</p>
 <p>VibePod sets <code>JCODE_NO_AUTO_UPDATE=1</code> so the pinned binary in the image is
 never self-updated at runtime. Jcode has no auto-approval flag (its safety
 system asks for permission in-session), so <code>--ikwid</code> is not supported for it.</p>
+<h3 id="freebuff-codebuffai">Freebuff (CodebuffAI)<a class="headerlink" href="#freebuff-codebuffai" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w">   </span><span class="c1"># or: vp fb</span>
+</code></pre></div>
+<p>Freebuff is a free AI coding agent built on the Codebuff platform. Its npm
+package is a thin Node launcher that downloads a compiled glibc binary on
+first run, so the <code>vibepod/freebuff</code> image is glibc-based (Debian Node), not
+Alpine. Credentials and configuration are persisted under
+<code>~/.config/vibepod/agents/freebuff/</code>, mounted at <code>/freebuff</code> inside the
+container, where the image symlinks <code>~/.config/manicode</code> to <code>/freebuff</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/freebuff/settings.json</code></td>
+<td>Freebuff settings</td>
+</tr>
+<tr>
+<td><code>/freebuff/analytics-id.json</code></td>
+<td>Analytics ID</td>
+</tr>
+<tr>
+<td><code>/freebuff/projects/&lt;cwd&gt;/chats/&lt;ts&gt;/log.jsonl</code></td>
+<td>Chat history</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Freebuff authenticates through its own interactive login
+flow:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>login
+</code></pre></div>
+<p>On first run without a saved session, Freebuff prints "Not authenticated" and
+prompts you to press ENTER to log in. Saved credentials survive container
+restarts because they live in the persisted mount.</p>
+<p><strong>Resuming a session.</strong> Pass <code>--continue</code> (optionally with a conversation id)
+through the CLI:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue<span class="w"> </span>&lt;conversation-id&gt;
+</code></pre></div>
+<p>Use <code>--</code> so VibePod does not parse the agent's own flags.</p>
+<p><strong>Headless / task mode.</strong> Freebuff has no non-interactive print mode, so
+<code>vp task create freebuff ...</code> is not supported.</p>
+<p><strong>Skills.</strong> Freebuff scans <code>~/.agents/skills/</code>, so skills installed via
+<code>vp skills</code> are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up
+automatically.</p>
+<p><strong>IKWID mode.</strong> Freebuff is a managed TUI with no auto-approval or
+permission-skip flag, so <code>--ikwid</code> is not supported for it.</p>
+<h3 id="qwen-code-qwen">Qwen Code (Qwen)<a class="headerlink" href="#qwen-code-qwen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w">   </span><span class="c1"># or: vp q</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen-cli<span class="w">   </span><span class="c1"># alias of qwen</span>
+</code></pre></div>
+<p>Qwen Code is Alibaba's open-source terminal coding agent (npm
+<code>@qwen-code/qwen-code</code>, binary <code>qwen</code>, Node 22+). It is Claude-Code-inspired
+and supports OpenAI-, Anthropic- and Gemini-compatible endpoints, Qwen models,
+and any custom provider. Credentials and configuration are persisted under
+<code>~/.config/vibepod/agents/qwen/</code>, mounted at <code>/qwen</code> inside the container,
+where the image symlinks <code>~/.qwen</code> to <code>/qwen</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/qwen/settings.json</code></td>
+<td>Settings, model providers, auth selection</td>
+</tr>
+<tr>
+<td><code>/qwen/.env</code></td>
+<td>Env-file overrides (API keys, base URLs)</td>
+</tr>
+<tr>
+<td><code>/qwen/skills/</code></td>
+<td>Personal skills (<code>SKILL.md</code> folders)</td>
+</tr>
+<tr>
+<td><code>/qwen/</code></td>
+<td>Memory, session history, commands</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Run Qwen Code and use its <code>/auth</code> command to connect an
+Alibaba Cloud Coding Plan, a third-party API key, or a custom endpoint:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="c1"># then inside the session: /auth</span>
+</code></pre></div>
+<p>Saved credentials survive container restarts because they live in the
+persisted mount. API keys can also be injected instead of <code>/auth</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="nt">qwen</span><span class="p">:</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
+<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a><span class="w">      </span><span class="nt">OPENAI_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3-coder-plus</span>
+</code></pre></div>
+<p>Or per run: <code>vp run qwen -e OPENAI_API_KEY=sk-...</code>. Qwen Code honors the
+standard <code>OPENAI_API_KEY</code> / <code>OPENAI_BASE_URL</code> / <code>OPENAI_MODEL</code> (alias
+<code>QWEN_MODEL</code>), <code>ANTHROPIC_*</code> and <code>GEMINI_API_KEY</code> env vars for its provider
+protocols.</p>
+<p><strong>Non-interactive mode.</strong> Qwen Code's headless mode works with both <code>vp run</code>
+and task mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"Summarize the README"</span>
+</code></pre></div>
+<p><strong>Skills.</strong> Qwen Code scans personal <code>~/.qwen/skills/</code> (symlinked to
+<code>/qwen/skills/</code>), so skills installed via <code>vp skills</code> are mounted at
+<code>/qwen/skills/&lt;id&gt;</code> and picked up automatically. Project-level skills in
+<code>&lt;workspace&gt;/.qwen/skills/</code> work without extra setup because the workspace is
+already mounted.</p>
+<p><strong>IKWID mode.</strong> Qwen Code auto-approves all tool calls in YOLO mode, which
+<code>--ikwid</code> enables via <code>--approval-mode=yolo</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+</code></pre></div>
 
 
 

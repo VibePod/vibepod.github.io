@@ -847,7 +847,7 @@ config directory:</p>
 <p>Inside the container the script finds <code>HERDR_PANE_ID</code> and <code>HERDR_SOCKET_PATH</code>
 already set. When VibePod also found a usable <code>herdr</code> binary on the host,
 <code>HERDR_BIN_PATH</code> is set too and the script can report state with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="s2">&quot;</span><span class="nv">$HERDR_BIN_PATH</span><span class="s2">&quot;</span><span class="w"> </span>pane<span class="w"> </span>report-agent<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HERDR_PANE_ID</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="s2">"</span><span class="nv">$HERDR_BIN_PATH</span><span class="s2">"</span><span class="w"> </span>pane<span class="w"> </span>report-agent<span class="w"> </span><span class="s2">"</span><span class="nv">$HERDR_PANE_ID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>--source<span class="w"> </span>vibepod<span class="w"> </span>--agent<span class="w"> </span>gemini<span class="w"> </span>--state<span class="w"> </span>working
 </code></pre></div>
 <p><code>HERDR_BIN_PATH</code> may be unset (no binary on the host, or one that cannot run

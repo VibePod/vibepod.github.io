@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VibePod CLI | Zero-Config AI Coding Agents in Docker or Podman</title>
-  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, and Jcode locally in isolated Docker or Podman containers. No config required; reusable skills supported.">
+  <meta name="description" content="Install VibePod CLI from PyPI and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, and Qwen Code locally in isolated Docker or Podman containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
@@ -73,7 +73,7 @@
         <p class="eyebrow">Zero-config local agents</p>
         <h1>One CLI for AI coding agents in isolated containers.</h1>
         <p class="hero-lead">Built-in local metrics, HTTP traffic tracking, and an analytics dashboard to see what your agents do. Zero config &mdash; just <code>vp run claude</code> in Docker or Podman.</p>
-        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, or Jcode in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
+        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, or Qwen Code in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="install-widget">
           <div class="install-tabs" role="group" aria-label="Choose an install method">
             <button type="button" class="install-tab is-active" data-install="pip" aria-pressed="true">pip</button>
@@ -122,6 +122,12 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Aug 18, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback</h3>
+          <p>Keep multiple credential sets per agent and switch with <code>--profile</code>, run Alibaba's Qwen Code as <code>qwen</code> and Codebuff's Freebuff as <code>freebuff</code>, and keep working offline with the local image fallback.</p>
+          <a class="card-link" href="news/vibepod-cli-0-20/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">Jul 31, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode</h3>
           <p>Projects extend agent images with committed Dockerfile fragments, agents report live state to herdr panes, containers publish ports via per-agent config, and Jcode joins as <code>jcode</code>.</p>
@@ -132,12 +138,6 @@
           <h3>VibePod CLI 0.18: Tau agent, local skills, and Podman auto-detect</h3>
           <p>Hugging Face Tau joins the agent matrix as <code>tau</code>, skills install from local paths, and the Podman socket is detected automatically.</p>
           <a class="card-link" href="news/vibepod-cli-0-18/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">Jun 30, 2026 · Release · CLI</p>
-          <h3>VibePod CLI 0.17: Pull progress and Python 3.14 polish</h3>
-          <p>Image pulls now show progress for agents and helper images, Podman socket setup is clearer, and Python 3.14 client-close handling is quieter.</p>
-          <a class="card-link" href="news/vibepod-cli-0-17/">Read post</a>
         </article>
       </div>
     </section>
@@ -199,7 +199,7 @@ vp logs start</code></pre>
         </div>
         <figure class="demo-frame">
 <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.19.0
+VibePod CLI: 0.20.0
 Python:      3.12.3
 Docker:      28.1.1
 
@@ -240,7 +240,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       <div class="feature-grid">
         <article class="feature-card" data-reveal>
           <h3>Zero config by default</h3>
-          <p>No project file is needed to start. Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, and Jcode are ready out of the box.</p>
+          <p>No project file is needed to start. Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, and Qwen Code are ready out of the box.</p>
           <p class="proof">Proof point: run an agent with <code>vp run &lt;agent&gt;</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
@@ -397,7 +397,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
     <section class="section shell tool-section" id="screenshots" data-reveal>
       <p class="eyebrow">Product screenshots</p>
       <h2>Dashboard and supported tools</h2>
-      <p class="section-lead">Included screenshots cover the analytics dashboard plus Auggie, Antigravity, Claude Code, GitHub Copilot, Gemini, Jcode, Mistral, OpenAI Codex, OpenCode, Pi, and Tau.</p>
+      <p class="section-lead">Included screenshots cover the analytics dashboard plus Auggie, Antigravity, Claude Code, Freebuff, GitHub Copilot, Gemini, Jcode, Mistral, OpenAI Codex, OpenCode, Pi, Qwen Code, and Tau.</p>
       <div class="tool-grid">
         <figure class="tool-card tool-card-wide" data-reveal>
           <img src="screenshots/dashboard.png" alt="Screenshot of the VibePod analytics dashboard with token usage charts." loading="lazy" width="1905" height="966">
@@ -447,6 +447,14 @@ Starting claude with image vibepod/claude:latest</code></pre>
           <img src="screenshots/jcode.png" alt="Screenshot of VibePod workflow with Jcode." loading="lazy" width="866" height="629">
           <figcaption>Jcode</figcaption>
         </figure>
+        <figure class="tool-card" data-reveal>
+          <img src="screenshots/freebuff.png" alt="Screenshot of VibePod workflow with Freebuff." loading="lazy" width="866" height="629">
+          <figcaption>Freebuff</figcaption>
+        </figure>
+        <figure class="tool-card" data-reveal>
+          <img src="screenshots/qwen%20code.png" alt="Screenshot of VibePod workflow with Qwen Code." loading="lazy" width="866" height="629">
+          <figcaption>Qwen Code</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -459,7 +467,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </details>
       <details>
         <summary>Do I need to configure anything before running an agent?</summary>
-        <p>No. VibePod comes pre-configured for Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, and Jcode. Run <code>vp run &lt;agent&gt;</code> and it starts from the default image.</p>
+        <p>No. VibePod comes pre-configured for Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, and Qwen Code. Run <code>vp run &lt;agent&gt;</code> and it starts from the default image.</p>
       </details>
       <details>
         <summary>Can I use YAML config files?</summary>
@@ -491,7 +499,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </details>
       <details>
         <summary>Which coding agents can I switch between?</summary>
-        <p>VibePod currently supports Claude, Gemini, OpenCode, Devstral, Auggie, GitHub Copilot, OpenAI Codex, Pi, Antigravity, Tau, and Jcode.</p>
+        <p>VibePod currently supports Claude, Gemini, OpenCode, Devstral, Auggie, GitHub Copilot, OpenAI Codex, Pi, Antigravity, Tau, Jcode, Freebuff, and Qwen Code.</p>
       </details>
       <details>
         <summary>Where can I track roadmap and issues?</summary>

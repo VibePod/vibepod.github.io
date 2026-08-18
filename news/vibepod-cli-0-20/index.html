@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.20.0 adds credential profiles to switch between login setups per agent, welcomes Qwen Code and Freebuff to the agent matrix, and falls back to a local image when a pull fails.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback">
+  <meta property="og:description" content="VibePod 0.20.0 adds credential profiles to switch between login setups per agent, welcomes Qwen Code and Freebuff to the agent matrix, and falls back to a local image when a pull fails.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-20/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback">
+  <meta name="twitter:description" content="Keep multiple credential sets per agent and switch at run time, run Qwen Code and Freebuff, and keep working offline with the local image fallback.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback</h1>
+      <p class="hero-lead">VibePod 0.20.0 lets you keep multiple credential sets per
+      agent and switch between them at run time, adds Qwen Code and Freebuff to the
+      agent matrix, and keeps you working when an image pull fails by falling back to
+      the local copy.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/profiles/">Read the profiles docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-08-18 · Release · CLI · Agents</p>
+      <h2>Credential profiles: one agent, many logins</h2>
+      <p>Profiles keep multiple credential sets per agent — for example a Claude
+      subscription login, a separate API-key setup, and an environment prepared for a
+      local Ollama — and switch between them at run time. A profile only swaps the
+      credential directories mounted into the agent container; skills, allowed
+      directories, proxy, and logging stay shared.</p>
+      <pre class="code-block"><code>vp profile create work
+vp run claude --profile work
+vp task create claude "summarize the diff" --profile work
+vp profile list</code></pre>
+      <p>Existing credentials in <code>~/.config/vibepod/agents/</code> are the
+      built-in <code>default</code> profile — nothing moves when you start using
+      profiles. Without the flag, the profile resolves from <code>VP_PROFILE</code>,
+      then the <code>profile:</code> key in the merged config, then
+      <code>default</code>, so a project can pin its own profile in
+      <code>.vibepod/config.yaml</code> and pair it with per-project env vars.
+      <code>vp doctor &lt;agent&gt; --profile &lt;name&gt;</code> diagnoses a specific
+      profile, and <code>vp profile remove</code> deletes one after confirmation.</p>
+      <h2>Qwen Code joins the agent matrix</h2>
+      <p>Qwen Code is Alibaba's open-source terminal coding agent. It is
+      Claude-Code-inspired and supports OpenAI-, Anthropic- and Gemini-compatible
+      endpoints, Qwen models, and any custom provider. Start it with the full name,
+      the <code>qwen-cli</code> alias, or the new <code>vp q</code> shortcut:</p>
+      <pre class="code-block"><code>vp run qwen
+vp q
+# then inside the session: /auth</code></pre>
+      <p>Settings, provider configuration, personal skills, and session history
+      persist under <code>~/.config/vibepod/agents/qwen/</code> and survive container
+      restarts. Authentication runs through Qwen Code's own <code>/auth</code> command
+      — connect an Alibaba Cloud Coding Plan, a third-party API key, or a custom
+      endpoint.</p>
+      <h2>Freebuff joins the agent matrix</h2>
+      <p>Freebuff is a free AI coding agent built on the Codebuff platform. Start it
+      with the full name or the <code>vp fb</code> shortcut:</p>
+      <pre class="code-block"><code>vp run freebuff
+vp fb
+vp run freebuff login</code></pre>
+      <p>Credentials, settings, and chat history persist under
+      <code>~/.config/vibepod/agents/freebuff/</code>. Freebuff authenticates through
+      its own interactive login flow on first run.</p>
+      <h2>Local image fallback</h2>
+      <p>When pulling the latest agent image fails — registry hiccup, rate limit, or
+      no network — <code>vp run</code> and <code>vp task</code> now warn and fall back
+      to the image already present locally instead of aborting. An explicit
+      <code>--pull</code> still fails hard, so you can force a fresh image when you
+      need one.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Added credential profiles: <code>vp profile list/create/remove</code>, <code>--profile</code> on <code>run</code>, <code>task create</code>, and <code>doctor</code>, <code>VP_PROFILE</code>, and the <code>profile:</code> config key.</li>
+        <li>Added Qwen Code (<code>qwen</code>, alias <code>qwen-cli</code>, shortcut <code>vp q</code>, image <code>vibepod/qwen:latest</code>, override <code>VP_IMAGE_QWEN</code>).</li>
+        <li>Added Freebuff (<code>freebuff</code>, shortcut <code>vp fb</code>, image <code>vibepod/freebuff:latest</code>, override <code>VP_IMAGE_FREEBUFF</code>).</li>
+        <li>Added a pull-failure fallback to the local image with a warning; <code>--pull</code> still errors.</li>
+        <li>Bumped the package version to <code>0.20.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/profiles/">Credential profiles docs</a></li>
+        <li><a href="../../docs/agents/#qwen-code-qwen">Agents docs: Qwen Code (Qwen)</a></li>
+        <li><a href="../../docs/agents/#freebuff-codebuffai">Agents docs: Freebuff (CodebuffAI)</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.20.0" target="_blank" rel="noreferrer">0.20.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

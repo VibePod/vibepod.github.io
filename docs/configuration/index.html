@@ -369,6 +369,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../profiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -383,10 +410,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -404,8 +431,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1122,8 +1149,16 @@
 <td><em>(config root)</em></td>
 <td><code>VP_CONFIG_DIR=/custom/path</code></td>
 </tr>
+<tr>
+<td><code>VP_PROFILE</code></td>
+<td><code>profile</code></td>
+<td><code>VP_PROFILE=work</code></td>
+</tr>
 </tbody>
 </table>
+<p>The <code>profile</code> key selects the active <a href="../profiles/">credential profile</a>; the
+<code>--profile</code> flag on <code>vp run</code>, <code>vp task create</code>, and <code>vp doctor claude</code> takes
+precedence over both the variable and the config key.</p>
 <h3 id="image-overrides">Image overrides<a class="headerlink" href="#image-overrides" title="Permanent link">&para;</a></h3>
 <p>Each agent image can be overridden individually:</p>
 <table>

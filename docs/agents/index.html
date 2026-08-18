@@ -16,7 +16,7 @@
         <link rel="prev" href="../development/">
       
       
-        <link rel="next" href="../skills/">
+        <link rel="next" href="../profiles/">
       
       
         
@@ -930,6 +930,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../profiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -944,10 +971,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -965,8 +992,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1768,7 +1795,7 @@
 
 
 <h1 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h1>
-<p>VibePod manages each agent as a Docker or Podman container. Credentials and config are persisted to <code>~/.config/vibepod/agents/&lt;agent&gt;/</code> on your host and mounted into the container on every run, so you only need to authenticate once.</p>
+<p>VibePod manages each agent as a Docker or Podman container. Credentials and config are persisted on your host — at <code>~/.config/vibepod/agents/&lt;agent&gt;/</code> for the <code>default</code> profile — and mounted into the container on every run, so you only need to authenticate once. To keep several credential sets per agent (subscription vs. API key vs. Ollama, stored under <code>~/.config/vibepod/profiles/&lt;name&gt;/</code>), see <a href="../profiles/">Credential Profiles</a>.</p>
 <h2 id="supported-agents">Supported Agents<a class="headerlink" href="#supported-agents" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

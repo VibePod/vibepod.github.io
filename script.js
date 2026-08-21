@@ -250,6 +250,7 @@ if (lightbox) {
     pip: "pip install vibepod",
     brew: "brew install vibepod/vibepod/vibepod",
     conda: "conda install -c conda-forge vibepod",
+    mamba: "mamba install -c conda-forge vibepod",
     pixi: "pixi global install vibepod"
   };
 

@@ -854,6 +854,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Pi (Earendil)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-models-ollama-lm-studio-lemonade-llamacpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local models (Ollama, LM Studio, Lemonade, llama.cpp)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1707,6 +1724,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Pi (Earendil)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-models-ollama-lm-studio-lemonade-llamacpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local models (Ollama, LM Studio, Lemonade, llama.cpp)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2486,17 +2520,103 @@ forwarder:</p>
 <li><code>--ikwid</code>: appends <code>--approve</code>, trusting project-local files for that run (see <a href="#ikwid-mode---ikwid">IKWID mode</a>).</li>
 <li>Non-interactive modes (<code>-p</code>, <code>--mode json</code>, <code>--mode rpc</code>) show no prompt and fall back to <code>defaultProjectTrust</code> in <code>/config/.pi/agent/settings.json</code> (<code>ask</code> | <code>always</code> | <code>never</code>). Pre-seed this file if you need unattended runs to trust projects automatically.</li>
 </ul>
+<h4 id="local-models-ollama-lm-studio-lemonade-llamacpp">Local models (Ollama, LM Studio, Lemonade, llama.cpp)<a class="headerlink" href="#local-models-ollama-lm-studio-lemonade-llamacpp" title="Permanent link">&para;</a></h4>
+<p>Pi supports custom OpenAI-compatible providers through a
+<a href="https://pi.dev/docs/latest/models"><code>models.json</code></a> file in its agent directory.
+Inside the container that directory is <code>PI_CODING_AGENT_DIR</code>
+(<code>/config/.pi/agent/</code>), which is part of the persisted config mount — so you
+create the file <strong>on the host</strong> and it is picked up on every run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>config<span class="w"> </span>path
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="c1"># Global:  ~/.config/vibepod/config.yaml</span>
+</code></pre></div>
+<p>The agent directory lives next to that config file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>~/.config/vibepod/agents/pi/.pi/agent/models.json
+</code></pre></div>
+<p>Point each provider's <code>baseUrl</code> at <code>host.docker.internal</code> so the container can
+reach the server running on your host (VibePod maps this hostname on Linux,
+macOS, and Windows automatically):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="p">{</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">    </span><span class="nt">"ollama"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:11434/v1"</span><span class="p">,</span>
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span>
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwen3.6:35b"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemma4:12b"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a><span class="w">    </span><span class="nt">"lmstudio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:1234/v1"</span><span class="p">,</span>
+<a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lmstudio"</span><span class="p">,</span>
+<a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poolside/laguna-s-2.1"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a><span class="w">    </span><span class="nt">"lemonade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:13305/v1"</span><span class="p">,</span>
+<a id="__codelineno-53-22" name="__codelineno-53-22" href="#__codelineno-53-22"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-53-23" name="__codelineno-53-23" href="#__codelineno-53-23"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lemonade"</span><span class="p">,</span>
+<a id="__codelineno-53-24" name="__codelineno-53-24" href="#__codelineno-53-24"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-53-25" name="__codelineno-53-25" href="#__codelineno-53-25"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Devstral-Small-2507-GGUF:latest"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-53-26" name="__codelineno-53-26" href="#__codelineno-53-26"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-53-27" name="__codelineno-53-27" href="#__codelineno-53-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-53-28" name="__codelineno-53-28" href="#__codelineno-53-28"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-53-29" name="__codelineno-53-29" href="#__codelineno-53-29"></a><span class="p">}</span>
+</code></pre></div>
+<p>The <code>api</code> / <code>baseUrl</code> / <code>models</code> fields are documented in Pi's
+<a href="https://pi.dev/docs/latest/models">models</a> and
+<a href="https://pi.dev/docs/latest/llama-cpp">llama.cpp</a> guides. The <code>apiKey</code> value is
+arbitrary for local servers that don't check it. Each model <code>id</code> must match an
+identifier your server actually exposes (<code>GET /v1/models</code> lists them) — the
+ids above are examples, replace them with the models you have installed.
+Start Pi as usual
+(<code>vp run pi</code>) and pick the model with the <code>/model</code> command — providers from
+<code>models.json</code> appear alongside the built-in ones, and the file is re-read
+every time you open <code>/model</code>, so you can edit it mid-session.</p>
+<p>Note that adding <code>models.json</code> does <strong>not</strong> change which model Pi starts
+with: the startup model comes from the <code>defaultModel</code> setting in
+<code>/config/.pi/agent/settings.json</code> (on the host:
+<code>~/.config/vibepod/agents/pi/.pi/agent/settings.json</code>). Select the local
+model via <code>/model</code>, or set <code>defaultModel</code> explicitly, so an existing
+configuration does not silently keep sending requests to a remote metered
+provider.</p>
+<div class="admonition note">
+<p class="admonition-title">Linux: expose the server to Docker</p>
+<p>On Linux, <code>host.docker.internal</code> resolves to the Docker bridge gateway
+(typically <code>172.17.0.1</code>), so a server bound to <code>127.0.0.1</code> — the default
+for Ollama, LM Studio, and Lemonade — refuses connections from the
+container. Bind it to the bridge gateway IP (preferred when only VibePod
+needs access) or to <code>0.0.0.0</code>, e.g.:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nv">OLLAMA_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>ollama<span class="w"> </span>serve
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="nv">LEMONADE_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>lemonade-server<span class="w"> </span>serve
+</code></pre></div>
+<p>In LM Studio, enable <strong>Serve on Local Network</strong> in the server settings,
+and turn on <strong>Require Authentication</strong> there (then use the generated API
+token as the provider's <code>apiKey</code> in <code>models.json</code>). Ollama and Lemonade
+have no built-in authentication, so when binding those to <code>0.0.0.0</code>
+restrict access with firewall rules instead.
+For systemd-managed services, set the variable via
+<code>sudo systemctl edit &lt;service&gt;</code> and restart. See
+<a href="../llm/#quick-start-with-ollama">Using OSS models</a> for the full
+Ollama systemd walkthrough and the security implications of binding to
+<code>0.0.0.0</code>.</p>
+<p>On macOS and Windows (Docker Desktop), <code>host.docker.internal</code> reaches the
+host's loopback interface directly, so the default <code>127.0.0.1</code> binding
+works without changes.</p>
+</div>
 <h3 id="agy-antigravity-google">Agy / Antigravity (Google)<a class="headerlink" href="#agy-antigravity-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w">   </span><span class="c1"># or: vp n</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w">   </span><span class="c1"># or: vp n</span>
 </code></pre></div>
 <p>Agy runs Google's Antigravity CLI in the same isolated VibePod container
 workflow. Credentials and configuration are persisted under
 <code>~/.config/vibepod/agents/agy/</code> and mounted at <code>/home/agy</code> inside the container.</p>
 <p>Use <code>--ikwid</code> to append Agy's permission-skip flag:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
 </code></pre></div>
 <h3 id="tau-hugging-face">Tau (Hugging Face)<a class="headerlink" href="#tau-hugging-face" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w">   </span><span class="c1"># or: vp t</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w">   </span><span class="c1"># or: vp t</span>
 </code></pre></div>
 <p>Tau is Hugging Face's minimalist, Pi-inspired terminal coding agent, written in
 Python. It is the first non-Node agent in the VibePod matrix. Credentials and
@@ -2529,21 +2649,21 @@ configuration are persisted under <code>~/.config/vibepod/agents/tau/</code>, mo
 </tbody>
 </table>
 <p><strong>Authentication.</strong> Start Tau and run the <code>/login</code> slash command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>/login              # pick a provider interactively
-<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>/login openai
-<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>/login openai-codex # OpenAI Codex subscription auth
-<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>/model              # choose a model
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>/login              # pick a provider interactively
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>/login openai
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>/login openai-codex # OpenAI Codex subscription auth
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>/model              # choose a model
 </code></pre></div>
 <p>Tau supports OpenAI, Anthropic, the Codex subscription, OpenRouter, Hugging
 Face, and any custom OpenAI-compatible endpoint. Saved credentials take
 precedence over environment variables and survive container restarts because
 they live in the persisted mount.</p>
 <p>API keys can also be injected instead of using <code>/login</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="w">  </span><span class="nt">tau</span><span class="p">:</span>
-<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
-<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a><span class="w">      </span><span class="nt">HF_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf_...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">  </span><span class="nt">tau</span><span class="p">:</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="w">      </span><span class="nt">HF_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf_...</span>
 </code></pre></div>
 <p>Or per run: <code>vp run tau -e OPENAI_API_KEY=sk-...</code>.</p>
 <p><strong>Custom models.</strong> Drop a <code>catalog.toml</code> into
@@ -2557,14 +2677,14 @@ usual: <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> route traffic through <c
 verification context. Streaming responses pass through unchanged.</p>
 <p><strong>Non-interactive mode.</strong> Tau's print mode works with both <code>vp run</code> and task
 mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Tau scans <code>~/.agents/skills/</code>, so skills installed via <code>vp skills</code>
 are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
 <p>Tau has no auto-approval flag, so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="jcode-1jehuang">Jcode (1jehuang)<a class="headerlink" href="#jcode-1jehuang" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w">   </span><span class="c1"># or: vp j</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w">   </span><span class="c1"># or: vp j</span>
 </code></pre></div>
 <p>Jcode is a resource-focused terminal coding agent written in Rust, distributed
 as a single static binary. It supports Anthropic, OpenAI (including the Codex
@@ -2603,9 +2723,9 @@ the container, where Jcode finds them as <code>~/.jcode/</code> and <code>~/.con
 </tbody>
 </table>
 <p><strong>Authentication.</strong> Run <code>jcode login</code> inside the container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>claude<span class="w">                </span><span class="c1"># Anthropic OAuth / subscription</span>
-<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>anthropic-api<span class="w">         </span><span class="c1"># Anthropic API key</span>
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>openai<span class="w"> </span>--no-browser<span class="w">   </span><span class="c1"># headless: prints the auth URL</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>claude<span class="w">                </span><span class="c1"># Anthropic OAuth / subscription</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>anthropic-api<span class="w">         </span><span class="c1"># Anthropic API key</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>openai<span class="w"> </span>--no-browser<span class="w">   </span><span class="c1"># headless: prints the auth URL</span>
 </code></pre></div>
 <p>OAuth-style providers support <code>--no-browser</code> (alias <code>--headless</code>) so the auth
 URL is printed instead of a browser being launched — open the URL on the host,
@@ -2614,11 +2734,11 @@ container's localhost callback listener is not reachable from the host browser.
 Saved credentials survive container restarts because they live in the
 persisted mount.</p>
 <p>API keys can also be injected instead of <code>jcode login</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">  </span><span class="nt">jcode</span><span class="p">:</span>
-<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
-<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="w">  </span><span class="nt">jcode</span><span class="p">:</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
 </code></pre></div>
 <p>Or per run: <code>vp run jcode -e ANTHROPIC_API_KEY=sk-ant-...</code>.</p>
 <p><strong>Proxy and TLS.</strong> Jcode's HTTP client (reqwest with rustls) honors
@@ -2627,8 +2747,8 @@ persisted mount.</p>
 traffic routes through <code>vibepod-proxy</code> with the mounted mitmproxy CA.</p>
 <p><strong>Non-interactive mode.</strong> Jcode's <code>run</code> subcommand works with both <code>vp run</code>
 and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Jcode scans <code>~/.agents/skills/</code>, so skills installed via
 <code>vp skills</code> are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up
@@ -2637,7 +2757,7 @@ automatically.</p>
 never self-updated at runtime. Jcode has no auto-approval flag (its safety
 system asks for permission in-session), so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="freebuff-codebuffai">Freebuff (CodebuffAI)<a class="headerlink" href="#freebuff-codebuffai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w">   </span><span class="c1"># or: vp fb</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w">   </span><span class="c1"># or: vp fb</span>
 </code></pre></div>
 <p>Freebuff is a free AI coding agent built on the Codebuff platform. Its npm
 package is a thin Node launcher that downloads a compiled glibc binary on
@@ -2669,15 +2789,15 @@ container, where the image symlinks <code>~/.config/manicode</code> to <code>/fr
 </table>
 <p><strong>Authentication.</strong> Freebuff authenticates through its own interactive login
 flow:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>login
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>login
 </code></pre></div>
 <p>On first run without a saved session, Freebuff prints "Not authenticated" and
 prompts you to press ENTER to log in. Saved credentials survive container
 restarts because they live in the persisted mount.</p>
 <p><strong>Resuming a session.</strong> Pass <code>--continue</code> (optionally with a conversation id)
 through the CLI:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue
-<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue<span class="w"> </span>&lt;conversation-id&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue<span class="w"> </span>&lt;conversation-id&gt;
 </code></pre></div>
 <p>Use <code>--</code> so VibePod does not parse the agent's own flags.</p>
 <p><strong>Headless / task mode.</strong> Freebuff has no non-interactive print mode, so
@@ -2688,8 +2808,8 @@ automatically.</p>
 <p><strong>IKWID mode.</strong> Freebuff is a managed TUI with no auto-approval or
 permission-skip flag, so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="qwen-code-qwen">Qwen Code (Qwen)<a class="headerlink" href="#qwen-code-qwen" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w">   </span><span class="c1"># or: vp q</span>
-<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen-cli<span class="w">   </span><span class="c1"># alias of qwen</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w">   </span><span class="c1"># or: vp q</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen-cli<span class="w">   </span><span class="c1"># alias of qwen</span>
 </code></pre></div>
 <p>Qwen Code is Alibaba's open-source terminal coding agent (npm
 <code>@qwen-code/qwen-code</code>, binary <code>qwen</code>, Node 22+). It is Claude-Code-inspired
@@ -2725,17 +2845,17 @@ where the image symlinks <code>~/.qwen</code> to <code>/qwen</code>:</p>
 </table>
 <p><strong>Authentication.</strong> Run Qwen Code and use its <code>/auth</code> command to connect an
 Alibaba Cloud Coding Plan, a third-party API key, or a custom endpoint:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen
-<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="c1"># then inside the session: /auth</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen
+<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a><span class="c1"># then inside the session: /auth</span>
 </code></pre></div>
 <p>Saved credentials survive container restarts because they live in the
 persisted mount. API keys can also be injected instead of <code>/auth</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="nt">qwen</span><span class="p">:</span>
-<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
-<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
-<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a><span class="w">      </span><span class="nt">OPENAI_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3-coder-plus</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="w">  </span><span class="nt">qwen</span><span class="p">:</span>
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="w">      </span><span class="nt">OPENAI_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3-coder-plus</span>
 </code></pre></div>
 <p>Or per run: <code>vp run qwen -e OPENAI_API_KEY=sk-...</code>. Qwen Code honors the
 standard <code>OPENAI_API_KEY</code> / <code>OPENAI_BASE_URL</code> / <code>OPENAI_MODEL</code> (alias
@@ -2743,8 +2863,8 @@ standard <code>OPENAI_API_KEY</code> / <code>OPENAI_BASE_URL</code> / <code>OPEN
 protocols.</p>
 <p><strong>Non-interactive mode.</strong> Qwen Code's headless mode works with both <code>vp run</code>
 and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Qwen Code scans personal <code>~/.qwen/skills/</code> (symlinked to
 <code>/qwen/skills/</code>), so skills installed via <code>vp skills</code> are mounted at
@@ -2753,8 +2873,8 @@ and task mode:</p>
 already mounted.</p>
 <p><strong>IKWID mode.</strong> Qwen Code auto-approves all tool calls in YOLO mode, which
 <code>--ikwid</code> enables via <code>--approval-mode=yolo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
-<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 

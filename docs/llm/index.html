@@ -1001,6 +1001,13 @@
 </tbody>
 </table>
 <p>Other agents do not yet have LLM mapping and will not receive any LLM configuration.</p>
+<p>Some agents configure local models through their own native mechanism instead:</p>
+<ul>
+<li><strong>pi</strong> — custom providers via <code>models.json</code>, see <a href="../agents/#local-models-ollama-lm-studio-lemonade-llamacpp">Pi: Local models</a></li>
+<li><strong>tau</strong> — custom providers via <code>catalog.toml</code>, see <a href="../agents/#tau-hugging-face">Tau</a></li>
+<li><strong>jcode</strong> — supports Ollama, LM Studio, and custom OpenAI-compatible endpoints via <code>config.toml</code>, see <a href="../agents/#jcode-1jehuang">Jcode</a></li>
+<li><strong>qwen</strong> — any OpenAI-compatible endpoint via <code>OPENAI_BASE_URL</code> / <code>OPENAI_MODEL</code>, see <a href="../agents/#qwen-code-qwen">Qwen Code</a></li>
+</ul>
 <h2 id="quick-start-with-ollama">Quick start with Ollama<a class="headerlink" href="#quick-start-with-ollama" title="Permanent link">&para;</a></h2>
 <h3 id="1-start-ollama-and-pull-a-model">1. Start Ollama and pull a model<a class="headerlink" href="#1-start-ollama-and-pull-a-model" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ollama<span class="w"> </span>pull<span class="w"> </span>qwen3:14b

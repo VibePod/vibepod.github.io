@@ -414,6 +414,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deepseek-harness-dsh-web-ui-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeepSeek Harness (dsh) — Web UI agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#first-run-authentication" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1383,6 +1394,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deepseek-harness-dsh-web-ui-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeepSeek Harness (dsh) — Web UI agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#first-run-authentication" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2029,71 +2051,134 @@
 <td><code>vp q</code></td>
 <td><code>vibepod/qwen:latest</code></td>
 </tr>
+<tr>
+<td><code>dsh</code> (DeepSeek Harness)</td>
+<td>DeepSeek</td>
+<td><code>vp ds</code></td>
+<td><code>vibepod/dsh:latest</code></td>
+</tr>
 </tbody>
 </table>
-<p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>, and <code>vp run qwen-cli</code>
-resolves to <code>vp run qwen</code>.</p>
+<p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>, <code>vp run qwen-cli</code>
+resolves to <code>vp run qwen</code>, and <code>vp run deepseek</code> / <code>vp run deepseek-harness</code>
+resolve to <code>vp run dsh</code>.</p>
+<h2 id="deepseek-harness-dsh-web-ui-agent">DeepSeek Harness (<code>dsh</code>) — Web UI agent<a class="headerlink" href="#deepseek-harness-dsh-web-ui-agent" title="Permanent link">&para;</a></h2>
+<p>dsh is Web-UI-first: <code>vp run dsh</code> starts the harness's browser UI and prints
+its URL (default <code>http://127.0.0.1:3080</code>, published loopback-only on the
+host). The terminal stays attached to the container logs; Ctrl+C stops it.
+Sessions, profiles, plugins, and credentials persist in the agent config dir
+(<code>~/.config/vibepod/agents/dsh/</code>, mounted as the container's home).</p>
+<blockquote>
+<p><strong>Developer preview:</strong> upstream warns of compatibility-breaking changes.
+The default <code>vibepod/dsh</code> image pins an exact harness (npm) version — the
+<code>:latest</code> docker tag refers to the image build, not the harness inside.
+VibePod prints a preview notice on every run.</p>
+</blockquote>
+<p><strong>First-run setup (one time):</strong> the Web UI needs a workspace and a model
+before the first session; both persist in the agent config dir.</p>
+<ol>
+<li>Open the printed URL and click the workspace path in the top bar (or
+   <strong>Choose workspace</strong>). Navigate to <code>/workspace</code> — the project mount — via
+   the root breadcrumb or the path editor, and select it. Don't use the
+   new-folder input: <code>/workspace</code> already exists, and the input only accepts a
+   single folder name. Every project is mounted at <code>/workspace</code>, so this
+   registration carries over to all of them.</li>
+<li>Configure a model under <strong>Settings → Models</strong> (see below).</li>
+</ol>
+<p><strong>Auth:</strong> enter a DeepSeek API key in the Web UI (Settings → Models) — it
+persists across restarts — or pass it from the host:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vp<span class="w"> </span>run<span class="w"> </span>dsh<span class="w"> </span>-e<span class="w"> </span><span class="nv">DEEPSEEK_API_KEY</span><span class="o">=</span><span class="nv">$DEEPSEEK_API_KEY</span>
+</code></pre></div>
+<p><strong>Other providers:</strong> no DeepSeek account is required. Any OpenAI-compatible
+endpoint works — in <strong>Settings → Models</strong> pick the <code>openai</code> provider, set a
+custom base URL (e.g. a local <a href="https://ollama.com/">Ollama</a> server), fill in
+any non-empty token if the endpoint doesn't check one, and enter the model
+name manually.</p>
+<p><strong>Headless one-shot</strong> (uses dsh's <code>headless</code> profile, no server, prints the
+final answer):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>dsh<span class="w"> </span><span class="s2">"summarize this repository"</span>
+</code></pre></div>
+<p><strong>Changing the host port:</strong> override the published port in your config; the
+container-side port stays <code>3081</code> (the image's internal forwarder):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">dsh</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"127.0.0.1:3090:3081"</span>
+</code></pre></div>
+<p>For a one-off run, the <a href="../configuration/#publishing-ports"><code>-p/--publish</code> flag</a>
+replaces the configured list instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>run<span class="w"> </span>dsh<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:3090:3081
+</code></pre></div>
+<p>A host port of <code>0</code> (e.g. <code>127.0.0.1:0:3081</code>) lets the Docker daemon pick a
+free port — useful for running dsh in several projects at once; the printed
+Web UI URL shows the assigned port.</p>
+<p>dsh's browser-trust fence expects the canonical authority; on a non-default
+host port also pass <code>vp run dsh -- --trusted-host 127.0.0.1:3090</code> (with the
+actual port when the daemon assigned one).</p>
+<p><strong>Customizing:</strong> dsh composes profiles from patch layers. Edit
+<code>~/.config/vibepod/agents/dsh/.dsh/cordis.patch.yml</code> on the host — changes
+hot-reload into the running server.</p>
 <h2 id="first-run-authentication">First run &amp; authentication<a class="headerlink" href="#first-run-authentication" title="Permanent link">&para;</a></h2>
 <p>Start any agent for the first time with <code>vp run &lt;agent&gt;</code>. The container will prompt you to authenticate (browser OAuth, API key entry, or device flow depending on the provider). Once authenticated, credentials are written to the persisted config directory and reused on subsequent runs.</p>
 <h2 id="auto-pulling-the-latest-image">Auto-pulling the latest image<a class="headerlink" href="#auto-pulling-the-latest-image" title="Permanent link">&para;</a></h2>
 <p>VibePod automatically pulls the latest image for an agent before every run and shows pull progress while layers download. This ensures you always start with the most up-to-date container without manual intervention.</p>
 <p>To disable auto-pull globally:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Or for a specific agent only:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">devstral</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">devstral</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Per-agent <code>auto_pull</code> takes precedence over the global setting. For example, you can disable it globally but keep it on for a specific agent:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">          </span><span class="c1"># skip pull by default</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># except claude — always pull</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">          </span><span class="c1"># skip pull by default</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># except claude — always pull</span>
 </code></pre></div>
 <p>You can also force a one-off pull via the CLI flag regardless of config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--pull
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--pull
 </code></pre></div>
 <p>The resolution order is: <code>--pull</code> flag &gt; per-agent <code>auto_pull</code> &gt; global <code>auto_pull</code>.</p>
 <h2 id="overriding-the-image">Overriding the image<a class="headerlink" href="#overriding-the-image" title="Permanent link">&para;</a></h2>
 <p>You can point VibePod at a custom image via an environment variable:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/my-claude:dev<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/my-claude:dev<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <p>Or permanently via your <a href="../configuration/">global config</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>) and <code>qwen-cli</code> (→ <code>qwen</code>). Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
 <li>Create a Dockerfile that extends the current base image.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># Dockerfile.claude</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">vibepod/claude:latest</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c"># Add project-specific utilities.</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ripgrep<span class="w"> </span>jq<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># Dockerfile.claude</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">vibepod/claude:latest</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c"># Add project-specific utilities.</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ripgrep<span class="w"> </span>jq<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
 </code></pre></div>
 <ol>
 <li>Build and tag the derived image.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.claude<span class="w"> </span>-t<span class="w"> </span>myorg/claude-container:with-tools<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.claude<span class="w"> </span>-t<span class="w"> </span>myorg/claude-container:with-tools<span class="w"> </span>.
 </code></pre></div>
 <ol>
 <li>Run with the new image (one-off) or set it in config (persistent).</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># one-off</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/claude-container:with-tools<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># one-off</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">VP_IMAGE_CLAUDE</span><span class="o">=</span>myorg/claude-container:with-tools<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (or .vibepod/config.yaml)</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/claude-container:with-tools</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (or .vibepod/config.yaml)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/claude-container:with-tools</span>
 </code></pre></div>
 <h3 id="2-add-a-new-image-for-an-agent">2. Add a new image for an agent<a class="headerlink" href="#2-add-a-new-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: point <code>opencode</code> at a newly published internal image.</p>
@@ -2101,44 +2186,44 @@ resolves to <code>vp run qwen</code>.</p>
 <li>Build/publish your image to a registry (for example <code>registry.example.com/team/opencode:2026-03-01</code>).</li>
 <li>Attach that image to the target agent in config.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.example.com/team/opencode:2026-03-01</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry.example.com/team/opencode:2026-03-01</span>
 </code></pre></div>
 <ol>
 <li>Start the agent.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode
 </code></pre></div>
 <p>You can also test quickly without editing config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">VP_IMAGE_OPENCODE</span><span class="o">=</span>registry.example.com/team/opencode:2026-03-01<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>opencode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">VP_IMAGE_OPENCODE</span><span class="o">=</span>registry.example.com/team/opencode:2026-03-01<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>opencode
 </code></pre></div>
 <h2 id="passing-environment-variables">Passing environment variables<a class="headerlink" href="#passing-environment-variables" title="Permanent link">&para;</a></h2>
 <p>Use <code>-e</code> / <code>--env</code> to inject variables at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">MY_VAR</span><span class="o">=</span>value<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANOTHER</span><span class="o">=</span><span class="m">123</span>
 </code></pre></div>
 <p>Persistent per-agent env vars can also be set in config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">      </span><span class="nt">MY_VAR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
 </code></pre></div>
 <h2 id="passing-arguments-to-the-agent">Passing arguments to the agent<a class="headerlink" href="#passing-arguments-to-the-agent" title="Permanent link">&para;</a></h2>
 <p>Any extra arguments after the agent name are appended to the agent command inside the container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
 </code></pre></div>
 <p>Use <code>--</code> before agent flags so VibePod does not parse them as its own options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
 </code></pre></div>
 <p>For concrete syntax, check the agent's own CLI help. For example, Claude and
 Codex both accept model flags, but their exact flag names and values differ.</p>
 <h2 id="init-scripts-before-startup">Init scripts before startup<a class="headerlink" href="#init-scripts-before-startup" title="Permanent link">&para;</a></h2>
 <p>Use <code>agents.&lt;agent&gt;.init</code> to run shell commands in the container before the agent launches. This is useful for installing extra tools in a custom image workflow.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get update</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get install -y ripgrep jq</span>
 </code></pre></div>
 <p>The <code>init</code> commands run on every <code>vp run</code> for that agent and must be idempotent.</p>
 <h2 id="ikwid-mode-ikwid">IKWID mode (<code>--ikwid</code>)<a class="headerlink" href="#ikwid-mode-ikwid" title="Permanent link">&para;</a></h2>
@@ -2203,15 +2288,19 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>qwen</code></td>
 <td><code>--approval-mode=yolo</code></td>
 </tr>
+<tr>
+<td><code>dsh</code></td>
+<td>Not supported</td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>--ikwid
 </code></pre></div>
 <h2 id="pasting-images-paste-images">Pasting images (<code>--paste-images</code>)<a class="headerlink" href="#pasting-images-paste-images" title="Permanent link">&para;</a></h2>
 <p>Agents that accept pasted screenshots need access to your clipboard, which lives
 on the host X server. Use <code>--paste-images</code> to forward it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--paste-images
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--paste-images
 </code></pre></div>
 <p>VibePod mounts the X11 socket (<code>/tmp/.X11-unix</code>), passes your <code>DISPLAY</code>, and
 prepares an X authority cookie for the container. Host cookies are bound to the
@@ -2232,15 +2321,15 @@ cookie to the wildcard address family and mounts it read-only at
 <h2 id="detached-mode">Detached mode<a class="headerlink" href="#detached-mode" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start an agent container in the background without attaching your terminal. The agent process starts immediately inside the container — <code>-d</code> only controls whether VibePod attaches your terminal to it.</p>
 <h3 id="basic-usage">Basic usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1"># ✓ Started vibepod-claude-a1b2c3d4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="c1"># ✓ Started vibepod-claude-a1b2c3d4</span>
 </code></pre></div>
 <p>The command prints the container name and returns immediately. You can also find it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
 </code></pre></div>
 <h3 id="interacting-with-a-detached-container">Interacting with a detached container<a class="headerlink" href="#interacting-with-a-detached-container" title="Permanent link">&para;</a></h3>
 <p>The agent is already running inside the container. You can exec into it to inspect state, install extra tools, or interact with the agent alongside its running process:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w"> </span>bash
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w"> </span>bash
 </code></pre></div>
 <p>Use the container name printed by <code>vp run -d</code> or shown in <code>vp list</code>.</p>
 <div class="admonition tip">
@@ -2249,18 +2338,18 @@ cookie to the wildcard address family and mounts it read-only at
 </div>
 <h3 id="managing-detached-containers">Managing detached containers<a class="headerlink" href="#managing-detached-containers" title="Permanent link">&para;</a></h3>
 <p>Check running agents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>list<span class="w">              </span><span class="c1"># shows running + configured agents</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">    </span><span class="c1"># shows only running agents</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>vp<span class="w"> </span>list<span class="w"> </span>--json<span class="w">       </span><span class="c1"># machine-readable output</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>list<span class="w">              </span><span class="c1"># shows running + configured agents</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">    </span><span class="c1"># shows only running agents</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>vp<span class="w"> </span>list<span class="w"> </span>--json<span class="w">       </span><span class="c1"># machine-readable output</span>
 </code></pre></div>
 <p>When the current project has <a href="../overlays/">overlays</a>, <code>vp list</code> adds a
 <strong>Project Overlays</strong> table naming the overlay image each agent resolves to and
 whether it is already built.</p>
 <p>Stop a specific agent, a single container, or all agents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w">                       </span><span class="c1"># stop every container for the `claude` agent</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>vp<span class="w"> </span>stop<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w">      </span><span class="c1"># stop one specific container (from `vp list`)</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w"> </span>-f<span class="w">                    </span><span class="c1"># force stop immediately</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>vp<span class="w"> </span>stop<span class="w"> </span>--all<span class="w">                        </span><span class="c1"># stop every VibePod container</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w">                       </span><span class="c1"># stop every container for the `claude` agent</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>vp<span class="w"> </span>stop<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w">      </span><span class="c1"># stop one specific container (from `vp list`)</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w"> </span>-f<span class="w">                    </span><span class="c1"># force stop immediately</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>vp<span class="w"> </span>stop<span class="w"> </span>--all<span class="w">                        </span><span class="c1"># stop every VibePod container</span>
 </code></pre></div>
 <p>The argument is resolved as an agent name/shortcut first; anything else is looked up as a container name or ID. Only VibePod-managed containers can be stopped this way.</p>
 <h3 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h3>
@@ -2270,10 +2359,10 @@ whether it is already built.</p>
 </ul>
 <h2 id="task-mode-headless">Task mode (headless)<a class="headerlink" href="#task-mode-headless" title="Permanent link">&para;</a></h2>
 <p>Run an agent non-interactively as a background task. Claude calls this "headless mode"; codex and auggie expose equivalent flags. VibePod wraps them in a uniform <code>vp task</code> command.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"Summarize the README"</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1"># ✓ Task started: 9f1e8a20b4c14e2f89d7f6a1c3e42b99</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">#   container: vibepod-claude-abcdef12</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1">#   follow:    vp task logs 9f1e8a20b4c1 --follow</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="c1"># ✓ Task started: 9f1e8a20b4c14e2f89d7f6a1c3e42b99</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="c1">#   container: vibepod-claude-abcdef12</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1">#   follow:    vp task logs 9f1e8a20b4c1 --follow</span>
 </code></pre></div>
 <p>The command starts a detached container, writes a row to <code>~/.config/vibepod/tasks.db</code>, and returns a task id. The container is <strong>not</strong> auto-removed, so you can inspect logs and exit status after it finishes.</p>
 <p>Task mode applies a finite timeout by default: <strong>2 hours</strong>. Override it per task with <code>--timeout 30m</code>, <code>--timeout 4h</code>, or another <code>s</code>/<code>m</code>/<code>h</code> duration. Use <code>--timeout none</code> only when you explicitly want an unlimited background task.</p>
@@ -2310,39 +2399,43 @@ whether it is already built.</p>
 <td><code>qwen</code></td>
 <td><code>qwen -p "&lt;prompt&gt;"</code></td>
 </tr>
+<tr>
+<td><code>dsh</code></td>
+<td><code>dsh --profile headless "&lt;prompt&gt;"</code></td>
+</tr>
 </tbody>
 </table>
-<p>Other agents error with a clear message; support can be added by setting <code>headless_prefix</code> on their <code>AgentSpec</code>.</p>
+<p>Other agents error with a clear message; support can be added by setting <code>headless_prefix</code> (or <code>headless_command</code> for agents whose one-shot invocation differs from their interactive command) on their <code>AgentSpec</code>.</p>
 <h3 id="managing-tasks">Managing tasks<a class="headerlink" href="#managing-tasks" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w">                     </span><span class="c1"># recent tasks + container status</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--agent<span class="w"> </span>claude<span class="w">      </span><span class="c1"># filter</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--json<span class="w">              </span><span class="c1"># machine-readable</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>vp<span class="w"> </span>task<span class="w"> </span>logs<span class="w"> </span>&lt;id&gt;<span class="w">                </span><span class="c1"># dump captured stdout/stderr</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>vp<span class="w"> </span>task<span class="w"> </span>logs<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--follow<span class="w">       </span><span class="c1"># stream</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
-<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>vp<span class="w"> </span>task<span class="w"> </span>status<span class="w"> </span>&lt;id&gt;<span class="w">              </span><span class="c1"># state, exit code, timestamps</span>
-<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>vp<span class="w"> </span>task<span class="w"> </span>cancel<span class="w"> </span>&lt;id&gt;<span class="w">              </span><span class="c1"># gracefully stop a running task, keeping logs</span>
-<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>&lt;id&gt;<span class="w">                  </span><span class="c1"># remove task + its (stopped) container</span>
-<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>&lt;id&gt;<span class="w"> </span>-f<span class="w">               </span><span class="c1"># kill running container before removing</span>
-<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>--all<span class="w">                 </span><span class="c1"># remove all stopped/finished tasks</span>
-<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>--all<span class="w"> </span>-f<span class="w">              </span><span class="c1"># kill running task containers and remove all tasks</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w">                     </span><span class="c1"># recent tasks + container status</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--agent<span class="w"> </span>claude<span class="w">      </span><span class="c1"># filter</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>vp<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--json<span class="w">              </span><span class="c1"># machine-readable</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>vp<span class="w"> </span>task<span class="w"> </span>logs<span class="w"> </span>&lt;id&gt;<span class="w">                </span><span class="c1"># dump captured stdout/stderr</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>vp<span class="w"> </span>task<span class="w"> </span>logs<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--follow<span class="w">       </span><span class="c1"># stream</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>vp<span class="w"> </span>task<span class="w"> </span>status<span class="w"> </span>&lt;id&gt;<span class="w">              </span><span class="c1"># state, exit code, timestamps</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>vp<span class="w"> </span>task<span class="w"> </span>cancel<span class="w"> </span>&lt;id&gt;<span class="w">              </span><span class="c1"># gracefully stop a running task, keeping logs</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>&lt;id&gt;<span class="w">                  </span><span class="c1"># remove task + its (stopped) container</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>&lt;id&gt;<span class="w"> </span>-f<span class="w">               </span><span class="c1"># kill running container before removing</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>--all<span class="w">                 </span><span class="c1"># remove all stopped/finished tasks</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>vp<span class="w"> </span>task<span class="w"> </span>rm<span class="w"> </span>--all<span class="w"> </span>-f<span class="w">              </span><span class="c1"># kill running task containers and remove all tasks</span>
 </code></pre></div>
 <p>Task ids can be abbreviated to any unique prefix (e.g., the first 12 chars shown by <code>vp task list</code>).</p>
 <h3 id="passing-agent-flags">Passing agent flags<a class="headerlink" href="#passing-agent-flags" title="Permanent link">&para;</a></h3>
 <p>Anything after <code>--</code> is forwarded to the agent's command after the prompt, matching the CLI's documented form (<code>claude -p "..." --allowedTools ...</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"review staged changes"</span><span class="w"> </span>--<span class="w"> </span>--output-format<span class="w"> </span>json
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>30m<span class="w"> </span>claude<span class="w"> </span><span class="s2">"run the fast audit"</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>none<span class="w"> </span>claude<span class="w"> </span><span class="s2">"wait for the external job"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"review staged changes"</span><span class="w"> </span>--<span class="w"> </span>--output-format<span class="w"> </span>json
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>30m<span class="w"> </span>claude<span class="w"> </span><span class="s2">"run the fast audit"</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>--timeout<span class="w"> </span>none<span class="w"> </span>claude<span class="w"> </span><span class="s2">"wait for the external job"</span>
 </code></pre></div>
 <h3 id="auto-approval-for-automation">Auto-approval for automation<a class="headerlink" href="#auto-approval-for-automation" title="Permanent link">&para;</a></h3>
 <p>Headless tasks typically need to run without permission prompts. Pass <code>--ikwid</code> to apply the agent's documented auto-approve flag (e.g., <code>--dangerously-skip-permissions</code> for Claude):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"fix the failing test in auth.py"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"fix the failing test in auth.py"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 <h3 id="codex-task-authentication">Codex task authentication<a class="headerlink" href="#codex-task-authentication" title="Permanent link">&para;</a></h3>
 <p><code>codex exec</code> reuses saved Codex login state from the mounted config directory when available. For automation and smoke tests, pass <code>CODEX_API_KEY</code> explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>-e<span class="w"> </span><span class="nv">CODEX_API_KEY</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OPENAI_API_KEY</span><span class="s2">"</span><span class="w"> </span>--ikwid<span class="w"> </span>codex<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="s2">"Print exactly TASK_OK_CODEX and exit."</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>-e<span class="w"> </span><span class="nv">CODEX_API_KEY</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OPENAI_API_KEY</span><span class="s2">"</span><span class="w"> </span>--ikwid<span class="w"> </span>codex<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="s2">"Print exactly TASK_OK_CODEX and exit."</span>
 </code></pre></div>
 <p>For compatibility, Codex task mode also maps an explicitly supplied <code>OPENAI_API_KEY</code> to <code>CODEX_API_KEY</code> when <code>CODEX_API_KEY</code> is not already set.</p>
 <h3 id="caveats_1">Caveats<a class="headerlink" href="#caveats_1" title="Permanent link">&para;</a></h3>
@@ -2355,24 +2448,24 @@ whether it is already built.</p>
 <h2 id="reattaching-a-terminal">Reattaching a terminal<a class="headerlink" href="#reattaching-a-terminal" title="Permanent link">&para;</a></h2>
 <p>Closing the terminal window that runs <code>vp run</code> does <strong>not</strong> stop the container — the agent keeps running in the background under Docker. This is by design: the container's lifecycle is tied to Docker, not to your shell. Use it as a feature when you want to keep a long-running session alive across terminal restarts.</p>
 <p>To rejoin a running container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">       </span><span class="c1"># find the container name</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>vp<span class="w"> </span>attach<span class="w"> </span>&lt;container&gt;<span class="w">   </span><span class="c1"># reattach your terminal</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">       </span><span class="c1"># find the container name</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>vp<span class="w"> </span>attach<span class="w"> </span>&lt;container&gt;<span class="w">   </span><span class="c1"># reattach your terminal</span>
 </code></pre></div>
 <p>If exactly one managed container is running you can omit the name:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>vp<span class="w"> </span>attach
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>vp<span class="w"> </span>attach
 </code></pre></div>
 <p><code>vp attach</code> only works for containers that are already running and managed by VibePod. When you are done, close the terminal to leave it running, or stop it explicitly with <code>vp stop &lt;container&gt;</code>, <code>vp stop &lt;agent&gt;</code>, or <code>vp stop --all</code>.</p>
 <h2 id="resume-hints-after-a-session-ends">Resume hints after a session ends<a class="headerlink" href="#resume-hints-after-a-session-ends" title="Permanent link">&para;</a></h2>
 <p>Several agents print their own resume instruction when they exit — Claude, for
 example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Resume this session with:
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>claude --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Resume this session with:
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>claude --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
 </code></pre></div>
 <p>When VibePod recognizes such a hint in the session output (supported for
 Claude, Codex, Pi, Copilot, Jcode, and Freebuff), it prints the equivalent
 VibePod command after the agent exits:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Resume this session with:
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>  vp run claude -- --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Resume this session with:
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  vp run claude -- --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
 </code></pre></div>
 <p>The suggested command wraps the agent's own resume arguments in passthrough
 form (after <code>--</code>), so it works because each agent's session state lives in the
@@ -2381,11 +2474,11 @@ nothing extra is printed.</p>
 <h2 id="connecting-to-a-docker-compose-network">Connecting to a Docker Compose network<a class="headerlink" href="#connecting-to-a-docker-compose-network" title="Permanent link">&para;</a></h2>
 <p>When your workspace contains a <code>docker-compose.yml</code> or <code>compose.yml</code>, VibePod detects it and offers to connect the agent container to an existing network so it can reach your running services.</p>
 <p>You can also specify the network explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>my-compose-network
 </code></pre></div>
 <h2 id="individual-agents">Individual agents<a class="headerlink" href="#individual-agents" title="Permanent link">&para;</a></h2>
 <h3 id="claude-anthropic">Claude (Anthropic)<a class="headerlink" href="#claude-anthropic" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w">   </span><span class="c1"># or: vp c</span>
 </code></pre></div>
 <p>Credentials are stored in <code>~/.config/vibepod/agents/claude/</code>. On first run, Claude's interactive setup will guide you through API key configuration.</p>
 <h4 id="long-lived-token-recommended">Long-lived token (recommended)<a class="headerlink" href="#long-lived-token-recommended" title="Permanent link">&para;</a></h4>
@@ -2396,13 +2489,13 @@ nothing extra is printed.</p>
 <p><code>claude setup-token</code> and the <code>CLAUDE_CODE_OAUTH_TOKEN</code> environment variable are both documented by Anthropic as a supported authentication path for CI pipelines, scripts, and other environments where an interactive browser login isn't available. See the <a href="https://code.claude.com/docs/en/authentication#long-lived-tokens">official Claude Code authentication docs</a> and the <a href="https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md"><code>claude-code-action</code> setup guide</a>. VibePod just automates the storage and injection.</p>
 </div>
 <p><strong>One-time setup:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>setup-token
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>setup-token
 </code></pre></div>
 <p>This starts the container with <code>claude setup-token</code>, which opens Anthropic's OAuth flow in your browser. After you authorise, the container prints a token. VibePod then prompts you to paste it and saves it to:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>~/.config/vibepod/agents/claude/oauth-token   (mode 0600)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>~/.config/vibepod/agents/claude/oauth-token   (mode 0600)
 </code></pre></div>
 <p><strong>Subsequent runs:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <p>VibePod detects the stored token and injects <code>CLAUDE_CODE_OAUTH_TOKEN</code> automatically. Look for <code>Using stored Claude OAuth token</code> in the startup output to confirm.</p>
 <p><strong>Precedence</strong> (first match wins):</p>
@@ -2413,15 +2506,15 @@ nothing extra is printed.</p>
 <li>Interactive OAuth via <code>.credentials.json</code> (subject to the refresh bug)</li>
 </ol>
 <p><strong>Verifying the token is stored:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>vp<span class="w"> </span>doctor<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>vp<span class="w"> </span>doctor<span class="w"> </span>claude
 </code></pre></div>
 <p>Shows credentials state, stored-token presence and mtime, and which auth mode the next run will use. You can also inspect the file directly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="c1"># or to view contents (treat as a secret — do not share):</span>
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>nano<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="c1"># or to view contents (treat as a secret — do not share):</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>nano<span class="w"> </span>~/.config/vibepod/agents/claude/oauth-token
 </code></pre></div>
 <p><strong>Verifying the token works:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">"say ok"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">"say ok"</span>
 </code></pre></div>
 <p><code>-p</code> runs Claude Code in headless mode — one API call, one response. If you see "ok", the token is valid.</p>
 <p><strong>Caveats:</strong></p>
@@ -2432,13 +2525,13 @@ nothing extra is printed.</p>
 </ul>
 <h4 id="using-an-api-key-instead">Using an API key instead<a class="headerlink" href="#using-an-api-key-instead" title="Permanent link">&para;</a></h4>
 <p>If you're on a Console (pay-per-token) account, set <code>ANTHROPIC_API_KEY</code> and skip the setup-token flow entirely:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>sk-ant-...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>sk-ant-...
 </code></pre></div>
 <p>Or permanently in config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
 </code></pre></div>
 <h4 id="diagnostics">Diagnostics<a class="headerlink" href="#diagnostics" title="Permanent link">&para;</a></h4>
 <p><code>vp doctor claude</code> is the first tool to reach for when auth misbehaves. It reports:</p>
@@ -2601,31 +2694,31 @@ nothing extra is printed.</p>
 </table>
 <p><strong>Anthropic's posture:</strong> most reports are auto-closed as duplicates by a bot; the core issues (#21765, #33995) were closed as "not planned." A changelog line for Claude Code v2.1.44 mentioned "Fixed auth refresh errors" but users report the same behaviour on every later version (v2.1.62, 2.1.74, 2.1.116 observed). No committed fix has landed as of this writing.</p>
 <h3 id="gemini-google">Gemini (Google)<a class="headerlink" href="#gemini-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>vp<span class="w"> </span>run<span class="w"> </span>gemini<span class="w">   </span><span class="c1"># or: vp g</span>
 </code></pre></div>
 <h3 id="opencode-openai">OpenCode (OpenAI)<a class="headerlink" href="#opencode-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
 <p>Credentials and settings are persisted to <code>~/.config/vibepod/agents/opencode/</code> on the host and mounted at <code>/config</code> inside the container. In addition, the XDG data and config directories (<code>/root/.local/share/opencode</code> and <code>/root/.config/opencode</code>) are bind-mounted from the host so that authentication state is preserved across container restarts.</p>
 <h3 id="devstral-vibe-mistral">Devstral / Vibe (Mistral)<a class="headerlink" href="#devstral-vibe-mistral" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Devstral runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
 </div>
 <h3 id="auggie-augment-code">Auggie (Augment Code)<a class="headerlink" href="#auggie-augment-code" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>
 </code></pre></div>
 <h3 id="copilot-github">Copilot (GitHub)<a class="headerlink" href="#copilot-github" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp<span class="w"> </span>run<span class="w"> </span>copilot<span class="w">   </span><span class="c1"># or: vp p</span>
 </code></pre></div>
 <h3 id="codex-openai">Codex (OpenAI)<a class="headerlink" href="#codex-openai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w">   </span><span class="c1"># or: vp x</span>
 </code></pre></div>
 <p>For browser OAuth login, run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login
 </code></pre></div>
 <p>Codex binds its OAuth callback server to <code>127.0.0.1:1455</code> inside the container.
 During <code>codex login</code>, VibePod publishes the expected host callback port and enables
@@ -2633,11 +2726,11 @@ a small container forwarder so the host browser can complete the redirect back t
 Codex.</p>
 <p>Device-code and API-key flows do not need the browser callback, so they skip the
 forwarder:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--device-auth
-<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--with-api-key
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--device-auth
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>login<span class="w"> </span>--with-api-key
 </code></pre></div>
 <h3 id="pi-earendil">Pi (Earendil)<a class="headerlink" href="#pi-earendil" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w">   </span><span class="c1"># or: vp pi</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w">   </span><span class="c1"># or: vp pi</span>
 </code></pre></div>
 <p>Pi runs the Pi coding agent from Earendil in the same isolated VibePod container workflow. Credentials and configuration are persisted under <code>~/.config/vibepod/agents/pi/</code>.</p>
 <p>Pi has a per-project <strong>trust/approval system</strong>: before loading project-local extensions and settings, it asks you to trust the project once. Inside VibePod:</p>
@@ -2652,44 +2745,44 @@ forwarder:</p>
 Inside the container that directory is <code>PI_CODING_AGENT_DIR</code>
 (<code>/config/.pi/agent/</code>), which is part of the persisted config mount — so you
 create the file <strong>on the host</strong> and it is picked up on every run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>vp<span class="w"> </span>config<span class="w"> </span>path
-<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="c1"># Global:  ~/.config/vibepod/config.yaml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp<span class="w"> </span>config<span class="w"> </span>path
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="c1"># Global:  ~/.config/vibepod/config.yaml</span>
 </code></pre></div>
 <p>The agent directory lives next to that config file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>~/.config/vibepod/agents/pi/.pi/agent/models.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>~/.config/vibepod/agents/pi/.pi/agent/models.json
 </code></pre></div>
 <p>Point each provider's <code>baseUrl</code> at <code>host.docker.internal</code> so the container can
 reach the server running on your host (VibePod maps this hostname on Linux,
 macOS, and Windows automatically):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="p">{</span>
-<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="w">  </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="w">    </span><span class="nt">"ollama"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:11434/v1"</span><span class="p">,</span>
-<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
-<a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span>
-<a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwen3.6:35b"</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemma4:12b"</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a><span class="w">      </span><span class="p">]</span>
-<a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a><span class="w">    </span><span class="nt">"lmstudio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:1234/v1"</span><span class="p">,</span>
-<a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
-<a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lmstudio"</span><span class="p">,</span>
-<a id="__codelineno-55-16" name="__codelineno-55-16" href="#__codelineno-55-16"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-55-17" name="__codelineno-55-17" href="#__codelineno-55-17"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poolside/laguna-s-2.1"</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-55-18" name="__codelineno-55-18" href="#__codelineno-55-18"></a><span class="w">      </span><span class="p">]</span>
-<a id="__codelineno-55-19" name="__codelineno-55-19" href="#__codelineno-55-19"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-55-20" name="__codelineno-55-20" href="#__codelineno-55-20"></a><span class="w">    </span><span class="nt">"lemonade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:13305/v1"</span><span class="p">,</span>
-<a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
-<a id="__codelineno-55-23" name="__codelineno-55-23" href="#__codelineno-55-23"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lemonade"</span><span class="p">,</span>
-<a id="__codelineno-55-24" name="__codelineno-55-24" href="#__codelineno-55-24"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-55-25" name="__codelineno-55-25" href="#__codelineno-55-25"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Devstral-Small-2507-GGUF:latest"</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-55-26" name="__codelineno-55-26" href="#__codelineno-55-26"></a><span class="w">      </span><span class="p">]</span>
-<a id="__codelineno-55-27" name="__codelineno-55-27" href="#__codelineno-55-27"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-55-28" name="__codelineno-55-28" href="#__codelineno-55-28"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-55-29" name="__codelineno-55-29" href="#__codelineno-55-29"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="p">{</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">  </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">    </span><span class="nt">"ollama"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:11434/v1"</span><span class="p">,</span>
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwen3.6:35b"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemma4:12b"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a><span class="w">    </span><span class="nt">"lmstudio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:1234/v1"</span><span class="p">,</span>
+<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lmstudio"</span><span class="p">,</span>
+<a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-59-17" name="__codelineno-59-17" href="#__codelineno-59-17"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poolside/laguna-s-2.1"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-59-18" name="__codelineno-59-18" href="#__codelineno-59-18"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-59-19" name="__codelineno-59-19" href="#__codelineno-59-19"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-59-20" name="__codelineno-59-20" href="#__codelineno-59-20"></a><span class="w">    </span><span class="nt">"lemonade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-59-21" name="__codelineno-59-21" href="#__codelineno-59-21"></a><span class="w">      </span><span class="nt">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://host.docker.internal:13305/v1"</span><span class="p">,</span>
+<a id="__codelineno-59-22" name="__codelineno-59-22" href="#__codelineno-59-22"></a><span class="w">      </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span>
+<a id="__codelineno-59-23" name="__codelineno-59-23" href="#__codelineno-59-23"></a><span class="w">      </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lemonade"</span><span class="p">,</span>
+<a id="__codelineno-59-24" name="__codelineno-59-24" href="#__codelineno-59-24"></a><span class="w">      </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-59-25" name="__codelineno-59-25" href="#__codelineno-59-25"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Devstral-Small-2507-GGUF:latest"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-59-26" name="__codelineno-59-26" href="#__codelineno-59-26"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-59-27" name="__codelineno-59-27" href="#__codelineno-59-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-59-28" name="__codelineno-59-28" href="#__codelineno-59-28"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-59-29" name="__codelineno-59-29" href="#__codelineno-59-29"></a><span class="p">}</span>
 </code></pre></div>
 <p>The <code>api</code> / <code>baseUrl</code> / <code>models</code> fields are documented in Pi's
 <a href="https://pi.dev/docs/latest/models">models</a> and
@@ -2715,8 +2808,8 @@ provider.</p>
 for Ollama, LM Studio, and Lemonade — refuses connections from the
 container. Bind it to the bridge gateway IP (preferred when only VibePod
 needs access) or to <code>0.0.0.0</code>, e.g.:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="nv">OLLAMA_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>ollama<span class="w"> </span>serve
-<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="nv">LEMONADE_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>lemonade-server<span class="w"> </span>serve
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="nv">OLLAMA_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>ollama<span class="w"> </span>serve
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="nv">LEMONADE_HOST</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>lemonade-server<span class="w"> </span>serve
 </code></pre></div>
 <p>In LM Studio, enable <strong>Serve on Local Network</strong> in the server settings,
 and turn on <strong>Require Authentication</strong> there (then use the generated API
@@ -2733,16 +2826,16 @@ host's loopback interface directly, so the default <code>127.0.0.1</code> bindin
 works without changes.</p>
 </div>
 <h3 id="agy-antigravity-google">Agy / Antigravity (Google)<a class="headerlink" href="#agy-antigravity-google" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w">   </span><span class="c1"># or: vp n</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w">   </span><span class="c1"># or: vp n</span>
 </code></pre></div>
 <p>Agy runs Google's Antigravity CLI in the same isolated VibePod container
 workflow. Credentials and configuration are persisted under
 <code>~/.config/vibepod/agents/agy/</code> and mounted at <code>/home/agy</code> inside the container.</p>
 <p>Use <code>--ikwid</code> to append Agy's permission-skip flag:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>--ikwid
 </code></pre></div>
 <h3 id="tau-hugging-face">Tau (Hugging Face)<a class="headerlink" href="#tau-hugging-face" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w">   </span><span class="c1"># or: vp t</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w">   </span><span class="c1"># or: vp t</span>
 </code></pre></div>
 <p>Tau is Hugging Face's minimalist, Pi-inspired terminal coding agent, written in
 Python. It is the first non-Node agent in the VibePod matrix. Credentials and
@@ -2775,21 +2868,21 @@ configuration are persisted under <code>~/.config/vibepod/agents/tau/</code>, mo
 </tbody>
 </table>
 <p><strong>Authentication.</strong> Start Tau and run the <code>/login</code> slash command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>/login              # pick a provider interactively
-<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>/login openai
-<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>/login openai-codex # OpenAI Codex subscription auth
-<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>/model              # choose a model
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>/login              # pick a provider interactively
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>/login openai
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>/login openai-codex # OpenAI Codex subscription auth
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>/model              # choose a model
 </code></pre></div>
 <p>Tau supports OpenAI, Anthropic, the Codex subscription, OpenRouter, Hugging
 Face, and any custom OpenAI-compatible endpoint. Saved credentials take
 precedence over environment variables and survive container restarts because
 they live in the persisted mount.</p>
 <p>API keys can also be injected instead of using <code>/login</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="w">  </span><span class="nt">tau</span><span class="p">:</span>
-<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
-<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="w">      </span><span class="nt">HF_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf_...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">  </span><span class="nt">tau</span><span class="p">:</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">      </span><span class="nt">HF_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf_...</span>
 </code></pre></div>
 <p>Or per run: <code>vp run tau -e OPENAI_API_KEY=sk-...</code>.</p>
 <p><strong>Custom models.</strong> Drop a <code>catalog.toml</code> into
@@ -2803,14 +2896,14 @@ usual: <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> route traffic through <c
 verification context. Streaming responses pass through unchanged.</p>
 <p><strong>Non-interactive mode.</strong> Tau's print mode works with both <code>vp run</code> and task
 mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>tau<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Tau scans <code>~/.agents/skills/</code>, so skills installed via <code>vp skills</code>
 are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
 <p>Tau has no auto-approval flag, so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="jcode-1jehuang">Jcode (1jehuang)<a class="headerlink" href="#jcode-1jehuang" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w">   </span><span class="c1"># or: vp j</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w">   </span><span class="c1"># or: vp j</span>
 </code></pre></div>
 <p>Jcode is a resource-focused terminal coding agent written in Rust, distributed
 as a single static binary. It supports Anthropic, OpenAI (including the Codex
@@ -2849,9 +2942,9 @@ the container, where Jcode finds them as <code>~/.jcode/</code> and <code>~/.con
 </tbody>
 </table>
 <p><strong>Authentication.</strong> Run <code>jcode login</code> inside the container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>claude<span class="w">                </span><span class="c1"># Anthropic OAuth / subscription</span>
-<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>anthropic-api<span class="w">         </span><span class="c1"># Anthropic API key</span>
-<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>openai<span class="w"> </span>--no-browser<span class="w">   </span><span class="c1"># headless: prints the auth URL</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>claude<span class="w">                </span><span class="c1"># Anthropic OAuth / subscription</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>anthropic-api<span class="w">         </span><span class="c1"># Anthropic API key</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>--<span class="w"> </span>login<span class="w"> </span>--provider<span class="w"> </span>openai<span class="w"> </span>--no-browser<span class="w">   </span><span class="c1"># headless: prints the auth URL</span>
 </code></pre></div>
 <p>OAuth-style providers support <code>--no-browser</code> (alias <code>--headless</code>) so the auth
 URL is printed instead of a browser being launched — open the URL on the host,
@@ -2860,11 +2953,11 @@ container's localhost callback listener is not reachable from the host browser.
 Saved credentials survive container restarts because they live in the
 persisted mount.</p>
 <p>API keys can also be injected instead of <code>jcode login</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">  </span><span class="nt">jcode</span><span class="p">:</span>
-<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
-<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a><span class="w">  </span><span class="nt">jcode</span><span class="p">:</span>
+<a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+<a id="__codelineno-69-5" name="__codelineno-69-5" href="#__codelineno-69-5"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
 </code></pre></div>
 <p>Or per run: <code>vp run jcode -e ANTHROPIC_API_KEY=sk-ant-...</code>.</p>
 <p><strong>Proxy and TLS.</strong> Jcode's HTTP client (reqwest with rustls) honors
@@ -2873,8 +2966,8 @@ persisted mount.</p>
 traffic routes through <code>vibepod-proxy</code> with the mounted mitmproxy CA.</p>
 <p><strong>Non-interactive mode.</strong> Jcode's <code>run</code> subcommand works with both <code>vp run</code>
 and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>vp<span class="w"> </span>run<span class="w"> </span>jcode<span class="w"> </span>run<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>jcode<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Jcode scans <code>~/.agents/skills/</code>, so skills installed via
 <code>vp skills</code> are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up
@@ -2883,7 +2976,7 @@ automatically.</p>
 never self-updated at runtime. Jcode has no auto-approval flag (its safety
 system asks for permission in-session), so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="freebuff-codebuffai">Freebuff (CodebuffAI)<a class="headerlink" href="#freebuff-codebuffai" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w">   </span><span class="c1"># or: vp fb</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w">   </span><span class="c1"># or: vp fb</span>
 </code></pre></div>
 <p>Freebuff is a free AI coding agent built on the Codebuff platform. Its npm
 package is a thin Node launcher that downloads a compiled glibc binary on
@@ -2915,15 +3008,15 @@ container, where the image symlinks <code>~/.config/manicode</code> to <code>/fr
 </table>
 <p><strong>Authentication.</strong> Freebuff authenticates through its own interactive login
 flow:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>login
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>login
 </code></pre></div>
 <p>On first run without a saved session, Freebuff prints "Not authenticated" and
 prompts you to press ENTER to log in. Saved credentials survive container
 restarts because they live in the persisted mount.</p>
 <p><strong>Resuming a session.</strong> Pass <code>--continue</code> (optionally with a conversation id)
 through the CLI:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue
-<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue<span class="w"> </span>&lt;conversation-id&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue
+<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>vp<span class="w"> </span>run<span class="w"> </span>freebuff<span class="w"> </span>--<span class="w"> </span>--continue<span class="w"> </span>&lt;conversation-id&gt;
 </code></pre></div>
 <p>Use <code>--</code> so VibePod does not parse the agent's own flags.</p>
 <p><strong>Headless / task mode.</strong> Freebuff has no non-interactive print mode, so
@@ -2934,8 +3027,8 @@ automatically.</p>
 <p><strong>IKWID mode.</strong> Freebuff is a managed TUI with no auto-approval or
 permission-skip flag, so <code>--ikwid</code> is not supported for it.</p>
 <h3 id="qwen-code-qwen">Qwen Code (Qwen)<a class="headerlink" href="#qwen-code-qwen" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w">   </span><span class="c1"># or: vp q</span>
-<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen-cli<span class="w">   </span><span class="c1"># alias of qwen</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w">   </span><span class="c1"># or: vp q</span>
+<a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen-cli<span class="w">   </span><span class="c1"># alias of qwen</span>
 </code></pre></div>
 <p>Qwen Code is Alibaba's open-source terminal coding agent (npm
 <code>@qwen-code/qwen-code</code>, binary <code>qwen</code>, Node 22+). It is Claude-Code-inspired
@@ -2971,17 +3064,17 @@ where the image symlinks <code>~/.qwen</code> to <code>/qwen</code>:</p>
 </table>
 <p><strong>Authentication.</strong> Run Qwen Code and use its <code>/auth</code> command to connect an
 Alibaba Cloud Coding Plan, a third-party API key, or a custom endpoint:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen
-<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="c1"># then inside the session: /auth</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen
+<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a><span class="c1"># then inside the session: /auth</span>
 </code></pre></div>
 <p>Saved credentials survive container restarts because they live in the
 persisted mount. API keys can also be injected instead of <code>/auth</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a><span class="w">  </span><span class="nt">qwen</span><span class="p">:</span>
-<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
-<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
-<a id="__codelineno-72-6" name="__codelineno-72-6" href="#__codelineno-72-6"></a><span class="w">      </span><span class="nt">OPENAI_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3-coder-plus</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="w">  </span><span class="nt">qwen</span><span class="p">:</span>
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-...</span>
+<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="w">      </span><span class="nt">OPENAI_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
+<a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="w">      </span><span class="nt">OPENAI_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3-coder-plus</span>
 </code></pre></div>
 <p>Or per run: <code>vp run qwen -e OPENAI_API_KEY=sk-...</code>. Qwen Code honors the
 standard <code>OPENAI_API_KEY</code> / <code>OPENAI_BASE_URL</code> / <code>OPENAI_MODEL</code> (alias
@@ -2989,8 +3082,8 @@ standard <code>OPENAI_API_KEY</code> / <code>OPENAI_BASE_URL</code> / <code>OPEN
 protocols.</p>
 <p><strong>Non-interactive mode.</strong> Qwen Code's headless mode works with both <code>vp run</code>
 and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Skills.</strong> Qwen Code scans personal <code>~/.qwen/skills/</code> (symlinked to
 <code>/qwen/skills/</code>), so skills installed via <code>vp skills</code> are mounted at
@@ -2999,8 +3092,8 @@ and task mode:</p>
 already mounted.</p>
 <p><strong>IKWID mode.</strong> Qwen Code auto-approves all tool calls in YOLO mode, which
 <code>--ikwid</code> enables via <code>--approval-mode=yolo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
-<a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 

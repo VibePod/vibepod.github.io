@@ -1372,15 +1372,18 @@ Out-of-range results (e.g. <code>3000:30</code> → <code>180030</code>) are rej
 but in-range ones are not detectable — quote every entry.</p>
 </div>
 <p>Like other agent keys, a project-level <code>ports</code> list replaces the global one for that agent. The list applies to both <code>vp run</code> and <code>vp task</code> containers; note that two containers cannot publish the same host port at the same time, so a fixed host port limits you to one such container per agent.</p>
+<p>For a one-off override, <code>vp run</code> (and the agent alias commands) accept a repeatable <code>-p/--publish</code> flag with the same syntax. When given, it replaces the resolved config list for that run — the last level of the defaults → global → project → CLI chain:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:3090:3081<span class="w"> </span>-p<span class="w"> </span><span class="m">6000</span>:6000/udp
+</code></pre></div>
 <h2 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h2>
 <p>VibePod starts a <code>vibepod-proxy</code> container alongside every agent. It acts as an HTTP(S) MITM proxy and logs all outbound requests to a SQLite database viewable in the Datasette UI (<code>vp logs start</code>).</p>
 <p>The proxy is reachable inside the Docker network as <code>http://vibepod-proxy:8080</code>. It is not published on a host port.</p>
 <p>To disable the proxy globally:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">proxy</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">proxy</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Or at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Podman users</p>

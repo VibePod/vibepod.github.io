@@ -248,7 +248,9 @@ if (lightbox) {
 
   const commands = {
     pip: "pip install vibepod",
-    brew: "brew install vibepod/vibepod/vibepod"
+    brew: "brew install vibepod/vibepod/vibepod",
+    conda: "conda install -c conda-forge vibepod",
+    pixi: "pixi global install vibepod"
   };
 
   const tabs = Array.from(widget.querySelectorAll(".install-tab"));

@@ -2109,6 +2109,9 @@ cookie to the wildcard address family and mounts it read-only at
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>vp<span class="w"> </span>list<span class="w"> </span>--running<span class="w">    </span><span class="c1"># shows only running agents</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>vp<span class="w"> </span>list<span class="w"> </span>--json<span class="w">       </span><span class="c1"># machine-readable output</span>
 </code></pre></div>
+<p>When the current project has <a href="../overlays/">overlays</a>, <code>vp list</code> adds a
+<strong>Project Overlays</strong> table naming the overlay image each agent resolves to and
+whether it is already built.</p>
 <p>Stop a specific agent, a single container, or all agents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude<span class="w">                       </span><span class="c1"># stop every container for the `claude` agent</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>vp<span class="w"> </span>stop<span class="w"> </span>vibepod-claude-a1b2c3d4<span class="w">      </span><span class="c1"># stop one specific container (from `vp list`)</span>

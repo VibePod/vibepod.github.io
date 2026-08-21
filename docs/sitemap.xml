@@ -25,10 +25,6 @@
          <lastmod>2026-08-21</lastmod>
     </url>
     <url>
-         <loc>https://vibepod.dev/docs/overlays/</loc>
-         <lastmod>2026-08-21</lastmod>
-    </url>
-    <url>
          <loc>https://vibepod.dev/docs/profiles/</loc>
          <lastmod>2026-08-21</lastmod>
     </url>
@@ -38,6 +34,14 @@
     </url>
     <url>
          <loc>https://vibepod.dev/docs/agents/</loc>
+         <lastmod>2026-08-21</lastmod>
+    </url>
+    <url>
+         <loc>https://vibepod.dev/docs/overlays/</loc>
+         <lastmod>2026-08-21</lastmod>
+    </url>
+    <url>
+         <loc>https://vibepod.dev/docs/overlays/recipes/</loc>
          <lastmod>2026-08-21</lastmod>
     </url>
     <url>

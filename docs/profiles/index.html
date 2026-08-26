@@ -473,6 +473,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#per-profile-proxy-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-profile proxy filter
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -917,6 +928,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#per-profile-proxy-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-profile proxy filter
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -946,15 +968,17 @@
 <p>Profiles let you keep multiple credential sets per agent and switch between them
 at run time — for example a Claude subscription login, a separate API-key setup,
 and an environment prepared for Ollama.</p>
-<p>A profile only switches the <strong>credential directories</strong> that get mounted into the
-agent container. Everything else (skills, allowed directories, proxy, logging)
-stays shared. Environment variables such as <code>ANTHROPIC_API_KEY</code> are still
-configured via <code>agents.&lt;agent&gt;.env</code> or <code>-e</code> flags — combine them with a profile
-via a project config (see below).</p>
+<p>A profile switches the <strong>credential directories</strong> that get mounted into the
+agent container and, when the profile has its own filter settings, the
+<strong>proxy allow/deny filter</strong> (see below). Everything else (skills, allowed
+directories, proxy, logging) stays shared. Environment variables such as
+<code>ANTHROPIC_API_KEY</code> are still configured via <code>agents.&lt;agent&gt;.env</code> or <code>-e</code>
+flags — combine them with a profile via a project config (see below).</p>
 <h2 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>~/.config/vibepod/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  agents/&lt;agent&gt;/                    # the built-in "default" profile
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  profiles/&lt;name&gt;/agents/&lt;agent&gt;/    # named profiles
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  profiles/&lt;name&gt;/filter.yaml        # optional per-profile proxy filter
 </code></pre></div>
 <p>Your existing credentials in <code>~/.config/vibepod/agents/</code> are the <code>default</code>
 profile — nothing moves when you start using profiles.</p>
@@ -993,6 +1017,28 @@ credentials are persisted inside that profile.</p>
 </code></pre></div>
 <p>Referencing a profile that does not exist is a hard error — create it first
 with <code>vp profile create &lt;name&gt;</code>.</p>
+<h2 id="per-profile-proxy-filter">Per-profile proxy filter<a class="headerlink" href="#per-profile-proxy-filter" title="Permanent link">&para;</a></h2>
+<p>Each named profile can carry its own proxy filter mode and allow/deny lists in
+<code>profiles/&lt;name&gt;/filter.yaml</code>. The <code>vp proxy filter</code> commands act on the
+active profile, or on an explicit one via <code>--profile</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status<span class="w"> </span>--profile<span class="w"> </span>work
+</code></pre></div>
+<p>The file is created on first write, seeded from the global filter settings.
+A profile without <code>filter.yaml</code> inherits the global <code>proxy.filter</code> config and
+then any project filter captured for that launch. An explicit profile file is
+a complete replacement for the global/project base. In both cases, the
+launch-time <code>VP_PROXY_FILTER_MODE</code> value wins last.</p>
+<p>The proxy keeps one materialized profile base and a small record for each
+container. Editing a profile filter hot-reloads every running container that
+uses it, while each container retains the project and environment overrides it
+started with. This means two agents using different profiles—or different
+projects with the same inherited profile—can safely share one proxy.</p>
+<p><code>vp list</code> shows the selected profile and live effective proxy mode for each
+running container. Removing a profile deletes its credentials, but VibePod
+retains its materialized filter while any existing container (including a
+stopped container) still references it.</p>
 
 
 

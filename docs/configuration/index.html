@@ -811,6 +811,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="The built-in proxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allowdeny-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allow/deny filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -970,6 +987,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="The built-in proxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allowdeny-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allow/deny filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1174,6 +1208,10 @@
 <a id="__codelineno-0-164" name="__codelineno-0-164" href="#__codelineno-0-164"></a><span class="w">  </span><span class="nt">db_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/proxy.db</span>
 <a id="__codelineno-0-165" name="__codelineno-0-165" href="#__codelineno-0-165"></a><span class="w">  </span><span class="nt">ca_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy</span>
 <a id="__codelineno-0-166" name="__codelineno-0-166" href="#__codelineno-0-166"></a><span class="w">  </span><span class="nt">ca_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.config/vibepod/proxy/mitmproxy/mitmproxy-ca-cert.pem</span>
+<a id="__codelineno-0-167" name="__codelineno-0-167" href="#__codelineno-0-167"></a><span class="w">  </span><span class="nt">filter</span><span class="p">:</span>
+<a id="__codelineno-0-168" name="__codelineno-0-168" href="#__codelineno-0-168"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">open</span><span class="w">        </span><span class="c1"># open | allow | deny</span>
+<a id="__codelineno-0-169" name="__codelineno-0-169" href="#__codelineno-0-169"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-0-170" name="__codelineno-0-170" href="#__codelineno-0-170"></a><span class="w">    </span><span class="nt">deny</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 </code></pre></div>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <p>These variables override the corresponding config keys without editing any file:</p>
@@ -1220,6 +1258,11 @@
 <td><code>VP_PROXY_ENABLED</code></td>
 <td><code>proxy.enabled</code></td>
 <td><code>VP_PROXY_ENABLED=false</code></td>
+</tr>
+<tr>
+<td><code>VP_PROXY_FILTER_MODE</code></td>
+<td><code>proxy.filter.mode</code></td>
+<td><code>VP_PROXY_FILTER_MODE=allow</code></td>
 </tr>
 <tr>
 <td><code>VP_LLM_ENABLED</code></td>
@@ -1404,6 +1447,57 @@ but in-range ones are not detectable — quote every entry.</p>
 network. If you use Podman with the CNI backend, install the <code>dnsname</code>
 plugin (e.g. <code>podman-plugins</code> on Fedora, <code>golang-github-containernetworking-plugin-dnsname</code>
 on Debian/Ubuntu) and recreate the network. See <a href="../quickstart/#using-podman-instead-of-docker">Quickstart — Using Podman</a> for full instructions.</p>
+</div>
+<h3 id="allowdeny-filtering">Allow/deny filtering<a class="headerlink" href="#allowdeny-filtering" title="Permanent link">&para;</a></h3>
+<p>Filtering is opt-in; the default mode <code>open</code> passes and logs everything
+(today's behavior). In <code>allow</code> mode only listed hosts pass; in <code>deny</code> mode
+everything passes except listed hosts. Patterns: <code>example.com</code> matches that
+host exactly, <code>*.example.com</code> matches subdomains (not the apex).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span><span class="s2">"*.github.com"</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>deny<span class="w"> </span>add<span class="w"> </span>example.com
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>open<span class="w">        </span><span class="c1"># back to no filtering; lists are kept</span>
+</code></pre></div>
+<p>One shared proxy evaluates a separate policy for every VibePod agent container.
+Each launch receives an opaque policy identity and is also bound to its source
+container after startup. This prevents a later launch from replacing the rules
+of an already-running agent. Unidentified clients continue to use the global
+filter.</p>
+<p>Profile changes apply immediately to every running container using that
+profile—no proxy restart is needed. Project filter settings and
+<code>VP_PROXY_FILTER_MODE</code> are captured when each container starts, so changing
+either affects new launches only. The effective profile and live mode are shown
+by <code>vp list</code> in the <code>PROFILE</code> and <code>PROXY MODE</code> columns and in its JSON rows as
+<code>profile</code> and <code>proxy_mode</code>.</p>
+<p>Blocked requests return <code>403</code> (HTTPS tunnels are refused at <code>CONNECT</code>) and are
+logged with <code>blocked = 1</code> in the proxy database. Invalid policy configuration
+is rejected instead of silently falling back to <code>open</code>; an identified launch
+whose policy files are missing or malformed fails closed.</p>
+<p>The <code>vp proxy filter</code> commands act on the <strong>active profile</strong>. For the
+<code>default</code> profile they write the global config; for a named profile they write
+<code>profiles/&lt;name&gt;/filter.yaml</code> (seeded from the global settings on first
+write), so switching profiles also switches the filter mode and lists. Pass
+<code>--profile &lt;name&gt;</code> to manage another profile's filter without switching.</p>
+<p>A project-level <code>.vibepod/config.yaml</code> filter section or
+<code>VP_PROXY_FILTER_MODE</code> takes precedence over the global values (for a profile
+with its own <code>filter.yaml</code>, only <code>VP_PROXY_FILTER_MODE</code> still overrides the
+mode). Project and environment overrides are launch-specific and never replace
+the shared global fallback.</p>
+<p>Custom proxy images must implement per-source policies and expose this exact
+OCI image label:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">LABEL</span><span class="w"> </span>io.vibepod.proxy.policy-schema<span class="o">=</span><span class="s2">"2"</span>
+</code></pre></div>
+<p>VibePod checks the configured image—and an already-running proxy—before
+launching a proxied agent. An image with a missing or different schema label is
+rejected with an upgrade error.</p>
+<div class="admonition warning">
+<p class="admonition-title">Filtering is not a network sandbox</p>
+<p>The filter controls requests that use the injected proxy. A container can
+override its proxy environment or attempt a direct connection unless a
+separate network-control layer prevents that. VibePod warns when explicit
+<code>HTTP_PROXY</code> or <code>HTTPS_PROXY</code> values bypass its identified proxy URL.</p>
 </div>
 
 

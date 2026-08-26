@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.21: DeepSeek Harness, per-profile proxy filters, and one-off port publishing | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.21.0 adds the Web-UI-first DeepSeek Harness as dsh, per-profile allow/deny proxy filters via vp proxy filter, and a -p/--publish flag for one-off port publishing.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.21: DeepSeek Harness, per-profile proxy filters, and one-off port publishing">
+  <meta property="og:description" content="VibePod 0.21.0 adds the Web-UI-first DeepSeek Harness as dsh, per-profile allow/deny proxy filters via vp proxy filter, and a -p/--publish flag for one-off port publishing.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-21/">
+  <meta property="og:image" content="https://vibepod.dev/screenshots/dsh.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.21: DeepSeek Harness, per-profile proxy filters, and one-off port publishing">
+  <meta name="twitter:description" content="Run the DeepSeek Harness Web UI in a container, allow or block hosts per credential profile, and publish a port for a single session.">
+  <meta name="twitter:image" content="https://vibepod.dev/screenshots/dsh.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.21: DeepSeek Harness, per-profile proxy filters, and one-off port publishing</h1>
+      <p class="hero-lead">VibePod 0.21.0 welcomes the first Web-UI-first agent —
+      the DeepSeek Harness, run as <code>dsh</code> — lets each credential profile
+      carry its own allow/deny list for outbound traffic, and adds a
+      <code>-p/--publish</code> flag to expose a port for a single session.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/#deepseek-harness-dsh-web-ui-agent">Read the dsh docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-08-26 · Release · CLI · Agents</p>
+      <h2>DeepSeek Harness: the first Web UI agent</h2>
+      <p>Every agent VibePod shipped so far was a terminal program. The DeepSeek
+      Harness is not: <code>vp run dsh</code> starts the harness's browser UI inside
+      the container and prints its URL — by default
+      <code>http://127.0.0.1:3080</code>, published loopback-only on the host. The
+      terminal stays attached to the container logs, and Ctrl+C stops it.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/dsh.png" alt="The DeepSeek Harness Web UI running in a VibePod container, showing the workspace and mode pickers above the prompt box." loading="lazy" width="981" height="554">
+        <figcaption>The DeepSeek Harness Web UI served by <code>vp run dsh</code>.</figcaption>
+      </figure>
+      <pre class="code-block"><code>vp run dsh
+vp ds
+vp run deepseek   # alias</code></pre>
+      <p>Sessions, profiles, plugins, and credentials persist in
+      <code>~/.config/vibepod/agents/dsh/</code>, which is mounted as the container's
+      home. On first run, pick <code>/workspace</code> — the project mount — as the
+      workspace in the Web UI, then configure a model under
+      <strong>Settings → Models</strong>. Both choices survive restarts.</p>
+      <p>No DeepSeek account is required: enter a DeepSeek API key in the Web UI (or
+      pass <code>-e DEEPSEEK_API_KEY=$DEEPSEEK_API_KEY</code> from the host), or point
+      the <code>openai</code> provider at any OpenAI-compatible endpoint, including a
+      local Ollama server. For a one-shot answer without the server, the harness's
+      headless profile runs through <code>vp task</code>:</p>
+      <pre class="code-block"><code>vp task create dsh "summarize this repository"</code></pre>
+      <p>The harness is a developer preview upstream and warns of
+      compatibility-breaking changes, so the <code>vibepod/dsh</code> image pins an
+      exact harness version and the CLI prints a preview notice on every run.</p>
+      <h2>Per-profile proxy filters</h2>
+      <p>The built-in proxy already logged every outbound request. Now it can also
+      decide which ones go through, and the decision belongs to the credential
+      profile — a work profile can be locked to a short allow list while a personal
+      profile stays open:</p>
+      <pre class="code-block"><code>vp proxy filter show
+vp proxy filter allow api.anthropic.com --profile work
+vp proxy filter deny example.com --profile work
+vp proxy filter clear --profile work</code></pre>
+      <p>Filters are materialized into proxy policies when <code>vp run</code> or
+      <code>vp task</code> starts, applied to containers that are already running, and
+      cleaned up when they are stale. An invalid filter fails closed: the run stops
+      instead of quietly letting everything through, and blocked requests are recorded
+      with their reason so the dashboard can show what was refused.</p>
+      <h2>Publish a port for one session</h2>
+      <p>Port publishing used to require a config entry. <code>-p/--publish</code>
+      adds a one-off mapping for a single run — handy for a dev server you only want
+      reachable while you are working:</p>
+      <pre class="code-block"><code>vp run claude -p 127.0.0.1:5173:5173</code></pre>
+      <p>An explicit <code>--publish</code> replaces the configured ports for that
+      run, so the config's port validation is skipped rather than fought with.</p>
+      <h2>Smaller changes</h2>
+      <p><code>vp config path</code> now prints the config directory and the proxy
+      database next to the config file. After an agent exits, VibePod prints the
+      <code>vibepod resume</code> command needed to pick the session back up (matching
+      Pi's <code>--session</code> form). Project overlay images are named per project,
+      so two projects no longer share one overlay build. And agent containers map
+      <code>host.docker.internal</code>, which is what local model servers on the host
+      are reached through.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Added the DeepSeek Harness (<code>dsh</code>, aliases <code>deepseek</code> / <code>deepseek-harness</code>, shortcut <code>vp ds</code>, image <code>vibepod/dsh:latest</code>, override <code>VP_IMAGE_DSH</code>) with a loopback-only Web UI port, a headless <code>vp task</code> path, and a preview warning.</li>
+        <li>Added <code>vp proxy filter</code> (<code>show</code>, <code>allow</code>, <code>deny</code>, <code>clear</code>) with per-profile settings, materialization on <code>run</code>/<code>task</code> startup, live application to running containers, stale-policy cleanup, and fail-closed validation.</li>
+        <li>Added <code>-p/--publish</code> to <code>vp run</code> for one-off port publishing; config port validation is skipped when it replaces the configured ports.</li>
+        <li><code>vp config path</code> shows the config directory and the proxy database.</li>
+        <li>Prints the <code>vibepod resume</code> command after an agent exits.</li>
+        <li>Overlay images are named per project.</li>
+        <li>Maps <code>host.docker.internal</code> in agent containers.</li>
+        <li>Documented the Homebrew and conda-forge install channels, overlay recipes, and dsh setup.</li>
+        <li>Added the <code>ruamel.yaml</code> dependency and bumped the package version to <code>0.21.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/agents/#deepseek-harness-dsh-web-ui-agent">Agents docs: DeepSeek Harness (dsh)</a></li>
+        <li><a href="../../docs/profiles/#per-profile-proxy-filter">Docs: per-profile proxy filter</a></li>
+        <li><a href="../../docs/configuration/#publishing-ports">Docs: publishing ports</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.21.0" target="_blank" rel="noreferrer">0.21.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer">vibepod-cli on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

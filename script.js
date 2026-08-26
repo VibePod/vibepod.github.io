@@ -349,7 +349,7 @@ if (lightbox) {
     { t: "cmd", text: "pip install vibepod" },
     { t: "dim", text: "Successfully installed vibepod" },
     { t: "cmd", text: "vp version" },
-    { t: "out", text: "VibePod CLI: 0.20.0" },
+    { t: "out", text: "VibePod CLI: 0.21.0" },
     { t: "out", text: "Python:      3.12.3" },
     { t: "out", text: "Docker:      28.3.3" },
     { t: "cmd", text: "vp run " + agent.cmd },

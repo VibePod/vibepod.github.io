@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.22: what every agent call costs | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.22.0 ships with vibepod-datasette 0.6.0 and vibepod-proxy 0.5.0: token usage priced in dollars from published rates, and cost attributed per workspace, profile, and session.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.22: what every agent call costs">
+  <meta property="og:description" content="VibePod 0.22.0 ships with vibepod-datasette 0.6.0 and vibepod-proxy 0.5.0: token usage priced in dollars from published rates, and cost attributed per workspace, profile, and session.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-22/">
+  <meta property="og:image" content="https://vibepod.dev/screenshots/cost-dashboard.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.22: what every agent call costs">
+  <meta name="twitter:description" content="Token usage is now priced in dollars from published rates and broken down by agent, workspace, profile, session, model, and provider.">
+  <meta name="twitter:image" content="https://vibepod.dev/screenshots/cost-dashboard.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Dashboard · Proxy</p>
+      <h1>VibePod CLI 0.22: what every agent call costs</h1>
+      <p class="hero-lead">0.22.0 ships with <strong>vibepod-datasette 0.6.0</strong>
+      and <strong>vibepod-proxy 0.5.0</strong>: every model call your agents make is
+      now priced from published rates, and the spend is broken down by agent,
+      workspace, credential profile, and single run.</p>
+      <div class="hero-actions"><a class="button button-primary" href="https://github.com/VibePod/vibepod-datasette#all-agents-token-usage-dashboard" target="_blank" rel="noreferrer">Read the dashboard docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-09-04 · Release · CLI · Dashboard · Proxy</p>
+      <h2>Every call, priced</h2>
+      <p>The dashboard has counted tokens for a while. It now also prices them, using
+      published rates from
+      <a href="https://github.com/pydantic/genai-prices" target="_blank" rel="noreferrer"><code>pydantic/genai-prices</code></a>
+      rather than a table kept by hand. Calls are priced once, when they are captured,
+      against their own timestamp — so old totals stay correct after a provider changes
+      a price — and the rates ship with the image, so nothing is fetched over the
+      network.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/cost-dashboard.png" alt="The all-agents token usage dashboard showing total and estimated cost cards, cost over time, and cost broken down by agent." loading="lazy" width="1917" height="1080">
+        <figcaption>The all-agents dashboard, now with cost alongside tokens.</figcaption>
+      </figure>
+      <pre class="code-block"><code>python -m pip install --upgrade vibepod
+vp logs start</code></pre>
+      <p>Two figures stay separate. <strong>Confirmed cost</strong> is calls to a host
+      that names its billing provider. <strong>Estimated cost</strong> is calls to a
+      host that fronts several vendors — a Copilot endpoint never says who billed the
+      call, so the provider is read off the model name. Both use published rates, but
+      a guess never lands in the actual-dollars number.</p>
+      <h2>Where the money went</h2>
+      <p>One table ranks every dimension — agent, workspace, profile, session, model,
+      provider, host — by share of spend. Beside it: cost over time against the
+      previous window of the same length, average, median and p95 cost per call, the
+      most expensive calls, outliers costing 3× the median for their own model, and
+      models billed at more than one rate.</p>
+      <p>Three of those breakdowns are new, and they are where this release's three
+      repositories meet:</p>
+      <ul>
+        <li><strong>Workspace</strong> — the directory the agent ran in, so spend maps
+        to projects.</li>
+        <li><strong>Profile</strong> — the credential profile the call ran under, which
+        also decides which hosts that agent may reach. The proxy now writes it on every
+        request, the CLI writes it on every session.</li>
+        <li><strong>Session</strong> — a single <code>vp run</code>, which is usually
+        the question behind a surprising number.</li>
+      </ul>
+      <p>Calls that resolve to none of them are counted as <code>unknown</code> instead
+      of dropped, so the breakdowns still add up to the total.</p>
+      <h2>What is not priced</h2>
+      <p>Coverage and quality tables report how each call got its price — an exact
+      rate, an alias match (<code>claude-opus-4-5-20260101</code> at the
+      <code>claude-opus-4-5</code> rate), an inferred provider, or nothing — plus the
+      token volume nothing could price and what it would have cost at the window's
+      confirmed rate. A missing rate is worth fixing upstream in the
+      <a href="https://github.com/pydantic/genai-prices/tree/main/prices" target="_blank" rel="noreferrer">genai-prices provider files</a>.
+      As that project says itself, these prices are a best-effort estimate, not a
+      bill.</p>
+      <h2>Upgrading</h2>
+      <p>Nothing to migrate by hand. <code>vp logs start</code> pulls the new dashboard
+      image, <code>vp run</code> and <code>vp task</code> pull the new proxy, and both
+      databases update their schema in place — earlier captures keep working, they just
+      carry no profile.</p>
+      <h2>Release details</h2>
+      <ul>
+        <li>Sessions record the credential profile they ran under (<code>logs.db</code> gains a <code>profile</code> column, migrated in place).</li>
+        <li>Ships with <strong>vibepod-proxy 0.5.0</strong>: an indexed <code>profile</code> column on <code>http_requests</code>, written for CONNECT and plain HTTP alike.</li>
+        <li>Ships with <strong>vibepod-datasette 0.6.0</strong>: per-call cost from <code>pydantic/genai-prices</code>, reported as confirmed and estimated figures per agent and over time.</li>
+        <li>Cost drivers, cost per call, most expensive calls, per-model outliers, mid-window rate changes, and pricing coverage and quality tables.</li>
+        <li>Token usage attributed per workspace, per profile, and per session, with unresolved rows visible as <code>unknown</code>.</li>
+        <li>Dashboard filters gain <code>2h</code> and <code>4h</code> ranges, a model filter, and a table-rows selector; the deprecated Claude Code and Codex token dashboards were removed.</li>
+        <li>Cached input tokens are no longer double charged on providers that already count them inside the input total.</li>
+        <li>Documented the DeepSeek Harness with a screenshot, and bumped the package version to <code>0.22.0</code>.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="https://github.com/VibePod/vibepod-datasette#all-agents-token-usage-dashboard" target="_blank" rel="noreferrer">Dashboard docs: token usage and cost</a></li>
+        <li><a href="../../docs/profiles/">Docs: credential profiles</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.22.0" target="_blank" rel="noreferrer">0.22.0 release on GitHub</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-datasette/releases/tag/0.6.0" target="_blank" rel="noreferrer">vibepod-datasette 0.6.0 release</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-proxy/releases/tag/0.5.0" target="_blank" rel="noreferrer">vibepod-proxy 0.5.0 release</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

@@ -125,6 +125,12 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Sep 12, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.23: containerized agents inside your editor</h3>
+          <p>ACP mode puts eleven containerized agents in the AI panel of Zed, PyCharm, or VS Code with isolation, profiles, overlays, and proxy metrics intact, and Nous Research's Hermes joins as <code>hermes</code>.</p>
+          <a class="card-link" href="news/vibepod-cli-0-23/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">Sep 4, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.22: what every agent call costs</h3>
           <p>Shipping with vibepod-datasette 0.6.0 and vibepod-proxy 0.5.0: every captured model call is priced from published rates, and the spend is broken down by agent, workspace, credential profile, and single run.</p>
@@ -141,12 +147,6 @@
           <h3>VibePod CLI 0.20: Credential profiles, Qwen Code, Freebuff, and local image fallback</h3>
           <p>Keep multiple credential sets per agent and switch with <code>--profile</code>, run Alibaba's Qwen Code as <code>qwen</code> and Codebuff's Freebuff as <code>freebuff</code>, and keep working offline with the local image fallback.</p>
           <a class="card-link" href="news/vibepod-cli-0-20/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">Jul 31, 2026 · Release · CLI</p>
-          <h3>VibePod CLI 0.19: Project overlays, Herdr integration, port publishing, and Jcode</h3>
-          <p>Projects extend agent images with committed Dockerfile fragments, agents report live state to herdr panes, containers publish ports via per-agent config, and Jcode joins as <code>jcode</code>.</p>
-          <a class="card-link" href="news/vibepod-cli-0-19/">Read post</a>
         </article>
       </div>
     </section>
@@ -271,6 +271,11 @@ Starting claude with image vibepod/claude:latest</code></pre>
           <h3>Reusable skills</h3>
           <p>Install prompt recipes per user or per project, then mount them into supported agents automatically.</p>
           <p class="proof">Proof point: <code>vp skills add github:vibepod/vibepod-skills//skills/researcher</code>.</p>
+        </article>
+        <article class="feature-card" data-reveal>
+          <h3>Editor integration (ACP)</h3>
+          <p>Run a containerized agent in the AI panel of any Agent Client Protocol editor — Zed, PyCharm, or VS Code — with isolation, profiles, overlays, and proxy metrics intact.</p>
+          <p class="proof">Proof point: <code>vp run claude --acp</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
           <h3>Detach and reattach</h3>

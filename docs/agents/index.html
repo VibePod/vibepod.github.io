@@ -955,6 +955,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hermes-agent-hermes-developer-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hermes Agent (hermes) — developer preview
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1962,6 +1973,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hermes-agent-hermes-developer-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hermes Agent (hermes) — developer preview
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2084,6 +2106,12 @@
 <td><code>vp ds</code></td>
 <td><code>vibepod/dsh:latest</code></td>
 </tr>
+<tr>
+<td><code>hermes</code></td>
+<td>Nous Research</td>
+<td><code>vp h</code></td>
+<td><code>vibepod/hermes:latest</code></td>
+</tr>
 </tbody>
 </table>
 <p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>, <code>vp run qwen-cli</code>
@@ -2178,7 +2206,7 @@ hot-reload into the running server.</p>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -2320,6 +2348,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>dsh</code></td>
 <td>Not supported</td>
 </tr>
+<tr>
+<td><code>hermes</code></td>
+<td><code>--yolo</code></td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
@@ -2430,6 +2462,10 @@ whether it is already built.</p>
 <tr>
 <td><code>dsh</code></td>
 <td><code>dsh --profile headless "&lt;prompt&gt;"</code></td>
+</tr>
+<tr>
+<td><code>hermes</code></td>
+<td><code>hermes -z "&lt;prompt&gt;"</code></td>
 </tr>
 </tbody>
 </table>
@@ -3122,6 +3158,68 @@ already mounted.</p>
 <code>--ikwid</code> enables via <code>--approval-mode=yolo</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
 <a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+</code></pre></div>
+<h2 id="hermes-agent-hermes-developer-preview">Hermes Agent (<code>hermes</code>) — developer preview<a class="headerlink" href="#hermes-agent-hermes-developer-preview" title="Permanent link">&para;</a></h2>
+<p>Hermes is Nous Research's self-improving agent: it keeps cross-session memory,
+writes its own skills, and is not primarily a coding TUI. VibePod runs its
+interactive CLI; the <code>gateway</code> daemon, cron jobs and messaging bridges are out
+of scope.</p>
+<p><code>vp run hermes</code> starts the classic Python REPL. The Ink TUI is available with
+<code>vp run hermes -- --tui</code>.</p>
+<blockquote>
+<p>The default <code>vibepod/hermes</code> image is built on the official
+<code>nousresearch/hermes-agent</code> image and pins one of its CalVer release tags
+(<code>v2026.9.7</code>). Upstream no longer publishes to PyPI, so the image tracks the
+Docker release line instead. Hermes is pre-1.0, so <code>vp run</code> and <code>vp task</code>
+print a developer-preview warning.</p>
+</blockquote>
+<p><strong>First run.</strong> Hermes has no usable provider until it is given credentials. Run
+<code>hermes setup</code> once inside the container — it persists to the mounted config at
+<code>~/.config/vibepod/agents/hermes/</code>, which is the container's <code>/opt/data</code> state
+volume. Configure OpenAI-compatible endpoints through Hermes's own provider
+setup too.</p>
+<p><strong>Global LLM wiring is not supported.</strong> Set <code>llm.enabled: false</code> in your
+VibePod configuration when running Hermes. Interactive, task, and ACP launches
+reject enabled global LLM wiring before starting a container, rather than
+silently using a different provider or model. The pinned Hermes runtime
+prioritizes saved provider settings, does not use <code>OPENAI_BASE_URL</code> for its
+main custom-provider endpoint, and restricts API keys by endpoint host. Its
+ACP adapter also has no provider/model launch flags. Hermes-native provider
+setup remains supported; VibePod does not rewrite Hermes's saved settings.</p>
+<p><strong>Rootless Podman is not supported.</strong> The pinned Hermes image needs its own
+runtime user and exits before showing any output when launched under
+rootless Podman's <code>keep-id</code> user mapping, which VibePod uses for most agents.
+On a rootless Podman engine, <code>vp run hermes</code> and <code>vp task create hermes</code>
+(affecting interactive, task, and ACP) reject the launch before
+starting a container rather than crashing mid-boot. Run Hermes on rootful
+Docker or Podman instead.</p>
+<p><strong>Headless one-shot:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
+</code></pre></div>
+<p><strong>Write sandbox.</strong> Hermes restricts its <code>write_file</code>/<code>patch</code> tools to the
+directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image ships
+<code>/opt/data</code> alone, which would leave the project mount read-only, so VibePod
+sets <code>/opt/data:/workspace</code>. With <code>--acp</code> the workspace host path is appended
+too, because editors send absolute host paths. To widen it further, extend the
+value rather than replacing it — VibePod appends to whatever you set:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
+<a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
+</code></pre></div>
+<p><strong>Editor integration.</strong> Hermes ships its own ACP adapter as the separate
+<code>hermes-acp</code> console script, which the official image already provides, so
+<code>vp run hermes --acp</code> works in any ACP editor — see the <a href="../acp/">ACP docs</a>.</p>
+<p><strong>Skills.</strong> Hermes scans <code>~/.agents/skills/</code> only when <code>skills.external_dirs</code>
+is set in its <code>config.yaml</code> — there is no environment-variable override — so
+the image seeds that key on every start. Skills installed via <code>vp skills</code> are
+then mounted at <code>/opt/data/.agents/skills/&lt;id&gt;</code> and picked up automatically.
+Editing <code>external_dirs</code> yourself disables the seeding; VibePod never
+overwrites a value you set.</p>
+<p><strong>IKWID mode.</strong> Hermes auto-approves tool calls in YOLO mode, which <code>--ikwid</code>
+enables via <code>--yolo</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
+<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 

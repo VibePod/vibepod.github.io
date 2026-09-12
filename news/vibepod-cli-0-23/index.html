@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.23: containerized agents inside your editor | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.23.0 adds ACP mode: eleven agents run in the AI panel of Zed, PyCharm, or VS Code while staying in their container, with profiles, overlays, and proxy metrics intact. Nous Research's Hermes joins as a developer preview.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.23: containerized agents inside your editor">
+  <meta property="og:description" content="VibePod 0.23.0 adds ACP mode: eleven agents run in the AI panel of Zed, PyCharm, or VS Code while staying in their container, with profiles, overlays, and proxy metrics intact. Nous Research's Hermes joins as a developer preview.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-23/">
+  <meta property="og:url" content="https://vibepod.dev/news/vibepod-cli-0-23/">
+  <meta property="og:image" content="https://vibepod.dev/screenshots/acp-pycharm-claude.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibePod CLI 0.23: containerized agents inside your editor">
+  <meta name="twitter:description" content="ACP mode puts eleven containerized agents in the editor's AI panel, and Nous Research's Hermes joins the agent matrix as a developer preview.">
+  <meta name="twitter:image" content="https://vibepod.dev/screenshots/acp-pycharm-claude.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Agents · Editors</p>
+      <h1>VibePod CLI 0.23: containerized agents inside your editor</h1>
+      <p class="hero-lead">0.23.0 adds <strong>ACP mode</strong>: eleven agents now appear
+      in the AI panel of any editor that speaks the Agent Client Protocol, while still
+      running in their own container. Nous Research's <strong>Hermes</strong> joins the
+      agent matrix as a developer preview.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/acp/">Read the ACP docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-09-12 · Release · CLI · Agents · Editors</p>
+      <h2>The agent moves into the AI panel</h2>
+      <p>Until now a VibePod agent lived in a terminal. With
+      <code>vp run &lt;agent&gt; --acp</code>, VibePod acts as an
+      <a href="https://agentclientprotocol.com/" target="_blank" rel="noreferrer">Agent Client Protocol</a>
+      adapter instead: the editor launches <code>vp</code> as a subprocess, speaks
+      JSON-RPC to it, and renders the agent in its own AI panel. Nothing about the run
+      changes — container isolation, credential profiles, project overlays, the MITM
+      proxy and local metric collection all stay active.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/acp-pycharm-claude.png" alt="PyCharm's AI panel showing VibePod Claude answering a question about a file in the open project." loading="lazy" width="1848" height="976">
+        <figcaption>A containerized Claude answering in PyCharm's AI panel, started by <code>vp run claude --acp</code>.</figcaption>
+      </figure>
+      <p>Register <code>vp</code> as a custom agent server once. Zed
+      (<code>settings.json</code>):</p>
+      <pre class="code-block"><code>{
+  "agent_servers": {
+    "VibePod Claude": {
+      "type": "custom",
+      "command": "/absolute/path/to/vp",
+      "args": ["run", "claude", "--acp"],
+      "env": {}
+    }
+  }
+}</code></pre>
+      <p>Use an absolute path — GUI applications do not inherit your shell
+      <code>PATH</code>. <code>-w</code> is usually unnecessary: Zed, PyCharm and the
+      VS Code ACP Client start the agent in the open project, and <code>vp run</code>
+      takes its working directory as the workspace, so one entry serves every project.
+      Allow the directory once beforehand, because the editor's stdin is a protocol
+      pipe rather than a TTY:</p>
+      <pre class="code-block"><code>vp config allow-dir /absolute/path/to/project</code></pre>
+      <p>Questions VibePod would normally ask on the terminal are sent as ACP forms and
+      answered in the chat instead of failing the launch.</p>
+      <h2>Eleven agents, two kinds of adapter</h2>
+      <p><code>opencode</code>, <code>copilot</code>, <code>auggie</code>,
+      <code>jcode</code>, <code>gemini</code>, <code>qwen</code>,
+      <code>devstral</code> and <code>hermes</code> run an adapter that is already in
+      the image, so they start offline and immediately. <code>claude</code>,
+      <code>codex</code> and <code>pi</code> fetch theirs with <code>npx</code>, which
+      needs the package registry reachable through the proxy filter and adds startup
+      latency. For the claude and codex adapters VibePod points
+      <code>CLAUDE_CODE_EXECUTABLE</code> and <code>CODEX_PATH</code> at the image's
+      own binary, so the version the image pins is the one that runs. Any other agent
+      can be wired up through <code>agents.&lt;agent&gt;.acp_command</code>, which is
+      also how you pin an <code>npx</code> adapter to a version.</p>
+      <h2>Hermes joins as a developer preview</h2>
+      <p>Hermes is Nous Research's self-improving agent: it keeps cross-session memory
+      and writes its own skills, and it is not primarily a coding TUI. It runs as
+      <code>hermes</code> (<code>vp h</code>) from
+      <code>vibepod/hermes:latest</code>, which is built on the official
+      <code>nousresearch/hermes-agent</code> image and pins one of its CalVer release
+      tags.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/hermes.png" alt="The Hermes Agent banner in a VibePod container, listing its available tools and skills." loading="lazy" width="1920" height="1048">
+        <figcaption>Hermes starting in its container, listing the tools and skills it found.</figcaption>
+      </figure>
+      <pre class="code-block"><code>vp run hermes              # classic Python REPL
+vp run hermes -- --tui     # the Ink TUI
+vp task create hermes "summarize this repository"</code></pre>
+      <p>Three things are worth knowing before the first run. Hermes has no usable
+      provider until you run <code>hermes setup</code> once inside the container; it
+      persists to the mounted config directory. Global LLM wiring is not supported, so
+      set <code>llm.enabled: false</code> — VibePod rejects the launch rather than
+      silently starting a different model. And the pinned image needs its own runtime
+      user, so rootless Podman is rejected up front instead of crashing mid-boot; run
+      Hermes on rootful Docker or Podman.</p>
+      <p>Its write sandbox is honored rather than worked around: VibePod sets
+      <code>HERMES_WRITE_SAFE_ROOT</code> to <code>/opt/data:/workspace</code> so the
+      project mount is writable, appends the host workspace path under
+      <code>--acp</code>, and extends whatever value you configure instead of replacing
+      it. Skills installed with <code>vp skills</code> are mounted and picked up
+      automatically, and <code>hermes-acp</code> means Hermes works in an ACP editor
+      like the rest.</p>
+      <h2>Upgrading</h2>
+      <p>Nothing to migrate by hand.</p>
+      <pre class="code-block"><code>python -m pip install --upgrade vibepod</code></pre>
+      <h2>Release details</h2>
+      <ul>
+        <li>New <code>--acp</code> mode: <code>vp run &lt;agent&gt; --acp</code> exposes a containerized agent to any ACP editor, with isolation, profiles, overlays and proxy metrics intact.</li>
+        <li>ACP support for eleven agents — <code>claude</code>, <code>gemini</code>, <code>qwen</code>, <code>codex</code>, <code>opencode</code>, <code>copilot</code>, <code>auggie</code>, <code>jcode</code>, <code>devstral</code>, <code>hermes</code> and <code>pi</code> — plus <code>agents.&lt;agent&gt;.acp_command</code> for your own adapter.</li>
+        <li>VibePod's own questions are rendered as ACP forms in the editor when stdin is a protocol pipe.</li>
+        <li>ACP fixes: exit codes, init-command override, attach cleanup, stdout hygiene, and Windows support scoped to WSL2.</li>
+        <li>New agent <code>hermes</code> (<code>vp h</code>, <code>vibepod/hermes:latest</code>) in developer preview: resume and continue detection, shared skills mount, <code>/opt/data</code> state volume, <code>HERMES_WRITE_SAFE_ROOT</code> write sandbox, and the <code>hermes-acp</code> adapter.</li>
+        <li>Hermes guards: enabled global LLM wiring and rootless Podman are rejected before a container starts, for interactive, task and ACP launches alike.</li>
+        <li>A running proxy is now replaced when a newer proxy image is pulled.</li>
+        <li>Herdr reporting skips the socket mount on VM-backed Podman engines (<a href="https://github.com/VibePod/vibepod-cli/issues/170" target="_blank" rel="noreferrer">#170</a>) and is guarded where Python lacks <code>AF_UNIX</code>.</li>
+        <li>Editor integration documented with PyCharm screenshots; the Hermes agent documented with a screenshot.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/acp/">Docs: editor integration (ACP mode)</a></li>
+        <li><a href="../../docs/agents/#hermes-agent-hermes-developer-preview">Docs: Hermes Agent</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.23.0" target="_blank" rel="noreferrer">0.23.0 release on GitHub</a></li>
+        <li><a href="https://agentclientprotocol.com/" target="_blank" rel="noreferrer">Agent Client Protocol</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

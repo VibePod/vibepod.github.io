@@ -342,7 +342,8 @@ if (lightbox) {
     { cmd: "tau", name: "Hugging Face Tau" },
     { cmd: "jcode", name: "Jcode" },
     { cmd: "freebuff", name: "Freebuff" },
-    { cmd: "qwen", name: "Qwen Code" }
+    { cmd: "qwen", name: "Qwen Code" },
+    { cmd: "hermes", name: "Hermes Agent" }
   ];
 
   const buildScript = (agent) => [

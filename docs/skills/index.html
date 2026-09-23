@@ -1234,6 +1234,10 @@ SKILL.md folders into an auto-discovery location for them.</p>
 <td><code>vp skills update [&lt;id&gt;] [--scope]</code></td>
 <td>Re-resolve locators and rewrite the lockfile</td>
 </tr>
+<tr>
+<td><code>vp skills cache clear</code></td>
+<td>Remove cached git clones and npm packages</td>
+</tr>
 </tbody>
 </table>
 <p>All commands accept <code>--json</code> for machine-readable output. The host CLI is a thin
@@ -1243,6 +1247,10 @@ what runs inside.</p>
 <p>Use <code>sync</code> when you want to restore the exact installed contents from the
 lockfile. Use <code>update</code> when you want to re-resolve moving refs such as branches
 or package ranges and rewrite the lockfile.</p>
+<p>Remote sources are fetched into <code>skills-cache/</code> under the VibePod config
+directory. The engine re-fetches on every <code>add</code>, <code>sync</code> and <code>update</code>, so the
+cache never serves stale content; <code>vp skills cache clear</code> only reclaims disk
+space. Installed skills are copies and keep working after the cache is cleared.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

@@ -396,6 +396,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -410,10 +437,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -431,8 +458,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -555,10 +582,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -576,8 +603,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -719,6 +746,17 @@
     <span class="md-ellipsis">
       
         pixi + PDF/OCR toolchain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pi-mcp-servers-pi-mcp-adapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pi + MCP servers (pi-mcp-adapter)
       
     </span>
   </a>
@@ -958,6 +996,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pi-mcp-servers-pi-mcp-adapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pi + MCP servers (pi-mcp-adapter)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contributing-a-recipe" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1099,6 +1148,62 @@ ghostscript, and tesseract for PDF and OCR work. Described in his
   <code>ADD</code> URLs and the <code>sed</code> pattern.</li>
 <li>Uses <code>latest</code>; pin a release (as in the previous recipe) for
   reproducibility.</li>
+</ul>
+<h2 id="pi-mcp-servers-pi-mcp-adapter">pi + MCP servers (pi-mcp-adapter)<a class="headerlink" href="#pi-mcp-servers-pi-mcp-adapter" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/nicobailon/pi-mcp-adapter">pi-mcp-adapter</a> is the pi
+extension that gives it MCP tools. The usual <code>pi install npm:pi-mcp-adapter</code>
+does not survive as a build step: pi writes into <code>$HOME/.pi</code>, and <code>$HOME</code>
+(<code>/config</code>) is a host mount at runtime, so anything installed there at build
+time is shadowed. Install into <code>/opt</code> instead and point the project's
+<code>.pi/settings.json</code> at it as a local-path package.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># .vibepod/overlay/pi/Dockerfile — no FROM line</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c">#</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c"># $HOME (/config) is a host mount at runtime, so `pi install` at build time</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c"># would be shadowed. Install into /opt instead; the project's</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c"># .pi/settings.json references it as a local-path package.</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">PI_MCP_ADAPTER_VERSION</span><span class="o">=</span><span class="m">2</span>.34.0
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">RUN</span><span class="w"> </span>node<span class="w"> </span>-e<span class="w"> </span><span class="s1">'const [a,b]=process.versions.node.split(".").map(Number); if (a&lt;22||(a===22&amp;&amp;b&lt;18)) { console.error("pi-mcp-adapter needs Node &gt;= 22.18, got "+process.version); process.exit(1) }'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/pi-packages<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/opt/pi-packages<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>init<span class="w"> </span>-y<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>--omit<span class="o">=</span>dev<span class="w"> </span>--no-audit<span class="w"> </span>--no-fund<span class="w"> </span><span class="s2">"pi-mcp-adapter@</span><span class="si">${</span><span class="nv">PI_MCP_ADAPTER_VERSION</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>cache<span class="w"> </span>clean<span class="w"> </span>--force<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span>a+rX<span class="w"> </span>/opt/pi-packages
+</code></pre></div>
+<p>Commit the two project files pi reads at startup. <code>.pi/settings.json</code> loads
+the baked-in extension:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"/opt/pi-packages/node_modules/pi-mcp-adapter"</span><span class="p">]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>.mcp.json</code> lists the servers to expose (shared with other MCP-aware tools):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">"filesystem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-y"</span><span class="p">,</span><span class="w"> </span><span class="s2">"@modelcontextprotocol/server-filesystem@2026.8.31"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/workspace"</span><span class="p">]</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>Per-agent overlay</strong> — the fragment lives under <code>.vibepod/overlay/pi/</code> so
+  other agents in the project do not pay for an extension only pi loads.</li>
+<li><strong>Absolute path in <code>settings.json</code></strong> — pi resolves relative package paths
+  against the settings file, which sits in the workspace mount; the install is
+  outside it, so the path must be absolute.</li>
+<li><strong><code>chmod -R a+rX</code></strong> — the overlay builds as root but pi runs as the
+  container user; without it the extension is unreadable at runtime.</li>
+<li><strong>Node check</strong> — the adapter's <code>engines</code> field says Node 20, but parts of
+  it (the token commands, for one) need 22.18+; failing the build early beats
+  a silent load failure in pi. Drop the guard if your base image is known-good.</li>
+<li><strong>Pinned version via <code>ARG</code></strong> — bump <code>PI_MCP_ADAPTER_VERSION</code> to upgrade;
+  the fragment text changes, so the overlay rebuilds.</li>
+<li><strong>Pinned server version in <code>.mcp.json</code></strong> — <code>npx -y</code> fetches the package
+  on first use, so an unpinned name resolves to whatever is latest that day
+  and needs registry access at runtime. Pin it, or bake the server into the
+  overlay next to the adapter and point <code>command</code> at it.</li>
 </ul>
 <h2 id="contributing-a-recipe">Contributing a recipe<a class="headerlink" href="#contributing-a-recipe" title="Permanent link">&para;</a></h2>
 <p>Got an overlay other projects could reuse? Open an issue or PR with the

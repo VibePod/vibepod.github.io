@@ -1,0 +1,1514 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="One CLI for containerized AI coding agents">
+      
+      
+      
+        <link rel="canonical" href="https://vibepod.dev/docs/providers/">
+      
+      
+        <link rel="prev" href="../profiles/">
+      
+      
+        <link rel="next" href="../skills/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Model providers - VibePod</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#global-model-providers-in-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="VibePod" class="md-header__button md-logo" aria-label="VibePod" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VibePod
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model providers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/VibePod/vibepod-cli" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    VibePod/vibepod-cli
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="VibePod" class="md-nav__button md-logo" aria-label="VibePod" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    VibePod
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/VibePod/vibepod-cli" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    VibePod/vibepod-cli
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../profiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model providers
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credentials-and-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials and storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temporary-launch-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temporary launch routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Temporary launch routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-lifetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration lifetime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-smoke-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker smoke tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local providers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-ollama-on-another-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Ollama on another machine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skills
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/locators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Locator format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project overlays
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project overlays
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overlays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overlays/recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../herdr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herdr integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor integration (ACP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credentials-and-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials and storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temporary-launch-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temporary launch routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Temporary launch routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-lifetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration lifetime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-smoke-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker smoke tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local providers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-ollama-on-another-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Ollama on another machine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/VibePod/vibepod-cli/edit/main/docs/providers.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="global-model-providers-in-development">Global model providers (in development)<a class="headerlink" href="#global-model-providers-in-development" title="Permanent link">&para;</a></h1>
+<p>Register a compatible hosted endpoint or local model server without editing files:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vp<span class="w"> </span>provider<span class="w"> </span>add
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>vp<span class="w"> </span>provider<span class="w"> </span>list
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>vp<span class="w"> </span>provider<span class="w"> </span>edit<span class="w"> </span>my-provider
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>vp<span class="w"> </span>provider<span class="w"> </span>models<span class="w"> </span>my-provider
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>vp<span class="w"> </span>provider<span class="w"> </span>models<span class="w"> </span>my-provider<span class="w"> </span>--refresh
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>vp<span class="w"> </span>provider<span class="w"> </span>refresh<span class="w"> </span>my-provider
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>vp<span class="w"> </span>provider<span class="w"> </span>remove<span class="w"> </span>my-provider
+</code></pre></div>
+<p>The wizard asks for the API protocol, base URL, authentication, selected model IDs, and an optional default model. It supports
+OpenAI Chat Completions, OpenAI Responses, and Anthropic Messages as distinct
+protocols. Model discovery uses the endpoint's compatible model-list API; enter
+model IDs manually when that endpoint is unavailable. Listing a model does not
+prove tool calling, streaming, vision, or protocol compatibility.</p>
+<p>After successful discovery, <strong>Use all discovered models?</strong> defaults to Yes.
+Decline to enter specific IDs. This selects the current catalog; it does not
+silently enable models added by the server in the future.</p>
+<p>Use <code>vp provider edit NAME</code> to change prefilled settings, keep or replace the
+stored key, and refresh the model catalog. After refreshing, accept all discovered
+models to include newly installed local models or additions to a hosted catalog.
+The current default is preserved if it remains selected. Enter <code>-</code> to clear the
+default model. Cancelling before saving leaves settings
+and credentials unchanged. Changes apply to future launches, not running agents.</p>
+<p><code>vp provider refresh NAME</code> re-discovers models, asks which ones to use and which
+is the default, and changes nothing else; settings of models that stay selected
+are kept. <code>vp provider models NAME --refresh</code> updates only the discovery cache,
+not your selected models or default. A failed refresh keeps the existing cache.</p>
+<h2 id="model-settings">Model settings<a class="headerlink" href="#model-settings" title="Permanent link">&para;</a></h2>
+<p>Discovery only yields model IDs. Context window, output limit, and reasoning
+controls are never guessed. <code>vp provider add</code> and <code>vp provider edit</code> offer to
+set them after the model selection: choose the models to configure (Enter picks
+the default model), then answer context window, max output tokens, reasoning
+model, accepted reasoning levels (Enter keeps all), and default level. <code>edit</code>
+prefills saved values and forgets settings of models that are no longer
+selected. <code>vp provider models NAME</code> lists the model IDs with their settings.</p>
+<p>Reasoning levels are the portable set <code>off, minimal, low, medium, high, xhigh</code>;
+each adapter maps them to the agent's own names and hides the rest. The default
+level applies at launch to the provider's default model only.</p>
+<p>What each agent receives (only fields you set; unset fields stay agent defaults):</p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Context window</th>
+<th>Max output</th>
+<th>Reasoning</th>
+<th>Levels / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pi</td>
+<td><code>contextWindow</code></td>
+<td><code>maxTokens</code></td>
+<td><code>reasoning</code></td>
+<td><code>thinkingLevelMap</code> (unsupported levels <code>null</code>, <code>xhigh</code> mapped for OpenAI-style APIs); default via <code>--thinking</code></td>
+</tr>
+<tr>
+<td>Codex</td>
+<td><code>model_context_window</code></td>
+<td>not a Codex setting</td>
+<td>via effort</td>
+<td><code>model_reasoning_effort</code> from the default level (<code>off</code> → <code>none</code>)</td>
+</tr>
+<tr>
+<td>OpenCode</td>
+<td><code>limit.context</code> (with output)</td>
+<td><code>limit.output</code> (with context)</td>
+<td><code>reasoning</code></td>
+<td>no portable control</td>
+</tr>
+<tr>
+<td>Tau</td>
+<td><code>model_metadata.&lt;id&gt;.context_window</code></td>
+<td><code>max_tokens</code></td>
+<td><code>reasoning</code></td>
+<td><code>unsupported_thinking_levels</code>, provider <code>thinking_parameter</code> by protocol, <code>thinking_default</code></td>
+</tr>
+<tr>
+<td>Jcode</td>
+<td><code>context_window</code> per model</td>
+<td>no setting</td>
+<td>no setting</td>
+<td>no setting</td>
+</tr>
+<tr>
+<td>Claude</td>
+<td>no setting</td>
+<td><code>CLAUDE_CODE_MAX_OUTPUT_TOKENS</code></td>
+<td>native</td>
+<td>native</td>
+</tr>
+<tr>
+<td>Qwen</td>
+<td>no setting</td>
+<td>no setting</td>
+<td>no setting</td>
+<td>no setting</td>
+</tr>
+</tbody>
+</table>
+<p>OpenCode's <code>limit</code> needs both values; with only one set, nothing is emitted.</p>
+<h2 id="credentials-and-storage">Credentials and storage<a class="headerlink" href="#credentials-and-storage" title="Permanent link">&para;</a></h2>
+<p>Definitions are global across profiles, under <code>~/.vibepod/providers/&lt;name&gt;/</code>:</p>
+<ul>
+<li><code>provider.toml</code>: URL, protocol, authentication reference, selected models.</li>
+<li><code>credentials.json</code> (or <code>credentials-&lt;id&gt;.json</code> after rotation): API key, only
+  when stored-key authentication is selected. Metadata references the active file;
+  rotation publishes a new reference atomically before removing the old key.</li>
+<li><code>models.json</code>: cached discovered model IDs and refresh time, when available.</li>
+</ul>
+<p><code>VP_PROVIDERS_DIR</code> overrides the provider-store directory. This is deliberately
+separate from the existing <code>~/.config/vibepod/</code> configuration/profile root.</p>
+<p>Stored keys are <strong>plaintext</strong>, protected by owner-only directory/file permissions.
+Processes running as your user and backups can still read them. The wizard masks
+key input and asks before storing a key. Alternatively, reference an environment
+variable or select no authentication for a local endpoint. Current storage
+requires POSIX owner/permission support; it fails closed on unsupported platforms.
+Do not put the store in a project or version-control repository.</p>
+<p>Discovery shows its destination before sending requests. TLS certificates are
+verified; redirects are refused. Sending a key over HTTP for discovery requires
+explicit confirmation. A stored-key provider is never activated automatically.</p>
+<h2 id="temporary-launch-routing">Temporary launch routing<a class="headerlink" href="#temporary-launch-routing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Protocols</th>
+<th>Selection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude</td>
+<td>Anthropic Messages</td>
+<td>One provider, saved default model required</td>
+</tr>
+<tr>
+<td>Pi</td>
+<td>OpenAI Chat Completions, Responses, Anthropic Messages</td>
+<td>One or more providers; models available in <code>/model</code></td>
+</tr>
+<tr>
+<td>Codex</td>
+<td>OpenAI Responses</td>
+<td>One provider, saved default model required</td>
+</tr>
+<tr>
+<td>Qwen</td>
+<td>OpenAI Chat Completions, Anthropic Messages</td>
+<td>One provider, saved default model required; routed via <code>OPENAI_*</code>/<code>ANTHROPIC_*</code> env</td>
+</tr>
+<tr>
+<td>Tau</td>
+<td>OpenAI Chat Completions, Responses, Anthropic Messages</td>
+<td>One or more providers; private <code>catalog.toml</code> view; a single provider with a saved default is selected via Tau's <code>--provider</code>/<code>--model</code></td>
+</tr>
+<tr>
+<td>Jcode</td>
+<td>OpenAI Chat Completions only (jcode named profiles); plain <code>http</code> only to <code>localhost</code>, <code>*.local</code>, or private IPs (jcode's own rule, so register the LAN IP, not <code>host.docker.internal</code>)</td>
+<td>One or more providers; private <code>config.toml</code> profiles under <code>JCODE_HOME</code>; a saved default is selected via <code>--provider-profile</code>/<code>--model</code></td>
+</tr>
+<tr>
+<td>OpenCode</td>
+<td>OpenAI Chat Completions, Responses, Anthropic Messages</td>
+<td>One or more providers; private <code>opencode.json</code> view</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>llmapi
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--profile<span class="w"> </span>work<span class="w"> </span>--provider<span class="w"> </span><span class="nb">local</span><span class="w"> </span>--provider<span class="w"> </span>hosted
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>--provider<span class="w"> </span>responses-endpoint
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--provider<span class="w"> </span>anthropic-endpoint
+</code></pre></div>
+<p>For Pi, a single provider's saved default selects the startup model. With multiple
+providers, or no saved default, native model selection is retained; the injected
+models are available in <code>/model</code>. No provider is arbitrarily picked as default.
+Pi's own defaults apply to unspecified model metadata; discovery does not establish
+context limits or vision/tool capabilities.</p>
+<p>Codex requires the Responses API. An endpoint advertising OpenAI compatibility
+but supporting only Chat Completions cannot be used with this adapter. Use
+<code>vp provider edit NAME</code> to select <code>openai-responses</code> only if the server actually
+supports it. The adapter uses Codex's native custom-provider configuration,
+not its <code>--oss</code> mode. The registry stores all selected model IDs, but Codex starts
+with the provider's saved default; it does not get Pi's custom model-picker catalog.</p>
+<p>An explicit <code>--model</code>/<code>-m</code> passed through to the agent (after <code>--</code>) takes
+precedence over the provider's saved default; the provider routing itself is
+still injected.</p>
+<p>Selected providers replace legacy <code>llm</code> injection for that launch; conflicting
+explicit routing environment settings cause an error. Without <code>--provider</code>,
+existing native/legacy behavior is unchanged. Provider selection does not mount
+the global store or alter the original profile's provider configuration.</p>
+<h3 id="configuration-lifetime">Configuration lifetime<a class="headerlink" href="#configuration-lifetime" title="Permanent link">&para;</a></h3>
+<p>Claude uses environment variables. Pi and Codex use a private configuration
+view created <strong>inside the container</strong> by its Node runtime after user mapping.
+Pi's <code>models.json</code>, settings, and authentication are copied/merged privately;
+Codex's config/auth files are private copies with native command-line overrides.
+Unrelated native Pi providers remain available. Saved credentials for an injected
+Pi provider cannot override its selected launch key.</p>
+<p>OpenCode merges its configuration sources in a fixed order and reads
+<code>OPENCODE_CONFIG_DIR</code> last, so the private view becomes that directory: the
+profile's <code>opencode.json</code> (VibePod points <code>OPENCODE_CONFIG_DIR</code> at the mounted
+config root) is copied with the injected <code>provider</code> entries and, for a single
+provider with a saved default, <code>model = "&lt;name&gt;/&lt;model&gt;"</code>; every other entry of
+that directory is symlinked through and <code>XDG_CONFIG_HOME</code> is untouched. A
+profile that keeps an <code>opencode.jsonc</code> in that directory cannot be overridden
+safely and fails the launch with a message; convert it to <code>opencode.json</code>.</p>
+<p><code>vp list</code> marks each running container with the injected provider names in its
+<code>PROVIDER</code> column (comma-separated when several <code>--provider</code> flags were used).</p>
+<p>Agents may still rewrite their own files on startup as they always do (opencode
+inserts <code>$schema</code> into its config, Qwen Code stamps <code>$version</code> into its settings);
+that is native behaviour, not provider injection.</p>
+<p>Session directories stay linked to the active profile, so conversations persist.
+Settings changed in the temporary view are not written back. Login state follows
+each agent's own store: Pi, Codex, and Tau get private copies of their
+credential files for the launch (a login there is discarded), while Jcode's
+<code>auth.json</code> and OpenCode's XDG data directory stay the profile's own, so logins
+and token refreshes in those sessions persist as usual. Existing profile
+credentials are never removed: provider selection is not a credential isolation
+sandbox. Concurrent launches get separate configuration directories.</p>
+<p>Temporary files are removed when the agent process exits normally. Background
+containers own their files independently of the CLI process. A forced kill can
+leave private files inside a retained container until it is removed; no temporary
+provider files are left on the host. Restarting a retained container rebuilds the
+view using that container's original launch environment.</p>
+<p>Environment credentials remain visible to container-runtime administrators and
+in retained containers until removal. Authenticated launches currently require
+an HTTPS endpoint. Unauthenticated local endpoints can use HTTP; Pi and Claude
+receive a placeholder key because their clients require one.</p>
+<p>The bootstrap script itself is copied once to <code>&lt;config root&gt;/runtime/</code>
+(<code>~/.config/vibepod/runtime/provider-bootstrap.cjs</code>, honoring <code>VP_CONFIG_DIR</code>)
+and bind-mounted read-only at <code>/opt/vibepod/provider-bootstrap.cjs</code> (likewise
+<code>.py</code> for Tau and <code>.sh</code> for Jcode). It contains no secrets. The container command is only <code>node</code> plus that path; the real agent
+command travels in <code>VIBEPOD_PROVIDER_COMMAND</code> (JSON), which the bootstrap unsets
+before starting the agent. This keeps the launch working on older Codex images
+whose entrypoint re-parses argv through <code>sh -c "$*"</code>. That entrypoint still
+mangles ordinary passthrough arguments containing quotes or spaces, which the
+<code>vibepod-agents</code> Codex entrypoint fix addresses independently.</p>
+<p><strong>Bootstrap runtimes:</strong> Pi, Codex, and OpenCode use the image's Node; Tau uses
+its Python; Jcode, whose image ships neither, uses POSIX <code>sh</code> with coreutils
+(<code>mktemp</code>, <code>ln</code>, <code>base64</code>). For Jcode the <code>[providers.&lt;name&gt;]</code> sections are
+rendered by the CLI and passed in <code>VIBEPOD_PROVIDER_CONFIG_TOML</code> (keys by
+environment variable name only), and the agent argv travels base64-encoded per
+argument in <code>VIBEPOD_PROVIDER_COMMAND_B64</code>. No image change is required.
+Tau has no config-root override, so inside its view <code>HOME</code> points at the
+private directory; every other entry of the real home (<code>.gitconfig</code>, <code>.ssh</code>,
+<code>.config</code>, caches) is symlinked through, so git identity and other tools keep
+working. The private <code>catalog.toml</code> is the profile's own catalog plus appended
+<code>[[providers]]</code> entries (Tau schema version 1); <code>providers.json</code> and
+<code>credentials.json</code> are private, unmodified copies. Jcode keeps <code>HOME</code> and gets
+<code>JCODE_HOME</code> pointing at a view whose <code>config.toml</code> is the profile's file plus
+appended <code>[providers.&lt;name&gt;]</code> profiles; <code>config/jcode</code> and <code>external/</code> link back
+to the real <code>~/.config/jcode</code> and home. A VibePod provider whose name already
+exists in the native Tau catalog or Jcode config fails the launch explicitly;
+rename the VibePod provider.</p>
+<p><strong>Remaining limitations:</strong> provider injection in ACP mode is not implemented
+for the agents that need a private configuration view (Pi, Codex, Tau, Jcode,
+OpenCode) and is rejected there; the environment-routed agents (Claude, Qwen)
+accept <code>--provider</code> in ACP mode. Unsupported <code>vp run</code> selections fail explicitly. OpenCode has no headless mode, so it
+cannot take <code>--provider</code> in task mode; the same applies to Pi. Hermes is deliberately out of scope for
+this feature: its runtime prioritizes saved provider settings, ignores
+<code>OPENAI_BASE_URL</code>, and restricts keys by endpoint host, so use <code>hermes setup</code>
+inside the container (see the <a href="../agents/#hermes-agent-hermes-developer-preview">Hermes notes</a>).
+Gemini, Copilot, Auggie, Agy, Freebuff, Devstral, and dsh have no verified
+custom-endpoint mechanism and are rejected as well.</p>
+<p>Qwen, Tau, Jcode, and OpenCode follow the same temporary-launch rules as the
+first three agents: saved credentials and native configuration are never
+written back, provider selection replaces legacy <code>llm</code> injection for that
+launch, and conflicting routing environment settings cause an error. Injected
+Tau/Jcode profiles reference the launch key by environment variable only, so
+saved native credentials for other providers are untouched. Task mode accepts
+<code>--provider</code> for every agent in the table above except OpenCode and Pi, which
+have no headless mode in VibePod.</p>
+<h3 id="docker-smoke-tests">Docker smoke tests<a class="headerlink" href="#docker-smoke-tests" title="Permanent link">&para;</a></h3>
+<p><code>.github/workflows/provider-smoke.yml</code> builds a real image per supported agent and
+runs it against a local fake streaming API, checking routing, preserved profile files,
+and persistent sessions. No real API keys or paid services are used. The companion
+<code>vibepod-agents</code> ref must include the Codex entrypoint fix: select it with the manual
+workflow's <code>agents_ref</code> input or the <code>PROVIDER_AGENTS_REF</code> repository variable while
+the change is under development; the default is <code>main</code>. The provider wrapper itself
+no longer depends on that fix; the smoke test's prompt argument does.</p>
+<p>The job runs <code>tests/integration/test_provider_smoke.py</code> with <code>VP_PROVIDER_SMOKE=1</code>
+and <code>VP_PROVIDER_SMOKE_AGENT</code> set to one of <code>pi</code>, <code>codex</code>, <code>qwen</code>, <code>tau</code>, <code>jcode</code>,
+<code>opencode</code>. Ordinary unit tests do not need Docker.</p>
+<h2 id="local-providers">Local providers<a class="headerlink" href="#local-providers" title="Permanent link">&para;</a></h2>
+<p>Ollama, Lemonade Server, and other servers can use generic discovery when they
+expose a compatible <code>/models</code> endpoint. Enter the API base URL the server actually
+provides, for example <code>http://localhost:11434/v1</code> for an OpenAI-compatible Ollama
+endpoint. For the Anthropic Messages protocol, enter the URL <strong>without</strong> a <code>/v1</code>
+suffix (for example <code>http://localhost:11434</code>): Anthropic clients append <code>/v1</code>
+themselves, and the wizard rejects URLs that already end with it. Native
+discovery APIs and branded server presets are not implemented.</p>
+<p>A provider has one URL, used for discovery on the host and for inference inside
+the agent container. <code>localhost</code> inside the container is the container itself,
+so a server on your machine needs an address that works from both sides. Three
+patterns:</p>
+<p><strong>LAN address (recommended).</strong> Bind the server to your machine's LAN IP (for
+Ollama: <code>OLLAMA_HOST=0.0.0.0</code> or the IP itself) and register
+<code>http://192.168.1.10:11434/v1</code>. Discovery and inference both work, and the same
+provider serves a server on another machine unchanged.</p>
+<p><strong>Host gateway alias.</strong> VibePod adds <code>host.docker.internal</code> to every agent
+container (Docker Desktop resolves it natively; on Linux Docker it maps to the
+host gateway). Register <code>http://host.docker.internal:11434/v1</code> and bind the
+server to <code>0.0.0.0</code> or the Docker bridge address; a server bound to <code>127.0.0.1</code>
+only is not reachable this way. The host cannot resolve that name, so decline
+discovery and enter the model IDs manually.</p>
+<p><strong>Model server as a container on the VibePod network.</strong> Attach it to the
+network agents use (<code>network</code> in the VibePod config, default <code>vibepod-network</code>)
+and register its container name:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>ollama<span class="w"> </span>--network<span class="w"> </span>vibepod-network<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-v<span class="w"> </span>ollama:/root/.ollama<span class="w"> </span>ollama/ollama
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>vp<span class="w"> </span>provider<span class="w"> </span>add<span class="w">   </span><span class="c1"># API base URL: http://ollama:11434/v1</span>
+</code></pre></div>
+<p>Nothing needs to be published to the host, and the server is unreachable from
+outside the network. Discovery from the host cannot resolve the container name,
+so enter model IDs manually (or publish the port on <code>127.0.0.1</code> temporarily for
+discovery and switch the URL back with <code>vp provider edit</code>).</p>
+<p>Prefer restricted bindings and firewall rules over exposing an unauthenticated
+server on all interfaces. Provider setup does not change server bindings, open
+ports, or bypass VibePod proxy allow/deny policies. See
+<a href="../llm/">LLM integration</a> for further networking guidance.</p>
+<h3 id="example-ollama-on-another-machine">Example: Ollama on another machine<a class="headerlink" href="#example-ollama-on-another-machine" title="Permanent link">&para;</a></h3>
+<p>An Ollama server on a Mac mini in the LAN, reached by IP, which works from the
+host and from every agent container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ vp provider add
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Provider name: local-m4
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>API protocol (openai-chat, openai-responses, anthropic) [openai-chat]:
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>API base URL: http://192.168.178.85:11434/v1
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Authentication (none, key, env) [none]:
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Discover models now? [Y/n]:
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Discovery destination: http://192.168.178.85:11434/v1
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Contact this endpoint to list models? [Y/n]:
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>devstral-small-2:24b
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>gemma4:12b-mlx
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>glm-4.7-flash:latest
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>granite4.1:3b
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>granite4.1:8b
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>granite4:3b
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>lfm2.5-thinking:1.2b
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>lfm2.5-thinking:latest
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>lfm2:24b
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>ministral-3:14b
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>nemotron-cascade-2:30b
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>ornith-1.5:9b
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>qwen3-embedding:8b
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>qwen3.5:27b
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>qwen3.5:9b
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>qwen3.8:27b-mlx
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>translategemma:12b
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>Use all discovered models? [Y/n]: y
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>Default model (empty keeps native selection) []: gemma4:12b-mlx
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>Saved provider 'local-m4'. Native agent configuration is unchanged.
+</code></pre></div>
+<p>Launch an agent with it for one session; the profile's own provider setup is
+untouched:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">    </span><span class="c1"># starts on gemma4:12b-mlx, others in /model</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">   </span><span class="c1"># tau --provider local-m4 --model gemma4:12b-mlx</span>
+</code></pre></div>
+<p>The provider uses the Chat Completions protocol, so Claude (Anthropic only) and
+Codex (Responses only) reject it. Ollama also serves the Anthropic Messages API
+on recent versions: register a second provider with protocol <code>anthropic</code> and
+base URL <code>http://192.168.178.85:11434</code> (no <code>/v1</code>) to use it with Claude.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

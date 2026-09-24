@@ -857,6 +857,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mounting-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mounting volumes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-built-in-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1034,6 +1045,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mounting-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mounting volumes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-built-in-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1134,7 +1156,7 @@
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vibepod/claude:latest</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"> </span><span class="c1"># Per-agent override: true/false, or null to use global auto_pull</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"> </span><span class="c1"># Extra environment variables passed to the container</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="c1"># Reserved for future use</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="c1"># Extra mounts, `docker run -v` syntax (see Mounting volumes)</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="c1"># Ports to publish on the host, `docker run -p` syntax</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="nt">init</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="c1"># Optional shell commands run before agent startup</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">    </span><span class="nt">overlay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># Set false to ignore the project's .vibepod/overlay/ (see Project overlays)</span>
@@ -1503,15 +1525,40 @@ but in-range ones are not detectable — quote every entry.</p>
 <p>For a one-off override, <code>vp run</code> (and the agent alias commands) accept a repeatable <code>-p/--publish</code> flag with the same syntax. When given, it replaces the resolved config list for that run — the last level of the defaults → global → project → CLI chain:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:3090:3081<span class="w"> </span>-p<span class="w"> </span><span class="m">6000</span>:6000/udp
 </code></pre></div>
+<h2 id="mounting-volumes">Mounting volumes<a class="headerlink" href="#mounting-volumes" title="Permanent link">&para;</a></h2>
+<p>Only the workspace (at <code>/workspace</code>) and the agent's config directory are mounted by default. <code>agents.&lt;agent&gt;.volumes</code> adds more mounts using the same syntax as <code>docker run -v</code>, <code>SOURCE:TARGET[:MODE]</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"~/datasets:/datasets:ro"</span><span class="w"> </span><span class="c1"># host path, read-only</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"../shared-lib:/shared-lib"</span><span class="w"> </span><span class="c1"># relative to the workspace, read-write</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"pip-cache:/root/.cache/pip"</span><span class="w"> </span><span class="c1"># Docker named volume (created on first use)</span>
+</code></pre></div>
+<ul>
+<li><strong>SOURCE</strong> is either a host path or a Docker named volume. Host paths may be absolute, start with <code>~</code>, or be relative. In config, relative paths resolve against the workspace. The host path must already exist: VibePod rejects a missing one rather than letting Docker create it as a root-owned directory. A source without a <code>/</code> (like <code>pip-cache</code>) is a named volume.</li>
+<li><strong>TARGET</strong> must be an absolute container path. It cannot be <code>/</code>, and it cannot be a path VibePod already mounts (<code>/workspace</code>, the agent config directory, <code>/etc/vibepod-proxy-ca</code>, and so on). A path nested inside one of those, such as <code>/workspace/data</code>, is allowed.</li>
+<li><strong>MODE</strong> is <code>rw</code> (default) or <code>ro</code>. It can be combined with the SELinux relabel options <code>z</code>/<code>Z</code>, e.g. <code>ro,z</code>.</li>
+</ul>
+<p>The list applies to both <code>vp run</code> and <code>vp task</code> containers. Like other agent keys, a project-level <code>volumes</code> list replaces the global one for that agent.</p>
+<div class="admonition warning">
+<p class="admonition-title">Project configs can mount any host path</p>
+<p>A committed <code>.vibepod/config.yaml</code> can mount any path your user can read
+(for example <code>~/.ssh</code>) into the agent container. Review the <code>volumes</code>
+of a project you did not write before running an agent in it.</p>
+</div>
+<p><code>vp run</code> (and the agent alias commands) also accept a repeatable <code>-v/--volume</code> flag with the same syntax. Unlike <code>--publish</code>, the flag <strong>adds</strong> to the configured list. A flag entry replaces only the configured entry mounted at the same container path. Relative flag paths resolve against the current directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-v<span class="w"> </span>~/datasets:/datasets:ro<span class="w"> </span>-v<span class="w"> </span>pip-cache:/root/.cache/pip
+</code></pre></div>
 <h2 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h2>
 <p>VibePod starts a <code>vibepod-proxy</code> container alongside every agent. It acts as an HTTP(S) MITM proxy and logs all outbound requests to a SQLite database viewable in the Datasette UI (<code>vp logs start</code>).</p>
 <p>The proxy is reachable inside the Docker network as <code>http://vibepod-proxy:8080</code>. It is not published on a host port.</p>
 <p>To disable the proxy globally:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">proxy</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">proxy</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Or at runtime:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">VP_PROXY_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Podman users</p>
@@ -1525,12 +1572,12 @@ on Debian/Ubuntu) and recreate the network. See <a href="../quickstart/#using-po
 (today's behavior). In <code>allow</code> mode only listed hosts pass; in <code>deny</code> mode
 everything passes except listed hosts. Patterns: <code>example.com</code> matches that
 host exactly, <code>*.example.com</code> matches subdomains (not the apex).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span><span class="s2">"*.github.com"</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>deny<span class="w"> </span>add<span class="w"> </span>example.com
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>open<span class="w">        </span><span class="c1"># back to no filtering; lists are kept</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span><span class="s2">"*.github.com"</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>deny<span class="w"> </span>add<span class="w"> </span>example.com
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>open<span class="w">        </span><span class="c1"># back to no filtering; lists are kept</span>
 </code></pre></div>
 <p>One shared proxy evaluates a separate policy for every VibePod agent container.
 Each launch receives an opaque policy identity and is also bound to its source
@@ -1559,7 +1606,7 @@ mode). Project and environment overrides are launch-specific and never replace
 the shared global fallback.</p>
 <p>Custom proxy images must implement per-source policies and expose this exact
 OCI image label:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">LABEL</span><span class="w"> </span>io.vibepod.proxy.policy-schema<span class="o">=</span><span class="s2">"2"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">LABEL</span><span class="w"> </span>io.vibepod.proxy.policy-schema<span class="o">=</span><span class="s2">"2"</span>
 </code></pre></div>
 <p>VibePod checks the configured image—and an already-running proxy—before
 launching a proxied agent. An image with a missing or different schema label is

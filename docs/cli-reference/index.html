@@ -1413,6 +1413,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2518,6 +2540,28 @@
     <span class="md-ellipsis">
       
         edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        import
       
     </span>
   </a>
@@ -3926,504 +3970,523 @@ exact in-container herdr call.</p>
 <p>Options:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>  name    Provider name  [required]
 </code></pre></div>
+<h5 id="export">export<a class="headerlink" href="#export" title="Permanent link">&para;</a></h5>
+<p>Write a shareable provider file; stored credentials are never included.</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>vp provider export [OPTIONS] {name}
+</code></pre></div>
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>  name                 Provider name  [required]
+<a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>  -o, --output &lt;path&gt;  Write to this file instead of stdout
+</code></pre></div>
+<h5 id="import">import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h5>
+<p>Create a provider from a shared file. Keys are asked for, never read from the file.</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>vp provider import [OPTIONS] {source}
+</code></pre></div>
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>  source           Local file path or http(s) URL  [required]
+<a id="__codelineno-92-2" name="__codelineno-92-2" href="#__codelineno-92-2"></a>  --name &lt;str&gt;     Store under this name instead of the file's
+<a id="__codelineno-92-3" name="__codelineno-92-3" href="#__codelineno-92-3"></a>  --key-env &lt;str&gt;  Read the API key from this environment variable
+</code></pre></div>
 <h5 id="list_2">list<a class="headerlink" href="#list_2" title="Permanent link">&para;</a></h5>
 <p>List provider identities without reading credentials.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>vp provider list [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>vp provider list [OPTIONS]
 </code></pre></div>
 <h5 id="models">models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h5>
 <p>Show cached model IDs, optionally querying the server again.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>vp provider models [OPTIONS] {name}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>vp provider models [OPTIONS] {name}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>  name       Provider name  [required]
-<a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>  --refresh  Refresh the model cache
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>  name       Provider name  [required]
+<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>  --refresh  Refresh the model cache
 </code></pre></div>
 <h5 id="refresh">refresh<a class="headerlink" href="#refresh" title="Permanent link">&para;</a></h5>
 <p>Re-discover models, choose which to use, and set the default; nothing else changes.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>vp provider refresh [OPTIONS] {name}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp provider refresh [OPTIONS] {name}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>  name    Provider name  [required]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>  name    Provider name  [required]
 </code></pre></div>
 <h5 id="remove_1">remove<a class="headerlink" href="#remove_1" title="Permanent link">&para;</a></h5>
 <p>Remove a global provider, including its stored key.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>vp provider remove [OPTIONS] {name}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp provider remove [OPTIONS] {name}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>  name       Provider name  [required]
-<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>  -y, --yes  Skip confirmation
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>  name       Provider name  [required]
+<a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a>  -y, --yes  Skip confirmation
 </code></pre></div>
 <h4 id="proxy">proxy<a class="headerlink" href="#proxy" title="Permanent link">&para;</a></h4>
 <p>Manage the HTTP(S) proxy</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>vp proxy [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="filter">filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h5>
 <p>Manage proxy allow/deny filtering</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>vp proxy filter [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>vp proxy filter [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h6 id="allow">allow<a class="headerlink" href="#allow" title="Permanent link">&para;</a></h6>
 <p>Manage the allow list</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp proxy filter allow [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>vp proxy filter allow [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h6 id="add_1"># add<a class="headerlink" href="#add_1" title="Permanent link">&para;</a></h6>
 <p>Add a host pattern to the allow list.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>vp proxy filter allow add [OPTIONS] {host}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>vp proxy filter allow add [OPTIONS] {host}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>  host             Host pattern  [required]
-<a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-100-3" name="__codelineno-100-3" href="#__codelineno-100-3"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>  host             Host pattern  [required]
+<a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-104-3" name="__codelineno-104-3" href="#__codelineno-104-3"></a>                   profile)
 </code></pre></div>
 <h6 id="remove_2"># remove<a class="headerlink" href="#remove_2" title="Permanent link">&para;</a></h6>
 <p>Remove a host pattern from the allow list.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>vp proxy filter allow remove [OPTIONS] {host}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>vp proxy filter allow remove [OPTIONS] {host}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>  host             Host pattern  [required]
-<a id="__codelineno-102-2" name="__codelineno-102-2" href="#__codelineno-102-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-102-3" name="__codelineno-102-3" href="#__codelineno-102-3"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>  host             Host pattern  [required]
+<a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-106-3" name="__codelineno-106-3" href="#__codelineno-106-3"></a>                   profile)
 </code></pre></div>
 <h6 id="deny">deny<a class="headerlink" href="#deny" title="Permanent link">&para;</a></h6>
 <p>Manage the deny list</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>vp proxy filter deny [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>vp proxy filter deny [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h6 id="add_2"># add<a class="headerlink" href="#add_2" title="Permanent link">&para;</a></h6>
 <p>Add a host pattern to the deny list.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>vp proxy filter deny add [OPTIONS] {host}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>vp proxy filter deny add [OPTIONS] {host}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>  host             Host pattern  [required]
-<a id="__codelineno-105-2" name="__codelineno-105-2" href="#__codelineno-105-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-105-3" name="__codelineno-105-3" href="#__codelineno-105-3"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>  host             Host pattern  [required]
+<a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a>                   profile)
 </code></pre></div>
 <h6 id="remove_3"># remove<a class="headerlink" href="#remove_3" title="Permanent link">&para;</a></h6>
 <p>Remove a host pattern from the deny list.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>vp proxy filter deny remove [OPTIONS] {host}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>vp proxy filter deny remove [OPTIONS] {host}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>  host             Host pattern  [required]
-<a id="__codelineno-107-2" name="__codelineno-107-2" href="#__codelineno-107-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-107-3" name="__codelineno-107-3" href="#__codelineno-107-3"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>  host             Host pattern  [required]
+<a id="__codelineno-111-2" name="__codelineno-111-2" href="#__codelineno-111-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-111-3" name="__codelineno-111-3" href="#__codelineno-111-3"></a>                   profile)
 </code></pre></div>
 <h6 id="mode">mode<a class="headerlink" href="#mode" title="Permanent link">&para;</a></h6>
 <p>Set the filter mode (open = no filtering).</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>vp proxy filter mode [OPTIONS] {value}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>vp proxy filter mode [OPTIONS] {value}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>  value            open, allow, or deny  [required]
-<a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>  value            open, allow, or deny  [required]
+<a id="__codelineno-113-2" name="__codelineno-113-2" href="#__codelineno-113-2"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-113-3" name="__codelineno-113-3" href="#__codelineno-113-3"></a>                   profile)
 </code></pre></div>
 <h6 id="status_1">status<a class="headerlink" href="#status_1" title="Permanent link">&para;</a></h6>
 <p>Show filter mode, lists, and proxy state.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>vp proxy filter status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>vp proxy filter status [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
-<a id="__codelineno-111-2" name="__codelineno-111-2" href="#__codelineno-111-2"></a>                   profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>  --profile &lt;str&gt;  Profile whose filter to manage (default: the active
+<a id="__codelineno-115-2" name="__codelineno-115-2" href="#__codelineno-115-2"></a>                   profile)
 </code></pre></div>
 <h5 id="start_1">start<a class="headerlink" href="#start_1" title="Permanent link">&para;</a></h5>
 <p>Start the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>vp proxy start [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>vp proxy start [OPTIONS]
 </code></pre></div>
 <h5 id="status_2">status<a class="headerlink" href="#status_2" title="Permanent link">&para;</a></h5>
 <p>Show proxy container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>vp proxy status [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>vp proxy status [OPTIONS]
 </code></pre></div>
 <h5 id="stop_1">stop<a class="headerlink" href="#stop_1" title="Permanent link">&para;</a></h5>
 <p>Stop the proxy container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>vp proxy stop [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>vp proxy stop [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="q">q<a class="headerlink" href="#q" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run qwen</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>vp q [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>vp q [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a>  -d, --detach            Run container in background
-<a id="__codelineno-117-7" name="__codelineno-117-7" href="#__codelineno-117-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-117-8" name="__codelineno-117-8" href="#__codelineno-117-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-117-9" name="__codelineno-117-9" href="#__codelineno-117-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-117-10" name="__codelineno-117-10" href="#__codelineno-117-10"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-117-11" name="__codelineno-117-11" href="#__codelineno-117-11"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-117-12" name="__codelineno-117-12" href="#__codelineno-117-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-117-13" name="__codelineno-117-13" href="#__codelineno-117-13"></a>                          to
-<a id="__codelineno-117-14" name="__codelineno-117-14" href="#__codelineno-117-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-117-15" name="__codelineno-117-15" href="#__codelineno-117-15"></a>                          DISPLAY to be set)
-<a id="__codelineno-117-16" name="__codelineno-117-16" href="#__codelineno-117-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-117-17" name="__codelineno-117-17" href="#__codelineno-117-17"></a>                          permission prompts
-<a id="__codelineno-117-18" name="__codelineno-117-18" href="#__codelineno-117-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-117-19" name="__codelineno-117-19" href="#__codelineno-117-19"></a>                          ACP-capable editors
-<a id="__codelineno-117-20" name="__codelineno-117-20" href="#__codelineno-117-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-117-21" name="__codelineno-117-21" href="#__codelineno-117-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-121-6" name="__codelineno-121-6" href="#__codelineno-121-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-121-7" name="__codelineno-121-7" href="#__codelineno-121-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-121-8" name="__codelineno-121-8" href="#__codelineno-121-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-121-9" name="__codelineno-121-9" href="#__codelineno-121-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-121-10" name="__codelineno-121-10" href="#__codelineno-121-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-121-11" name="__codelineno-121-11" href="#__codelineno-121-11"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-121-12" name="__codelineno-121-12" href="#__codelineno-121-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-121-13" name="__codelineno-121-13" href="#__codelineno-121-13"></a>                          to
+<a id="__codelineno-121-14" name="__codelineno-121-14" href="#__codelineno-121-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-121-15" name="__codelineno-121-15" href="#__codelineno-121-15"></a>                          DISPLAY to be set)
+<a id="__codelineno-121-16" name="__codelineno-121-16" href="#__codelineno-121-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-121-17" name="__codelineno-121-17" href="#__codelineno-121-17"></a>                          permission prompts
+<a id="__codelineno-121-18" name="__codelineno-121-18" href="#__codelineno-121-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-121-19" name="__codelineno-121-19" href="#__codelineno-121-19"></a>                          ACP-capable editors
+<a id="__codelineno-121-20" name="__codelineno-121-20" href="#__codelineno-121-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-121-21" name="__codelineno-121-21" href="#__codelineno-121-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="qwen">qwen<a class="headerlink" href="#qwen" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run qwen</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>vp qwen [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>vp qwen [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-119-2" name="__codelineno-119-2" href="#__codelineno-119-2"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-119-3" name="__codelineno-119-3" href="#__codelineno-119-3"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-119-4" name="__codelineno-119-4" href="#__codelineno-119-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-119-5" name="__codelineno-119-5" href="#__codelineno-119-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-119-6" name="__codelineno-119-6" href="#__codelineno-119-6"></a>  -d, --detach            Run container in background
-<a id="__codelineno-119-7" name="__codelineno-119-7" href="#__codelineno-119-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-119-8" name="__codelineno-119-8" href="#__codelineno-119-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-119-9" name="__codelineno-119-9" href="#__codelineno-119-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-119-10" name="__codelineno-119-10" href="#__codelineno-119-10"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-119-11" name="__codelineno-119-11" href="#__codelineno-119-11"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-119-12" name="__codelineno-119-12" href="#__codelineno-119-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-119-13" name="__codelineno-119-13" href="#__codelineno-119-13"></a>                          to
-<a id="__codelineno-119-14" name="__codelineno-119-14" href="#__codelineno-119-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-119-15" name="__codelineno-119-15" href="#__codelineno-119-15"></a>                          DISPLAY to be set)
-<a id="__codelineno-119-16" name="__codelineno-119-16" href="#__codelineno-119-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-119-17" name="__codelineno-119-17" href="#__codelineno-119-17"></a>                          permission prompts
-<a id="__codelineno-119-18" name="__codelineno-119-18" href="#__codelineno-119-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-119-19" name="__codelineno-119-19" href="#__codelineno-119-19"></a>                          ACP-capable editors
-<a id="__codelineno-119-20" name="__codelineno-119-20" href="#__codelineno-119-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-119-21" name="__codelineno-119-21" href="#__codelineno-119-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-123-4" name="__codelineno-123-4" href="#__codelineno-123-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-123-5" name="__codelineno-123-5" href="#__codelineno-123-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-123-6" name="__codelineno-123-6" href="#__codelineno-123-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-123-7" name="__codelineno-123-7" href="#__codelineno-123-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-123-8" name="__codelineno-123-8" href="#__codelineno-123-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-123-9" name="__codelineno-123-9" href="#__codelineno-123-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-123-10" name="__codelineno-123-10" href="#__codelineno-123-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-123-11" name="__codelineno-123-11" href="#__codelineno-123-11"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-123-12" name="__codelineno-123-12" href="#__codelineno-123-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-123-13" name="__codelineno-123-13" href="#__codelineno-123-13"></a>                          to
+<a id="__codelineno-123-14" name="__codelineno-123-14" href="#__codelineno-123-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-123-15" name="__codelineno-123-15" href="#__codelineno-123-15"></a>                          DISPLAY to be set)
+<a id="__codelineno-123-16" name="__codelineno-123-16" href="#__codelineno-123-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-123-17" name="__codelineno-123-17" href="#__codelineno-123-17"></a>                          permission prompts
+<a id="__codelineno-123-18" name="__codelineno-123-18" href="#__codelineno-123-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-123-19" name="__codelineno-123-19" href="#__codelineno-123-19"></a>                          ACP-capable editors
+<a id="__codelineno-123-20" name="__codelineno-123-20" href="#__codelineno-123-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-123-21" name="__codelineno-123-21" href="#__codelineno-123-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h4>
 <p>Start an agent container.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>vp run [OPTIONS] [agent]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-124-1" name="__codelineno-124-1" href="#__codelineno-124-1"></a>vp run [OPTIONS] [agent]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>  agent                   Agent to run
-<a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-121-6" name="__codelineno-121-6" href="#__codelineno-121-6"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-121-7" name="__codelineno-121-7" href="#__codelineno-121-7"></a>  -d, --detach            Run container in background
-<a id="__codelineno-121-8" name="__codelineno-121-8" href="#__codelineno-121-8"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-121-9" name="__codelineno-121-9" href="#__codelineno-121-9"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-121-10" name="__codelineno-121-10" href="#__codelineno-121-10"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-121-11" name="__codelineno-121-11" href="#__codelineno-121-11"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-121-12" name="__codelineno-121-12" href="#__codelineno-121-12"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-121-13" name="__codelineno-121-13" href="#__codelineno-121-13"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-121-14" name="__codelineno-121-14" href="#__codelineno-121-14"></a>                          to
-<a id="__codelineno-121-15" name="__codelineno-121-15" href="#__codelineno-121-15"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-121-16" name="__codelineno-121-16" href="#__codelineno-121-16"></a>                          DISPLAY to be set)
-<a id="__codelineno-121-17" name="__codelineno-121-17" href="#__codelineno-121-17"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-121-18" name="__codelineno-121-18" href="#__codelineno-121-18"></a>                          permission prompts
-<a id="__codelineno-121-19" name="__codelineno-121-19" href="#__codelineno-121-19"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-121-20" name="__codelineno-121-20" href="#__codelineno-121-20"></a>                          ACP-capable editors
-<a id="__codelineno-121-21" name="__codelineno-121-21" href="#__codelineno-121-21"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-121-22" name="__codelineno-121-22" href="#__codelineno-121-22"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-125-1" name="__codelineno-125-1" href="#__codelineno-125-1"></a>  agent                   Agent to run
+<a id="__codelineno-125-2" name="__codelineno-125-2" href="#__codelineno-125-2"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-125-3" name="__codelineno-125-3" href="#__codelineno-125-3"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-125-4" name="__codelineno-125-4" href="#__codelineno-125-4"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-125-5" name="__codelineno-125-5" href="#__codelineno-125-5"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-125-6" name="__codelineno-125-6" href="#__codelineno-125-6"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-125-7" name="__codelineno-125-7" href="#__codelineno-125-7"></a>  -d, --detach            Run container in background
+<a id="__codelineno-125-8" name="__codelineno-125-8" href="#__codelineno-125-8"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-125-9" name="__codelineno-125-9" href="#__codelineno-125-9"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-125-10" name="__codelineno-125-10" href="#__codelineno-125-10"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-125-11" name="__codelineno-125-11" href="#__codelineno-125-11"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-125-12" name="__codelineno-125-12" href="#__codelineno-125-12"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-125-13" name="__codelineno-125-13" href="#__codelineno-125-13"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-125-14" name="__codelineno-125-14" href="#__codelineno-125-14"></a>                          to
+<a id="__codelineno-125-15" name="__codelineno-125-15" href="#__codelineno-125-15"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-125-16" name="__codelineno-125-16" href="#__codelineno-125-16"></a>                          DISPLAY to be set)
+<a id="__codelineno-125-17" name="__codelineno-125-17" href="#__codelineno-125-17"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-125-18" name="__codelineno-125-18" href="#__codelineno-125-18"></a>                          permission prompts
+<a id="__codelineno-125-19" name="__codelineno-125-19" href="#__codelineno-125-19"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-125-20" name="__codelineno-125-20" href="#__codelineno-125-20"></a>                          ACP-capable editors
+<a id="__codelineno-125-21" name="__codelineno-125-21" href="#__codelineno-125-21"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-125-22" name="__codelineno-125-22" href="#__codelineno-125-22"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="skills">skills<a class="headerlink" href="#skills" title="Permanent link">&para;</a></h4>
 <p>Manage VibePod skills</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>vp skills [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-126-1" name="__codelineno-126-1" href="#__codelineno-126-1"></a>vp skills [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="add_3">add<a class="headerlink" href="#add_3" title="Permanent link">&para;</a></h5>
 <p>Install a skill from a locator.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>vp skills add [OPTIONS] {locator}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-127-1" name="__codelineno-127-1" href="#__codelineno-127-1"></a>vp skills add [OPTIONS] {locator}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-124-1" name="__codelineno-124-1" href="#__codelineno-124-1"></a>  locator        Skill locator (github:..., npm:..., ./path, ...)  [required]
-<a id="__codelineno-124-2" name="__codelineno-124-2" href="#__codelineno-124-2"></a>  --id &lt;str&gt;     Override the derived skill ID
-<a id="__codelineno-124-3" name="__codelineno-124-3" href="#__codelineno-124-3"></a>  --scope &lt;str&gt;  local|user (defaults to local inside a project, else user)
-<a id="__codelineno-124-4" name="__codelineno-124-4" href="#__codelineno-124-4"></a>  --link         Symlink instead of copy (local sources only)
-<a id="__codelineno-124-5" name="__codelineno-124-5" href="#__codelineno-124-5"></a>  --json         Emit JSON to stdout
+<div class="highlight"><pre><span></span><code><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a>  locator        Skill locator (github:..., npm:..., ./path, ...)  [required]
+<a id="__codelineno-128-2" name="__codelineno-128-2" href="#__codelineno-128-2"></a>  --id &lt;str&gt;     Override the derived skill ID
+<a id="__codelineno-128-3" name="__codelineno-128-3" href="#__codelineno-128-3"></a>  --scope &lt;str&gt;  local|user (defaults to local inside a project, else user)
+<a id="__codelineno-128-4" name="__codelineno-128-4" href="#__codelineno-128-4"></a>  --link         Symlink instead of copy (local sources only)
+<a id="__codelineno-128-5" name="__codelineno-128-5" href="#__codelineno-128-5"></a>  --json         Emit JSON to stdout
 </code></pre></div>
 <h5 id="cache">cache<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h5>
 <p>Manage the skills source cache</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-125-1" name="__codelineno-125-1" href="#__codelineno-125-1"></a>vp skills cache [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-129-1" name="__codelineno-129-1" href="#__codelineno-129-1"></a>vp skills cache [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h6 id="clear">clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h6>
 <p>Remove cached git clones and npm packages (installed skills are kept).</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-126-1" name="__codelineno-126-1" href="#__codelineno-126-1"></a>vp skills cache clear [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-130-1" name="__codelineno-130-1" href="#__codelineno-130-1"></a>vp skills cache clear [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-127-1" name="__codelineno-127-1" href="#__codelineno-127-1"></a>  --json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-131-1" name="__codelineno-131-1" href="#__codelineno-131-1"></a>  --json
 </code></pre></div>
 <h5 id="delete">delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h5>
 <p>Remove an installed skill.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a>vp skills delete [OPTIONS] {skill_id}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-132-1" name="__codelineno-132-1" href="#__codelineno-132-1"></a>vp skills delete [OPTIONS] {skill_id}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-129-1" name="__codelineno-129-1" href="#__codelineno-129-1"></a>  skill_id       Skill ID to remove  [required]
-<a id="__codelineno-129-2" name="__codelineno-129-2" href="#__codelineno-129-2"></a>  --scope &lt;str&gt;  local|user
-<a id="__codelineno-129-3" name="__codelineno-129-3" href="#__codelineno-129-3"></a>  --json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-133-1" name="__codelineno-133-1" href="#__codelineno-133-1"></a>  skill_id       Skill ID to remove  [required]
+<a id="__codelineno-133-2" name="__codelineno-133-2" href="#__codelineno-133-2"></a>  --scope &lt;str&gt;  local|user
+<a id="__codelineno-133-3" name="__codelineno-133-3" href="#__codelineno-133-3"></a>  --json
 </code></pre></div>
 <h5 id="list_3">list<a class="headerlink" href="#list_3" title="Permanent link">&para;</a></h5>
 <p>List installed skills across both scopes.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-130-1" name="__codelineno-130-1" href="#__codelineno-130-1"></a>vp skills list [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-134-1" name="__codelineno-134-1" href="#__codelineno-134-1"></a>vp skills list [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-131-1" name="__codelineno-131-1" href="#__codelineno-131-1"></a>  --scope &lt;str&gt;  Filter by scope (local|user)
-<a id="__codelineno-131-2" name="__codelineno-131-2" href="#__codelineno-131-2"></a>  --json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-135-1" name="__codelineno-135-1" href="#__codelineno-135-1"></a>  --scope &lt;str&gt;  Filter by scope (local|user)
+<a id="__codelineno-135-2" name="__codelineno-135-2" href="#__codelineno-135-2"></a>  --json
 </code></pre></div>
 <h5 id="sync">sync<a class="headerlink" href="#sync" title="Permanent link">&para;</a></h5>
 <p>Reconcile installed/ with the lockfile (no re-resolve).</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-132-1" name="__codelineno-132-1" href="#__codelineno-132-1"></a>vp skills sync [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-136-1" name="__codelineno-136-1" href="#__codelineno-136-1"></a>vp skills sync [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-133-1" name="__codelineno-133-1" href="#__codelineno-133-1"></a>  --scope &lt;str&gt;  local|user
-<a id="__codelineno-133-2" name="__codelineno-133-2" href="#__codelineno-133-2"></a>  --json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-137-1" name="__codelineno-137-1" href="#__codelineno-137-1"></a>  --scope &lt;str&gt;  local|user
+<a id="__codelineno-137-2" name="__codelineno-137-2" href="#__codelineno-137-2"></a>  --json
 </code></pre></div>
 <h5 id="update">update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h5>
 <p>Re-resolve locators and rewrite the lockfile.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-134-1" name="__codelineno-134-1" href="#__codelineno-134-1"></a>vp skills update [OPTIONS] [skill_id]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-138-1" name="__codelineno-138-1" href="#__codelineno-138-1"></a>vp skills update [OPTIONS] [skill_id]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-135-1" name="__codelineno-135-1" href="#__codelineno-135-1"></a>  skill_id       Skill ID (omit to update all)
-<a id="__codelineno-135-2" name="__codelineno-135-2" href="#__codelineno-135-2"></a>  --scope &lt;str&gt;  local|user
-<a id="__codelineno-135-3" name="__codelineno-135-3" href="#__codelineno-135-3"></a>  --json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-139-1" name="__codelineno-139-1" href="#__codelineno-139-1"></a>  skill_id       Skill ID (omit to update all)
+<a id="__codelineno-139-2" name="__codelineno-139-2" href="#__codelineno-139-2"></a>  --scope &lt;str&gt;  local|user
+<a id="__codelineno-139-3" name="__codelineno-139-3" href="#__codelineno-139-3"></a>  --json
 </code></pre></div>
 <h4 id="stop_2">stop<a class="headerlink" href="#stop_2" title="Permanent link">&para;</a></h4>
 <p>Stop an agent's containers, a specific container, or all managed containers.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-136-1" name="__codelineno-136-1" href="#__codelineno-136-1"></a>vp stop [OPTIONS] [target]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-140-1" name="__codelineno-140-1" href="#__codelineno-140-1"></a>vp stop [OPTIONS] [target]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-137-1" name="__codelineno-137-1" href="#__codelineno-137-1"></a>  target       Agent name/shortcut (stops all its containers) or a container
-<a id="__codelineno-137-2" name="__codelineno-137-2" href="#__codelineno-137-2"></a>               name or ID from `vp list` (stops just that container).
-<a id="__codelineno-137-3" name="__codelineno-137-3" href="#__codelineno-137-3"></a>  -a, --all    Stop all VibePod managed containers
-<a id="__codelineno-137-4" name="__codelineno-137-4" href="#__codelineno-137-4"></a>  -f, --force  Force stop
+<div class="highlight"><pre><span></span><code><a id="__codelineno-141-1" name="__codelineno-141-1" href="#__codelineno-141-1"></a>  target       Agent name/shortcut (stops all its containers) or a container
+<a id="__codelineno-141-2" name="__codelineno-141-2" href="#__codelineno-141-2"></a>               name or ID from `vp list` (stops just that container).
+<a id="__codelineno-141-3" name="__codelineno-141-3" href="#__codelineno-141-3"></a>  -a, --all    Stop all VibePod managed containers
+<a id="__codelineno-141-4" name="__codelineno-141-4" href="#__codelineno-141-4"></a>  -f, --force  Force stop
 </code></pre></div>
 <h4 id="t">t<a class="headerlink" href="#t" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run tau</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-138-1" name="__codelineno-138-1" href="#__codelineno-138-1"></a>vp t [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-142-1" name="__codelineno-142-1" href="#__codelineno-142-1"></a>vp t [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-139-1" name="__codelineno-139-1" href="#__codelineno-139-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-139-2" name="__codelineno-139-2" href="#__codelineno-139-2"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-139-3" name="__codelineno-139-3" href="#__codelineno-139-3"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-139-4" name="__codelineno-139-4" href="#__codelineno-139-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-139-5" name="__codelineno-139-5" href="#__codelineno-139-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-139-6" name="__codelineno-139-6" href="#__codelineno-139-6"></a>  -d, --detach            Run container in background
-<a id="__codelineno-139-7" name="__codelineno-139-7" href="#__codelineno-139-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-139-8" name="__codelineno-139-8" href="#__codelineno-139-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-139-9" name="__codelineno-139-9" href="#__codelineno-139-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-139-10" name="__codelineno-139-10" href="#__codelineno-139-10"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-139-11" name="__codelineno-139-11" href="#__codelineno-139-11"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-139-12" name="__codelineno-139-12" href="#__codelineno-139-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-139-13" name="__codelineno-139-13" href="#__codelineno-139-13"></a>                          to
-<a id="__codelineno-139-14" name="__codelineno-139-14" href="#__codelineno-139-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-139-15" name="__codelineno-139-15" href="#__codelineno-139-15"></a>                          DISPLAY to be set)
-<a id="__codelineno-139-16" name="__codelineno-139-16" href="#__codelineno-139-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-139-17" name="__codelineno-139-17" href="#__codelineno-139-17"></a>                          permission prompts
-<a id="__codelineno-139-18" name="__codelineno-139-18" href="#__codelineno-139-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-139-19" name="__codelineno-139-19" href="#__codelineno-139-19"></a>                          ACP-capable editors
-<a id="__codelineno-139-20" name="__codelineno-139-20" href="#__codelineno-139-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-139-21" name="__codelineno-139-21" href="#__codelineno-139-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-143-1" name="__codelineno-143-1" href="#__codelineno-143-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-143-2" name="__codelineno-143-2" href="#__codelineno-143-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-143-3" name="__codelineno-143-3" href="#__codelineno-143-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-143-4" name="__codelineno-143-4" href="#__codelineno-143-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-143-5" name="__codelineno-143-5" href="#__codelineno-143-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-143-6" name="__codelineno-143-6" href="#__codelineno-143-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-143-7" name="__codelineno-143-7" href="#__codelineno-143-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-143-8" name="__codelineno-143-8" href="#__codelineno-143-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-143-9" name="__codelineno-143-9" href="#__codelineno-143-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-143-10" name="__codelineno-143-10" href="#__codelineno-143-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-143-11" name="__codelineno-143-11" href="#__codelineno-143-11"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-143-12" name="__codelineno-143-12" href="#__codelineno-143-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-143-13" name="__codelineno-143-13" href="#__codelineno-143-13"></a>                          to
+<a id="__codelineno-143-14" name="__codelineno-143-14" href="#__codelineno-143-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-143-15" name="__codelineno-143-15" href="#__codelineno-143-15"></a>                          DISPLAY to be set)
+<a id="__codelineno-143-16" name="__codelineno-143-16" href="#__codelineno-143-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-143-17" name="__codelineno-143-17" href="#__codelineno-143-17"></a>                          permission prompts
+<a id="__codelineno-143-18" name="__codelineno-143-18" href="#__codelineno-143-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-143-19" name="__codelineno-143-19" href="#__codelineno-143-19"></a>                          ACP-capable editors
+<a id="__codelineno-143-20" name="__codelineno-143-20" href="#__codelineno-143-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-143-21" name="__codelineno-143-21" href="#__codelineno-143-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="task">task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h4>
 <p>Create and manage headless background agent tasks</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-140-1" name="__codelineno-140-1" href="#__codelineno-140-1"></a>vp task [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-144-1" name="__codelineno-144-1" href="#__codelineno-144-1"></a>vp task [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <h5 id="_watch-timeout">_watch-timeout<a class="headerlink" href="#_watch-timeout" title="Permanent link">&para;</a></h5>
 <p>Internal helper launched by <code>vp task create --timeout</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-141-1" name="__codelineno-141-1" href="#__codelineno-141-1"></a>vp task _watch-timeout [OPTIONS] {task_id} {timeout_seconds}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-145-1" name="__codelineno-145-1" href="#__codelineno-145-1"></a>vp task _watch-timeout [OPTIONS] {task_id} {timeout_seconds}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-142-1" name="__codelineno-142-1" href="#__codelineno-142-1"></a>  task_id          Task id to enforce  [required]
-<a id="__codelineno-142-2" name="__codelineno-142-2" href="#__codelineno-142-2"></a>  timeout_seconds  Timeout in seconds  [required]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-146-1" name="__codelineno-146-1" href="#__codelineno-146-1"></a>  task_id          Task id to enforce  [required]
+<a id="__codelineno-146-2" name="__codelineno-146-2" href="#__codelineno-146-2"></a>  timeout_seconds  Timeout in seconds  [required]
 </code></pre></div>
 <h5 id="cancel">cancel<a class="headerlink" href="#cancel" title="Permanent link">&para;</a></h5>
 <p>Gracefully stop a running task while keeping its record and logs.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-143-1" name="__codelineno-143-1" href="#__codelineno-143-1"></a>vp task cancel [OPTIONS] {task_id}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-147-1" name="__codelineno-147-1" href="#__codelineno-147-1"></a>vp task cancel [OPTIONS] {task_id}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-144-1" name="__codelineno-144-1" href="#__codelineno-144-1"></a>  task_id  Task id (full or prefix)  [required]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-148-1" name="__codelineno-148-1" href="#__codelineno-148-1"></a>  task_id  Task id (full or prefix)  [required]
 </code></pre></div>
 <h5 id="create_1">create<a class="headerlink" href="#create_1" title="Permanent link">&para;</a></h5>
 <p>Start an agent task in the background and print its id.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-145-1" name="__codelineno-145-1" href="#__codelineno-145-1"></a>vp task create [OPTIONS] {agent} {prompt}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-149-1" name="__codelineno-149-1" href="#__codelineno-149-1"></a>vp task create [OPTIONS] {agent} {prompt}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-146-1" name="__codelineno-146-1" href="#__codelineno-146-1"></a>  agent                   Agent to run headlessly  [required]
-<a id="__codelineno-146-2" name="__codelineno-146-2" href="#__codelineno-146-2"></a>  prompt                  Prompt to send to the agent  [required]
-<a id="__codelineno-146-3" name="__codelineno-146-3" href="#__codelineno-146-3"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-146-4" name="__codelineno-146-4" href="#__codelineno-146-4"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-146-5" name="__codelineno-146-5" href="#__codelineno-146-5"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-146-6" name="__codelineno-146-6" href="#__codelineno-146-6"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-146-7" name="__codelineno-146-7" href="#__codelineno-146-7"></a>                          to
-<a id="__codelineno-146-8" name="__codelineno-146-8" href="#__codelineno-146-8"></a>  --timeout &lt;str&gt;         Maximum task runtime before graceful stop. Use s/m/h
-<a id="__codelineno-146-9" name="__codelineno-146-9" href="#__codelineno-146-9"></a>                          suffixes, or 'none' to opt out.  [default: 2h]
-<a id="__codelineno-146-10" name="__codelineno-146-10" href="#__codelineno-146-10"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-146-11" name="__codelineno-146-11" href="#__codelineno-146-11"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-146-12" name="__codelineno-146-12" href="#__codelineno-146-12"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-146-13" name="__codelineno-146-13" href="#__codelineno-146-13"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-146-14" name="__codelineno-146-14" href="#__codelineno-146-14"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval flags
-<a id="__codelineno-146-15" name="__codelineno-146-15" href="#__codelineno-146-15"></a>                          for supported agents
-<a id="__codelineno-146-16" name="__codelineno-146-16" href="#__codelineno-146-16"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-146-17" name="__codelineno-146-17" href="#__codelineno-146-17"></a>  --provider &lt;str&gt;        Temporary model provider(s) for this launch (see `vp
-<a id="__codelineno-146-18" name="__codelineno-146-18" href="#__codelineno-146-18"></a>                          provider list`)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-150-1" name="__codelineno-150-1" href="#__codelineno-150-1"></a>  agent                   Agent to run headlessly  [required]
+<a id="__codelineno-150-2" name="__codelineno-150-2" href="#__codelineno-150-2"></a>  prompt                  Prompt to send to the agent  [required]
+<a id="__codelineno-150-3" name="__codelineno-150-3" href="#__codelineno-150-3"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-150-4" name="__codelineno-150-4" href="#__codelineno-150-4"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-150-5" name="__codelineno-150-5" href="#__codelineno-150-5"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-150-6" name="__codelineno-150-6" href="#__codelineno-150-6"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-150-7" name="__codelineno-150-7" href="#__codelineno-150-7"></a>                          to
+<a id="__codelineno-150-8" name="__codelineno-150-8" href="#__codelineno-150-8"></a>  --timeout &lt;str&gt;         Maximum task runtime before graceful stop. Use s/m/h
+<a id="__codelineno-150-9" name="__codelineno-150-9" href="#__codelineno-150-9"></a>                          suffixes, or 'none' to opt out.  [default: 2h]
+<a id="__codelineno-150-10" name="__codelineno-150-10" href="#__codelineno-150-10"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-150-11" name="__codelineno-150-11" href="#__codelineno-150-11"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-150-12" name="__codelineno-150-12" href="#__codelineno-150-12"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-150-13" name="__codelineno-150-13" href="#__codelineno-150-13"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-150-14" name="__codelineno-150-14" href="#__codelineno-150-14"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval flags
+<a id="__codelineno-150-15" name="__codelineno-150-15" href="#__codelineno-150-15"></a>                          for supported agents
+<a id="__codelineno-150-16" name="__codelineno-150-16" href="#__codelineno-150-16"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-150-17" name="__codelineno-150-17" href="#__codelineno-150-17"></a>  --provider &lt;str&gt;        Temporary model provider(s) for this launch (see `vp
+<a id="__codelineno-150-18" name="__codelineno-150-18" href="#__codelineno-150-18"></a>                          provider list`)
 </code></pre></div>
 <h5 id="list_4">list<a class="headerlink" href="#list_4" title="Permanent link">&para;</a></h5>
 <p>List recent tasks with container status.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-147-1" name="__codelineno-147-1" href="#__codelineno-147-1"></a>vp task list [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-151-1" name="__codelineno-151-1" href="#__codelineno-151-1"></a>vp task list [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-148-1" name="__codelineno-148-1" href="#__codelineno-148-1"></a>  --agent &lt;str&gt;  Filter by agent name
-<a id="__codelineno-148-2" name="__codelineno-148-2" href="#__codelineno-148-2"></a>  --json         Output JSON
-<a id="__codelineno-148-3" name="__codelineno-148-3" href="#__codelineno-148-3"></a>  --limit &lt;int&gt;  Max rows to show  [default: 20]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-152-1" name="__codelineno-152-1" href="#__codelineno-152-1"></a>  --agent &lt;str&gt;  Filter by agent name
+<a id="__codelineno-152-2" name="__codelineno-152-2" href="#__codelineno-152-2"></a>  --json         Output JSON
+<a id="__codelineno-152-3" name="__codelineno-152-3" href="#__codelineno-152-3"></a>  --limit &lt;int&gt;  Max rows to show  [default: 20]
 </code></pre></div>
 <h5 id="logs_1">logs<a class="headerlink" href="#logs_1" title="Permanent link">&para;</a></h5>
 <p>Print the agent's stdout/stderr for a task.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-149-1" name="__codelineno-149-1" href="#__codelineno-149-1"></a>vp task logs [OPTIONS] {task_id}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-153-1" name="__codelineno-153-1" href="#__codelineno-153-1"></a>vp task logs [OPTIONS] {task_id}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-150-1" name="__codelineno-150-1" href="#__codelineno-150-1"></a>  task_id       Task id (full or prefix)  [required]
-<a id="__codelineno-150-2" name="__codelineno-150-2" href="#__codelineno-150-2"></a>  -f, --follow  Stream logs as they are written
+<div class="highlight"><pre><span></span><code><a id="__codelineno-154-1" name="__codelineno-154-1" href="#__codelineno-154-1"></a>  task_id       Task id (full or prefix)  [required]
+<a id="__codelineno-154-2" name="__codelineno-154-2" href="#__codelineno-154-2"></a>  -f, --follow  Stream logs as they are written
 </code></pre></div>
 <h5 id="rm">rm<a class="headerlink" href="#rm" title="Permanent link">&para;</a></h5>
 <p>Remove one task, or all tasks with --all.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-151-1" name="__codelineno-151-1" href="#__codelineno-151-1"></a>vp task rm [OPTIONS] [task_id]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-155-1" name="__codelineno-155-1" href="#__codelineno-155-1"></a>vp task rm [OPTIONS] [task_id]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-152-1" name="__codelineno-152-1" href="#__codelineno-152-1"></a>  task_id      Task id (full or prefix); omit when using --all
-<a id="__codelineno-152-2" name="__codelineno-152-2" href="#__codelineno-152-2"></a>  --all        Remove all task records and their containers
-<a id="__codelineno-152-3" name="__codelineno-152-3" href="#__codelineno-152-3"></a>  -f, --force  Kill a running container before removing
+<div class="highlight"><pre><span></span><code><a id="__codelineno-156-1" name="__codelineno-156-1" href="#__codelineno-156-1"></a>  task_id      Task id (full or prefix); omit when using --all
+<a id="__codelineno-156-2" name="__codelineno-156-2" href="#__codelineno-156-2"></a>  --all        Remove all task records and their containers
+<a id="__codelineno-156-3" name="__codelineno-156-3" href="#__codelineno-156-3"></a>  -f, --force  Kill a running container before removing
 </code></pre></div>
 <h5 id="run_1">run<a class="headerlink" href="#run_1" title="Permanent link">&para;</a></h5>
 <p>Deprecated alias for <code>task create</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-153-1" name="__codelineno-153-1" href="#__codelineno-153-1"></a>vp task run [OPTIONS] {agent} {prompt}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-157-1" name="__codelineno-157-1" href="#__codelineno-157-1"></a>vp task run [OPTIONS] {agent} {prompt}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-154-1" name="__codelineno-154-1" href="#__codelineno-154-1"></a>  agent                   Agent to run headlessly  [required]
-<a id="__codelineno-154-2" name="__codelineno-154-2" href="#__codelineno-154-2"></a>  prompt                  Prompt to send to the agent  [required]
-<a id="__codelineno-154-3" name="__codelineno-154-3" href="#__codelineno-154-3"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-154-4" name="__codelineno-154-4" href="#__codelineno-154-4"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-154-5" name="__codelineno-154-5" href="#__codelineno-154-5"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-154-6" name="__codelineno-154-6" href="#__codelineno-154-6"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-154-7" name="__codelineno-154-7" href="#__codelineno-154-7"></a>                          to
-<a id="__codelineno-154-8" name="__codelineno-154-8" href="#__codelineno-154-8"></a>  --timeout &lt;str&gt;         Maximum task runtime before graceful stop. Use s/m/h
-<a id="__codelineno-154-9" name="__codelineno-154-9" href="#__codelineno-154-9"></a>                          suffixes, or 'none' to opt out.  [default: 2h]
-<a id="__codelineno-154-10" name="__codelineno-154-10" href="#__codelineno-154-10"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-154-11" name="__codelineno-154-11" href="#__codelineno-154-11"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-154-12" name="__codelineno-154-12" href="#__codelineno-154-12"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-154-13" name="__codelineno-154-13" href="#__codelineno-154-13"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-154-14" name="__codelineno-154-14" href="#__codelineno-154-14"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval flags
-<a id="__codelineno-154-15" name="__codelineno-154-15" href="#__codelineno-154-15"></a>                          for supported agents
-<a id="__codelineno-154-16" name="__codelineno-154-16" href="#__codelineno-154-16"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-154-17" name="__codelineno-154-17" href="#__codelineno-154-17"></a>  --provider &lt;str&gt;        Temporary model provider(s) for this launch (see `vp
-<a id="__codelineno-154-18" name="__codelineno-154-18" href="#__codelineno-154-18"></a>                          provider list`)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-158-1" name="__codelineno-158-1" href="#__codelineno-158-1"></a>  agent                   Agent to run headlessly  [required]
+<a id="__codelineno-158-2" name="__codelineno-158-2" href="#__codelineno-158-2"></a>  prompt                  Prompt to send to the agent  [required]
+<a id="__codelineno-158-3" name="__codelineno-158-3" href="#__codelineno-158-3"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-158-4" name="__codelineno-158-4" href="#__codelineno-158-4"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-158-5" name="__codelineno-158-5" href="#__codelineno-158-5"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-158-6" name="__codelineno-158-6" href="#__codelineno-158-6"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-158-7" name="__codelineno-158-7" href="#__codelineno-158-7"></a>                          to
+<a id="__codelineno-158-8" name="__codelineno-158-8" href="#__codelineno-158-8"></a>  --timeout &lt;str&gt;         Maximum task runtime before graceful stop. Use s/m/h
+<a id="__codelineno-158-9" name="__codelineno-158-9" href="#__codelineno-158-9"></a>                          suffixes, or 'none' to opt out.  [default: 2h]
+<a id="__codelineno-158-10" name="__codelineno-158-10" href="#__codelineno-158-10"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-158-11" name="__codelineno-158-11" href="#__codelineno-158-11"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-158-12" name="__codelineno-158-12" href="#__codelineno-158-12"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-158-13" name="__codelineno-158-13" href="#__codelineno-158-13"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-158-14" name="__codelineno-158-14" href="#__codelineno-158-14"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval flags
+<a id="__codelineno-158-15" name="__codelineno-158-15" href="#__codelineno-158-15"></a>                          for supported agents
+<a id="__codelineno-158-16" name="__codelineno-158-16" href="#__codelineno-158-16"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-158-17" name="__codelineno-158-17" href="#__codelineno-158-17"></a>  --provider &lt;str&gt;        Temporary model provider(s) for this launch (see `vp
+<a id="__codelineno-158-18" name="__codelineno-158-18" href="#__codelineno-158-18"></a>                          provider list`)
 </code></pre></div>
 <h5 id="status_3">status<a class="headerlink" href="#status_3" title="Permanent link">&para;</a></h5>
 <p>Show container status and exit code for a task.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-155-1" name="__codelineno-155-1" href="#__codelineno-155-1"></a>vp task status [OPTIONS] {task_id}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-159-1" name="__codelineno-159-1" href="#__codelineno-159-1"></a>vp task status [OPTIONS] {task_id}
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-156-1" name="__codelineno-156-1" href="#__codelineno-156-1"></a>  task_id  Task id (full or prefix)  [required]
-<a id="__codelineno-156-2" name="__codelineno-156-2" href="#__codelineno-156-2"></a>  --json   Output JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-160-1" name="__codelineno-160-1" href="#__codelineno-160-1"></a>  task_id  Task id (full or prefix)  [required]
+<a id="__codelineno-160-2" name="__codelineno-160-2" href="#__codelineno-160-2"></a>  --json   Output JSON
 </code></pre></div>
 <h4 id="tau">tau<a class="headerlink" href="#tau" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run tau</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-157-1" name="__codelineno-157-1" href="#__codelineno-157-1"></a>vp tau [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-161-1" name="__codelineno-161-1" href="#__codelineno-161-1"></a>vp tau [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-158-1" name="__codelineno-158-1" href="#__codelineno-158-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-158-2" name="__codelineno-158-2" href="#__codelineno-158-2"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-158-3" name="__codelineno-158-3" href="#__codelineno-158-3"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-158-4" name="__codelineno-158-4" href="#__codelineno-158-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-158-5" name="__codelineno-158-5" href="#__codelineno-158-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-158-6" name="__codelineno-158-6" href="#__codelineno-158-6"></a>  -d, --detach            Run container in background
-<a id="__codelineno-158-7" name="__codelineno-158-7" href="#__codelineno-158-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-158-8" name="__codelineno-158-8" href="#__codelineno-158-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-158-9" name="__codelineno-158-9" href="#__codelineno-158-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-158-10" name="__codelineno-158-10" href="#__codelineno-158-10"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-158-11" name="__codelineno-158-11" href="#__codelineno-158-11"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-158-12" name="__codelineno-158-12" href="#__codelineno-158-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-158-13" name="__codelineno-158-13" href="#__codelineno-158-13"></a>                          to
-<a id="__codelineno-158-14" name="__codelineno-158-14" href="#__codelineno-158-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-158-15" name="__codelineno-158-15" href="#__codelineno-158-15"></a>                          DISPLAY to be set)
-<a id="__codelineno-158-16" name="__codelineno-158-16" href="#__codelineno-158-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-158-17" name="__codelineno-158-17" href="#__codelineno-158-17"></a>                          permission prompts
-<a id="__codelineno-158-18" name="__codelineno-158-18" href="#__codelineno-158-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-158-19" name="__codelineno-158-19" href="#__codelineno-158-19"></a>                          ACP-capable editors
-<a id="__codelineno-158-20" name="__codelineno-158-20" href="#__codelineno-158-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-158-21" name="__codelineno-158-21" href="#__codelineno-158-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-162-1" name="__codelineno-162-1" href="#__codelineno-162-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-162-2" name="__codelineno-162-2" href="#__codelineno-162-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-162-3" name="__codelineno-162-3" href="#__codelineno-162-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-162-4" name="__codelineno-162-4" href="#__codelineno-162-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-162-5" name="__codelineno-162-5" href="#__codelineno-162-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-162-6" name="__codelineno-162-6" href="#__codelineno-162-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-162-7" name="__codelineno-162-7" href="#__codelineno-162-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-162-8" name="__codelineno-162-8" href="#__codelineno-162-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-162-9" name="__codelineno-162-9" href="#__codelineno-162-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-162-10" name="__codelineno-162-10" href="#__codelineno-162-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-162-11" name="__codelineno-162-11" href="#__codelineno-162-11"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-162-12" name="__codelineno-162-12" href="#__codelineno-162-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-162-13" name="__codelineno-162-13" href="#__codelineno-162-13"></a>                          to
+<a id="__codelineno-162-14" name="__codelineno-162-14" href="#__codelineno-162-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-162-15" name="__codelineno-162-15" href="#__codelineno-162-15"></a>                          DISPLAY to be set)
+<a id="__codelineno-162-16" name="__codelineno-162-16" href="#__codelineno-162-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-162-17" name="__codelineno-162-17" href="#__codelineno-162-17"></a>                          permission prompts
+<a id="__codelineno-162-18" name="__codelineno-162-18" href="#__codelineno-162-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-162-19" name="__codelineno-162-19" href="#__codelineno-162-19"></a>                          ACP-capable editors
+<a id="__codelineno-162-20" name="__codelineno-162-20" href="#__codelineno-162-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-162-21" name="__codelineno-162-21" href="#__codelineno-162-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="ui_1">ui<a class="headerlink" href="#ui_1" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp logs start</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-159-1" name="__codelineno-159-1" href="#__codelineno-159-1"></a>vp ui [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-163-1" name="__codelineno-163-1" href="#__codelineno-163-1"></a>vp ui [OPTIONS]
 </code></pre></div>
 <h4 id="version">version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h4>
 <p>Show version and runtime information.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-160-1" name="__codelineno-160-1" href="#__codelineno-160-1"></a>vp version [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-164-1" name="__codelineno-164-1" href="#__codelineno-164-1"></a>vp version [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-161-1" name="__codelineno-161-1" href="#__codelineno-161-1"></a>  --json  Output as JSON
+<div class="highlight"><pre><span></span><code><a id="__codelineno-165-1" name="__codelineno-165-1" href="#__codelineno-165-1"></a>  --json  Output as JSON
 </code></pre></div>
 <h4 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run codex</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-162-1" name="__codelineno-162-1" href="#__codelineno-162-1"></a>vp x [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-166-1" name="__codelineno-166-1" href="#__codelineno-166-1"></a>vp x [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-163-1" name="__codelineno-163-1" href="#__codelineno-163-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
-<a id="__codelineno-163-2" name="__codelineno-163-2" href="#__codelineno-163-2"></a>  --pull                  Pull latest image before run
-<a id="__codelineno-163-3" name="__codelineno-163-3" href="#__codelineno-163-3"></a>  --no-overlay            Skip the project overlay image
-<a id="__codelineno-163-4" name="__codelineno-163-4" href="#__codelineno-163-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
-<a id="__codelineno-163-5" name="__codelineno-163-5" href="#__codelineno-163-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
-<a id="__codelineno-163-6" name="__codelineno-163-6" href="#__codelineno-163-6"></a>  -d, --detach            Run container in background
-<a id="__codelineno-163-7" name="__codelineno-163-7" href="#__codelineno-163-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
-<a id="__codelineno-163-8" name="__codelineno-163-8" href="#__codelineno-163-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
-<a id="__codelineno-163-9" name="__codelineno-163-9" href="#__codelineno-163-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
-<a id="__codelineno-163-10" name="__codelineno-163-10" href="#__codelineno-163-10"></a>                          agents.&lt;agent&gt;.ports for this run
-<a id="__codelineno-163-11" name="__codelineno-163-11" href="#__codelineno-163-11"></a>  --name &lt;str&gt;            Custom container name
-<a id="__codelineno-163-12" name="__codelineno-163-12" href="#__codelineno-163-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
-<a id="__codelineno-163-13" name="__codelineno-163-13" href="#__codelineno-163-13"></a>                          to
-<a id="__codelineno-163-14" name="__codelineno-163-14" href="#__codelineno-163-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
-<a id="__codelineno-163-15" name="__codelineno-163-15" href="#__codelineno-163-15"></a>                          DISPLAY to be set)
-<a id="__codelineno-163-16" name="__codelineno-163-16" href="#__codelineno-163-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
-<a id="__codelineno-163-17" name="__codelineno-163-17" href="#__codelineno-163-17"></a>                          permission prompts
-<a id="__codelineno-163-18" name="__codelineno-163-18" href="#__codelineno-163-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
-<a id="__codelineno-163-19" name="__codelineno-163-19" href="#__codelineno-163-19"></a>                          ACP-capable editors
-<a id="__codelineno-163-20" name="__codelineno-163-20" href="#__codelineno-163-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
-<a id="__codelineno-163-21" name="__codelineno-163-21" href="#__codelineno-163-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+<div class="highlight"><pre><span></span><code><a id="__codelineno-167-1" name="__codelineno-167-1" href="#__codelineno-167-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-167-2" name="__codelineno-167-2" href="#__codelineno-167-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-167-3" name="__codelineno-167-3" href="#__codelineno-167-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-167-4" name="__codelineno-167-4" href="#__codelineno-167-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-167-5" name="__codelineno-167-5" href="#__codelineno-167-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-167-6" name="__codelineno-167-6" href="#__codelineno-167-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-167-7" name="__codelineno-167-7" href="#__codelineno-167-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-167-8" name="__codelineno-167-8" href="#__codelineno-167-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-167-9" name="__codelineno-167-9" href="#__codelineno-167-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-167-10" name="__codelineno-167-10" href="#__codelineno-167-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-167-11" name="__codelineno-167-11" href="#__codelineno-167-11"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-167-12" name="__codelineno-167-12" href="#__codelineno-167-12"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-167-13" name="__codelineno-167-13" href="#__codelineno-167-13"></a>                          to
+<a id="__codelineno-167-14" name="__codelineno-167-14" href="#__codelineno-167-14"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-167-15" name="__codelineno-167-15" href="#__codelineno-167-15"></a>                          DISPLAY to be set)
+<a id="__codelineno-167-16" name="__codelineno-167-16" href="#__codelineno-167-16"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-167-17" name="__codelineno-167-17" href="#__codelineno-167-17"></a>                          permission prompts
+<a id="__codelineno-167-18" name="__codelineno-167-18" href="#__codelineno-167-18"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-167-19" name="__codelineno-167-19" href="#__codelineno-167-19"></a>                          ACP-capable editors
+<a id="__codelineno-167-20" name="__codelineno-167-20" href="#__codelineno-167-20"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-167-21" name="__codelineno-167-21" href="#__codelineno-167-21"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 
 

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibePod CLI 0.24: bring your own model provider | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.24.0 adds global model providers: register any OpenAI- or Anthropic-compatible endpoint or local model server once, import ready-made templates, and route Claude, Pi, Codex, Qwen, Tau, Jcode, or OpenCode to it with --provider. Plus custom volumes and skills cache cleanup.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../../assets/icon.png">
+  <link rel="apple-touch-icon" href="../../assets/icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VibePod CLI 0.24: bring your own model provider">
+  <meta property="og:description" content="VibePod 0.24.0 adds global model providers: register any OpenAI- or Anthropic-compatible endpoint or local model server once, import ready-made templates, and route Claude, Pi, Codex, Qwen, Tau, Jcode, or OpenCode to it with --provider. Plus custom volumes and skills cache cleanup.">
+  <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-24/">
+  <meta property="og:url" content="https://vibepod.dev/news/vibepod-cli-0-24/">
+  <meta property="og:image" content="https://vibepod.dev/assets/icon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="VibePod CLI 0.24: bring your own model provider">
+  <meta name="twitter:description" content="Register a compatible endpoint or local model server once, import it from a template, and route seven agents to it with --provider.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../../" aria-label="VibePod CLI home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">VibePod CLI</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../../#quickstart">Quickstart</a>
+        <a href="../../docs/">Docs</a>
+        <a href="../">News</a>
+        <a href="../../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Release · CLI · Providers</p>
+      <h1>VibePod CLI 0.24: bring your own model provider</h1>
+      <p class="hero-lead">0.24.0 adds <strong>global model providers</strong>: register an
+      OpenAI- or Anthropic-compatible endpoint or a local model server once, or import it
+      from a ready-made template, then point an agent at it with
+      <code>vp run &lt;agent&gt; --provider NAME</code>. The release also adds custom
+      volumes and a skills cache cleanup command.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/providers/">Read the provider docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+    </section>
+    <article class="shell post-article" data-reveal>
+      <p class="news-meta">2026-09-25 · Release · CLI · Providers</p>
+      <h2>One registry for every endpoint</h2>
+      <p>Every agent has its own way of configuring a custom endpoint, and switching
+      an agent to OpenRouter or a local Ollama used to mean editing that agent's config
+      by hand. <code>vp provider add</code> asks for the protocol (OpenAI Chat
+      Completions, OpenAI Responses, or Anthropic Messages), the base URL, the
+      authentication and the models, and discovers the model list from the endpoint
+      when it offers one:</p>
+      <pre class="code-block"><code>vp provider add
+vp provider list
+vp provider models my-provider
+vp provider refresh my-provider</code></pre>
+      <p>Definitions are global across credential profiles and live under
+      <code>~/.vibepod/providers/</code>. A key can be referenced from an environment
+      variable, or stored with owner-only permissions after you confirm it. Local servers
+      can use no authentication at all. Discovery shows where it sends requests, verifies
+      TLS, refuses redirects, and asks before sending a key over plain HTTP.</p>
+      <h2>Routing an agent for one launch</h2>
+      <p><code>--provider</code> routes a single launch through the provider. VibePod
+      writes a private, temporary configuration for the agent and never touches the
+      agent's own saved provider settings:</p>
+      <pre class="code-block"><code>vp run pi --provider openrouter
+vp run pi --profile work --provider local --provider hosted
+vp run codex --provider responses-endpoint
+vp run claude --provider anthropic-endpoint
+vp task create qwen "fix the failing test" --provider local</code></pre>
+      <p>Seven agents are supported: <code>claude</code>, <code>pi</code>,
+      <code>codex</code>, <code>qwen</code>, <code>tau</code>, <code>jcode</code> and
+      <code>opencode</code>. Pi, Tau, Jcode and OpenCode accept several providers at
+      once and list their models in the agent's own model picker. Claude, Codex and Qwen
+      use one provider and its saved default model. An explicit <code>--model</code>
+      passed to the agent wins over that default. Each agent speaks only some of the
+      protocols. Codex, for example, needs the Responses API. The
+      <a href="../../docs/providers/#temporary-launch-routing">routing table</a> lists the
+      details.</p>
+      <h2>Share a provider, or start from a template</h2>
+      <p><code>vp provider export</code> writes a definition without any credential:
+      protocol, URL, authentication mode, models and model settings (context window,
+      output limit, reasoning levels). <code>vp provider import</code> reads one back
+      from a local path or an <code>https://</code> URL. A team can commit its internal
+      gateway once, and a vendor can publish one file per endpoint.</p>
+      <p>To skip the wizard entirely, the new
+      <a href="https://github.com/VibePod/vibepod-providers" target="_blank" rel="noreferrer">VibePod/vibepod-providers</a>
+      repository collects credential-free templates for hosted APIs such as OpenRouter,
+      DeepSeek, Groq and Mistral. Their model lists and settings are synced from
+      <a href="https://models.dev" target="_blank" rel="noreferrer">models.dev</a>. It
+      also has templates for local servers: Ollama, LM Studio, llama.cpp, vLLM and
+      Lemonade. Import one by its raw URL:</p>
+      <pre class="code-block"><code>vp provider import https://raw.githubusercontent.com/VibePod/vibepod-providers/main/providers/cloud/openrouter.toml
+vp provider import https://raw.githubusercontent.com/VibePod/vibepod-providers/main/providers/local/ollama.toml</code></pre>
+      <p>Hosted templates reference the vendor's usual API key variable, such as
+      <code>OPENROUTER_API_KEY</code>, so export it before launching. Local templates
+      ship without models; run <code>vp provider refresh NAME</code> once the server is
+      up. Missing templates and fixes are welcome as pull requests.</p>
+      <h2>Mount what the agent needs</h2>
+      <p>Only the workspace and the agent's config directory were mounted before. Now
+      <code>agents.&lt;agent&gt;.volumes</code> adds host paths or Docker named volumes
+      with the familiar <code>docker run -v</code> syntax, for both <code>vp run</code>
+      and <code>vp task</code>:</p>
+      <pre class="code-block"><code>agents:
+  claude:
+    volumes:
+      - "~/datasets:/datasets:ro"
+      - "pip-cache:/root/.cache/pip"</code></pre>
+      <p><code>vp run -v/--volume</code> adds mounts for a single session. Missing host
+      paths are rejected instead of being created as root-owned directories, and
+      VibePod's own mount points are protected. A committed project config can mount any
+      path your user can read, so review the <code>volumes</code> of a project you did
+      not write before you run an agent in it.</p>
+      <h2>Upgrading</h2>
+      <p>Nothing to migrate by hand. Agents without <code>--provider</code> behave
+      exactly as before.</p>
+      <pre class="code-block"><code>python -m pip install --upgrade vibepod</code></pre>
+      <h2>Release details</h2>
+      <ul>
+        <li>New <code>vp provider</code> command group: <code>add</code>, <code>list</code>, <code>edit</code>, <code>models</code>, <code>refresh</code>, <code>export</code>, <code>import</code>, <code>remove</code>. It covers OpenAI Chat Completions, OpenAI Responses and Anthropic Messages, with model discovery and per-model settings.</li>
+        <li><code>vp run --provider</code> for <code>claude</code>, <code>pi</code>, <code>codex</code>, <code>qwen</code>, <code>tau</code>, <code>jcode</code> and <code>opencode</code>, with a temporary per-launch configuration. <code>vp task create --provider</code> works for all of them except Pi and OpenCode, which have no headless mode in VibePod.</li>
+        <li><code>vp list</code> shows the providers injected into running agents.</li>
+        <li>Provider templates in <a href="https://github.com/VibePod/vibepod-providers" target="_blank" rel="noreferrer">VibePod/vibepod-providers</a>, importable by URL.</li>
+        <li>Model discovery and provider file fetches send a VibePod User-Agent, so endpoints behind Cloudflare, such as Groq, no longer answer with 403.</li>
+        <li>Custom mounts through <code>agents.&lt;agent&gt;.volumes</code> and <code>vp run -v/--volume</code>.</li>
+        <li>New <code>vp skills cache clear</code> removes cached git clones and npm packages. Installed skills keep working.</li>
+        <li>A "Built with VibePod" <a href="../../docs/badge/">shields.io badge</a> for your README.</li>
+      </ul>
+      <h2>Related links</h2>
+      <ul>
+        <li><a href="../../docs/providers/">Docs: global model providers</a></li>
+        <li><a href="../../docs/providers/#provider-templates">Docs: provider templates</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-providers" target="_blank" rel="noreferrer">VibePod/vibepod-providers on GitHub</a></li>
+        <li><a href="../../docs/configuration/#mounting-volumes">Docs: mounting volumes</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.24.0" target="_blank" rel="noreferrer">0.24.0 release on GitHub</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links"><a href="../../docs/">Docs</a><a href="../">News</a><a href="../../repositories/">Repositories</a><a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a></div>
+    </div>
+  </footer>
+  <script src="../../script.js" defer></script>
+</body>
+</html>

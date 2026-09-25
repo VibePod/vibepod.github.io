@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#global-model-providers-in-development" class="md-skip">
+        <a href="#global-model-providers" class="md-skip">
           Skip to content
         </a>
       
@@ -475,6 +475,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Sharing providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provider-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1030,6 +1047,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Sharing providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provider-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1135,7 +1169,7 @@
   
 
 
-<h1 id="global-model-providers-in-development">Global model providers (in development)<a class="headerlink" href="#global-model-providers-in-development" title="Permanent link">&para;</a></h1>
+<h1 id="global-model-providers">Global model providers<a class="headerlink" href="#global-model-providers" title="Permanent link">&para;</a></h1>
 <p>Register a compatible hosted endpoint or local model server without editing files:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vp<span class="w"> </span>provider<span class="w"> </span>add
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>vp<span class="w"> </span>provider<span class="w"> </span>list
@@ -1153,6 +1187,9 @@ OpenAI Chat Completions, OpenAI Responses, and Anthropic Messages as distinct
 protocols. Model discovery uses the endpoint's compatible model-list API; enter
 model IDs manually when that endpoint is unavailable. Listing a model does not
 prove tool calling, streaming, vision, or protocol compatibility.</p>
+<p>To skip the wizard for a common endpoint, import a ready-made template from
+<a href="https://github.com/VibePod/vibepod-providers">VibePod/vibepod-providers</a> (see
+<a href="#provider-templates">Provider templates</a>).</p>
 <p>After successful discovery, <strong>Use all discovered models?</strong> defaults to Yes.
 Decline to enter specific IDs. This selects the current catalog; it does not
 silently enable models added by the server in the future.</p>
@@ -1278,6 +1315,19 @@ to sync it with the endpoint. Vendors can publish one file per endpoint:</p>
 </code></pre></div>
 <p>Keep keys out of the file, prefer <code>https</code> hosting, and keep <code>name</code> a lowercase
 slug (importers can rename with <code>--name</code>).</p>
+<h3 id="provider-templates">Provider templates<a class="headerlink" href="#provider-templates" title="Permanent link">&para;</a></h3>
+<p>The <a href="https://github.com/VibePod/vibepod-providers">VibePod/vibepod-providers</a>
+repository collects credential-free definitions for hosted APIs (OpenRouter,
+DeepSeek, Groq, Mistral and more, with model lists and settings synced from
+<a href="https://models.dev">models.dev</a>) and for local servers (Ollama, LM Studio,
+llama.cpp, vLLM, Lemonade). Import one by its raw URL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>provider<span class="w"> </span>import<span class="w"> </span>https://raw.githubusercontent.com/VibePod/vibepod-providers/main/providers/cloud/openrouter.toml
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vp<span class="w"> </span>provider<span class="w"> </span>import<span class="w"> </span>https://raw.githubusercontent.com/VibePod/vibepod-providers/main/providers/local/ollama.toml
+</code></pre></div>
+<p>Hosted templates use <code>auth = "env"</code>, so set the variable named by <code>key_env</code>
+before launching. Local templates ship without models; run
+<code>vp provider refresh NAME</code> once the server is running. New templates and fixes
+are welcome as pull requests to that repository.</p>
 <h2 id="credentials-and-storage">Credentials and storage<a class="headerlink" href="#credentials-and-storage" title="Permanent link">&para;</a></h2>
 <p>Definitions are global across profiles, under <code>~/.vibepod/providers/&lt;name&gt;/</code>:</p>
 <ul>
@@ -1345,10 +1395,10 @@ explicit confirmation. A stored-key provider is never activated automatically.</
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>llmapi
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--profile<span class="w"> </span>work<span class="w"> </span>--provider<span class="w"> </span><span class="nb">local</span><span class="w"> </span>--provider<span class="w"> </span>hosted
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>--provider<span class="w"> </span>responses-endpoint
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--provider<span class="w"> </span>anthropic-endpoint
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>llmapi
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--profile<span class="w"> </span>work<span class="w"> </span>--provider<span class="w"> </span><span class="nb">local</span><span class="w"> </span>--provider<span class="w"> </span>hosted
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>vp<span class="w"> </span>run<span class="w"> </span>codex<span class="w"> </span>--provider<span class="w"> </span>responses-endpoint
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--provider<span class="w"> </span>anthropic-endpoint
 </code></pre></div>
 <p>For Pi, a single provider's saved default selects the startup model. With multiple
 providers, or no saved default, native model selection is retained; the injected
@@ -1452,11 +1502,9 @@ have no headless mode in VibePod.</p>
 <h3 id="docker-smoke-tests">Docker smoke tests<a class="headerlink" href="#docker-smoke-tests" title="Permanent link">&para;</a></h3>
 <p><code>.github/workflows/provider-smoke.yml</code> builds a real image per supported agent and
 runs it against a local fake streaming API, checking routing, preserved profile files,
-and persistent sessions. No real API keys or paid services are used. The companion
-<code>vibepod-agents</code> ref must include the Codex entrypoint fix: select it with the manual
-workflow's <code>agents_ref</code> input or the <code>PROVIDER_AGENTS_REF</code> repository variable while
-the change is under development; the default is <code>main</code>. The provider wrapper itself
-no longer depends on that fix; the smoke test's prompt argument does.</p>
+and persistent sessions. No real API keys or paid services are used. Images are
+built from <code>vibepod-agents</code> <code>main</code> by default; to test an agent image branch, set the
+manual workflow's <code>agents_ref</code> input or the <code>PROVIDER_AGENTS_REF</code> repository variable.</p>
 <p>The job runs <code>tests/integration/test_provider_smoke.py</code> with <code>VP_PROVIDER_SMOKE=1</code>
 and <code>VP_PROVIDER_SMOKE_AGENT</code> set to one of <code>pi</code>, <code>codex</code>, <code>qwen</code>, <code>tau</code>, <code>jcode</code>,
 <code>opencode</code>. Ordinary unit tests do not need Docker.</p>
@@ -1485,9 +1533,9 @@ discovery and enter the model IDs manually.</p>
 <p><strong>Model server as a container on the VibePod network.</strong> Attach it to the
 network agents use (<code>network</code> in the VibePod config, default <code>vibepod-network</code>)
 and register its container name:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>ollama<span class="w"> </span>--network<span class="w"> </span>vibepod-network<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>ollama:/root/.ollama<span class="w"> </span>ollama/ollama
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>vp<span class="w"> </span>provider<span class="w"> </span>add<span class="w">   </span><span class="c1"># API base URL: http://ollama:11434/v1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>ollama<span class="w"> </span>--network<span class="w"> </span>vibepod-network<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-v<span class="w"> </span>ollama:/root/.ollama<span class="w"> </span>ollama/ollama
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>vp<span class="w"> </span>provider<span class="w"> </span>add<span class="w">   </span><span class="c1"># API base URL: http://ollama:11434/v1</span>
 </code></pre></div>
 <p>Nothing needs to be published to the host, and the server is unreachable from
 outside the network. Discovery from the host cannot resolve the container name,
@@ -1500,39 +1548,39 @@ ports, or bypass VibePod proxy allow/deny policies. See
 <h3 id="example-ollama-on-another-machine">Example: Ollama on another machine<a class="headerlink" href="#example-ollama-on-another-machine" title="Permanent link">&para;</a></h3>
 <p>An Ollama server on a Mac mini in the LAN, reached by IP, which works from the
 host and from every agent container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ vp provider add
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Provider name: local-m4
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>API protocol (openai-chat, openai-responses, anthropic) [openai-chat]:
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>API base URL: http://192.168.178.85:11434/v1
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Authentication (none, key, env) [none]:
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>Discover models now? [Y/n]:
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Discovery destination: http://192.168.178.85:11434/v1
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Contact this endpoint to list models? [Y/n]:
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>devstral-small-2:24b
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>gemma4:12b-mlx
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>glm-4.7-flash:latest
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>granite4.1:3b
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>granite4.1:8b
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>granite4:3b
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>lfm2.5-thinking:1.2b
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>lfm2.5-thinking:latest
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>lfm2:24b
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>ministral-3:14b
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>nemotron-cascade-2:30b
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>ornith-1.5:9b
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>qwen3-embedding:8b
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>qwen3.5:27b
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>qwen3.5:9b
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>qwen3.8:27b-mlx
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>translategemma:12b
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>Use all discovered models? [Y/n]: y
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>Default model (empty keeps native selection) []: gemma4:12b-mlx
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>Saved provider 'local-m4'. Native agent configuration is unchanged.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ vp provider add
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Provider name: local-m4
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>API protocol (openai-chat, openai-responses, anthropic) [openai-chat]:
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>API base URL: http://192.168.178.85:11434/v1
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Authentication (none, key, env) [none]:
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Discover models now? [Y/n]:
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Discovery destination: http://192.168.178.85:11434/v1
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Contact this endpoint to list models? [Y/n]:
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>devstral-small-2:24b
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>gemma4:12b-mlx
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>glm-4.7-flash:latest
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>granite4.1:3b
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>granite4.1:8b
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>granite4:3b
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>lfm2.5-thinking:1.2b
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>lfm2.5-thinking:latest
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>lfm2:24b
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>ministral-3:14b
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>nemotron-cascade-2:30b
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>ornith-1.5:9b
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>qwen3-embedding:8b
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>qwen3.5:27b
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>qwen3.5:9b
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>qwen3.8:27b-mlx
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>translategemma:12b
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>Use all discovered models? [Y/n]: y
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>Default model (empty keeps native selection) []: gemma4:12b-mlx
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>Saved provider 'local-m4'. Native agent configuration is unchanged.
 </code></pre></div>
 <p>Launch an agent with it for one session; the profile's own provider setup is
 untouched:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">    </span><span class="c1"># starts on gemma4:12b-mlx, others in /model</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">   </span><span class="c1"># tau --provider local-m4 --model gemma4:12b-mlx</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>run<span class="w"> </span>pi<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">    </span><span class="c1"># starts on gemma4:12b-mlx, others in /model</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>vp<span class="w"> </span>run<span class="w"> </span>tau<span class="w"> </span>--provider<span class="w"> </span>local-m4<span class="w">   </span><span class="c1"># tau --provider local-m4 --model gemma4:12b-mlx</span>
 </code></pre></div>
 <p>The provider uses the Chat Completions protocol, so Claude (Anthropic only) and
 Codex (Responses only) reject it. Ollama also serves the Anthropic Messages API

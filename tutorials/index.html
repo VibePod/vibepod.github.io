@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorials | VibePod CLI</title>
+  <meta name="description" content="Step-by-step VibePod tutorials: guided, task-oriented walkthroughs that show how the CLI features fit together, with links to the reference docs.">
+  <meta name="theme-color" content="#fff7ed">
+  <link rel="icon" type="image/png" href="../assets/icon.png">
+  <link rel="apple-touch-icon" href="../assets/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tutorials | VibePod CLI">
+  <meta property="og:description" content="Guided, task-oriented VibePod walkthroughs that link to the reference docs.">
+  <link rel="canonical" href="https://vibepod.dev/tutorials/">
+  <meta property="og:url" content="https://vibepod.dev/tutorials/">
+  <meta property="og:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tutorials | VibePod CLI">
+  <meta name="twitter:description" content="Guided, task-oriented VibePod walkthroughs that link to the reference docs.">
+  <meta name="twitter:image" content="https://vibepod.dev/assets/vibepod-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../" aria-label="VibePod CLI home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">VibePod CLI</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="../#quickstart">Quickstart</a>
+        <a href="../docs/">Docs</a>
+        <a href="../tutorials/">Tutorials</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button button-sm button-outline star-button" href="https://github.com/VibePod/vibepod-cli" target="_blank" rel="noreferrer" aria-label="Star VibePod CLI on GitHub">
+          <span class="star-icon" aria-hidden="true">&#9733;</span>
+          <span>Star</span>
+          <span class="star-count-badge" data-star-count>172</span>
+        </a>
+        <button class="button button-sm button-outline theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sr-only">Toggle color theme</span></button>
+        <a class="button button-sm button-outline" href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI Package</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero shell" data-reveal>
+      <p class="eyebrow">Tutorials</p>
+      <h1>Learn VibePod one task at a time.</h1>
+      <p class="hero-lead">Tutorials are guided, task-oriented walkthroughs. Each one picks a concrete goal and takes you through it end to end in short steps, with commands you can copy. The docs are the reference: one page per feature, in full detail. Tutorials link to them instead of repeating them.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="getting-started/">Start with getting started</a>
+        <a class="button button-ghost" href="../docs/">Browse the docs</a>
+      </div>
+    </section>
+
+    <section class="section page-section" aria-labelledby="all-tutorials">
+      <div class="shell section-heading-row">
+        <div>
+          <p class="eyebrow">Walkthroughs</p>
+          <h2 id="all-tutorials">All tutorials</h2>
+          <p class="section-lead">You need Docker or Podman running and a project directory to work in, ideally a Git repository. The first tutorial covers installing VibePod.</p>
+        </div>
+      </div>
+      <div class="shell news-grid">
+        <article class="news-card" data-reveal>
+          <p class="news-meta">Tutorial · 7 steps · Beginner</p>
+          <h3>Getting started with VibePod</h3>
+          <p>A guided first session: install VibePod, run an agent in a project, leave and rejoin the session, try a second agent, check the dashboard with <code>vp logs start</code>, and save your settings in a project config.</p>
+          <div class="tag-row" aria-label="Tags"><span>CLI</span><span>Agents</span><span>Config</span></div>
+          <a class="card-link" href="getting-started/">Start tutorial</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-shell">
+      <p><span id="year"></span> VibePod CLI. Installed from PyPI, built in public on GitHub.</p>
+      <div class="footer-links">
+        <a href="../docs/">Docs</a>
+        <a href="../tutorials/">Tutorials</a>
+        <a href="../news/">News</a>
+        <a href="../repositories/">Repositories</a>
+        <a href="https://pypi.org/project/vibepod/" target="_blank" rel="noreferrer">PyPI</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

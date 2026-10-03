@@ -671,12 +671,23 @@ p {
 }
 
 .post-article p,
-.post-article ul {
+.post-article ul,
+.post-article ol {
   margin-top: var(--space-4);
 }
 
-.post-article ul {
+.post-article ul,
+.post-article ol {
   padding-left: var(--space-5);
+}
+
+.post-article ol li + li {
+  margin-top: var(--space-2);
+}
+
+.post-article .post-note {
+  border-left: 3px solid rgba(249, 115, 22, 0.45);
+  padding-left: var(--space-4);
 }
 
 .post-article a {
@@ -881,6 +892,11 @@ p {
   margin-bottom: var(--space-5);
   color: #685238;
   font-size: var(--caption);
+}
+
+.install-hint a {
+  color: var(--accent-deep);
+  font-weight: 600;
 }
 
 .faq details {
@@ -1202,7 +1218,7 @@ p {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .main-nav {
     display: none;
   }

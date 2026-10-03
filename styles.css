@@ -894,6 +894,11 @@ p {
   font-size: var(--caption);
 }
 
+.install-hint a {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
 .faq details {
   margin-top: var(--space-3);
   border: 1px solid var(--line);

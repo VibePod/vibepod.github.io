@@ -1,0 +1,1786 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="One CLI for containerized AI coding agents">
+      
+      
+      
+        <link rel="canonical" href="https://vibepod.dev/docs/integrations/">
+      
+      
+        <link rel="prev" href="../badge/">
+      
+      
+        <link rel="next" href="../cli-reference/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>External tools - VibePod</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#integrating-external-tools" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="VibePod" class="md-header__button md-logo" aria-label="VibePod" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VibePod
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              External tools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/VibePod/vibepod-cli" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    VibePod/vibepod-cli
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="VibePod" class="md-nav__button md-logo" aria-label="VibePod" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    VibePod
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/VibePod/vibepod-cli" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    VibePod/vibepod-cli
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../profiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Skills
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/locators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Locator format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skills/authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project overlays
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project overlays
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overlays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overlays/recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../herdr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herdr integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor integration (ACP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../badge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Badge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External tools
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#services-on-the-vibepod-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services on the VibePod network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services on the VibePod network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pointing-the-agent-at-the-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pointing the agent at the service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-built-in-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The built-in proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-with-their-own-compose-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools with their own compose network
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#litellm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LiteLLM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headroom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headroom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-inside-the-agent-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools inside the agent container
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graphify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graphify
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtk-and-graphify-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTK and Graphify together
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-the-wiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying the wiring
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#services-on-the-vibepod-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services on the VibePod network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services on the VibePod network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pointing-the-agent-at-the-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pointing the agent at the service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-built-in-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The built-in proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-with-their-own-compose-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools with their own compose network
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#litellm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LiteLLM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headroom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headroom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-inside-the-agent-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools inside the agent container
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graphify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graphify
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtk-and-graphify-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTK and Graphify together
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-the-wiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying the wiring
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/VibePod/vibepod-cli/edit/main/docs/integrations.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="integrating-external-tools">Integrating external tools<a class="headerlink" href="#integrating-external-tools" title="Permanent link">&para;</a></h1>
+<p>VibePod agents run in containers, so plugging in third-party tooling comes
+down to <em>where the tool lives</em>:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Where it runs</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/BerriAI/litellm">LiteLLM</a></td>
+<td>Model gateway: one endpoint and key for 100+ providers</td>
+<td>Its own container</td>
+<td><a href="#services-on-the-vibepod-network">Service on the VibePod network</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/headroomlabs-ai/headroom">Headroom</a></td>
+<td>Compression proxy: shrinks tool output, logs and files before they reach the model</td>
+<td>Its own container</td>
+<td><a href="#services-on-the-vibepod-network">Service on the VibePod network</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/rtk-ai/rtk">RTK</a></td>
+<td>Rewrites shell commands so the agent reads compact output</td>
+<td>Inside the agent container</td>
+<td><a href="#tools-inside-the-agent-container">Tool in the agent image</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Graphify-Labs/graphify">Graphify</a></td>
+<td>Knowledge graph of the codebase the agent can query instead of grepping</td>
+<td>Inside the agent container</td>
+<td><a href="#tools-inside-the-agent-container">Tool in the agent image</a></td>
+</tr>
+</tbody>
+</table>
+<p>Both patterns use configuration VibePod already has — no plugin or code change
+is involved. This page describes each pattern once and then applies it to the
+four tools from <a href="https://github.com/VibePod/vibepod-cli/issues/130">issue #130</a>.</p>
+<h2 id="services-on-the-vibepod-network">Services on the VibePod network<a class="headerlink" href="#services-on-the-vibepod-network" title="Permanent link">&para;</a></h2>
+<p>Every <code>vp run</code> creates (or reuses) the Docker network named by the <code>network:</code>
+config key — <code>vibepod-network</code> unless you changed it — and attaches the agent
+and the built-in <code>vibepod-proxy</code> container to it. The
+fastest way to make a service reachable from agents is to start it on that
+network under a stable alias — the same wiring
+<a href="https://github.com/VibePod/vibepod-board/blob/main/compose.yml">vibepod-board</a>
+uses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># compose.yml of the tool you want to integrate</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">mytool</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example/mytool:latest</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mytool</span><span class="w">          </span><span class="c1"># agents reach it as http://mytool:&lt;port&gt;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${VIBEPOD_NETWORK:-vibepod-network}</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<ul>
+<li><code>external: true</code> makes compose join the network instead of creating its
+  own. The network has to exist first: run any agent once (<code>vp run claude</code>)
+  or create it by hand with <code>docker network create &lt;network&gt;</code>. If you
+  changed the <code>network:</code> key in your VibePod config, tell the tool's compose
+  file which one to join by setting <code>VIBEPOD_NETWORK</code> when you run
+  <code>docker compose up</code> — it only drives the interpolation above; VibePod
+  itself reads the <code>network:</code> config key.</li>
+<li>No <code>ports:</code> are needed. The service is reachable from containers on the
+  network — agents and the proxy — but not from the host or the LAN. Publish a
+  port only when you also want the tool's web UI in your browser.</li>
+<li>The alias is plain container DNS. On Podman this needs a DNS-enabled
+  network; see <a href="../quickstart/#using-podman-instead-of-docker">Quickstart — Using Podman</a>.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Plain HTTP between containers</p>
+<p>The examples on this page use <code>http://&lt;alias&gt;:&lt;port&gt;</code>, so API keys and
+subscription tokens cross the container network unencrypted. A network
+does not encrypt traffic between its containers. That is acceptable on a
+single-host bridge network that only your own containers join; it is not
+once the network spans hosts (an overlay or a remote engine) or runs
+containers you do not trust. In those cases put TLS in front of the
+service (a reverse proxy, or the tool's own TLS options) and use an
+<code>https://</code> URL.</p>
+</div>
+<h3 id="pointing-the-agent-at-the-service">Pointing the agent at the service<a class="headerlink" href="#pointing-the-agent-at-the-service" title="Permanent link">&para;</a></h3>
+<p>Agents are configured through environment variables, so referencing the
+service means setting the right variable to <code>http://&lt;alias&gt;:&lt;port&gt;</code>. Pick
+the scope you need:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ~/.config/vibepod/config.yaml (global) or .vibepod/config.yaml (project)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://mytool:4000</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANTHROPIC_BASE_URL</span><span class="o">=</span>http://mytool:4000<span class="w">   </span><span class="c1"># this run only</span>
+</code></pre></div>
+<p>For LLM gateways the <a href="../llm/"><code>llm:</code> section</a> sets base URL, key and model
+for Claude Code in one place. It has no per-agent scope: once enabled it is
+applied to every agent with an LLM mapping, and its Codex mapping passes only
+the base URL and model (Codex's <code>--oss</code> mode, no key). When Codex routes
+through an authenticated gateway with its own provider config, as shown
+below, leave <code>llm:</code> off and configure Claude through <code>agents.claude.env</code>.</p>
+<p>Some agents read endpoints from their own config files rather than the
+environment (Codex's <code>config.toml</code>, Pi's <code>models.json</code>, Tau's
+<code>catalog.toml</code>). Those files live in the agent's persisted config directory,
+which is mounted into the container on every run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>vp<span class="w"> </span>config<span class="w"> </span>path
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">Config:  /home/me/.config/vibepod</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Global:  /home/me/.config/vibepod/config.yaml</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">Project: /home/me/project/.vibepod/config.yaml</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">Logs:    /home/me/.config/vibepod/logs.db</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">Proxy:   /home/me/.config/vibepod/proxy/proxy.db</span>
+</code></pre></div>
+<p><code>Config:</code> is the root. Below it, <code>agents/&lt;agent&gt;/</code> is the <code>default</code>
+<a href="../profiles/">profile</a> and <code>profiles/&lt;name&gt;/agents/&lt;agent&gt;/</code> a named one; the
+container sees that directory as its config or home mount, so a file you edit
+there is what the agent reads. Pinning a profile per project (<code>profile: work</code>
+in <code>.vibepod/config.yaml</code>) keeps a "via gateway" credential set next to a
+direct one.</p>
+<h3 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h3>
+<p>Agents send outbound HTTP through <code>vibepod-proxy</code>, and that includes requests
+to a sidecar alias — calls to <code>http://litellm:4000</code> show up in <code>vp logs</code> like
+any other traffic. Two consequences:</p>
+<ul>
+<li>In <code>allow</code> filter mode, allow the alias: <code>vp proxy filter allow add litellm</code>.</li>
+<li>To bypass the proxy for the sidecar (say, to compare latencies), extend
+  <code>NO_PROXY</code>: <code>-e NO_PROXY=localhost,127.0.0.1,::1,litellm</code>.</li>
+</ul>
+<h3 id="tools-with-their-own-compose-network">Tools with their own compose network<a class="headerlink" href="#tools-with-their-own-compose-network" title="Permanent link">&para;</a></h3>
+<p>If a tool ships a compose file you would rather not edit, keep its network and
+connect the agent to it instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--network<span class="w"> </span>mytool_default
+</code></pre></div>
+<p>When the workspace itself contains a compose file, <code>vp run</code> offers this
+interactively — see
+<a href="../agents/#connecting-to-a-docker-compose-network">Connecting to a Docker Compose network</a>.</p>
+<h2 id="litellm">LiteLLM<a class="headerlink" href="#litellm" title="Permanent link">&para;</a></h2>
+<p><a href="https://docs.litellm.ai/">LiteLLM</a> is an OpenAI- and Anthropic-compatible
+gateway: one endpoint, one key, any provider behind it, plus spend tracking,
+virtual keys and fallbacks. It serves <code>/v1/messages</code>, so Claude Code talks to
+it natively, and <code>/v1/chat/completions</code> and <code>/v1/responses</code> for OpenAI-style
+clients.</p>
+<div class="admonition tip">
+<p class="admonition-title">LiteLLM as a VibePod model provider</p>
+<p>LiteLLM can also be registered with <code>vp provider add</code> as a
+<a href="../providers/">model provider</a> and selected per launch with
+<code>vp run &lt;agent&gt; --provider &lt;name&gt;</code>. A provider has one protocol, so
+register one entry per protocol you need: <code>anthropic</code> for Claude (base URL
+without <code>/v1</code>), <code>openai-responses</code> for Codex, <code>openai-chat</code> for Pi, Qwen,
+Tau, Jcode and OpenCode (base URL ending in <code>/v1</code>). Authenticated
+provider launches require an <code>https://</code> URL, so this route fits a LiteLLM
+deployment behind TLS. The plain <code>http://litellm:4000</code> sidecar below,
+with its master key, is wired through the <code>llm:</code> section and agent <code>env</code>
+instead. The host cannot resolve the <code>litellm</code> alias, so enter model IDs
+by hand rather than using discovery.</p>
+</div>
+<p><strong>1. Start it on the VibePod network</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># litellm/compose.yml</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">litellm</span><span class="p">:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.litellm.ai/berriai/litellm:latest</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"--config"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"/app/config.yaml"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"--port"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"4000"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config.yaml:/app/config.yaml:ro</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">LITELLM_MASTER_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LITELLM_MASTER_KEY:?set a master key}</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${ANTHROPIC_API_KEY:-}</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">OPENAI_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY:-}</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">litellm</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">  </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${VIBEPOD_NETWORK:-vibepod-network}</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># litellm/config.yaml — model_name is what agents will ask for</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">model_list</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-sonnet-4-6</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anthropic/claude-sonnet-4-6</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os.environ/ANTHROPIC_API_KEY</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpt-5.3-codex</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai/gpt-5.3-codex</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">      </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os.environ/OPENAI_API_KEY</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nt">general_settings</span><span class="p">:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span><span class="nt">master_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os.environ/LITELLM_MASTER_KEY</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>litellm
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">LITELLM_MASTER_KEY</span><span class="o">=</span>sk-litellm-...<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>sk-ant-...<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-...<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Export a key for every provider in <code>model_list</code>; a missing one reaches
+LiteLLM as an empty string and only that model's requests fail. Drop the
+<code>gpt-5.3-codex</code> entry (and <code>OPENAI_API_KEY</code>) if you only route Claude Code.</p>
+<p><strong>2. Point agents at <code>http://litellm:4000</code></strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Claude Code</label><label for="__tabbed_1_2">Codex</label><label for="__tabbed_1_3">Other agents</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Set the base URL, the key and the model name from <code>model_list</code> in
+Claude's own <code>env</code>, so the setting stays scoped to Claude:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://litellm:4000</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-litellm-...</span><span class="w">      </span><span class="c1"># master key or a LiteLLM virtual key</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="nt">ANTHROPIC_AUTH_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-litellm-...</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">      </span><span class="nt">ANTHROPIC_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-sonnet-4-6</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="nt">ANTHROPIC_DEFAULT_OPUS_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-sonnet-4-6</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">      </span><span class="nt">ANTHROPIC_DEFAULT_SONNET_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-sonnet-4-6</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">ANTHROPIC_DEFAULT_HAIKU_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-sonnet-4-6</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-p<span class="w"> </span><span class="s2">"say ok"</span>
+</code></pre></div>
+<p>These are the variables the <a href="../llm/"><code>llm:</code> section</a> would set. <code>llm:</code> is
+shorter, but it is not per agent: enabled, it also launches Codex as
+<code>codex --oss -m claude-sonnet-4-6</code> against <code>http://litellm:4000</code>, which
+overrides the provider set up in the Codex tab. Use it only when Claude
+Code is the one agent you route through LiteLLM.</p>
+</div>
+<div class="tabbed-block">
+<p>Codex selects providers in its <code>config.toml</code>, which lives in the
+persisted agent directory: <code>&lt;Config&gt;/agents/codex/.codex/config.toml</code>
+(create it if missing; <code>profiles/&lt;name&gt;/agents/codex/...</code> for a named
+profile).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"gpt-5.3-codex"</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">model_provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"litellm"</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">[model_providers.litellm]</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"litellm"</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">base_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"http://litellm:4000/v1"</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">env_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LITELLM_API_KEY"</span>
+</code></pre></div>
+<p>Then hand Codex the key named in <code>env_key</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">codex</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">LITELLM_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-litellm-...</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Any agent that accepts an OpenAI-compatible base URL works the same way,
+e.g. Qwen Code with <code>OPENAI_BASE_URL: http://litellm:4000/v1</code> in
+<code>agents.qwen.env</code>. Agents with their own provider files are covered in
+<a href="../agents/">Agents</a>: Pi's <code>models.json</code>, Tau's <code>catalog.toml</code>,
+Jcode's <code>config.toml</code>.</p>
+</div>
+</div>
+</div>
+<p>LiteLLM's <a href="https://docs.litellm.ai/docs/tutorials/claude_responses_api">Claude Code</a>
+and <a href="https://docs.litellm.ai/docs/tutorials/openai_codex">Codex</a> guides cover
+the agent side in more depth.</p>
+<h2 id="headroom">Headroom<a class="headerlink" href="#headroom" title="Permanent link">&para;</a></h2>
+<p><a href="https://docs.headroomlabs.ai/docs">Headroom</a> is a compression proxy between
+the agent and the provider: it shrinks tool output, logs and file contents in
+the prompt before they reach the model, and keeps the originals retrievable.
+Its <code>headroom wrap</code> command is a host-side workflow (start a local proxy,
+launch the agent); inside VibePod you run its plain proxy mode and let the
+container network do the wiring.</p>
+<p><strong>1. Start it on the VibePod network</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># headroom/compose.yml</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">headroom</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="c1"># The image's entrypoint is `headroom proxy`, listening on 0.0.0.0:8787.</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/headroomlabs-ai/headroom:latest</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">HOME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/nonroot</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">HEADROOM_WORKSPACE_DIR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/nonroot/.headroom</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="nt">HEADROOM_CONFIG_DIR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/nonroot/.headroom/config</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="c1"># HEADROOM_OUTPUT_SHAPER: "1"   # also trim what the model writes back</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">headroom-state:/home/nonroot/.headroom</span><span class="w">   </span><span class="c1"># savings ledger, CCR cache, logs</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">      </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">headroom</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">  </span><span class="nt">headroom-state</span><span class="p">:</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">  </span><span class="nt">vibepod</span><span class="p">:</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${VIBEPOD_NETWORK:-vibepod-network}</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>Headroom forwards the credentials the agent sends, so the proxy needs no
+provider key of its own: Claude Code keeps using its login (API key or
+subscription token). Leave port 8787 unpublished — on the VibePod network only
+agents can reach it. If you publish it anyway, set <code>HEADROOM_PROXY_TOKEN</code> as
+Headroom's own compose file requires.</p>
+<p><strong>2. Point agents at it</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://headroom:8787</span>
+</code></pre></div>
+<p>With <code>HEADROOM_PROXY_TOKEN</code> set, Headroom answers <code>401</code> to every caller that
+is not on its own loopback — agents on the VibePod network included — unless
+the request carries the token. <code>Authorization: Bearer</code> is already taken by the
+provider credential, so send it in Headroom's dedicated header through
+Claude Code's <code>ANTHROPIC_CUSTOM_HEADERS</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># .vibepod/config.yaml</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://headroom:8787</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">      </span><span class="nt">ANTHROPIC_CUSTOM_HEADERS</span><span class="p">:</span><span class="w"> </span><span class="s">"X-Headroom-Proxy-Token:</span><span class="nv"> </span><span class="s">&lt;HEADROOM_PROXY_TOKEN</span><span class="nv"> </span><span class="s">value&gt;"</span>
+</code></pre></div>
+<p>OpenAI-style clients use <code>http://headroom:8787/v1</code>; for Codex put that in a
+<code>model_providers</code> block as shown for <a href="#litellm">LiteLLM</a>.</p>
+<p><strong>3. Watch the savings</strong></p>
+<p>Compression happens after the VibePod proxy has seen the request, so
+<code>vp logs</code> reports the uncompressed sizes. Headroom's own numbers live in its
+container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>headroom/compose.yml<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>headroom<span class="w"> </span>headroom<span class="w"> </span>savings
+</code></pre></div>
+<p>To chain Headroom in front of LiteLLM, point Headroom's upstream at the
+gateway (<code>ANTHROPIC_TARGET_API_URL: http://litellm:4000</code> in its environment)
+and the agents at Headroom.</p>
+<h2 id="tools-inside-the-agent-container">Tools inside the agent container<a class="headerlink" href="#tools-inside-the-agent-container" title="Permanent link">&para;</a></h2>
+<p>RTK and Graphify are not services. They are programs the agent invokes, plus
+a hook or skill that tells the agent to use them. Two VibePod features cover
+that:</p>
+<ul>
+<li>A <a href="../overlays/">project overlay</a> installs the binary into the agent
+  image once — content-addressed, cached, shared with the team through the
+  committed <code>.vibepod/overlay/</code> directory.</li>
+<li>The registration step writes into the agent's persisted config dir. For
+  Claude Code the container sets <code>CLAUDE_CONFIG_DIR=/claude</code>, which is the
+  host's <code>agents/claude/</code> directory (see <code>vp config path</code>); both RTK and
+  Graphify honor that variable, so a hook or skill registered once is there
+  on every later run and in every project.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">One overlay Dockerfile per agent</p>
+<p>VibePod builds exactly one fragment per agent: <code>.vibepod/overlay/&lt;agent&gt;/Dockerfile</code>
+if it exists, otherwise the shared <code>.vibepod/overlay/Dockerfile</code>. The two do
+not stack — once <code>claude/Dockerfile</code> exists, the shared file is ignored for
+Claude. The RTK example below uses the shared file and the Graphify example
+the per-agent one; to install both, put both into the same file as shown in
+<a href="#rtk-and-graphify-together">RTK and Graphify together</a>.</p>
+</div>
+<p>Run the registration <strong>inside a session</strong> so the files belong to your user:
+Claude Code's bash mode executes a line starting with <code>!</code> in the container as
+the agent user. <code>agents.&lt;agent&gt;.init</code> can automate it, but the init wrapper
+replaces the image entrypoint, so the user-switching step is bypassed: init
+commands (and the agent that follows them) run as root, and on Linux the
+files they create in the config dir end up root-owned.</p>
+<h2 id="rtk">RTK<a class="headerlink" href="#rtk" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rtk-ai/rtk">RTK</a> rewrites the shell commands an agent
+runs (<code>git status</code> → <code>rtk git status</code>, <code>pytest</code> → <code>rtk pytest</code>, …) and returns
+compact output — up to 90 % less bash output for the agent to read.</p>
+<p><strong>1. Install the binary via an overlay</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c"># .vibepod/overlay/Dockerfile — no FROM line</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">ADD</span><span class="w"> </span>https://github.com/rtk-ai/rtk/releases/download/v0.48.0/rtk-x86_64-unknown-linux-musl.tar.gz<span class="w"> </span>/tmp/rtk-x86_64.tar.gz
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">ADD</span><span class="w"> </span>https://github.com/rtk-ai/rtk/releases/download/v0.48.0/rtk-aarch64-unknown-linux-gnu.tar.gz<span class="w"> </span>/tmp/rtk-aarch64.tar.gz
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c"># SHA-256 values from the release's checksums.txt; update them with the version.</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">RUN</span><span class="w"> </span><span class="nv">arch</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$arch</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">         </span>x86_64<span class="o">)</span><span class="w">  </span><span class="nv">sum</span><span class="o">=</span>e4e650fa1677c0de2f6839a6040d7b17f312d32f163c402b75af70e9e5af1a91<span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">         </span>aarch64<span class="o">)</span><span class="w"> </span><span class="nv">sum</span><span class="o">=</span>5ed65486a96077bd6bba7c87fdc9d0e4a1918d19619be3c87380888389a30c7c<span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">         </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"no RTK build for </span><span class="nv">$arch</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">       </span><span class="k">esac</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$sum</span><span class="s2">  /tmp/rtk-</span><span class="nv">$arch</span><span class="s2">.tar.gz"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">"/tmp/rtk-</span><span class="nv">$arch</span><span class="s2">.tar.gz"</span><span class="w"> </span>-C<span class="w"> </span>/usr/local/bin<span class="w"> </span>rtk<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/usr/local/bin/rtk<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>/tmp/rtk-*.tar.gz
+</code></pre></div>
+<ul>
+<li><strong>Architecture</strong> — the archive is picked by <code>uname -m</code> inside the build,
+  i.e. by the image's platform, not the host's. That matters because some
+  agents pin <code>linux/amd64</code> and run emulated on an arm64 host. Overlays build
+  with the classic builder, so <code>TARGETARCH</code> is not available; <code>ADD</code> cannot be
+  conditional, hence both downloads. Note the different libc suffix of the
+  two builds (<code>musl</code> vs. <code>gnu</code>).</li>
+<li><strong>Pinned and verified</strong> — with a moving URL the overlay cache would keep
+  whatever it downloaded first, and the checksum check fails the build if the
+  archive is not the one you reviewed. The hashes are written into the
+  fragment rather than fetched from the same release, so a tampered release
+  cannot vouch for itself.</li>
+<li>Some RTK filters shell out to ripgrep; the <code>vibepod/claude</code> image ships it.</li>
+</ul>
+<p><strong>2. Register the hook once</strong></p>
+<p>In a running <code>vp run claude</code> session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>! rtk init -g --auto-patch
+</code></pre></div>
+<p><code>--auto-patch</code> skips the consent prompt. RTK adds a <code>PreToolUse</code> hook to
+<code>/claude/settings.json</code> and a short <code>RTK.md</code> next to it; restart the agent to
+load the hook. RTK's other integrations (<code>rtk init -g --codex</code>, <code>--gemini</code>,
+<code>--opencode</code>, <code>--agent pi</code>, <code>--agent vibe</code>) follow the same shape — the
+<a href="https://github.com/rtk-ai/rtk#supported-ai-tools">supported agents table</a>
+lists the mechanism each one uses.</p>
+<p>The hook covers Bash tool calls only; Claude Code's built-in <code>Read</code>, <code>Grep</code>
+and <code>Glob</code> tools bypass it. RTK's savings statistics (<code>rtk gain</code>) live in the
+container user's home, which is not persisted — the hook is.</p>
+<h2 id="graphify">Graphify<a class="headerlink" href="#graphify" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/Graphify-Labs/graphify">Graphify</a> parses the codebase
+into a knowledge graph (<code>graphify-out/</code> in the workspace) that the agent
+can query instead of grepping: <code>/graphify .</code> builds it; <code>graphify query</code>,
+<code>path</code> and <code>explain</code> answer questions against it. The Python package is
+<code>graphifyy</code> (double y).</p>
+<p><strong>1. Install the CLI via an overlay</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c"># .vibepod/overlay/claude/Dockerfile — no FROM line</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">GRAPHIFY_VERSION</span><span class="o">=</span><span class="m">0</span>.9.73
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>python3-venv<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/graphify<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>/opt/graphify/bin/pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span><span class="s2">"graphifyy==</span><span class="si">${</span><span class="nv">GRAPHIFY_VERSION</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/opt/graphify/bin/graphify<span class="w"> </span>/usr/local/bin/graphify
+</code></pre></div>
+<p>The version is pinned, but its dependencies (tree-sitter grammars, numpy,
+networkx, …) still resolve at build time. To lock the whole set, compile a
+hashed requirements file once from a one-line <code>graphifyy==0.9.73</code> input —
+e.g. <code>uv pip compile --generate-hashes --python-version &lt;X.Y&gt; -o requirements.txt</code>,
+with <code>&lt;X.Y&gt;</code> the image's <code>python3 --version</code> — commit it as
+<code>.vibepod/overlay/claude/requirements.txt</code> (the fragment's directory is its
+build context) and install with <code>--require-hashes</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c"># .vibepod/overlay/claude/Dockerfile — no FROM line</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>/tmp/graphify-requirements.txt
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>python3-venv<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/graphify<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>/opt/graphify/bin/pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--require-hashes<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">         </span>-r<span class="w"> </span>/tmp/graphify-requirements.txt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/opt/graphify/bin/graphify<span class="w"> </span>/usr/local/bin/graphify
+</code></pre></div>
+<p>The <code>vibepod/claude</code> image ships <code>python3</code> but no <code>pip</code>, hence the venv. A
+fixed path under <code>/opt</code> keeps the interpreter location stable regardless of
+the <code>HOME</code> the agent runs with — the skill records that path in
+<code>graphify-out/</code> and reuses it later.</p>
+<p><strong>2. Register the skill</strong></p>
+<p>Once per config dir, in a running <code>vp run claude</code> session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>! graphify install
+</code></pre></div>
+<p>This writes <code>/claude/skills/graphify/SKILL.md</code> and a pointer in
+<code>/claude/CLAUDE.md</code>. To ship the skill with the project instead, run
+<code>graphify install --project</code> in the workspace (from the session, or on the
+host with <code>pipx install graphifyy</code>); it writes <code>.claude/skills/graphify/</code> for
+you to commit. For Codex use <code>graphify install --platform codex</code>, which
+targets <code>~/.codex</code> — the persisted <code>agents/codex/</code> mount.</p>
+<p>The default install only nudges the agent to run <code>graphify query</code> before
+reading files; it may still grep. For Claude Code, <code>graphify install --project
+--strict</code> blocks the first raw source read of a session and redirects it to
+the graph (once per session, then back to the nudge); <code>GRAPHIFY_HOOK_STRICT=1</code>
+or <code>0</code> in <code>agents.claude.env</code> toggles that at runtime.</p>
+<p>Then, in the agent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>/graphify .
+</code></pre></div>
+<h2 id="rtk-and-graphify-together">RTK and Graphify together<a class="headerlink" href="#rtk-and-graphify-together" title="Permanent link">&para;</a></h2>
+<p>Because the per-agent fragment replaces the shared one, a Claude image with
+both tools needs both installs in <code>.vibepod/overlay/claude/Dockerfile</code>, with
+the Graphify <code>requirements.txt</code> next to it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>.vibepod/overlay/
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>├── Dockerfile            # optional: RTK only, for every other agent
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>└── claude/
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    ├── Dockerfile        # RTK + Graphify for Claude
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    └── requirements.txt  # hashed Graphify dependencies
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c"># .vibepod/overlay/claude/Dockerfile — no FROM line</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="c"># RTK</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="k">ADD</span><span class="w"> </span>https://github.com/rtk-ai/rtk/releases/download/v0.48.0/rtk-x86_64-unknown-linux-musl.tar.gz<span class="w"> </span>/tmp/rtk-x86_64.tar.gz
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="k">ADD</span><span class="w"> </span>https://github.com/rtk-ai/rtk/releases/download/v0.48.0/rtk-aarch64-unknown-linux-gnu.tar.gz<span class="w"> </span>/tmp/rtk-aarch64.tar.gz
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="k">RUN</span><span class="w"> </span><span class="nv">arch</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$arch</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">         </span>x86_64<span class="o">)</span><span class="w">  </span><span class="nv">sum</span><span class="o">=</span>e4e650fa1677c0de2f6839a6040d7b17f312d32f163c402b75af70e9e5af1a91<span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">         </span>aarch64<span class="o">)</span><span class="w"> </span><span class="nv">sum</span><span class="o">=</span>5ed65486a96077bd6bba7c87fdc9d0e4a1918d19619be3c87380888389a30c7c<span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">         </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"no RTK build for </span><span class="nv">$arch</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">       </span><span class="k">esac</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$sum</span><span class="s2">  /tmp/rtk-</span><span class="nv">$arch</span><span class="s2">.tar.gz"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">"/tmp/rtk-</span><span class="nv">$arch</span><span class="s2">.tar.gz"</span><span class="w"> </span>-C<span class="w"> </span>/usr/local/bin<span class="w"> </span>rtk<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/usr/local/bin/rtk<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>/tmp/rtk-*.tar.gz
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="c"># Graphify</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>/tmp/graphify-requirements.txt
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>python3-venv<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/graphify<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>/opt/graphify/bin/pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--require-hashes<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="w">         </span>-r<span class="w"> </span>/tmp/graphify-requirements.txt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/opt/graphify/bin/graphify<span class="w"> </span>/usr/local/bin/graphify
+</code></pre></div>
+<p>Keep the shared <code>.vibepod/overlay/Dockerfile</code> only if other agents should get
+RTK too; Claude no longer reads it, so the RTK lines live in both files.</p>
+<h2 id="verifying-the-wiring">Verifying the wiring<a class="headerlink" href="#verifying-the-wiring" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># VIBEPOD_NETWORK as for the compose files: your `network:` value (see `vp config show`)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">VIBEPOD_NETWORK</span><span class="k">:-</span><span class="nv">vibepod</span><span class="p">-network</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span>--format<span class="w"> </span><span class="s1">'{{range .Containers}}{{.Name}} {{end}}'</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>vp<span class="w"> </span>config<span class="w"> </span>show<span class="w">            </span><span class="c1"># merged config: env, llm and init sections</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>vp<span class="w"> </span>logs<span class="w"> </span>start<span class="w">             </span><span class="c1"># requests to a sidecar alias appear like any other traffic</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -969,6 +969,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cli-reference/" class="md-nav__link">
         
   
@@ -1284,6 +1311,9 @@ networks or when the host is protected by a firewall.</p>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">"my-api-key"</span>
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"meta-llama/Llama-3-8B-Instruct"</span>
 </code></pre></div>
+<p>Running a gateway such as LiteLLM in a container? Start it on the VibePod
+network and use its alias as <code>base_url</code> — see
+<a href="../integrations/#litellm">Integrating external tools</a>.</p>
 <h2 id="per-agent-overrides">Per-agent overrides<a class="headerlink" href="#per-agent-overrides" title="Permanent link">&para;</a></h2>
 <p>If you need different LLM settings for a specific agent, use the per-agent <code>env</code> config. Per-agent env vars take precedence over the <code>llm</code> section:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">llm</span><span class="p">:</span>

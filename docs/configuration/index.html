@@ -868,6 +868,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#session-and-task-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session and task records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-built-in-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1076,6 +1087,17 @@
     <span class="md-ellipsis">
       
         Mounting volumes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-and-task-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session and task records
       
     </span>
   </a>
@@ -1577,6 +1599,40 @@ of a project you did not write before running an agent in it.</p>
 <p><code>vp run</code> (and the agent alias commands) also accept a repeatable <code>-v/--volume</code> flag with the same syntax. Unlike <code>--publish</code>, the flag <strong>adds</strong> to the configured list. A flag entry replaces only the configured entry mounted at the same container path. Relative flag paths resolve against the current directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-v<span class="w"> </span>~/datasets:/datasets:ro<span class="w"> </span>-v<span class="w"> </span>pip-cache:/root/.cache/pip
 </code></pre></div>
+<h2 id="session-and-task-records">Session and task records<a class="headerlink" href="#session-and-task-records" title="Permanent link">&para;</a></h2>
+<p>Interactive runs (<code>vp run</code>) write a row to the <code>sessions</code> table in the logging
+database (<code>logging.db_path</code>, default <code>~/.config/vibepod/logs.db</code>, viewable in
+the Datasette UI via <code>vp logs start</code>). Background tasks (<code>vp task create</code>)
+write a row to the <code>tasks</code> table in <code>tasks.db</code> in the config directory;
+inspect it with <code>vp task list --json</code> or <code>vp task status &lt;id&gt; --json</code>.</p>
+<p>Besides the full image reference, each record tracks image provenance for
+traceability and auditing:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image_tag</code></td>
+<td>The tag (or digest) portion of the image reference, e.g. <code>0.18.0</code></td>
+</tr>
+<tr>
+<td><code>image_hash</code></td>
+<td>The image ID reported by the container engine (<code>sha256:…</code>)</td>
+</tr>
+<tr>
+<td><code>agent_version</code></td>
+<td>The agent's own version, read from the image label <code>vibepod.agent.version</code> (falling back to <code>org.opencontainers.image.version</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>All three columns are best-effort and nullable: an untagged reference stores
+<code>image_tag</code> as <code>NULL</code>, and images without version labels store <code>agent_version</code>
+as <code>NULL</code>. Databases created by older VibePod versions are migrated
+automatically on first use.</p>
 <h2 id="the-built-in-proxy">The built-in proxy<a class="headerlink" href="#the-built-in-proxy" title="Permanent link">&para;</a></h2>
 <p>VibePod starts a <code>vibepod-proxy</code> container alongside every agent. It acts as an HTTP(S) MITM proxy and logs all outbound requests to a SQLite database viewable in the Datasette UI (<code>vp logs start</code>).</p>
 <p>The proxy is reachable inside the Docker network as <code>http://vibepod-proxy:8080</code>. It is not published on a host port.</p>

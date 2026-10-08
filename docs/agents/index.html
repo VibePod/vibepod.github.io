@@ -824,10 +824,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#devstral-vibe-mistral" class="md-nav__link">
+  <a href="#mistral-vibe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Devstral / Vibe (Mistral)
+        Mistral Vibe
       
     </span>
   </a>
@@ -1923,10 +1923,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#devstral-vibe-mistral" class="md-nav__link">
+  <a href="#mistral-vibe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Devstral / Vibe (Mistral)
+        Mistral Vibe
       
     </span>
   </a>
@@ -2122,7 +2122,7 @@
 <td><code>vibepod/opencode:latest</code></td>
 </tr>
 <tr>
-<td><code>devstral</code> (alias: <code>vibe</code>)</td>
+<td><code>vibe</code> (alias: <code>devstral</code>)</td>
 <td>Mistral</td>
 <td><code>vp d</code></td>
 <td><code>vibepod/devstral:latest</code></td>
@@ -2195,7 +2195,7 @@
 </tr>
 </tbody>
 </table>
-<p>Alias note: <code>vp run vibe</code> resolves to <code>vp run devstral</code>, <code>vp run qwen-cli</code>
+<p>Alias note: <code>vp run devstral</code> resolves to <code>vp run vibe</code>, <code>vp run qwen-cli</code>
 resolves to <code>vp run qwen</code>, and <code>vp run deepseek</code> / <code>vp run deepseek-harness</code>
 resolve to <code>vp run dsh</code>.</p>
 <h2 id="deepseek-harness-dsh-web-ui-agent">DeepSeek Harness (<code>dsh</code>) — Web UI agent<a class="headerlink" href="#deepseek-harness-dsh-web-ui-agent" title="Permanent link">&para;</a></h2>
@@ -2264,7 +2264,7 @@ hot-reload into the running server.</p>
 </code></pre></div>
 <p>Or for a specific agent only:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">devstral</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">vibe</span><span class="p">:</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">auto_pull</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Per-agent <code>auto_pull</code> takes precedence over the global setting. For example, you can disable it globally but keep it on for a specific agent:</p>
@@ -2287,7 +2287,7 @@ hot-reload into the running server.</p>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>devstral</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>). The CLI also supports the aliases <code>vibe</code> (→ <code>devstral</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>vibe</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>). The CLI also supports the aliases <code>devstral</code> (→ <code>vibe</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -2382,7 +2382,7 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>--approval-mode=yolo</code></td>
 </tr>
 <tr>
-<td><code>devstral</code></td>
+<td><code>vibe</code></td>
 <td><code>--auto-approve</code></td>
 </tr>
 <tr>
@@ -2848,13 +2848,18 @@ nothing extra is printed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>vp<span class="w"> </span>run<span class="w"> </span>opencode<span class="w">   </span><span class="c1"># or: vp o</span>
 </code></pre></div>
 <p>Credentials and settings are persisted to <code>~/.config/vibepod/agents/opencode/</code> on the host and mounted at <code>/config</code> inside the container. In addition, the XDG data and config directories (<code>/root/.local/share/opencode</code> and <code>/root/.config/opencode</code>) are bind-mounted from the host so that authentication state is preserved across container restarts.</p>
-<h3 id="devstral-vibe-mistral">Devstral / Vibe (Mistral)<a class="headerlink" href="#devstral-vibe-mistral" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># or: vp d</span>
-<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">       </span><span class="c1"># alias of devstral</span>
+<h3 id="mistral-vibe">Mistral Vibe<a class="headerlink" href="#mistral-vibe" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>vp<span class="w"> </span>run<span class="w"> </span>vibe<span class="w">   </span><span class="c1"># or: vp d</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>vp<span class="w"> </span>run<span class="w"> </span>devstral<span class="w">   </span><span class="c1"># alias of vibe</span>
 </code></pre></div>
+<p>The canonical agent ID is <code>vibe</code>; <code>devstral</code> remains a compatibility alias.
+Existing <code>agents.devstral</code> configuration is accepted (use <code>agents.vibe</code> for new
+configuration). The published image remains <code>vibepod/devstral:latest</code>, and the
+existing <code>agents/devstral</code> storage directory is retained for credentials and
+sessions. <code>VP_IMAGE_VIBE</code> takes precedence over the legacy <code>VP_IMAGE_DEVSTRAL</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Devstral runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
+<p>Vibe runs under your host user (uid:gid) and requires the <code>linux/amd64</code> platform. On Apple Silicon, Docker's Rosetta emulation is used automatically.</p>
 </div>
 <h3 id="auggie-augment-code">Auggie (Augment Code)<a class="headerlink" href="#auggie-augment-code" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>vp<span class="w"> </span>run<span class="w"> </span>auggie<span class="w">   </span><span class="c1"># or: vp a</span>

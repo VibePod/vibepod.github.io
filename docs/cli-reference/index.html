@@ -1986,6 +1986,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#vibe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vibe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#x" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3120,6 +3131,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#vibe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vibe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#x" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3453,7 +3475,7 @@ was closed. Find candidate containers with <code>vp list</code>.</p>
 <a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="d">d<a class="headerlink" href="#d" title="Permanent link">&para;</a></h4>
-<p>Alias for <code>vp run devstral</code>.</p>
+<p>Alias for <code>vp run vibe</code>.</p>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>vp d [OPTIONS]
 </code></pre></div>
@@ -3484,7 +3506,7 @@ was closed. Find candidate containers with <code>vp list</code>.</p>
 <a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 <h4 id="devstral">devstral<a class="headerlink" href="#devstral" title="Permanent link">&para;</a></h4>
-<p>Alias for <code>vp run devstral</code>.</p>
+<p>Alias for <code>vp run vibe</code>.</p>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>vp devstral [OPTIONS]
 </code></pre></div>
@@ -4601,10 +4623,10 @@ exact in-container herdr call.</p>
 <p>Options:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-165-1" name="__codelineno-165-1" href="#__codelineno-165-1"></a>  --json  Output as JSON
 </code></pre></div>
-<h4 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h4>
-<p>Alias for <code>vp run codex</code>.</p>
+<h4 id="vibe">vibe<a class="headerlink" href="#vibe" title="Permanent link">&para;</a></h4>
+<p>Alias for <code>vp run vibe</code>.</p>
 <p>Usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-166-1" name="__codelineno-166-1" href="#__codelineno-166-1"></a>vp x [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-166-1" name="__codelineno-166-1" href="#__codelineno-166-1"></a>vp vibe [OPTIONS]
 </code></pre></div>
 <p>Options:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-167-1" name="__codelineno-167-1" href="#__codelineno-167-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
@@ -4631,6 +4653,37 @@ exact in-container herdr call.</p>
 <a id="__codelineno-167-22" name="__codelineno-167-22" href="#__codelineno-167-22"></a>                          ACP-capable editors
 <a id="__codelineno-167-23" name="__codelineno-167-23" href="#__codelineno-167-23"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
 <a id="__codelineno-167-24" name="__codelineno-167-24" href="#__codelineno-167-24"></a>  --provider &lt;str&gt;        Temporarily use a global provider
+</code></pre></div>
+<h4 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h4>
+<p>Alias for <code>vp run codex</code>.</p>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-168-1" name="__codelineno-168-1" href="#__codelineno-168-1"></a>vp x [OPTIONS]
+</code></pre></div>
+<p>Options:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-169-1" name="__codelineno-169-1" href="#__codelineno-169-1"></a>  -w, --workspace &lt;path&gt;  Workspace directory  [default: .]
+<a id="__codelineno-169-2" name="__codelineno-169-2" href="#__codelineno-169-2"></a>  --pull                  Pull latest image before run
+<a id="__codelineno-169-3" name="__codelineno-169-3" href="#__codelineno-169-3"></a>  --no-overlay            Skip the project overlay image
+<a id="__codelineno-169-4" name="__codelineno-169-4" href="#__codelineno-169-4"></a>  --rebuild-overlay       Force rebuilding the project overlay image
+<a id="__codelineno-169-5" name="__codelineno-169-5" href="#__codelineno-169-5"></a>  --no-herdr              Skip herdr terminal-multiplexer wiring
+<a id="__codelineno-169-6" name="__codelineno-169-6" href="#__codelineno-169-6"></a>  -d, --detach            Run container in background
+<a id="__codelineno-169-7" name="__codelineno-169-7" href="#__codelineno-169-7"></a>  -e, --env &lt;str&gt;         Environment variable KEY=VALUE
+<a id="__codelineno-169-8" name="__codelineno-169-8" href="#__codelineno-169-8"></a>  -p, --publish &lt;str&gt;     Publish a container port in `docker run -p` syntax
+<a id="__codelineno-169-9" name="__codelineno-169-9" href="#__codelineno-169-9"></a>                          (e.g. 127.0.0.1:3090:3081); replaces configured
+<a id="__codelineno-169-10" name="__codelineno-169-10" href="#__codelineno-169-10"></a>                          agents.&lt;agent&gt;.ports for this run
+<a id="__codelineno-169-11" name="__codelineno-169-11" href="#__codelineno-169-11"></a>  -v, --volume &lt;str&gt;      Mount a host path or named volume as
+<a id="__codelineno-169-12" name="__codelineno-169-12" href="#__codelineno-169-12"></a>                          SOURCE:TARGET[:ro|rw]; added to configured
+<a id="__codelineno-169-13" name="__codelineno-169-13" href="#__codelineno-169-13"></a>                          agents.&lt;agent&gt;.volumes (same TARGET replaces)
+<a id="__codelineno-169-14" name="__codelineno-169-14" href="#__codelineno-169-14"></a>  --name &lt;str&gt;            Custom container name
+<a id="__codelineno-169-15" name="__codelineno-169-15" href="#__codelineno-169-15"></a>  --network &lt;str&gt;         Additional Docker network to connect the container
+<a id="__codelineno-169-16" name="__codelineno-169-16" href="#__codelineno-169-16"></a>                          to
+<a id="__codelineno-169-17" name="__codelineno-169-17" href="#__codelineno-169-17"></a>  --paste-images          Enable image pasting via X11 clipboard (requires
+<a id="__codelineno-169-18" name="__codelineno-169-18" href="#__codelineno-169-18"></a>                          DISPLAY to be set)
+<a id="__codelineno-169-19" name="__codelineno-169-19" href="#__codelineno-169-19"></a>  --ikwid                 I Know What I'm Doing: enable auto-approval / skip
+<a id="__codelineno-169-20" name="__codelineno-169-20" href="#__codelineno-169-20"></a>                          permission prompts
+<a id="__codelineno-169-21" name="__codelineno-169-21" href="#__codelineno-169-21"></a>  --acp                   Run as an Agent Client Protocol (ACP) adapter for
+<a id="__codelineno-169-22" name="__codelineno-169-22" href="#__codelineno-169-22"></a>                          ACP-capable editors
+<a id="__codelineno-169-23" name="__codelineno-169-23" href="#__codelineno-169-23"></a>  --profile &lt;str&gt;         Credential profile to use (see `vp profile list`)
+<a id="__codelineno-169-24" name="__codelineno-169-24" href="#__codelineno-169-24"></a>  --provider &lt;str&gt;        Temporarily use a global provider
 </code></pre></div>
 
 

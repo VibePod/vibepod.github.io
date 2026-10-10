@@ -568,6 +568,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#authenticated-lan-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authenticated LAN servers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1193,6 +1204,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#authenticated-lan-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authenticated LAN servers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1506,9 +1528,11 @@ leave private files inside a retained container until it is removed; no temporar
 provider files are left on the host. Restarting a retained container rebuilds the
 view using that container's original launch environment.</p>
 <p>Environment credentials remain visible to container-runtime administrators and
-in retained containers until removal. Authenticated launches currently require
-an HTTPS endpoint. Unauthenticated local endpoints can use HTTP; Pi and Claude
-receive a placeholder key because their clients require one.</p>
+in retained containers until removal. Authenticated launches require an HTTPS
+endpoint unless the provider opts in to plain HTTP (see
+<a href="#authenticated-lan-servers">Authenticated LAN servers</a>). Unauthenticated local
+endpoints can use HTTP; Pi and Claude receive a placeholder key because their
+clients require one.</p>
 <p>The bootstrap script itself is copied once to <code>&lt;config root&gt;/runtime/</code>
 (<code>~/.config/vibepod/runtime/provider-bootstrap.cjs</code>, honoring <code>VP_CONFIG_DIR</code>)
 and bind-mounted read-only at <code>/opt/vibepod/provider-bootstrap.cjs</code> (likewise
@@ -1640,6 +1664,21 @@ untouched:</p>
 Codex (Responses only) reject it. Ollama also serves the Anthropic Messages API
 on recent versions: register a second provider with protocol <code>anthropic</code> and
 base URL <code>http://192.168.178.85:11434</code> (no <code>/v1</code>) to use it with Claude.</p>
+<h3 id="authenticated-lan-servers">Authenticated LAN servers<a class="headerlink" href="#authenticated-lan-servers" title="Permanent link">&para;</a></h3>
+<p>A local server that checks an API key (for example <code>llama-server --api-key</code>)
+but serves plain <code>http://</code> needs an explicit opt-in. When the endpoint is
+<code>http://</code> and authentication is <code>key</code> or <code>env</code>, <code>vp provider add</code> and
+<code>vp provider edit</code> ask:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Allow agents to send the API key over unencrypted HTTP (launches are refused otherwise)? [y/N]: y
+</code></pre></div>
+<p>Answering yes stores <code>allow_http_key = true</code> in the provider metadata. Launches
+then pass the key to the agent over HTTP, and discovery no longer asks again.
+<code>vp provider list</code> shows <code>http-key=allowed</code> for these providers. Without the
+opt-in, launches stop with <code>Authenticated provider launches require an HTTPS
+endpoint</code>. The opt-in is a local decision: <code>vp provider export</code> leaves it out,
+<code>vp provider import</code> ignores it, and switching the URL to <code>https://</code> or the
+authentication to <code>none</code> clears it. Anyone on the network path can read the
+key, so use it only on trusted networks.</p>
 
 
 

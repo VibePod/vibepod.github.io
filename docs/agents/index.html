@@ -2819,6 +2819,10 @@ whether it is already built.</p>
 <td><code>hermes</code></td>
 <td><code>hermes -z "&lt;prompt&gt;"</code></td>
 </tr>
+<tr>
+<td><code>pi</code></td>
+<td><code>pi --mode json -- "&lt;prompt&gt;"</code></td>
+</tr>
 </tbody>
 </table>
 <p>Other agents error with a clear message; support can be added by setting <code>headless_prefix</code> (or <code>headless_command</code> for agents whose one-shot invocation differs from their interactive command) on their <code>AgentSpec</code>.</p>
@@ -3158,8 +3162,10 @@ forwarder:</p>
 <ul>
 <li>Interactive: run <code>/trust</code> to save the decision. It is written to <code>PI_CODING_AGENT_DIR</code> (<code>/config/.pi/agent/trust.json</code>), which lives inside the persisted config mount, so the trust survives container restarts.</li>
 <li><code>--ikwid</code>: appends <code>--approve</code>, trusting project-local files for that run (see <a href="#ikwid-mode---ikwid">IKWID mode</a>).</li>
-<li>Non-interactive modes (<code>-p</code>, <code>--mode json</code>, <code>--mode rpc</code>) show no prompt and fall back to <code>defaultProjectTrust</code> in <code>/config/.pi/agent/settings.json</code> (<code>ask</code> | <code>always</code> | <code>never</code>). Pre-seed this file if you need unattended runs to trust projects automatically.</li>
+<li>Without a saved decision, Pi falls back to <code>defaultProjectTrust</code> in <code>/config/.pi/agent/settings.json</code> (<code>ask</code> | <code>always</code> | <code>never</code>). It applies to interactive sessions too, so <code>always</code> turns off the prompt everywhere. With <code>ask</code>, non-interactive modes (<code>-p</code>, <code>--mode json</code>, <code>--mode rpc</code>) treat the project as untrusted and skip its project-local files.</li>
 </ul>
+<p><code>vp task create pi "&lt;prompt&gt;"</code> runs <code>pi --mode json -- "&lt;prompt&gt;"</code>, so <code>vp task logs</code> shows the session header and then one JSON event per line, including the final assistant message. Like other headless agents, a task needs the project trusted beforehand (<code>/trust</code> in <code>vp run pi</code>) or <code>--ikwid</code> for that run. Arguments after <code>--</code> go before Pi's own <code>--</code>, so a prompt starting with <code>-</code> stays a prompt. With <code>--provider</code>, a task needs a model: either a single provider with a default model, or <code>-- --model &lt;provider&gt;/&lt;model&gt;</code>.</p>
+<p>In JSON mode Pi exits 0 even when the model call fails or is aborted, so a task can show as completed with an error in its last <code>message_end</code> event. Check <code>vp task logs</code> when the result matters.</p>
 <h4 id="local-models-ollama-lm-studio-lemonade-llamacpp">Local models (Ollama, LM Studio, Lemonade, llama.cpp)<a class="headerlink" href="#local-models-ollama-lm-studio-lemonade-llamacpp" title="Permanent link">&para;</a></h4>
 <p>Pi supports custom OpenAI-compatible providers through a
 <a href="https://pi.dev/docs/latest/models"><code>models.json</code></a> file in its agent directory.

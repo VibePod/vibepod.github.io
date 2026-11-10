@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1264,7 +1264,7 @@ the integrated terminal. Everything that makes a VibePod run what it is —
 container isolation, profiles, project overlays, the MITM proxy and local
 metric collection — stays active.</p>
 <h2 id="supported-agents">Supported agents<a class="headerlink" href="#supported-agents" title="Permanent link">&para;</a></h2>
-<p>Eleven agents ship an ACP adapter command. They split into two kinds, which
+<p>Fourteen agents ship an ACP adapter command. They split into two kinds, which
 differ in what has to happen before the first JSON-RPC frame:</p>
 <table>
 <thead>
@@ -1291,6 +1291,14 @@ differ in what has to happen before the first JSON-RPC frame:</p>
 <td><code>jcode acp</code> — built into the CLI</td>
 </tr>
 <tr>
+<td><code>cline</code></td>
+<td><code>cline --acp</code> — built into the CLI</td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td><code>cursor-agent acp</code> — built into the CLI</td>
+</tr>
+<tr>
 <td><code>gemini</code></td>
 <td><code>gemini --experimental-acp</code> — built in</td>
 </tr>
@@ -1307,6 +1315,10 @@ differ in what has to happen before the first JSON-RPC frame:</p>
 <td><code>hermes-acp</code> — separate binary in the image</td>
 </tr>
 <tr>
+<td><code>junie</code></td>
+<td><code>junie --acp=true</code> — built into the CLI</td>
+</tr>
+<tr>
 <td><code>claude</code></td>
 <td><code>npx @agentclientprotocol/claude-agent-acp</code></td>
 </tr>
@@ -1320,7 +1332,7 @@ differ in what has to happen before the first JSON-RPC frame:</p>
 </tr>
 </tbody>
 </table>
-<p>The first eight run a binary that is already in the image, so they start
+<p>The first eleven run a binary that is already in the image, so they start
 offline and immediately. <code>claude</code>, <code>codex</code> and <code>pi</code> fetch their adapter with
 npx, which needs the package registry reachable through the proxy filter and
 adds startup latency: <code>claude</code> and <code>codex</code> download on every launch, <code>pi</code>
@@ -1588,10 +1600,10 @@ Anything else arrives on stderr, or as a JSON-RPC error on stdout.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

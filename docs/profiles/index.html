@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -456,6 +456,17 @@
     <span class="md-ellipsis">
       
         Using a profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-configuration-per-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent configuration per profile
       
     </span>
   </a>
@@ -1053,6 +1064,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#agent-configuration-per-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent configuration per profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#selecting-a-profile-without-the-flag" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1110,13 +1132,36 @@ directories, proxy, logging) stays shared. Environment variables such as
 <code>ANTHROPIC_API_KEY</code> are still configured via <code>agents.&lt;agent&gt;.env</code> or <code>-e</code>
 flags — combine them with a profile via a project config (see below).</p>
 <h2 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>~/.config/vibepod/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;base&gt;/                              # see the table below
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  agents/&lt;agent&gt;/                    # the built-in "default" profile
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  profiles/&lt;name&gt;/agents/&lt;agent&gt;/    # named profiles
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  profiles/&lt;name&gt;/filter.yaml        # optional per-profile proxy filter
 </code></pre></div>
-<p>Your existing credentials in <code>~/.config/vibepod/agents/</code> are the <code>default</code>
-profile — nothing moves when you start using profiles.</p>
+<p>The base directory depends on the platform:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Base directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>~/.config/vibepod/</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/vibepod/</code></td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, if <code>XDG_CONFIG_HOME</code> is set, the base directory is
+<code>$XDG_CONFIG_HOME/vibepod/</code> instead.</p>
+<p>If <code>VP_CONFIG_DIR</code> is set, it replaces the base directory on all platforms (see
+<a href="../configuration/#environment-variables">Environment variables</a>).</p>
+<p>Your existing credentials in <code>&lt;base&gt;/agents/</code> are the <code>default</code> profile —
+nothing moves when you start using profiles.</p>
 <h2 id="managing-profiles">Managing profiles<a class="headerlink" href="#managing-profiles" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>profile<span class="w"> </span>list<span class="w">            </span><span class="c1"># list profiles; * marks the active one, agents with</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">                           </span><span class="c1"># stored data (config, caches, credentials) in parentheses</span>
@@ -1132,6 +1177,40 @@ The <code>default</code> profile always exists and cannot be removed.</p>
 </code></pre></div>
 <p>The first run with a fresh profile starts unauthenticated — log in once and the
 credentials are persisted inside that profile.</p>
+<h2 id="agent-configuration-per-profile">Agent configuration per profile<a class="headerlink" href="#agent-configuration-per-profile" title="Permanent link">&para;</a></h2>
+<p><code>vp profile create &lt;name&gt;</code> prints the path of the new profile directory. Each
+agent's directory inside it is mounted as that agent's config directory (see
+<a href="../agents/">Agents</a>), so any configuration file you place there applies
+only when the profile is active. Where the directory lives depends on the
+platform; see <a href="#layout">Layout</a>.</p>
+<p>For example, to point Claude at a custom endpoint and models, create
+<code>&lt;base&gt;/profiles/&lt;name&gt;/agents/claude/settings.json</code>. The file holds a token,
+so make it readable only by you before adding the content:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">profile_dir</span><span class="o">=</span><span class="s2">"/path/printed/by/vp-profile-create"</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>touch<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
+</code></pre></div>
+<p>Then add the settings to the file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"ANTHROPIC_BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com"</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"ANTHROPIC_AUTH_TOKEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">"ANTHROPIC_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DeepSeek-V4-Flash-0731"</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">"ANTHROPIC_DEFAULT_HAIKU_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Qwen3.6-35B-A3B"</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_CONTEXT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1048576"</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_OUTPUT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"393216"</span><span class="p">,</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nt">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dark"</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
+</code></pre></div>
+<p>Then <code>vp run claude --profile &lt;name&gt;</code> starts Claude with these settings, while
+other profiles keep their own.</p>
+<p>To set environment variables without a profile, use <code>agents.&lt;agent&gt;.env</code> (see
+<a href="../agents/#passing-environment-variables">Passing environment variables</a>).
+To route an agent to an endpoint without storing a token in the profile, use
+<a href="../providers/">Global model providers</a>.</p>
 <h2 id="selecting-a-profile-without-the-flag">Selecting a profile without the flag<a class="headerlink" href="#selecting-a-profile-without-the-flag" title="Permanent link">&para;</a></h2>
 <p>Resolution order (first match wins):</p>
 <ol>
@@ -1142,13 +1221,13 @@ credentials are persisted inside that profile.</p>
 <li><code>default</code></li>
 </ol>
 <p>Pinning a profile per project pairs well with per-project env vars:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># .vibepod/config.yaml — a project wired to a local Ollama</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://host.docker.internal:11434</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># .vibepod/config.yaml — a project wired to a local Ollama</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://host.docker.internal:11434</span>
 </code></pre></div>
 <p>Referencing a profile that does not exist is a hard error — create it first
 with <code>vp profile create &lt;name&gt;</code>.</p>
@@ -1156,9 +1235,9 @@ with <code>vp profile create &lt;name&gt;</code>.</p>
 <p>Each named profile can carry its own proxy filter mode and allow/deny lists in
 <code>profiles/&lt;name&gt;/filter.yaml</code>. The <code>vp proxy filter</code> commands act on the
 active profile, or on an explicit one via <code>--profile</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow<span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com<span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status<span class="w"> </span>--profile<span class="w"> </span>work
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status<span class="w"> </span>--profile<span class="w"> </span>work
 </code></pre></div>
 <p>The file is created on first write, seeded from the global filter settings.
 A profile without <code>filter.yaml</code> inherits the global <code>proxy.filter</code> config and
@@ -1229,10 +1308,10 @@ stopped container) still references it.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

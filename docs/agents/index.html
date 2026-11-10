@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -983,6 +983,39 @@
     <span class="md-ellipsis">
       
         Qwen Code (Qwen)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#junie-jetbrains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Junie (JetBrains)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursor-cli-anysphere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursor CLI (Anysphere)
       
     </span>
   </a>
@@ -2154,6 +2187,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#junie-jetbrains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Junie (JetBrains)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursor-cli-anysphere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursor CLI (Anysphere)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2297,6 +2363,24 @@
 <td>Nous Research</td>
 <td><code>vp h</code></td>
 <td><code>vibepod/hermes:latest</code></td>
+</tr>
+<tr>
+<td><code>cline</code></td>
+<td>Cline</td>
+<td><code>vp cl</code></td>
+<td><code>vibepod/cline:latest</code></td>
+</tr>
+<tr>
+<td><code>junie</code></td>
+<td>JetBrains</td>
+<td><code>vp ju</code></td>
+<td><code>vibepod/junie:latest</code></td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td>Anysphere</td>
+<td><code>vp cu</code></td>
+<td><code>vibepod/cursor:latest</code></td>
 </tr>
 </tbody>
 </table>
@@ -2555,7 +2639,7 @@ project env settings, or pass them explicitly with <code>vp run -e KEY=value</co
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>vibe</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>). The CLI also supports the aliases <code>devstral</code> (→ <code>vibe</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>vibe</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>, <code>cline</code>, <code>junie</code>, <code>cursor</code>). The CLI also supports the aliases <code>devstral</code> (→ <code>vibe</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -2701,6 +2785,18 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <td><code>hermes</code></td>
 <td><code>--yolo</code></td>
 </tr>
+<tr>
+<td><code>cline</code></td>
+<td><code>--auto-approve true</code></td>
+</tr>
+<tr>
+<td><code>junie</code></td>
+<td><code>--brave</code></td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td><code>--force</code></td>
+</tr>
 </tbody>
 </table>
 <p>Example:</p>
@@ -2823,6 +2919,18 @@ whether it is already built.</p>
 <td><code>pi</code></td>
 <td><code>pi --mode json -- "&lt;prompt&gt;"</code></td>
 </tr>
+<tr>
+<td><code>cline</code></td>
+<td><code>cline --act "&lt;prompt&gt;"</code></td>
+</tr>
+<tr>
+<td><code>junie</code></td>
+<td><code>junie --task "&lt;prompt&gt;"</code></td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td><code>cursor-agent --trust -p "&lt;prompt&gt;"</code></td>
+</tr>
 </tbody>
 </table>
 <p>Other agents error with a clear message; support can be added by setting <code>headless_prefix</code> (or <code>headless_command</code> for agents whose one-shot invocation differs from their interactive command) on their <code>AgentSpec</code>.</p>
@@ -2861,7 +2969,7 @@ whether it is already built.</p>
 <h3 id="caveats_1">Caveats<a class="headerlink" href="#caveats_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>No <code>--resume</code> in v1.</strong> Task mode starts a fresh session every time. Use the agent's own resume flag via passthrough (<code>-- --resume &lt;session_id&gt;</code> for Claude) if you need continuity.</li>
-<li><strong>LLM config model flag is skipped in task mode.</strong> <code>llm.base_url</code> / <code>llm.api_key</code> / <code>llm.model</code> are still injected as env vars, but the <code>--model</code>-style CLI flag is not appended — different agents place it differently relative to subcommands. Pass an explicit model via <code>--</code>.</li>
+<li><strong>LLM config model flag is skipped in task mode.</strong> <code>llm.base_url</code> / <code>llm.api_key</code> / <code>llm.model</code> are still injected as env vars for agents that map them (Junie, for example, takes models only from its own settings), but the <code>--model</code>-style CLI flag is not appended — different agents place it differently relative to subcommands. Pass an explicit model via <code>--</code>.</li>
 <li><strong>Default timeout: 2 hours.</strong> On timeout, VibePod gracefully stops the container and records the task as failed. Pass <code>--timeout none</code> to opt out for one task.</li>
 <li><strong>Task containers are not auto-removed.</strong> Run <code>vp task rm &lt;id&gt;</code> when you're done inspecting one task, or <code>vp task rm --all -f</code> to clean up every recorded task and its container.</li>
 </ul>
@@ -2882,8 +2990,8 @@ example:</p>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>claude --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
 </code></pre></div>
 <p>When VibePod recognizes such a hint in the session output (supported for
-Claude, Codex, Pi, Copilot, Jcode, and Freebuff), it prints the equivalent
-VibePod command after the agent exits:</p>
+Claude, Codex, Pi, Copilot, Jcode, Freebuff, Hermes, Cline, Junie, and Cursor), it
+prints the equivalent VibePod command after the agent exits:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>Resume this session with:
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>  vp run claude -- --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
 </code></pre></div>
@@ -3522,6 +3630,268 @@ already mounted.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>vp<span class="w"> </span>run<span class="w"> </span>qwen<span class="w"> </span>--ikwid
 <a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>qwen<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
+<h3 id="cline">Cline<a class="headerlink" href="#cline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w">   </span><span class="c1"># or: vp cl</span>
+</code></pre></div>
+<p>The default image is <code>vibepod/cline:latest</code>. Until it is published, build the
+Cline image from the companion
+<a href="https://github.com/VibePod/vibepod-agents/tree/cline-agent/docker/cline">vibepod-agents branch</a>
+and select the local image explicitly. From that repository's checkout:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>vibepod/cline:local<span class="w"> </span>docker/cline
+<a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a><span class="nv">VP_IMAGE_CLINE</span><span class="o">=</span>vibepod/cline:local<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>cline
+</code></pre></div>
+<p>Cline CLI is the terminal edition of the Cline coding agent and shares its
+agent core (plan/act modes, MCP servers, rules, skills, checkpoints) with the
+VS Code extension. The image installs the npm package <code>cline</code>, which ships a
+self-contained binary per platform, pins one release and disables the CLI's
+background self-update. State is persisted under
+<code>~/.config/vibepod/agents/cline/</code>, mounted at <code>/config</code> inside the container
+(<code>HOME=/config</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config/.cline/data/settings/providers.json</code></td>
+<td>Provider API keys, OAuth tokens and model selection</td>
+</tr>
+<tr>
+<td><code>/config/.cline/data/settings/global-settings.json</code>, <code>cline_mcp_settings.json</code></td>
+<td>Global settings and MCP servers</td>
+</tr>
+<tr>
+<td><code>/config/.cline/data/sessions/</code></td>
+<td>Session history (resume with <code>cline --id &lt;session-id&gt;</code>)</td>
+</tr>
+<tr>
+<td><code>/config/.cline/rules/</code>, <code>/config/.cline/skills/</code>, <code>/config/.cline/hooks/</code></td>
+<td>Global rules, skills and hooks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Seed a provider and model once; the settings persist in
+the config mount:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span>auth<span class="w"> </span>--provider<span class="w"> </span>anthropic<span class="w"> </span>--apikey<span class="w"> </span>sk-ant-...<span class="w"> </span>--modelid<span class="w"> </span>claude-sonnet-4-6
+</code></pre></div>
+<p><code>vp run cline -- auth</code> opens the interactive setup (Sign in with Cline,
+ChatGPT subscription, or your own API key). API keys can also be injected per
+provider through the environment, for example <code>ANTHROPIC_API_KEY</code>,
+<code>OPENAI_API_KEY</code>, <code>OPENROUTER_API_KEY</code> or <code>CLINE_API_KEY</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a><span class="w">  </span><span class="nt">cline</span><span class="p">:</span>
+<a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+</code></pre></div>
+<p>Cline picks its provider from the saved settings or <code>-P/--provider</code>, not from
+VibePod's global <code>llm</code> settings, and <code>--provider</code> launches are rejected for it
+(see <a href="../providers/">Model providers</a>).</p>
+<p><strong>Non-interactive mode.</strong> A prompt without <code>-i</code> runs a single turn and exits,
+with both <code>vp run</code> and task mode. Task mode passes <code>--act</code>, because without an
+explicit mode flag Cline reuses the plan/act mode last selected in the TUI and
+a task left in plan mode would never edit files:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"Summarize the README"</span>
+</code></pre></div>
+<p><strong>IKWID mode.</strong> Cline auto-approves tool calls by default, but the TUI
+remembers a disabled auto-approval toggle; <code>--ikwid</code> adds
+<code>--auto-approve true</code>, which forces auto-approval for every tool for that run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--ikwid
+<a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+</code></pre></div>
+<p><strong>Editor integration.</strong> <code>cline --acp</code> is a built-in ACP server, so
+<code>vp run cline --acp</code> works in any ACP editor — see the <a href="../acp/">ACP docs</a>.
+Configure a provider with <code>vp run cline -- auth</code> first; the adapter reuses
+those settings.</p>
+<p><strong>Skills.</strong> Cline scans <code>~/.agents/skills/</code> (as well as <code>~/.cline/skills/</code>),
+so skills installed via <code>vp skills</code> are mounted at
+<code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
+<p><strong>Proxy and TLS.</strong> The Cline binary honors <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> and
+<code>NODE_EXTRA_CA_CERTS</code>, which VibePod sets when the proxy is enabled; the
+image also appends the mounted mitmproxy CA to the system bundle, which the
+CLI merges into its trust store on every launch. Routing of Cline's API
+traffic through the proxy still needs verification against the published
+image.</p>
+<h3 id="junie-jetbrains">Junie (JetBrains)<a class="headerlink" href="#junie-jetbrains" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w">   </span><span class="c1"># or: vp ju</span>
+</code></pre></div>
+<p>Junie is JetBrains' LLM-agnostic coding agent. The image ships the official
+Linux release bundle (launcher, JetBrains Runtime and application jar) under
+<code>/opt/junie</code>. All state lives under <code>$JUNIE_HOME</code>, which VibePod points at
+<code>/config/.junie</code> on the persisted mount
+(<code>~/.config/vibepod/agents/junie/.junie/</code> on the host):</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config/.junie/settings.json</code></td>
+<td>CLI settings (selected model, UI preferences)</td>
+</tr>
+<tr>
+<td><code>/config/.junie/secure_credentials.json</code></td>
+<td>Junie account tokens and BYOK API keys (there is no Secret Service in the container, so Junie uses this file)</td>
+</tr>
+<tr>
+<td><code>/config/.junie/config.json</code></td>
+<td>User-level configuration</td>
+</tr>
+<tr>
+<td><code>/config/.junie/mcp/mcp.json</code></td>
+<td>Global MCP server configuration</td>
+</tr>
+<tr>
+<td><code>/config/.junie/skills/</code></td>
+<td>User-level skills</td>
+</tr>
+<tr>
+<td><code>/config/.junie/sessions/</code></td>
+<td>Session history (resume with <code>junie --session-id &lt;id&gt;</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Start <code>vp run junie</code> and log in with your JetBrains
+account from the TUI, or use an API key. Generate a Junie API key on
+<a href="https://junie.jetbrains.com/cli">junie.jetbrains.com/cli</a> and pass it as an
+environment variable. This also works in task mode, where there is no TUI. In
+your <a href="../configuration/">global config</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a><span class="w">  </span><span class="nt">junie</span><span class="p">:</span>
+<a id="__codelineno-90-3" name="__codelineno-90-3" href="#__codelineno-90-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-90-4" name="__codelineno-90-4" href="#__codelineno-90-4"></a><span class="w">      </span><span class="nt">JUNIE_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<p>Keep the key out of a committed project <code>.vibepod/config.yaml</code>; note that
+<code>vp config init junie</code> copies this <code>env</code>, key included, into the project config.
+Or per run, from a variable you already exported:
+<code>vp run junie -e JUNIE_API_KEY="$JUNIE_API_KEY"</code>. For bring-your-own-key, Junie
+reads <code>JUNIE_ANTHROPIC_API_KEY</code>, <code>JUNIE_OPENAI_API_KEY</code>, <code>JUNIE_GOOGLE_API_KEY</code>,
+<code>JUNIE_GROK_API_KEY</code> and <code>JUNIE_OPENROUTER_API_KEY</code>, plus
+<code>JUNIE_LITELLM_URL</code>/<code>JUNIE_LITELLM_API_KEY</code> for a LiteLLM proxy. Select the
+provider with <code>JUNIE_LLM_PROVIDER</code> (or <code>--provider</code>) and the model with
+<code>JUNIE_MODEL</code> (or <code>--model</code>). VibePod's global <code>llm</code> settings are not mapped for
+Junie, because <code>--model</code> only accepts names from Junie's built-in list or from
+custom model profiles.</p>
+<p><strong>Proxy and TLS.</strong> Junie honors <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code>, but its bundled
+Java runtime ignores <code>SSL_CERT_FILE</code>. When the VibePod proxy is enabled, the
+image entrypoint imports the mounted mitmproxy CA into the runtime's trust
+store before starting Junie, so HTTPS calls pass through <code>vibepod-proxy</code>.</p>
+<p><strong>Non-interactive mode.</strong> <code>--task</code> runs a single task and exits, both with
+<code>vp run</code> and task mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w"> </span>--<span class="w"> </span>--task<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>junie<span class="w"> </span><span class="s2">"Summarize the README"</span>
+</code></pre></div>
+<p><strong>Auto-approval.</strong> <code>--ikwid</code> appends <code>--brave</code> (Brave Mode), which Junie
+documents for interactive sessions. Non-interactive runs accept the flag and
+ignore it, so <code>vp task create junie "Fix the failing test" --ikwid</code> starts, but
+<code>--ikwid</code> does not change how a task handles approvals.</p>
+<p><strong>Skills.</strong> Junie reads user-level skills from <code>$JUNIE_HOME/skills/</code>, so skills
+installed via <code>vp skills</code> are mounted at <code>/config/.junie/skills/&lt;id&gt;</code>, or under
+the absolute <code>JUNIE_HOME</code> set in <code>agents.junie.env</code> or with <code>-e</code>. They are not
+mounted when that <code>JUNIE_HOME</code> is inside the workspace, where the mount points
+would end up in the project. Junie reads <code>.agents/skills/</code> only inside the
+project (<code>&lt;workspace&gt;/.agents/skills/</code>), not in the home directory.</p>
+<p>Only <code>/config</code> is persisted. A <code>JUNIE_HOME</code> outside it loses credentials and
+session history when the container is replaced, unless you mount a volume at
+that path.</p>
+<p><strong>ACP.</strong> <code>vp run junie --acp</code> starts <code>junie --acp=true</code>.</p>
+<p>VibePod sets <code>JUNIE_SKIP_UPDATE_CHECK=true</code> so the release pinned in the image
+does not update itself at runtime.</p>
+<h3 id="cursor-cli-anysphere">Cursor CLI (Anysphere)<a class="headerlink" href="#cursor-cli-anysphere" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w">   </span><span class="c1"># or: vp cu</span>
+</code></pre></div>
+<p>The default image is <code>vibepod/cursor:latest</code>. Until it is published, build the
+Cursor image from the companion
+<a href="https://github.com/VibePod/vibepod-agents/tree/cursor-agent/docker/cursor">vibepod-agents branch</a>
+and select the local image explicitly. From that repository's checkout:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>vibepod/cursor:local<span class="w"> </span>docker/cursor
+<a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a><span class="nv">VP_IMAGE_CURSOR</span><span class="o">=</span>vibepod/cursor:local<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>cursor
+</code></pre></div>
+<p>The <code>:local</code> tag avoids automatic pulls of <code>:latest</code>. The CLI registration
+alone does not install Cursor; the image must provide <code>cursor-agent</code> and the
+<code>/config</code> state mount described below.</p>
+<p>Cursor CLI (<code>cursor-agent</code>) is the terminal agent from the makers of the Cursor
+editor. It is closed source and ships as a self-contained package (bundled
+Node.js runtime) from <code>downloads.cursor.com</code>; the image pins one release and
+tracks new ones from Cursor's installer script. Models are served through your
+Cursor account (<code>--model</code>, <code>/model</code> or <code>cursor-agent models</code>), so VibePod's
+global <code>llm</code> settings do not apply to it. State is persisted under
+<code>~/.config/vibepod/agents/cursor/</code>, mounted at <code>/config</code> inside the container
+(<code>HOME=/config</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config/.cursor/cli-config.json</code></td>
+<td>CLI settings (permissions, approval mode, model, release channel)</td>
+</tr>
+<tr>
+<td><code>/config/.config/cursor/auth.json</code></td>
+<td>Login tokens written by <code>cursor-agent login</code></td>
+</tr>
+<tr>
+<td><code>/config/.cursor/projects/</code>, <code>/config/.cursor/chats/</code></td>
+<td>Per-workspace trust, chat history (resume with <code>cursor-agent --resume=&lt;id&gt;</code>)</td>
+</tr>
+<tr>
+<td><code>/config/.cursor/mcp.json</code>, <code>/config/.cursor/skills/</code></td>
+<td>Global MCP servers and personal skills</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Log in once; the CLI prints a <code>cursor.com/loginDeepControl</code>
+URL and polls for completion, so opening it in the host browser is enough (no
+callback port is involved):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>-e<span class="w"> </span><span class="nv">NO_OPEN_BROWSER</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>--<span class="w"> </span>login
+</code></pre></div>
+<p>Or use an API key from the Cursor dashboard instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a><span class="w">  </span><span class="nt">cursor</span><span class="p">:</span>
+<a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a><span class="w">      </span><span class="nt">CURSOR_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key_...</span>
+</code></pre></div>
+<p>Or per run: <code>vp run cursor -e CURSOR_API_KEY=key_...</code>.</p>
+<p><strong>Proxy and TLS.</strong> VibePod enables Node's environment proxy support with
+<code>NODE_USE_ENV_PROXY=1</code>. When the proxy is enabled, VibePod also supplies
+<code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> and <code>NODE_EXTRA_CA_CERTS</code> pointing at the mounted
+mitmproxy CA. Routing of Cursor's API traffic through the proxy still needs
+verification against the published image.</p>
+<p><strong>Non-interactive mode.</strong> Print mode works with both <code>vp run</code> and task mode.
+It refuses a workspace it has not been told to trust, so task mode always
+passes <code>--trust</code>, with or without <code>--ikwid</code>: a detached task cannot answer
+Cursor's workspace-trust prompt (interactive runs ask once per workspace and
+remember the answer in the config mount). <code>--trust</code> only marks the workspace as
+trusted; it does not skip command approvals, which is what <code>--ikwid</code> is for:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--<span class="w"> </span>--trust<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-96-2" name="__codelineno-96-2" href="#__codelineno-96-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"Summarize the README"</span>
+</code></pre></div>
+<p><strong>IKWID mode.</strong> <code>--ikwid</code> adds <code>--force</code> (alias <code>--yolo</code>), which runs every
+command not explicitly denied:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--ikwid
+<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+</code></pre></div>
+<p><strong>Editor integration.</strong> <code>cursor-agent acp</code> is a built-in ACP server, so
+<code>vp run cursor --acp</code> works in any ACP editor — see the <a href="../acp/">ACP docs</a>.
+Log in with <code>vp run cursor -- login</code> first; the adapter reuses those
+credentials.</p>
+<p><strong>Skills.</strong> Cursor scans <code>~/.agents/skills/</code> (as well as <code>~/.cursor/skills/</code>
+and <code>~/.claude/skills/</code>), so skills installed via <code>vp skills</code> are mounted at
+<code>/config/.agents/skills/&lt;id&gt;</code> and picked up automatically.</p>
+<p>The image pins Cursor's release channel to <code>static</code> in <code>cli-config.json</code> on
+every start. That is the CLI's only switch for its background self-update,
+which would otherwise download each new ~550 MB package into the config mount
+while the image keeps running its own pinned copy.</p>
 <h2 id="hermes-agent-hermes-developer-preview">Hermes Agent (<code>hermes</code>) — developer preview<a class="headerlink" href="#hermes-agent-hermes-developer-preview" title="Permanent link">&para;</a></h2>
 <p>Hermes is Nous Research's self-improving agent: it keeps cross-session memory,
 writes its own skills, and is not primarily a coding TUI. VibePod runs its
@@ -3558,7 +3928,7 @@ On a rootless Podman engine, <code>vp run hermes</code> and <code>vp task create
 starting a container rather than crashing mid-boot. Run Hermes on rootful
 Docker or Podman instead.</p>
 <p><strong>Headless one-shot:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
 </code></pre></div>
 <p><strong>Write sandbox.</strong> Hermes restricts its <code>write_file</code>/<code>patch</code> tools to the
 directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image ships
@@ -3566,10 +3936,10 @@ directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image sh
 sets <code>/opt/data:/workspace</code>. With <code>--acp</code> the workspace host path is appended
 too, because editors send absolute host paths. To widen it further, extend the
 value rather than replacing it — VibePod appends to whatever you set:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
-<a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
+<a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-99-4" name="__codelineno-99-4" href="#__codelineno-99-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
 </code></pre></div>
 <p><strong>Editor integration.</strong> Hermes ships its own ACP adapter as the separate
 <code>hermes-acp</code> console script, which the official image already provides, so
@@ -3582,8 +3952,8 @@ Editing <code>external_dirs</code> yourself disables the seeding; VibePod never
 overwrites a value you set.</p>
 <p><strong>IKWID mode.</strong> Hermes auto-approves tool calls in YOLO mode, which <code>--ikwid</code>
 enables via <code>--yolo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
-<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
+<a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 
@@ -3640,10 +4010,10 @@ enables via <code>--yolo</code>:</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

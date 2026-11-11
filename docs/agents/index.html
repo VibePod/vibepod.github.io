@@ -3920,13 +3920,16 @@ prioritizes saved provider settings, does not use <code>OPENAI_BASE_URL</code> f
 main custom-provider endpoint, and restricts API keys by endpoint host. Its
 ACP adapter also has no provider/model launch flags. Hermes-native provider
 setup remains supported; VibePod does not rewrite Hermes's saved settings.</p>
-<p><strong>Rootless Podman is not supported.</strong> The pinned Hermes image needs its own
-runtime user and exits before showing any output when launched under
-rootless Podman's <code>keep-id</code> user mapping, which VibePod uses for most agents.
-On a rootless Podman engine, <code>vp run hermes</code> and <code>vp task create hermes</code>
-(affecting interactive, task, and ACP) reject the launch before
-starting a container rather than crashing mid-boot. Run Hermes on rootful
-Docker or Podman instead.</p>
+<p><strong>Rootless Podman</strong> needs Podman 4.3 or newer. The pinned Hermes image must
+boot as root and then drop to its own <code>hermes</code> user (UID 10000); it exits if
+started directly as an arbitrary UID. On a rootless Podman engine VibePod
+therefore launches Hermes with <code>--userns=keep-id:uid=10000,gid=10000</code> and
+<code>--user 0:0</code> instead of the plain <code>keep-id</code> used for other agents: the image
+bootstraps as namespace root, and the <code>hermes</code> user it drops to is your host
+user, so files written to the workspace and config directory stay owned by
+you on the host. An explicit <code>HERMES_UID</code>/<code>HERMES_GID</code> (or <code>PUID</code>/<code>PGID</code>)
+other than <code>10000</code> is rejected there, since Hermes would drop to a UID
+outside that mapping.</p>
 <p><strong>Headless one-shot:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
 </code></pre></div>

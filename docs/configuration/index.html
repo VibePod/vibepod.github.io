@@ -1874,6 +1874,7 @@ but in-range ones are not detectable — quote every entry.</p>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Equivalent explicit mapping:</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--volume<span class="w"> </span>/my/path:/my/path
 </code></pre></div>
+<p>To make the workspace itself available at its host path as well as at <code>/workspace</code>, use <code>--workspace-system-path</code> instead of a volume; see <a href="../cli-reference/#workspace-at-its-host-path">Workspace at its host path</a>.</p>
 <h3 id="permissions-security-and-platform-behavior">Permissions, security, and platform behavior<a class="headerlink" href="#permissions-security-and-platform-behavior" title="Permanent link">&para;</a></h3>
 <ul>
 <li>A read-write bind mount lets the agent change or delete host files directly. Prefer <code>ro</code> for reference data and grant write access only where needed. Read-only mounts still expose their contents; avoid mounting credentials or other secrets unless required for the task. <code>ro</code> applies only to that mount: in the example, <code>data</code> is also reachable through the writable <code>/workspace/data</code> path. For data that must be protected from writes, use a source outside the workspace and ensure it has no other writable mount.</li>

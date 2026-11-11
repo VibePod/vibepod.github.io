@@ -78,6 +78,7 @@
         <div class="install-widget">
           <div class="install-tabs" role="group" aria-label="Choose an install method">
             <button type="button" class="install-tab is-active" data-install="pip" aria-pressed="true">pip</button>
+            <button type="button" class="install-tab" data-install="uv" aria-pressed="false">uv</button>
             <button type="button" class="install-tab" data-install="brew" aria-pressed="false">brew</button>
             <button type="button" class="install-tab" data-install="conda" aria-pressed="false">conda</button>
             <button type="button" class="install-tab" data-install="mamba" aria-pressed="false">mamba</button>
@@ -481,7 +482,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       <h2>Top questions</h2>
       <details>
         <summary>What is the best way to install VibePod CLI?</summary>
-        <p>Install from PyPI using <code>python -m pip install vibepod</code>, then use the README for command examples.</p>
+        <p>Install from PyPI using <code>python -m pip install vibepod</code> or <code>uv tool install vibepod</code>, then use the README for command examples.</p>
       </details>
       <details>
         <summary>Do I need to configure anything before running an agent?</summary>

@@ -344,7 +344,10 @@ if (lightbox) {
     { cmd: "jcode", name: "Jcode" },
     { cmd: "freebuff", name: "Freebuff" },
     { cmd: "qwen", name: "Qwen Code" },
-    { cmd: "hermes", name: "Hermes Agent" }
+    { cmd: "hermes", name: "Hermes Agent" },
+    { cmd: "cline", name: "Cline" },
+    { cmd: "junie", name: "JetBrains Junie" },
+    { cmd: "cursor", name: "Cursor CLI" }
   ];
 
   const buildScript = (agent) => [

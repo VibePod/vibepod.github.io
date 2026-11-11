@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VibePod CLI | Zero-Config AI Coding Agents in Docker or Podman</title>
-  <meta name="description" content="Install VibePod CLI from PyPI, Homebrew, or conda-forge and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, and Hermes locally in isolated Docker or Podman containers. No config required; reusable skills supported.">
+  <meta name="description" content="Install VibePod CLI from PyPI, Homebrew, or conda-forge and run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, Hermes, Cline, Junie, and Cursor locally in isolated Docker or Podman containers. No config required; reusable skills supported.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
@@ -74,7 +74,7 @@
         <p class="eyebrow">Zero-config local agents</p>
         <h1>One CLI for AI coding agents in isolated containers.</h1>
         <p class="hero-lead">Built-in local metrics, HTTP traffic tracking, and an analytics dashboard to see what your agents do. Zero config &mdash; just <code>vp run claude</code> in Docker or Podman.</p>
-        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, or Hermes in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
+        <p class="hero-detail">Install VibePod once. Run Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, Hermes, Cline, Junie, or Cursor in an isolated container with a single command. Add reusable prompt recipes with <code>vp skills</code>, and add global or project YAML only when you want shared defaults, custom images, env vars, init scripts, or LLM routing.</p>
         <div class="install-widget">
           <div class="install-tabs" role="group" aria-label="Choose an install method">
             <button type="button" class="install-tab is-active" data-install="pip" aria-pressed="true">pip</button>
@@ -246,7 +246,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       <div class="feature-grid">
         <article class="feature-card" data-reveal>
           <h3>Zero config by default</h3>
-          <p>No project file is needed to start. Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, and Hermes are ready out of the box.</p>
+          <p>No project file is needed to start. Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, Hermes, Cline, Junie, and Cursor are ready out of the box.</p>
           <p class="proof">Proof point: run an agent with <code>vp run &lt;agent&gt;</code>.</p>
         </article>
         <article class="feature-card" data-reveal>
@@ -408,7 +408,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
     <section class="section shell tool-section" id="screenshots" data-reveal>
       <p class="eyebrow">Product screenshots</p>
       <h2>Dashboard and supported tools</h2>
-      <p class="section-lead">Included screenshots cover the analytics dashboard plus Auggie, Antigravity, Claude Code, Freebuff, GitHub Copilot, DeepSeek Harness, Gemini, Hermes, Jcode, Mistral, OpenAI Codex, OpenCode, Pi, Qwen Code, and Tau.</p>
+      <p class="section-lead">Included screenshots cover the analytics dashboard plus Auggie, Antigravity, Claude Code, Cline, Cursor, Freebuff, GitHub Copilot, DeepSeek Harness, Gemini, Hermes, Jcode, Junie, Mistral, OpenAI Codex, OpenCode, Pi, Qwen Code, and Tau.</p>
       <div class="tool-grid">
         <figure class="tool-card tool-card-wide" data-reveal>
           <img src="screenshots/dashboard.png" alt="Screenshot of the VibePod analytics dashboard with token usage charts." loading="lazy" width="1905" height="966">
@@ -474,6 +474,18 @@ Starting claude with image vibepod/claude:latest</code></pre>
           <img src="screenshots/hermes.png" alt="Screenshot of VibePod workflow with the Hermes Agent." loading="lazy" width="1920" height="1048">
           <figcaption>Hermes Agent</figcaption>
         </figure>
+        <figure class="tool-card" data-reveal>
+          <img src="screenshots/cline.png" alt="Screenshot of VibePod workflow with Cline." loading="lazy" width="866" height="629">
+          <figcaption>Cline</figcaption>
+        </figure>
+        <figure class="tool-card" data-reveal>
+          <img src="screenshots/junie.png" alt="Screenshot of VibePod workflow with JetBrains Junie." loading="lazy" width="866" height="629">
+          <figcaption>JetBrains Junie</figcaption>
+        </figure>
+        <figure class="tool-card" data-reveal>
+          <img src="screenshots/cursor.png" alt="Screenshot of VibePod workflow with Cursor CLI." loading="lazy" width="866" height="629">
+          <figcaption>Cursor CLI</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -486,7 +498,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </details>
       <details>
         <summary>Do I need to configure anything before running an agent?</summary>
-        <p>No. VibePod comes pre-configured for Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, and Hermes. Run <code>vp run &lt;agent&gt;</code> and it starts from the default image.</p>
+        <p>No. VibePod comes pre-configured for Claude, Gemini, Codex, Devstral, Copilot, Auggie, OpenCode, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, Hermes, Cline, Junie, and Cursor. Run <code>vp run &lt;agent&gt;</code> and it starts from the default image.</p>
       </details>
       <details>
         <summary>Can I use YAML config files?</summary>
@@ -518,7 +530,7 @@ Starting claude with image vibepod/claude:latest</code></pre>
       </details>
       <details>
         <summary>Which coding agents can I switch between?</summary>
-        <p>VibePod currently supports Claude, Gemini, OpenCode, Devstral, Auggie, GitHub Copilot, OpenAI Codex, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, and Nous Research's Hermes Agent (developer preview, rootful Docker or Podman only).</p>
+        <p>VibePod currently supports Claude, Gemini, OpenCode, Devstral, Auggie, GitHub Copilot, OpenAI Codex, Pi, Antigravity, Tau, Jcode, Freebuff, Qwen Code, the DeepSeek Harness, Nous Research's Hermes Agent (developer preview, rootful Docker or Podman only), Cline, JetBrains Junie, and Cursor CLI.</p>
       </details>
       <details>
         <summary>Where can I track roadmap and issues?</summary>

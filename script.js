@@ -248,6 +248,7 @@ if (lightbox) {
 
   const commands = {
     pip: "pip install vibepod",
+    uv: "uv tool install vibepod",
     brew: "brew install vibepod/vibepod/vibepod",
     conda: "conda install -c conda-forge vibepod",
     mamba: "mamba install -c conda-forge vibepod",

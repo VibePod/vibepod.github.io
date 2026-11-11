@@ -3660,13 +3660,7 @@ already mounted.</p>
 <h3 id="cline">Cline<a class="headerlink" href="#cline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w">   </span><span class="c1"># or: vp cl</span>
 </code></pre></div>
-<p>The default image is <code>vibepod/cline:latest</code>. Until it is published, build the
-Cline image from the companion
-<a href="https://github.com/VibePod/vibepod-agents/tree/cline-agent/docker/cline">vibepod-agents branch</a>
-and select the local image explicitly. From that repository's checkout:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>vibepod/cline:local<span class="w"> </span>docker/cline
-<a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a><span class="nv">VP_IMAGE_CLINE</span><span class="o">=</span>vibepod/cline:local<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>cline
-</code></pre></div>
+<p><img alt="Cline CLI started by vp run cline in Act mode with auto-approve enabled" src="../assets/cline.png" /></p>
 <p>Cline CLI is the terminal edition of the Cline coding agent and shares its
 agent core (plan/act modes, MCP servers, rules, skills, checkpoints) with the
 VS Code extension. The image installs the npm package <code>cline</code>, which ships a
@@ -3702,16 +3696,16 @@ background self-update. State is persisted under
 </table>
 <p><strong>Authentication.</strong> Seed a provider and model once; the settings persist in
 the config mount:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span>auth<span class="w"> </span>--provider<span class="w"> </span>anthropic<span class="w"> </span>--apikey<span class="w"> </span>sk-ant-...<span class="w"> </span>--modelid<span class="w"> </span>claude-sonnet-4-6
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span>auth<span class="w"> </span>--provider<span class="w"> </span>anthropic<span class="w"> </span>--apikey<span class="w"> </span>sk-ant-...<span class="w"> </span>--modelid<span class="w"> </span>claude-sonnet-4-6
 </code></pre></div>
 <p><code>vp run cline -- auth</code> opens the interactive setup (Sign in with Cline,
 ChatGPT subscription, or your own API key). API keys can also be injected per
 provider through the environment, for example <code>ANTHROPIC_API_KEY</code>,
 <code>OPENAI_API_KEY</code>, <code>OPENROUTER_API_KEY</code> or <code>CLINE_API_KEY</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a><span class="w">  </span><span class="nt">cline</span><span class="p">:</span>
-<a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="w">  </span><span class="nt">cline</span><span class="p">:</span>
+<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-ant-...</span>
 </code></pre></div>
 <p>Cline picks its provider from the saved settings or <code>-P/--provider</code>, not from
 VibePod's global <code>llm</code> settings, and <code>--provider</code> launches are rejected for it
@@ -3720,14 +3714,14 @@ VibePod's global <code>llm</code> settings, and <code>--provider</code> launches
 with both <code>vp run</code> and task mode. Task mode passes <code>--act</code>, because without an
 explicit mode flag Cline reuses the plan/act mode last selected in the TUI and
 a task left in plan mode would never edit files:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>IKWID mode.</strong> Cline auto-approves tool calls by default, but the TUI
 remembers a disabled auto-approval toggle; <code>--ikwid</code> adds
 <code>--auto-approve true</code>, which forces auto-approval for every tool for that run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--ikwid
-<a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cline<span class="w"> </span>--ikwid
+<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cline<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 <p><strong>Editor integration.</strong> <code>cline --acp</code> is a built-in ACP server, so
 <code>vp run cline --acp</code> works in any ACP editor — see the <a href="../acp/">ACP docs</a>.
@@ -3743,8 +3737,9 @@ CLI merges into its trust store on every launch. Routing of Cline's API
 traffic through the proxy still needs verification against the published
 image.</p>
 <h3 id="junie-jetbrains">Junie (JetBrains)<a class="headerlink" href="#junie-jetbrains" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w">   </span><span class="c1"># or: vp ju</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w">   </span><span class="c1"># or: vp ju</span>
 </code></pre></div>
+<p><img alt="Junie started by vp run junie in Brave mode" src="../assets/junie.png" /></p>
 <p>Junie is JetBrains' LLM-agnostic coding agent. The image ships the official
 Linux release bundle (launcher, JetBrains Runtime and application jar) under
 <code>/opt/junie</code>. All state lives under <code>$JUNIE_HOME</code>, which VibePod points at
@@ -3789,10 +3784,10 @@ account from the TUI, or use an API key. Generate a Junie API key on
 <a href="https://junie.jetbrains.com/cli">junie.jetbrains.com/cli</a> and pass it as an
 environment variable. This also works in task mode, where there is no TUI. In
 your <a href="../configuration/">global config</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a><span class="w">  </span><span class="nt">junie</span><span class="p">:</span>
-<a id="__codelineno-90-3" name="__codelineno-90-3" href="#__codelineno-90-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-90-4" name="__codelineno-90-4" href="#__codelineno-90-4"></a><span class="w">      </span><span class="nt">JUNIE_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a><span class="w">  </span><span class="nt">junie</span><span class="p">:</span>
+<a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a><span class="w">      </span><span class="nt">JUNIE_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </code></pre></div>
 <p>Keep the key out of a committed project <code>.vibepod/config.yaml</code>; note that
 <code>vp config init junie</code> copies this <code>env</code>, key included, into the project config.
@@ -3811,8 +3806,8 @@ image entrypoint imports the mounted mitmproxy CA into the runtime's trust
 store before starting Junie, so HTTPS calls pass through <code>vibepod-proxy</code>.</p>
 <p><strong>Non-interactive mode.</strong> <code>--task</code> runs a single task and exits, both with
 <code>vp run</code> and task mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w"> </span>--<span class="w"> </span>--task<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>junie<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>vp<span class="w"> </span>run<span class="w"> </span>junie<span class="w"> </span>--<span class="w"> </span>--task<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>junie<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>Auto-approval.</strong> <code>--ikwid</code> appends <code>--brave</code> (Brave Mode), which Junie
 documents for interactive sessions. Non-interactive runs accept the flag and
@@ -3831,18 +3826,9 @@ that path.</p>
 <p>VibePod sets <code>JUNIE_SKIP_UPDATE_CHECK=true</code> so the release pinned in the image
 does not update itself at runtime.</p>
 <h3 id="cursor-cli-anysphere">Cursor CLI (Anysphere)<a class="headerlink" href="#cursor-cli-anysphere" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w">   </span><span class="c1"># or: vp cu</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w">   </span><span class="c1"># or: vp cu</span>
 </code></pre></div>
-<p>The default image is <code>vibepod/cursor:latest</code>. Until it is published, build the
-Cursor image from the companion
-<a href="https://github.com/VibePod/vibepod-agents/tree/cursor-agent/docker/cursor">vibepod-agents branch</a>
-and select the local image explicitly. From that repository's checkout:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>vibepod/cursor:local<span class="w"> </span>docker/cursor
-<a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a><span class="nv">VP_IMAGE_CURSOR</span><span class="o">=</span>vibepod/cursor:local<span class="w"> </span>vp<span class="w"> </span>run<span class="w"> </span>cursor
-</code></pre></div>
-<p>The <code>:local</code> tag avoids automatic pulls of <code>:latest</code>. The CLI registration
-alone does not install Cursor; the image must provide <code>cursor-agent</code> and the
-<code>/config</code> state mount described below.</p>
+<p><img alt="Cursor CLI started by vp run cursor, waiting for the first login" src="../assets/cursor.png" /></p>
 <p>Cursor CLI (<code>cursor-agent</code>) is the terminal agent from the makers of the Cursor
 editor. It is closed source and ships as a self-contained package (bundled
 Node.js runtime) from <code>downloads.cursor.com</code>; the image pins one release and
@@ -3880,13 +3866,13 @@ global <code>llm</code> settings do not apply to it. State is persisted under
 <p><strong>Authentication.</strong> Log in once; the CLI prints a <code>cursor.com/loginDeepControl</code>
 URL and polls for completion, so opening it in the host browser is enough (no
 callback port is involved):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>-e<span class="w"> </span><span class="nv">NO_OPEN_BROWSER</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>--<span class="w"> </span>login
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>-e<span class="w"> </span><span class="nv">NO_OPEN_BROWSER</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>--<span class="w"> </span>login
 </code></pre></div>
 <p>Or use an API key from the Cursor dashboard instead:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a><span class="w">  </span><span class="nt">cursor</span><span class="p">:</span>
-<a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a><span class="w">      </span><span class="nt">CURSOR_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key_...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a><span class="w">  </span><span class="nt">cursor</span><span class="p">:</span>
+<a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a><span class="w">      </span><span class="nt">CURSOR_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key_...</span>
 </code></pre></div>
 <p>Or per run: <code>vp run cursor -e CURSOR_API_KEY=key_...</code>.</p>
 <p><strong>Proxy and TLS.</strong> VibePod enables Node's environment proxy support with
@@ -3900,13 +3886,13 @@ passes <code>--trust</code>, with or without <code>--ikwid</code>: a detached ta
 Cursor's workspace-trust prompt (interactive runs ask once per workspace and
 remember the answer in the config mount). <code>--trust</code> only marks the workspace as
 trusted; it does not skip command approvals, which is what <code>--ikwid</code> is for:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--<span class="w"> </span>--trust<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
-<a id="__codelineno-96-2" name="__codelineno-96-2" href="#__codelineno-96-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"Summarize the README"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--<span class="w"> </span>--trust<span class="w"> </span>-p<span class="w"> </span><span class="s2">"explain this repo"</span>
+<a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"Summarize the README"</span>
 </code></pre></div>
 <p><strong>IKWID mode.</strong> <code>--ikwid</code> adds <code>--force</code> (alias <code>--yolo</code>), which runs every
 command not explicitly denied:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--ikwid
-<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>vp<span class="w"> </span>run<span class="w"> </span>cursor<span class="w"> </span>--ikwid
+<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>cursor<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 <p><strong>Editor integration.</strong> <code>cursor-agent acp</code> is a built-in ACP server, so
 <code>vp run cursor --acp</code> works in any ACP editor — see the <a href="../acp/">ACP docs</a>.
@@ -3958,7 +3944,7 @@ you on the host. An explicit <code>HERMES_UID</code>/<code>HERMES_GID</code> (or
 other than <code>10000</code> is rejected there, since Hermes would drop to a UID
 outside that mapping.</p>
 <p><strong>Headless one-shot:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
 </code></pre></div>
 <p><strong>Write sandbox.</strong> Hermes restricts its <code>write_file</code>/<code>patch</code> tools to the
 directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image ships
@@ -3966,10 +3952,10 @@ directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image sh
 sets <code>/opt/data:/workspace</code>. With <code>--acp</code> the workspace host path is appended
 too, because editors send absolute host paths. To widen it further, extend the
 value rather than replacing it — VibePod appends to whatever you set:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
-<a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-99-4" name="__codelineno-99-4" href="#__codelineno-99-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
+<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
 </code></pre></div>
 <p><strong>Editor integration.</strong> Hermes ships its own ACP adapter as the separate
 <code>hermes-acp</code> console script, which the official image already provides, so
@@ -3982,8 +3968,8 @@ Editing <code>external_dirs</code> yourself disables the seeding; VibePod never
 overwrites a value you set.</p>
 <p><strong>IKWID mode.</strong> Hermes auto-approves tool calls in YOLO mode, which <code>--ikwid</code>
 enables via <code>--yolo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
-<a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
+<a id="__codelineno-98-2" name="__codelineno-98-2" href="#__codelineno-98-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 

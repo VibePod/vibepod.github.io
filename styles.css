@@ -768,7 +768,7 @@ p {
 }
 
 .tool-card-wide img {
-  height: min(520px, 52vw);
+  height: auto;
   max-height: 520px;
   object-fit: cover;
   object-position: top;

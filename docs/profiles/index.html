@@ -536,6 +536,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Importing an existing setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -550,10 +577,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -571,8 +598,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -693,10 +720,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   
@@ -714,8 +741,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1163,17 +1190,23 @@ flags — combine them with a profile via a project config (see below).</p>
 <p>Your existing credentials in <code>&lt;base&gt;/agents/</code> are the <code>default</code> profile —
 nothing moves when you start using profiles.</p>
 <h2 id="managing-profiles">Managing profiles<a class="headerlink" href="#managing-profiles" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>profile<span class="w"> </span>list<span class="w">            </span><span class="c1"># list profiles; * marks the active one, agents with</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">                           </span><span class="c1"># stored data (config, caches, credentials) in parentheses</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>vp<span class="w"> </span>profile<span class="w"> </span>create<span class="w"> </span>work<span class="w">     </span><span class="c1"># create an empty profile</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>vp<span class="w"> </span>profile<span class="w"> </span>remove<span class="w"> </span>work<span class="w">     </span><span class="c1"># delete a profile and its credentials (asks first)</span>
+<p>To fill a profile from an agent you already run on your host, or to duplicate
+one profile's agent configuration into another, see
+<a href="../import/">Importing an existing setup</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vp<span class="w"> </span>import<span class="w"> </span>claude<span class="w"> </span>--to-profile<span class="w"> </span>work<span class="w"> </span>--create-profile
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>vp<span class="w"> </span>import<span class="w"> </span>claude<span class="w"> </span>--from-profile<span class="w"> </span>default<span class="w"> </span>--to-profile<span class="w"> </span>work
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>profile<span class="w"> </span>list<span class="w">            </span><span class="c1"># list profiles; * marks the active one, agents with</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">                           </span><span class="c1"># stored data (config, caches, credentials) in parentheses</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>vp<span class="w"> </span>profile<span class="w"> </span>create<span class="w"> </span>work<span class="w">     </span><span class="c1"># create an empty profile</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>vp<span class="w"> </span>profile<span class="w"> </span>remove<span class="w"> </span>work<span class="w">     </span><span class="c1"># delete a profile and its credentials (asks first)</span>
 </code></pre></div>
 <p>Profile names are lowercase slugs: letters, digits, <code>-</code> and <code>_</code>.
 The <code>default</code> profile always exists and cannot be removed.</p>
 <h2 id="using-a-profile">Using a profile<a class="headerlink" href="#using-a-profile" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"summarize the diff"</span><span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>vp<span class="w"> </span>doctor<span class="w"> </span>claude<span class="w"> </span>--profile<span class="w"> </span>work
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>claude<span class="w"> </span><span class="s2">"summarize the diff"</span><span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>vp<span class="w"> </span>doctor<span class="w"> </span>claude<span class="w"> </span>--profile<span class="w"> </span>work
 </code></pre></div>
 <p>The first run with a fresh profile starts unauthenticated — log in once and the
 credentials are persisted inside that profile.</p>
@@ -1186,24 +1219,24 @@ platform; see <a href="#layout">Layout</a>.</p>
 <p>For example, to point Claude at a custom endpoint and models, create
 <code>&lt;base&gt;/profiles/&lt;name&gt;/agents/claude/settings.json</code>. The file holds a token,
 so make it readable only by you before adding the content:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">profile_dir</span><span class="o">=</span><span class="s2">"/path/printed/by/vp-profile-create"</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude"</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>touch<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">profile_dir</span><span class="o">=</span><span class="s2">"/path/printed/by/vp-profile-create"</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude"</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>touch<span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="s2">"</span><span class="nv">$profile_dir</span><span class="s2">/agents/claude/settings.json"</span>
 </code></pre></div>
 <p>Then add the settings to the file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"ANTHROPIC_BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com"</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"ANTHROPIC_AUTH_TOKEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">"ANTHROPIC_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DeepSeek-V4-Flash-0731"</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">"ANTHROPIC_DEFAULT_HAIKU_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Qwen3.6-35B-A3B"</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_CONTEXT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1048576"</span><span class="p">,</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_OUTPUT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"393216"</span><span class="p">,</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nt">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dark"</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"ANTHROPIC_BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com"</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">"ANTHROPIC_AUTH_TOKEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">"ANTHROPIC_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DeepSeek-V4-Flash-0731"</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">"ANTHROPIC_DEFAULT_HAIKU_MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Qwen3.6-35B-A3B"</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_CONTEXT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1048576"</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_MAX_OUTPUT_TOKENS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"393216"</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="nt">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dark"</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">}</span>
 </code></pre></div>
 <p>Then <code>vp run claude --profile &lt;name&gt;</code> starts Claude with these settings, while
 other profiles keep their own.</p>
@@ -1221,13 +1254,13 @@ To route an agent to an endpoint without storing a token in the profile, use
 <li><code>default</code></li>
 </ol>
 <p>Pinning a profile per project pairs well with per-project env vars:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># .vibepod/config.yaml — a project wired to a local Ollama</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://host.docker.internal:11434</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># .vibepod/config.yaml — a project wired to a local Ollama</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">claude</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">ANTHROPIC_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://host.docker.internal:11434</span>
 </code></pre></div>
 <p>Referencing a profile that does not exist is a hard error — create it first
 with <code>vp profile create &lt;name&gt;</code>.</p>
@@ -1235,9 +1268,9 @@ with <code>vp profile create &lt;name&gt;</code>.</p>
 <p>Each named profile can carry its own proxy filter mode and allow/deny lists in
 <code>profiles/&lt;name&gt;/filter.yaml</code>. The <code>vp proxy filter</code> commands act on the
 active profile, or on an explicit one via <code>--profile</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow<span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com<span class="w"> </span>--profile<span class="w"> </span>work
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status<span class="w"> </span>--profile<span class="w"> </span>work
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>mode<span class="w"> </span>allow<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>allow<span class="w"> </span>add<span class="w"> </span>api.anthropic.com<span class="w"> </span>--profile<span class="w"> </span>work
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>vp<span class="w"> </span>proxy<span class="w"> </span>filter<span class="w"> </span>status<span class="w"> </span>--profile<span class="w"> </span>work
 </code></pre></div>
 <p>The file is created on first write, seeded from the global filter settings.
 A profile without <code>filter.yaml</code> inherits the global <code>proxy.filter</code> config and

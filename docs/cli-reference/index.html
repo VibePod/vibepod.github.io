@@ -3683,12 +3683,20 @@ was closed. Find candidate containers with <code>vp list</code>.</p>
 </code></pre></div>
 <h5 id="work">work<a class="headerlink" href="#work" title="Permanent link">&para;</a></h5>
 <p>Claim planned tasks of a board project and let an agent implement each one.</p>
-<p>Each task gets its own branch and worktree. The agent runs headless with the task as
-its prompt; after an optional --verify command passes, the task moves to Review with
-its branch. Failed and timed-out tasks go back to Planned (or blocked) with a note.</p>
+<p>Each task gets its own branch and a clone of the repository to work on it in. The agent
+runs headless with the task as its prompt; after an optional --verify command passes,
+the branch comes back into the repository and the task moves to Review with it. Failed
+and timed-out tasks go back to Planned (or blocked) with a note.</p>
+<p>Before each run the worker fetches the task's remote: new branches start from the
+remote's default branch, and a continued branch from where the remote has it when that
+is further along. A failed fetch goes on with the repository as it is, unless
+--require-fetch.</p>
 <p>With --mode review the worker claims tasks in Review instead, and the agent judges the
-work on the branch, in a worktree of its own, without changing it: approve, or send it
+work on the branch, in a clone of its own, without changing it: approve, or send it
 back for rework with feedback. A failing --verify command always sends it back.</p>
+<p>When the board asks, the worker pushes branches to GitHub from the repository with your
+git credentials: the commit a reviewer approved, and the branches of push requests, such
+as for Open PR. --no-push turns that off.</p>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vp board work [OPTIONS] {project}
 </code></pre></div>
@@ -3717,38 +3725,45 @@ back for rework with feedback. A failing --verify command always sends it back.<
 <a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>                                and look again instead of exiting
 <a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>  --repo &lt;path&gt;                 Repository to work in; defaults to the task's
 <a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>                                local path
-<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>  --worktree-dir &lt;path&gt;         Where task worktrees go; defaults to
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>  --worktree-dir &lt;path&gt;         Where task clones go; defaults to
 <a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>                                &lt;repo&gt;-worktrees next to the repository
 <a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>  --base &lt;str&gt;                  Where new branches start, and what reviews
-<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>                                diff against; defaults to the repository's
-<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>                                current branch
-<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>  --branch-template &lt;str&gt;       Branch name from {issue}, {number}, {key} and
-<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>                                {project}; tasks without a GitHub issue use
-<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>                                {key}, such as vp-12  [default: issue-{issue}]
-<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>  --existing &lt;continue|refuse&gt;  When the task's branch or worktree exists:
-<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>                                continue or refuse  [default: continue]
-<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>  --keep-worktree               Keep worktrees after the hand-over or review
-<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>  --profile &lt;str&gt;               Credential profile to use (see `vp profile
-<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>                                list`)
-<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>  --provider &lt;list[str]&gt;        Temporary model provider(s) for the agent runs
-<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>  --ikwid                       Enable the agent's auto-approval flags
-<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>  --timeout &lt;str&gt;               Time limit per task (s/m/h), or 'none'
-<a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>                                [default: 2h]
-<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>  -e, --env &lt;list[str]&gt;         Environment variable KEY=VALUE for the agent
-<a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a>  --network &lt;str&gt;               Additional Docker network for the agent
-<a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>                                container
-<a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a>  --no-overlay                  Skip the project overlay image
-<a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a>  --verify &lt;str&gt;                Command that must pass in the worktree before
-<a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>                                the hand-over
-<a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>  --on-fail &lt;planned|blocked&gt;   Where failed and timed-out tasks go: planned
-<a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a>                                (counts an attempt) or blocked  [default:
-<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a>                                planned]
-<a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a>  --max-attempts &lt;int range&gt;    Failed attempts before a task is blocked
-<a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a>                                [x&gt;=1]
-<a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a>  --parallel                    Run alongside other workers on the same
-<a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a>                                profile
-<a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a>  --usage-limit-wait &lt;str&gt;      Pause after a usage limit when the agent names
-<a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a>                                no reset time  [default: 30m]
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>                                diff against, taken from the remote where it
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>                                is further along; defaults to the remote's
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>                                default branch
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>  --branch-template &lt;str&gt;       Branch name from {issue}, {number}, {key} and
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>                                {project}; tasks without a GitHub issue use
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>                                {key}, such as vp-12  [default: issue-{issue}]
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>  --existing &lt;continue|refuse&gt;  When the task's branch exists: continue or
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>                                refuse  [default: continue]
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>  --keep-worktree               Keep task clones after the hand-over or review
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>  --no-push                     Do not push branches for the board: neither an
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>                                approved one nor on request (also board.push:
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>                                false)
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>  --require-fetch               Block a task whose remote cannot be fetched,
+<a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>                                instead of working from the repository as it
+<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>                                is (also board.require_fetch: true)
+<a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a>  --profile &lt;str&gt;               Credential profile to use (see `vp profile
+<a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>                                list`)
+<a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a>  --provider &lt;list[str]&gt;        Temporary model provider(s) for the agent runs
+<a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a>  --ikwid                       Enable the agent's auto-approval flags
+<a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>  --timeout &lt;str&gt;               Time limit per task (s/m/h), or 'none'
+<a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>                                [default: 2h]
+<a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a>  -e, --env &lt;list[str]&gt;         Environment variable KEY=VALUE for the agent
+<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a>  --network &lt;str&gt;               Additional Docker network for the agent
+<a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a>                                container
+<a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a>  --no-overlay                  Skip the project overlay image
+<a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a>  --verify &lt;str&gt;                Command that must pass in the task's clone
+<a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a>                                before the hand-over
+<a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a>  --on-fail &lt;planned|blocked&gt;   Where failed and timed-out tasks go: planned
+<a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a>                                (counts an attempt) or blocked  [default:
+<a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a>                                planned]
+<a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a>  --max-attempts &lt;int range&gt;    Failed attempts before a task is blocked
+<a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a>                                [x&gt;=1]
+<a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a>  --parallel                    Run alongside other workers on the same
+<a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a>                                profile
+<a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a>  --usage-limit-wait &lt;str&gt;      Pause after a usage limit when the agent names
+<a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a>                                no reset time  [default: 30m]
 </code></pre></div>
 <h4 id="c">c<a class="headerlink" href="#c" title="Permanent link">&para;</a></h4>
 <p>Alias for <code>vp run claude</code>.</p>

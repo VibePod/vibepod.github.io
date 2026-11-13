@@ -802,6 +802,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#fetching-before-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fetching before a run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#questions-and-rework" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -817,6 +828,17 @@
     <span class="md-ellipsis">
       
         Review workers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pushing-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pushing to GitHub
       
     </span>
   </a>
@@ -1113,6 +1135,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#fetching-before-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fetching before a run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#questions-and-rework" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1128,6 +1161,17 @@
     <span class="md-ellipsis">
       
         Review workers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pushing-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pushing to GitHub
       
     </span>
   </a>
@@ -1201,15 +1245,23 @@
 <li><strong>Claim</strong> the next planned task in the board's work order. Tasks whose
    dependencies are not done, blocked tasks and tasks someone holds are
    skipped. The card moves to In Progress, with the worker as its holder.</li>
-<li><strong>Check out</strong> the task's branch in a git worktree of its own, next to the
-   repository. The repository's own checkout is left alone.</li>
-<li><strong>Run the agent</strong> headless, like <code>vp task create</code>, with the task's title,
-   description and acceptance criteria as the prompt. The agent commits its
-   work; anything it leaves uncommitted is committed for it. It ends its run
-   with a short structured result: done, needs input (with its question), or
-   failed (with the reason).</li>
+<li><strong>Fetch</strong> the task's remote, so that the run starts from the latest
+   branches: a new branch from the remote's default branch, a continued one
+   from where the remote has it (see
+   <a href="#fetching-before-a-run">Fetching before a run</a>).</li>
+<li><strong>Check out</strong> the task's branch in a clone of the repository of its own,
+   next to the repository. The clone shares the repository's objects, so it is
+   quick to make; the repository and its checkouts are left alone.</li>
+<li><strong>Run the agent</strong> headless, like <code>vp task create</code>, in that clone, with the
+   task's title, description and acceptance criteria as the prompt. The agent
+   commits its work; anything it leaves uncommitted is committed for it. It
+   ends its run with a short structured result: done, needs input (with its
+   question), or failed (with the reason).</li>
 <li><strong>Verify</strong> with an optional command, such as the test suite, run in the
-   worktree.</li>
+   clone.</li>
+<li><strong>Bring the branch back</strong> into the repository: only the task's branch, and
+   only forward (see <a href="#safety">Safety</a>). A new branch the run did no work on
+   is not brought back, so a later attempt starts afresh.</li>
 <li><strong>Hand over</strong> the task to Review with its branch name, or give it back to
    Planned (or block it) with a note saying why.</li>
 </ol>
@@ -1304,11 +1356,11 @@ a regular <a href="../cli-reference/">background task</a>.</p>
 </tr>
 <tr>
 <td><code>--worktree-dir</code></td>
-<td>Where task worktrees go. Defaults to <code>&lt;repo&gt;-worktrees</code> next to the repository.</td>
+<td>Where the task clones go, one folder per task. Defaults to <code>&lt;repo&gt;-worktrees</code> next to the repository.</td>
 </tr>
 <tr>
 <td><code>--base</code></td>
-<td>Where new branches start, and what a review diffs the branch against. Defaults to the repository's current branch.</td>
+<td>Where new branches start, and what a review diffs the branch against. A branch the remote has is taken from the remote, unless the repository's is ahead of it. Defaults to the remote's default branch as just fetched, such as <code>origin/main</code>; for a repository without the remote, its current branch.</td>
 </tr>
 <tr>
 <td><code>--branch-template</code></td>
@@ -1316,11 +1368,19 @@ a regular <a href="../cli-reference/">background task</a>.</p>
 </tr>
 <tr>
 <td><code>--existing continue\|refuse</code></td>
-<td>When the task's branch or worktree exists, such as from an earlier attempt: continue on it (default) or refuse, which blocks the task.</td>
+<td>When the task's branch exists, such as from an earlier attempt: continue on it (default) or refuse, which blocks the task.</td>
 </tr>
 <tr>
 <td><code>--keep-worktree</code></td>
-<td>Keep the worktree after the hand-over or review; by default it is removed, and the branch stays.</td>
+<td>Keep the task's clone after the hand-over or review; by default it is removed, and the branch stays in the repository.</td>
+</tr>
+<tr>
+<td><code>--require-fetch</code></td>
+<td>Block a task whose remote cannot be fetched, instead of working from the repository as it is (see <a href="#fetching-before-a-run">Fetching before a run</a>). <code>board.require_fetch: true</code> in the config does the same.</td>
+</tr>
+<tr>
+<td><code>--no-push</code></td>
+<td>Never push a branch for the board: neither an approved one nor on request (see <a href="#pushing-to-github">Pushing to GitHub</a>). <code>board.push: false</code> in the config does the same.</td>
 </tr>
 <tr>
 <td><code>--profile</code>, <code>--provider</code>, <code>--ikwid</code>, <code>-e/--env</code>, <code>--network</code>, <code>--no-overlay</code></td>
@@ -1332,7 +1392,7 @@ a regular <a href="../cli-reference/">background task</a>.</p>
 </tr>
 <tr>
 <td><code>--verify</code></td>
-<td>A command that must pass in the worktree before the task moves to Review. In review mode, a failing command sends the task back for rework.</td>
+<td>A command that must pass in the task's clone before the task moves to Review. In review mode, a failing command sends the task back for rework.</td>
 </tr>
 <tr>
 <td><code>--on-fail planned\|blocked</code></td>
@@ -1352,6 +1412,45 @@ a regular <a href="../cli-reference/">background task</a>.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="fetching-before-a-run">Fetching before a run<a class="headerlink" href="#fetching-before-a-run" title="Permanent link">&para;</a></h2>
+<p>Branches move on GitHub while the repository on the worker's machine stands
+still: a reviewer's fix pushed to a pull request, a branch restacked, <code>main</code>
+merged into. So before every run, implementing or reviewing, the worker
+fetches the task's remote: the one whose URL is the card's repository URL
+(<code>https</code> and <code>ssh</code> forms of one repository match), else <code>origin</code>. The
+fetch only updates the repository's remote-tracking refs
+(<code>refs/remotes/&lt;remote&gt;/*</code>), pruning those the remote no longer has; it never
+creates or moves a branch or tag, or touches a checkout. Each run's clone
+borrows the repository's objects, so it sees what was fetched.</p>
+<ul>
+<li><strong>New branches</strong> start from the remote's default branch as just fetched,
+  such as <code>origin/main</code>, not from whatever the repository has checked out.
+  <code>--base main</code> starts them from <code>origin/main</code> too, unless the local <code>main</code>
+  is ahead of it; a branch only the repository has is used as it is.</li>
+<li><strong>Continued branches</strong>, such as a rework, an answered question, or an
+  earlier attempt with <code>--existing continue</code>, are compared with the remote's:<ul>
+<li>only the remote has it: the branch is taken from the remote;</li>
+<li>the local branch is behind: it is fast-forwarded to the remote's, unless
+  it is checked out somewhere, such as in your own checkout, which is
+  never worked on (the task is blocked as before);</li>
+<li>the local branch is ahead, with work not pushed yet: it is used as it is;</li>
+<li>the two have diverged: the task is blocked with both commits named, and
+  neither is picked.</li>
+</ul>
+</li>
+<li><strong>A renamed branch.</strong> When a rework's branch is gone locally and on the
+  remote but the branch of the card's GitHub issue (<code>issue-&lt;n&gt;</code>) exists, the
+  run continues there, and the hand-over sends the new name.</li>
+<li><strong>Reviews</strong> fetch before they check out the commit put up for review, so a
+  head someone else pushed can be reviewed; a commit that is still missing
+  blocks the review as before.</li>
+</ul>
+<p>The fetch runs git as pushes do: no hooks, fsmonitor or submodules, no
+prompt, the user's own git credentials, and the board token never reaches it.
+It is given up after three minutes. When it fails, such as offline or
+without credentials, the run works from the repository as it is and says so
+in its run report; <code>--require-fetch</code> (or <code>board.require_fetch: true</code>) blocks
+the task instead. A repository without the remote is not fetched.</p>
 <h2 id="questions-and-rework">Questions and rework<a class="headerlink" href="#questions-and-rework" title="Permanent link">&para;</a></h2>
 <p>The prompt asks the agent to end every run with a result block:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;vibepod-result&gt;
@@ -1363,6 +1462,14 @@ a regular <a href="../cli-reference/">background task</a>.</p>
 the task does not stand in for one; agents that log JSON events, such as Pi,
 have their messages decoded first. A run whose output does not end with a
 readable result counts as failed.</p>
+<p>With <code>done</code>, the agent may also suggest the pull request for its work:
+<code>prTitle</code>, one short line, and <code>prBody</code>, a few lines of markdown on what
+changed and why. The worker sends them with the hand-over, and the board
+prefills <strong>Open PR</strong> with them. A rework's hand-over sends the new suggestion,
+which replaces the earlier one; review runs never send one. The title is kept
+to one line and both are cut to GitHub's limits; a suggestion that is not a
+string is left out with a note in the worker's output, and the run goes on.
+A board from before suggestions ignores them.</p>
 <ul>
 <li><strong>Needs input.</strong> When the task is unclear, the agent asks instead of
   guessing. The task is blocked on the board with the question on its card,
@@ -1370,9 +1477,10 @@ readable result counts as failed.</p>
   Once someone answers on the board, the task is planned again, and the next
   run gets the question and the answer in its prompt.</li>
 <li><strong>Rework.</strong> When a reviewer sends a task back from Review with feedback, the
-  next run continues on the branch the task was handed over on and gets the
-  feedback in its prompt, instead of starting from scratch. A rework run that
-  adds no commit fails rather than handing the same work over again.</li>
+  next run continues on the branch the task was handed over on, as the remote
+  has it when it is further along there, and gets the feedback in its prompt,
+  instead of starting from scratch. A rework run that adds no commit fails
+  rather than handing the same work over again.</li>
 </ul>
 <p>A run needs the task's questions, answers and feedback: when the board cannot
 give the task history, after retries, the task goes back without running.</p>
@@ -1407,17 +1515,19 @@ the task is blocked in Review for a person instead.</p>
 <ol>
 <li><strong>Claims</strong> the next task in Review for a review. The card stays in Review;
    the claim names the commit the hand-over put up for review.</li>
-<li><strong>Checks out</strong> exactly that commit, detached, in a worktree of its own
+<li><strong>Checks out</strong> exactly that commit, detached, in a clone of its own
    (<code>&lt;worktree-dir&gt;/review-&lt;key&gt;-&lt;worker&gt;</code>), so reviewers of one task never
    share one. Punctuation and capital letters in worker names are
    percent-escaped in folder names (for example, <code>@</code> becomes <code>%40</code> and <code>A</code>
    becomes <code>%41</code>) to keep distinct names distinct, also on case-insensitive
-   file systems. No branch is created or moved. A claim without a commit, a
-   missing branch or commit, or a branch that moved on since the hand-over
-   blocks the task in Review with the reason. A review worktree left by an
-   earlier run is replaced only when nothing in it changed; one holding
-   changes, such as a kept worktree you edited, blocks the review until you
-   remove it.</li>
+   file systems. It fetches the task's remote first, so a commit someone else
+   pushed can be reviewed (see <a href="#fetching-before-a-run">Fetching before a run</a>).
+   No branch of the repository is created or moved. A claim without a commit,
+   a branch or commit that is still missing, or a branch that moved on since
+   the hand-over blocks the task in Review with the reason. A review clone
+   left by an earlier run is replaced only when nothing in it changed; one
+   holding changes, such as a kept clone you edited, blocks the review until
+   you remove it.</li>
 <li><strong>Runs the agent</strong> with a review prompt: the task's title, description and
    acceptance criteria, its history (questions, answers, earlier feedback and
    reviews), and the base to inspect <code>git diff &lt;base&gt;...HEAD</code> and the commit
@@ -1439,18 +1549,19 @@ blocked in Review until someone answers), or <code>failed</code> with a <code>re
 run without a readable result fails the review, and the task stays in
 Review for other reviewers. Every review adds a run report with its
 verdict, summary, feedback and verify output.
-6. <strong>Removes</strong> its worktree, unless <code>--keep-worktree</code>. The branch is never
-   touched.</p>
+6. <strong>Removes</strong> its clone, unless <code>--keep-worktree</code>. Nothing comes back into
+   the repository: the branch is never touched.</p>
 </li>
 </ol>
-<p>A review must leave the repository as it found it. The agent gets the git
-directory read-only, and if it committed, switched branches, moved refs or
-left changes in its worktree anyway, all of it is thrown away and the review
-fails with that reason. Before <code>--verify</code>, files git does not track, ignored ones
-too, are removed, so the command sees only the reviewed commit. The same check
-runs again after <code>--verify</code>, which runs the code under review: new files it
-leaves behind, such as caches, are fine, but changed tracked files, such as
-from a formatter, or new branches and tags fail the review.</p>
+<p>A review changes nothing. The agent gets the clone's git directory read-only,
+and if it committed, switched branches, moved refs or left changes in its
+clone anyway, none of it reaches the repository: it goes with the clone, and
+the review fails with that reason. Before <code>--verify</code>, files git does not
+track, ignored ones too, are removed, so the command sees only the reviewed
+commit. The same check runs again after <code>--verify</code>, which runs the code under
+review: new files it leaves behind, such as caches, are fine, but changed
+tracked files, such as from a formatter, or new branches and tags fail the
+review.</p>
 <p>When the task moved on during the review, because it was handed over again or
 another reviewer sent it back, the review ends without a verdict. Pause, stop,
 cancel, <code>--parallel</code>, the profile lock and usage limits work as for
@@ -1461,26 +1572,88 @@ review the task again after rework or a handover at a new head. A verdict the
 board cannot take yet is kept and sent again; it is counted once delivered. <code>--branch-template</code>, <code>--existing</code>, <code>--on-fail</code> and
 <code>--max-attempts</code> have no meaning for a review and are refused with
 <code>--mode review</code>.</p>
+<h2 id="pushing-to-github">Pushing to GitHub<a class="headerlink" href="#pushing-to-github" title="Permanent link">&para;</a></h2>
+<p>Workers commit on local branches; a pull request needs the branch on GitHub.
+The board has no access to your repositories, so the workers push, once, when
+the task is ready for its pull request, and the board only coordinates:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Review ──approve──▶ PR ready ──push──▶ on GitHub ──▶ Open PR
+</code></pre></div>
+<ul>
+<li><strong>On approval.</strong> When a reviewer's approval completes the approvals a task
+  needs, and the project's <strong>push approved branches</strong> setting is on (the
+  default), the board's reply to the verdict asks that reviewer to push. It
+  pushes the exact commit it approved to the task's branch and reports the
+  result; the card then shows the branch as on GitHub. If it does not report
+  within a few minutes, the request goes to the other workers.</li>
+<li><strong>On request.</strong> <strong>Open PR</strong> on a PR ready card whose branch is not on GitHub
+  offers <strong>Push and open PR</strong>. Any worker of the project, implementing or
+  reviewing, picks the request up from its next heartbeat when it has the
+  task's repository (the same <code>--repo</code>, or the task's local path on the
+  allowed directories list) and the commit to push. It claims the request,
+  pushes, reports, and the board opens the pull request. Workers serve one
+  request at a time, also while an agent runs, and check on the agent between
+  two pushes; their heartbeats go on while they push, and a request another
+  worker claimed first is left to it.</li>
+</ul>
+<p>A push goes from the repository itself, not from a task's clone:
+<code>git push &lt;remote&gt; &lt;commit&gt;:refs/heads/&lt;branch&gt;</code>, to the remote whose URL is
+the card's repository URL (<code>https</code> and <code>ssh</code> forms of one repository match),
+else <code>origin</code>. It is never forced: when the branch on GitHub has commits the
+pushed one does not contain, the push fails as non-fast-forward and the
+branch is left as it is. Hooks do not run, git and ssh never prompt, and a
+push that takes over two minutes is given up. A failed push reports a short
+reason to the board: non-fast-forward, authentication, network, missing
+commit, or what GitHub refused. The board token never reaches git or the
+remote.</p>
+<p>The worker pushes with the git credentials of the user it runs as, so set
+them up on the worker's machine before relying on it: for <code>https</code> remotes, a
+credential helper, such as the one <code>gh auth setup-git</code> configures for the
+GitHub CLI; for <code>ssh</code> remotes, a key that loads without a passphrase prompt,
+such as from a running <code>ssh-agent</code>. Check with <code>git push --dry-run</code> in the
+repository. <code>--no-push</code>, or <code>board.push: false</code> in the config, keeps a worker
+from pushing anything; its requests wait for another worker. With no worker
+online, Open PR shows the <code>git push</code> command to run yourself.</p>
 <h2 id="safety">Safety<a class="headerlink" href="#safety" title="Permanent link">&para;</a></h2>
 <p>The agent runs in its container; the worker keeps it there:</p>
 <ul>
-<li>Git on your machine never runs hooks or an fsmonitor while the worker uses it, and
-  never looks into nested repositories (submodules) of a worktree, whose configuration
-  the agent could have written; a submodule change is committed only if the agent
-  commits it. The agent container can commit to the repository, but its git
-  configuration, hooks, the
-  worktree's pointers into the repository, and the HEAD, index, pointers and lock of your
-  own checkouts are read-only there. A run that changed them anyway, moved other branches
-  or tags (they are put back), or left its own branch blocks the task for a look instead
-  of being handed over. Branches others move meanwhile are left alone: those of other
-  tasks, and a branch you commit to in your own checkout. The worker never prunes
-  worktrees other than its own.</li>
-<li>Only the worktree the worker made for a task, in the worktree folder, is reused or
-  removed. A branch checked out anywhere else, such as in your own checkout, is never
-  taken over, even when the worktree folder holds it.</li>
+<li>Each run gets a clone of the repository of its own, in its own folder in the
+  worktree folder, made with <code>git clone --shared</code>: it borrows the repository's
+  objects instead of copying them. The container gets only that clone, and the
+  repository's objects read-only; nothing else of the repository. Whatever the
+  agent does to branches, tags or the git configuration stays in its clone, so
+  workers running side by side, you in your own checkout, and other tools never
+  undo each other's work.</li>
+<li>After the run, the worker brings only the task's branch back into the
+  repository, with <code>git fetch &lt;clone&gt; &lt;branch&gt;:&lt;branch&gt;</code>. The new commits come
+  with it into the repository's own objects, so removing the clone loses
+  nothing. The branch only moves forward: when it moved in the repository during
+  the run, such as by someone else's commit on a branch being reworked, and the
+  run's work does not continue from there, it is left as it is and the task is
+  blocked with the reason; the work stays in the clone. A review never brings
+  anything back.</li>
+<li>Git on your machine never runs hooks, an fsmonitor or submodules in a clone,
+  and never looks into nested repositories of a clone, whose configuration the
+  agent could have written; a submodule change is committed only if the agent
+  commits it. The clone's git configuration, hooks, <code>info</code> and its pointer to the borrowed
+  objects are read-only in the container. A run that changed them anyway, or
+  replaced the clone's git directory, or left its own branch, blocks the task for
+  a look; its clone is kept and nothing of it is brought back.</li>
+<li>A clone an earlier run left behind, such as after a failed attempt, is worked
+  on again where its branch is where the repository has it, so what the
+  attempt left uncommitted carries on. It is replaced where nothing in it would
+  be lost, and otherwise the task is blocked until you look at it: a clone with
+  commits that are not in the repository, or with changes, is never thrown
+  away. A worktree an earlier version of <code>vp board work</code> left in a task's
+  folder is removed when it holds no changes (its branch stays), and otherwise
+  the task is blocked until you remove it yourself.</li>
+<li>A branch checked out in a worktree of the repository, such as in your own
+  checkout, is never worked on or moved: the task is blocked instead.</li>
+<li>Fetching before a run only moves the repository's remote-tracking refs. The
+  only branch the worker ever moves is the task's own, and only forward: by
+  the fast-forward to the remote's before a run and by the write-back after it.</li>
 <li>A repository named by a task on the board must be on the allowed directories list,
   like any <code>vp task</code> workspace, before the worker touches it.</li>
-<li><code>--verify</code> runs on your machine, in the worktree, with the agent's changes: it runs
+<li><code>--verify</code> runs on your machine, in the clone, with the agent's changes: it runs
   code the agent wrote with your permissions. The board token is left out of its
   environment. Use it in repositories you would run the agent's tests in yourself, or
   make the command run them in a container.</li>

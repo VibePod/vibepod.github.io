@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VibePod CLI 0.25: agents that work through your board | VibePod CLI</title>
-  <meta name="description" content="VibePod 0.25.0 adds vp board work: an agent takes the planned tasks of a vibepod-board project, implements each one on its own branch, and hands it over for review. Plus Cline, Junie, Cursor and Warp as new agents, vp import for the agent setup you already have, and mounts at host paths.">
+  <title>VibePod CLI 0.25: Cline, Junie, Cursor and Warp | VibePod CLI</title>
+  <meta name="description" content="VibePod 0.25.0 adds four agents: Cline, Junie, Cursor and Warp. vp import brings the agent setup you already have into a profile, directories mount at their host paths, and fixes cover macOS, rootless Podman and native Windows. Board automation with vp board work is included for testing.">
   <meta name="theme-color" content="#fff7ed">
   <link rel="icon" type="image/png" href="../../assets/icon.png">
   <link rel="apple-touch-icon" href="../../assets/icon.png">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="VibePod CLI 0.25: agents that work through your board">
-  <meta property="og:description" content="VibePod 0.25.0 adds vp board work: an agent takes the planned tasks of a vibepod-board project, implements each one on its own branch, and hands it over for review. Plus Cline, Junie, Cursor and Warp as new agents, vp import for the agent setup you already have, and mounts at host paths.">
+  <meta property="og:title" content="VibePod CLI 0.25: Cline, Junie, Cursor and Warp">
+  <meta property="og:description" content="VibePod 0.25.0 adds four agents: Cline, Junie, Cursor and Warp. vp import brings the agent setup you already have into a profile, directories mount at their host paths, and fixes cover macOS, rootless Podman and native Windows. Board automation with vp board work is included for testing.">
   <link rel="canonical" href="https://vibepod.dev/news/vibepod-cli-0-25/">
   <meta property="og:url" content="https://vibepod.dev/news/vibepod-cli-0-25/">
   <meta property="og:image" content="https://vibepod.dev/assets/icon.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="VibePod CLI 0.25: agents that work through your board">
-  <meta name="twitter:description" content="vp board work runs an agent through the planned tasks of a board project, one branch per task. Plus four new agents and vp import.">
+  <meta name="twitter:title" content="VibePod CLI 0.25: Cline, Junie, Cursor and Warp">
+  <meta name="twitter:description" content="Cline, Junie, Cursor and Warp join as agents. Plus vp import, mounts at host paths and fixes for macOS, Podman and Windows. Board automation is in for testing.">
   <meta name="twitter:image" content="https://vibepod.dev/assets/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,64 +48,85 @@
   </header>
   <main id="main-content">
     <section class="page-hero shell" data-reveal>
-      <p class="eyebrow">Release · CLI · Board · Agents</p>
-      <h1>VibePod CLI 0.25: agents that work through your board</h1>
-      <p class="hero-lead">0.25.0 adds <strong>board automation</strong>:
-      <code>vp board work</code> takes the planned tasks of a
-      <a href="https://github.com/VibePod/vibepod-board" target="_blank" rel="noreferrer">vibepod-board</a>
-      project, runs an agent on each one on a branch of its own, and moves the task to
-      Review. The release also adds four agents, Cline, Junie, Cursor and Warp, and
-      <code>vp import</code>, which copies an agent setup you already have into a
-      profile.</p>
-      <div class="hero-actions"><a class="button button-primary" href="../../docs/board/">Read the board docs</a><a class="button button-ghost" href="../">Back to News</a></div>
+      <p class="eyebrow">Release · CLI · Agents</p>
+      <h1>VibePod CLI 0.25: Cline, Junie, Cursor and Warp</h1>
+      <p class="hero-lead">0.25.0 brings <strong>four new agents</strong>: Cline,
+      Junie, Cursor and Warp, which makes nineteen for <code>vp run</code>.
+      <code>vp import</code> copies an agent setup you already have into a profile,
+      directories can be mounted at their host paths, and fixes cover macOS, rootless
+      Podman and native Windows. Board automation with <code>vp board work</code> is
+      included for testing.</p>
+      <div class="hero-actions"><a class="button button-primary" href="../../docs/agents/">Read the agent docs</a><a class="button button-ghost" href="../">Back to News</a></div>
     </section>
     <article class="shell post-article" data-reveal>
-      <p class="news-meta">2026-11-13 · Release · CLI · Board · Agents</p>
-      <h2>From Planned to Review</h2>
-      <p>A board project holds tasks with a description, acceptance criteria and
-      dependencies. <code>vp board work</code> claims the next planned task whose
-      dependencies are done, fetches the remote, and checks the task's branch out in a
-      clone next to your repository. The agent runs headless in that clone, like
-      <code>vp task create</code>, with the task as its prompt. An optional verify
-      command, such as the test suite, has to pass before the task moves to Review with
-      its branch name:</p>
-      <pre class="code-block"><code>vp config allow-dir ~/src/app       # once per repository
-vp board work VP --agent claude \
-  --repo ~/src/app \
-  --verify "python -m pytest -q" \
-  --ikwid</code></pre>
-      <p>Every run adds a report to its task: the agent's summary, its commits, the
-      verify output and the duration. An agent that finds a task unclear asks instead of
-      guessing. The task is blocked with the question on its card, and the next run gets
-      the answer in its prompt. Feedback from a review arrives the same way, and the
-      rework continues on the same branch. With <code>--poll 2m</code> the worker waits
-      for new tasks instead of exiting. The board token is never passed to the agent's
-      container.</p>
-      <h2>Review workers and the pull request</h2>
-      <p>Started with <code>--mode review</code>, a worker takes the tasks in Review
-      instead and decides whether each one needs rework or is ready for its pull
-      request. Several reviewers, with different agents, can review the same task:</p>
-      <pre class="code-block"><code>vp board work VP --agent codex --repo ~/src/app --poll 2m
-vp board work VP --agent claude --repo ~/src/app --poll 2m --mode review</code></pre>
-      <p>Workers commit on local branches. Once a task has the approvals it needs, the
-      approving worker pushes the commit it approved to the task's branch on GitHub, and
-      <strong>Open PR</strong> on the board is prefilled with the title and description
-      the implementing agent suggested. A push is never forced, uses the git credentials
-      of the user the worker runs as, and can be turned off with
-      <code>--no-push</code>.</p>
+      <p class="news-meta">2026-11-13 · Release · CLI · Agents</p>
       <h2>Four new agents</h2>
-      <p><code>vp run</code> now starts nineteen agents:</p>
-      <ul>
-        <li><code>cline</code> (<code>vp cl</code>): Cline CLI, the terminal edition of the Cline coding agent.</li>
-        <li><code>junie</code> (<code>vp ju</code>): Junie, the coding agent from JetBrains.</li>
-        <li><code>cursor</code> (<code>vp cu</code>): Cursor CLI, the terminal agent from the makers of the Cursor editor.</li>
-        <li><code>warp</code> (<code>vp w</code>): the Warp Agent CLI, the agent from the Warp terminal app.</li>
-      </ul>
-      <p>Cline, Junie and Cursor also run as background tasks and inside your editor
-      with <code>--acp</code>, which now covers fourteen agents. Warp is interactive
-      only. Cursor talks to its backend over long-lived HTTP/2 streams, which
-      vibepod-proxy 0.6.0 passes through instead of buffering, so this release requires
-      that proxy version.</p>
+      <p><code>vp run</code> now starts nineteen agents. Each of the four new ones runs
+      from an image that pins one release and switches off the agent's self-update, and
+      keeps its state under <code>~/.config/vibepod/agents/&lt;agent&gt;/</code>, so a
+      login outlives the container.</p>
+      <h3>Cline</h3>
+      <p><code>vp run cline</code>, or <code>vp cl</code>, starts Cline CLI, the
+      terminal edition of the Cline coding agent. It shares its agent core with the VS
+      Code extension: plan and act modes, MCP servers, rules, skills and checkpoints.
+      <code>vp run cline -- auth</code> opens the setup for a Cline account, a ChatGPT
+      subscription or your own API key, and the choice is kept in the config mount.
+      Tasks always run in act mode, because a task left in plan mode would never edit
+      a file.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/cline.png" alt="Cline CLI started by vp run cline in Act mode with auto-approve enabled." loading="lazy" width="866" height="629">
+        <figcaption>Cline in Act mode with auto-approve enabled.</figcaption>
+      </figure>
+      <h3>Junie</h3>
+      <p><code>vp run junie</code>, or <code>vp ju</code>, starts Junie, the
+      LLM-agnostic coding agent from JetBrains. Log in with your JetBrains account from
+      the TUI, or set <code>JUNIE_API_KEY</code>, which also works for tasks, where
+      there is no TUI. With your own keys, Junie talks to Anthropic, OpenAI, Google,
+      Grok, OpenRouter or a LiteLLM proxy. Junie's bundled Java runtime ignores
+      <code>SSL_CERT_FILE</code>, so the image imports the proxy's CA into the
+      runtime's trust store and Junie's HTTPS calls pass through vibepod-proxy.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/junie.png" alt="Junie started by vp run junie in Brave mode." loading="lazy" width="866" height="629">
+        <figcaption>Junie in Brave mode, which <code>--ikwid</code> turns on.</figcaption>
+      </figure>
+      <h3>Cursor</h3>
+      <p><code>vp run cursor</code>, or <code>vp cu</code>, starts Cursor CLI, the
+      terminal agent from the makers of the Cursor editor. Models come through your
+      Cursor account. Log in once with
+      <code>vp run cursor -e NO_OPEN_BROWSER=1 -- login</code> and open the printed URL
+      in the browser on your host, or set <code>CURSOR_API_KEY</code>. A detached task
+      cannot answer Cursor's workspace-trust prompt, so task mode marks the workspace
+      as trusted; command approvals stay in place unless you add
+      <code>--ikwid</code>. Cursor talks to its backend over long-lived HTTP/2 streams,
+      which vibepod-proxy 0.6.0 passes through instead of buffering, so this release
+      requires that proxy version.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/cursor.png" alt="Cursor CLI started by vp run cursor, waiting for the first login." loading="lazy" width="866" height="629">
+        <figcaption>Cursor CLI on its first start, waiting for the login.</figcaption>
+      </figure>
+      <h3>Warp</h3>
+      <p><code>vp run warp</code>, or <code>vp w</code>, starts the Warp Agent CLI,
+      which runs the agent from the Warp terminal app in any terminal. On the first
+      start it shows a verification link and a code; open the link in the browser on
+      your host, or set <code>WARP_API_KEY</code> to skip the login. Warp keeps its
+      login only in a system keyring, which a container does not have, so the image
+      starts a private one with its files on the config mount, and the login is
+      remembered across runs. Warp is interactive only: it takes no prompt argument and
+      has no ACP server, so <code>vp task create warp</code> and <code>--acp</code> are
+      not available.</p>
+      <figure class="demo-frame">
+        <img src="../../screenshots/warp.png" alt="Warp Agent CLI started by vp run warp, signed in, with the workspace's AGENTS.md and a skill loaded." loading="lazy" width="866" height="629">
+        <figcaption>Warp signed in, with the workspace's <code>AGENTS.md</code> and a skill loaded.</figcaption>
+      </figure>
+      <h3>Tasks, editors and skills</h3>
+      <p>Cline, Junie and Cursor also run as background tasks, and inside your editor
+      with <code>--acp</code>, which now covers fourteen agents:</p>
+      <pre class="code-block"><code>vp task create cline "fix the failing test" --ikwid
+vp task create junie "summarize the README"
+vp task create cursor "summarize the README"</code></pre>
+      <p>Skills installed with <code>vp skills</code> are mounted for all four. Each of
+      them brings its own model setup, so VibePod's <code>llm</code> settings and
+      <code>--provider</code> do not apply to them.</p>
       <h2>Bring the setup you already have</h2>
       <p><code>vp import</code> copies an agent's configuration from your home directory
       into a VibePod profile, mapped to the paths the agent reads inside its container:
@@ -126,6 +147,78 @@ vp import claude --with-credentials</code></pre>
       keep a label that containers may not access, and <code>selinux_relabel: true</code>
       opts in to relabeling the mounts VibePod owns. Relabeling is permanent, so read the
       <a href="../../docs/quickstart/#selinux">SELinux notes</a> first.</p>
+      <h2>Smaller additions</h2>
+      <ul>
+        <li><code>vp skills export</code> copies installed skills out as plain
+        <code>SKILL.md</code> folders, so you can commit them to a repository or hand
+        them to someone else.</li>
+        <li>A provider with an API key can use a plain <code>http://</code> endpoint
+        after an explicit opt-in, for LAN servers such as
+        <code>llama-server --api-key</code>. The opt-in stays in your local
+        configuration and is not part of a provider export.</li>
+        <li>Session and task records keep the image tag, the image ID and the agent
+        version, so you can tell later which build did a run.</li>
+        <li>Python 3.15 is tested and declared, and the docs cover
+        <code>uv tool install vibepod</code>.</li>
+        <li>The docs have new pages on
+        <a href="../../docs/integrations/">external tools</a> (LiteLLM, Headroom, RTK,
+        Graphify) and on <a href="../../docs/adding-an-agent/">adding an agent</a>, and
+        describe how to keep
+        <a href="../../docs/agents/#claude-memory-and-sessions">Claude's project memory</a>
+        in the repository.</li>
+      </ul>
+      <h2>Fixes</h2>
+      <ul>
+        <li><strong>macOS:</strong> an agent started inside a herdr pane no longer fails
+        to launch. The herdr socket cannot be bind-mounted off Linux, and VibePod now
+        skips that mount on every engine there, Docker Desktop and Colima as well as
+        Podman machine.</li>
+        <li><strong>Rootless Podman:</strong> Hermes starts. Earlier releases rejected
+        the launch; VibePod now maps your host user onto Hermes's runtime user, so the
+        files in your workspace stay yours. This needs Podman 4.3 or newer.</li>
+        <li><strong>Native Windows:</strong> attaching to an agent and
+        <code>--acp</code> work over the named pipes of Docker Desktop and Podman
+        Desktop, where they crashed before, and keystrokes are no longer doubled. A few
+        keys do not reach the agent yet; see the
+        <a href="../../docs/quickstart/#native-windows">Windows notes</a>.</li>
+        <li><strong>Pi tasks:</strong> <code>vp task create pi</code> works. Pi runs in
+        its JSON mode, and tasks trust the project's local files unless you have
+        chosen a trust setting yourself.</li>
+      </ul>
+      <h2>In testing: board automation</h2>
+      <p class="post-note">Board automation and its review workers ship with 0.25.0,
+      but they are still in testing, and commands and options may still change.</p>
+      <p><code>vp board work</code> connects VibePod to a
+      <a href="https://github.com/VibePod/vibepod-board" target="_blank" rel="noreferrer">vibepod-board</a>
+      project. It claims the next planned task whose dependencies are done, checks the
+      task's branch out in a clone next to your repository, and runs the agent headless
+      in that clone with the task as its prompt. An optional verify command, such as
+      the test suite, has to pass before the task moves to Review:</p>
+      <pre class="code-block"><code>vp config allow-dir ~/src/app       # once per repository
+vp board work VP --agent claude \
+  --repo ~/src/app \
+  --verify "python -m pytest -q" \
+  --ikwid</code></pre>
+      <p>Every run adds a report to its task: the agent's summary, its commits, the
+      verify output and the duration. An agent that finds a task unclear asks instead of
+      guessing: the task is blocked with the question on its card, and the next run gets
+      the answer in its prompt. With <code>--poll 2m</code> the worker waits for new
+      tasks instead of exiting. The board token is never passed to the agent's
+      container.</p>
+      <h3>Review workers and the pull request</h3>
+      <p>Started with <code>--mode review</code>, a worker takes the tasks in Review
+      instead and decides whether each one needs rework or is ready for its pull
+      request. Several reviewers, with different agents, can review the same task.
+      Feedback reaches the implementing agent in its next prompt, and the rework
+      continues on the same branch:</p>
+      <pre class="code-block"><code>vp board work VP --agent codex --repo ~/src/app --poll 2m
+vp board work VP --agent claude --repo ~/src/app --poll 2m --mode review</code></pre>
+      <p>Workers commit on local branches. Once a task has the approvals it needs, the
+      approving worker pushes the commit it approved to the task's branch on GitHub, and
+      <strong>Open PR</strong> on the board is prefilled with the title and description
+      the implementing agent suggested. A push is never forced, uses the git credentials
+      of the user the worker runs as, and can be turned off with
+      <code>--no-push</code>.</p>
       <h2>Upgrading</h2>
       <pre class="code-block"><code>python -m pip install --upgrade vibepod
 docker pull vibepod/proxy:latest</code></pre>
@@ -138,28 +231,29 @@ docker pull vibepod/proxy:latest</code></pre>
       working. Session and task databases are migrated on first use.</p>
       <h2>Release details</h2>
       <ul>
-        <li>New <code>vp board work</code> command with implementing and reviewing workers, configured under <code>board:</code> or with <code>VP_BOARD_URL</code> and <code>VP_BOARD_TOKEN</code>.</li>
         <li>New agents <code>cline</code>, <code>junie</code>, <code>cursor</code> and <code>warp</code>.</li>
         <li>New <code>vp import</code> for host agent setups and profile-to-profile copies.</li>
-        <li>New <code>vp skills export</code> copies installed skills out as plain <code>SKILL.md</code> folders.</li>
-        <li><code>vp task create pi</code> works: Pi runs in its JSON mode.</li>
         <li>Same-path volume shorthand, <code>vp run --workspace-system-path</code> and opt-in SELinux relabeling.</li>
-        <li>Hermes runs on rootless Podman.</li>
-        <li>On native Windows, attaching to an agent and <code>--acp</code> work over the named pipes of Docker Desktop and Podman Desktop. A few keys do not reach the agent yet; see the <a href="../../docs/quickstart/#native-windows">Windows notes</a>.</li>
-        <li>A provider with an API key can use a plain <code>http://</code> endpoint after an explicit opt-in, for LAN servers such as <code>llama-server --api-key</code>.</li>
+        <li>New <code>vp skills export</code> copies installed skills out as plain <code>SKILL.md</code> folders.</li>
+        <li>A provider with an API key can use a plain <code>http://</code> endpoint after an explicit opt-in.</li>
         <li>Session and task records keep the image tag, the image ID and the agent version.</li>
+        <li>The herdr socket mount is skipped on every container engine off Linux.</li>
+        <li>Hermes runs on rootless Podman.</li>
+        <li>On native Windows, attaching to an agent and <code>--acp</code> work over named pipes.</li>
+        <li><code>vp task create pi</code> works: Pi runs in its JSON mode.</li>
         <li>vibepod-proxy 0.6.0 or newer is required. A custom proxy image needs the label <code>io.vibepod.proxy.version</code>.</li>
         <li>Python 3.15 is tested and declared, and the docs cover <code>uv tool install vibepod</code>.</li>
         <li>New docs pages: <a href="../../docs/integrations/">external tools</a> (LiteLLM, Headroom, RTK, Graphify) and <a href="../../docs/adding-an-agent/">adding an agent</a>.</li>
+        <li>In testing: <code>vp board work</code> with implementing and reviewing workers, configured under <code>board:</code> or with <code>VP_BOARD_URL</code> and <code>VP_BOARD_TOKEN</code>.</li>
         <li>Thanks to <a href="https://github.com/janpipek" target="_blank" rel="noreferrer">@janpipek</a> (SELinux relabeling), <a href="https://github.com/ReimarBauer" target="_blank" rel="noreferrer">@ReimarBauer</a> (Windows attach), <a href="https://github.com/sguter90" target="_blank" rel="noreferrer">@sguter90</a> (profile docs) and <a href="https://github.com/Qrytics" target="_blank" rel="noreferrer">@Qrytics</a> (proxy policy validation) for their contributions.</li>
       </ul>
       <h2>Related links</h2>
       <ul>
-        <li><a href="../../docs/board/">Docs: board automation</a></li>
-        <li><a href="https://github.com/VibePod/vibepod-board" target="_blank" rel="noreferrer">VibePod/vibepod-board on GitHub</a></li>
         <li><a href="../../docs/agents/">Docs: agents</a></li>
         <li><a href="../../docs/import/">Docs: importing an existing setup</a></li>
         <li><a href="../../docs/configuration/#mounting-volumes">Docs: mounting volumes</a></li>
+        <li><a href="../../docs/board/">Docs: board automation</a></li>
+        <li><a href="https://github.com/VibePod/vibepod-board" target="_blank" rel="noreferrer">VibePod/vibepod-board on GitHub</a></li>
         <li><a href="https://github.com/VibePod/vibepod-cli/releases/tag/0.25.0" target="_blank" rel="noreferrer">0.25.0 release on GitHub</a></li>
       </ul>
     </article>

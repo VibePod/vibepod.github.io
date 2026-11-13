@@ -382,6 +382,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#native-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1201,6 +1212,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#native-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1470,40 +1492,67 @@ a project you did not write. It still never relabels:</p>
 <p>Detection reads <code>/sys/fs/selinux/enforce</code> on the machine running <code>vp</code>, so a
 remote <code>DOCKER_HOST</code> whose engine runs on a different (SELinux) host is not
 detected.</p>
+<h3 id="native-windows">Native Windows<a class="headerlink" href="#native-windows" title="Permanent link">&para;</a></h3>
+<p><code>vp</code> runs natively on Windows against Docker Desktop or Podman Desktop (their
+default <code>npipe://</code> connection). Use Windows Terminal or the console host; the
+console is switched to raw input while an agent is attached and restored
+afterwards.</p>
+<p>Without <code>DOCKER_HOST</code>, <code>vp</code> connects to the default pipe
+<code>npipe:////./pipe/docker_engine</code>. Podman serves that pipe only while Docker
+Desktop does not hold it; with both installed and Docker Desktop running, <code>vp</code>
+uses Docker. Podman's socket auto-discovery does not apply on Windows. To use
+Podman then, point <code>DOCKER_HOST</code> at the pipe of the machine you run (<code>podman
+machine list</code> shows its name):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$machine</span> <span class="p">=</span> <span class="s2">"podman-machine-default"</span>   <span class="c"># your machine's name</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">$pipe</span> <span class="p">=</span> <span class="n">podman</span> <span class="n">machine</span> <span class="n">inspect</span> <span class="nv">$machine</span> <span class="p">-</span><span class="n">-format</span> <span class="s1">'{{.ConnectionInfo.PodmanPipe.Path}}'</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">"No pipe for Podman machine '$machine'; check podman machine list"</span> <span class="p">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c"># \\.\pipe\&lt;name&gt; becomes npipe:////./pipe/&lt;name&gt;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">$env:DOCKER_HOST</span> <span class="p">=</span> <span class="s2">"npipe://"</span> <span class="p">+</span> <span class="p">(</span><span class="nv">$pipe</span> <span class="o">-replace</span> <span class="s1">'\\'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Known keyboard limitations on native Windows</p>
+<p>Console input is still read key by key and translated to terminal
+sequences, so a few keys do not reach the agent correctly yet: <code>à</code> can
+swallow the next key (or turn <code>àH</code> into Arrow Up), emoji arrive as <code>??</code>,
+and Alt+key combinations are ignored. Typing everything else, including
+arrows, Home/End, PgUp/PgDn, F1–F12, Shift+Tab and Ctrl+arrows, works.
+The rewrite is tracked in <a href="https://github.com/VibePod/vibepod-cli/issues/242">#242</a>.
+Running <code>vp</code> inside WSL2 avoids these limitations.</p>
+</div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">pip</label><label for="__tabbed_3_2">uv</label><label for="__tabbed_3_3">Homebrew</label><label for="__tabbed_3_4">conda / mamba</label><label for="__tabbed_3_5">pixi</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pip<span class="w"> </span>install<span class="w"> </span>vibepod
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>vibepod
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>brew<span class="w"> </span>install<span class="w"> </span>vibepod/vibepod/vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>brew<span class="w"> </span>install<span class="w"> </span>vibepod/vibepod/vibepod
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>vibepod
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># or</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>mamba<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>vibepod
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># or</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>mamba<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>vibepod
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pixi<span class="w"> </span>global<span class="w"> </span>install<span class="w"> </span>vibepod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pixi<span class="w"> </span>global<span class="w"> </span>install<span class="w"> </span>vibepod
 </code></pre></div>
 </div>
 </div>
 </div>
 <p>Verify the installation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>vp<span class="w"> </span>version
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>vp<span class="w"> </span>version
 </code></pre></div>
 <h2 id="run-your-first-agent">Run your first agent<a class="headerlink" href="#run-your-first-agent" title="Permanent link">&para;</a></h2>
 <p>Navigate to the project you want to work on, then run an agent:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-project
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-project
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>vp<span class="w"> </span>run<span class="w"> </span>claude
 </code></pre></div>
 <p>VibePod will:</p>
 <ol>
@@ -1523,47 +1572,47 @@ shortcut; Pi uses <code>vp pi</code> because <code>vp p</code> is assigned to Co
 <code>vp n</code>, Tau uses <code>vp t</code>, Jcode uses <code>vp j</code>, Freebuff uses <code>vp fb</code>,
 Qwen uses <code>vp q</code>, Cline uses <code>vp cl</code>, Junie uses <code>vp ju</code>, Cursor uses <code>vp cu</code>, and Warp uses <code>vp w</code>. DeepSeek Harness uses <code>vp ds</code> and opens a Web UI — the URL
 is printed after start.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>vp<span class="w"> </span>c<span class="w">        </span><span class="c1"># shortcut</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>vp<span class="w"> </span>run<span class="w"> </span>c<span class="w">    </span><span class="c1"># shortcut with run also works</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>claude<span class="w">   </span><span class="c1"># full name</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>vp<span class="w"> </span>c<span class="w">        </span><span class="c1"># shortcut</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>vp<span class="w"> </span>run<span class="w"> </span>c<span class="w">    </span><span class="c1"># shortcut with run also works</span>
 </code></pre></div>
 <h2 id="point-at-a-different-workspace">Point at a different workspace<a class="headerlink" href="#point-at-a-different-workspace" title="Permanent link">&para;</a></h2>
 <p>Use <code>-w</code> / <code>--workspace</code> to target any directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-w<span class="w"> </span>~/other-project
 </code></pre></div>
 <h2 id="pass-arguments-to-the-agent">Pass arguments to the agent<a class="headerlink" href="#pass-arguments-to-the-agent" title="Permanent link">&para;</a></h2>
 <p>Arguments after the agent name are forwarded to the agent command inside the container:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>&lt;agent-args&gt;
 </code></pre></div>
 <p>When forwarding flags to the agent, use <code>--</code> to stop VibePod option parsing:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>run<span class="w"> </span>&lt;agent&gt;<span class="w"> </span>--<span class="w"> </span>&lt;agent-flag&gt;<span class="w"> </span>&lt;value&gt;
 </code></pre></div>
 <h2 id="bootstrap-a-project-config">Bootstrap a project config<a class="headerlink" href="#bootstrap-a-project-config" title="Permanent link">&para;</a></h2>
 <p>Create a project-level config file that you can extend later:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init
 </code></pre></div>
 <p>This creates <code>.vibepod/config.yaml</code> in your current directory with a minimal starter:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
 <p>Add a specific agent block into the project config with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>claude
 </code></pre></div>
 <p>If that agent is already configured under <code>agents</code>, the command exits without changing the file.</p>
 <h2 id="run-in-the-background">Run in the background<a class="headerlink" href="#run-in-the-background" title="Permanent link">&para;</a></h2>
 <p>Use <code>-d</code> / <code>--detach</code> to start the container without attaching your terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>run<span class="w"> </span>claude<span class="w"> </span>-d
 </code></pre></div>
 <p>Check which agents are running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>list<span class="w"> </span>--running
 </code></pre></div>
 <p>Stop it later with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>stop<span class="w"> </span>claude
 </code></pre></div>
 <p>For more details on detached mode workflows, see <a href="../agents/#detached-mode">Agents &gt; Detached mode</a>.</p>
 <h2 id="add-reusable-skills">Add reusable skills<a class="headerlink" href="#add-reusable-skills" title="Permanent link">&para;</a></h2>
 <p>Skills are reusable prompt/recipe folders that supported agents can discover at
 runtime. Install one with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>vp<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>github:vibepod/vibepod-skills//skills/researcher<span class="w"> </span>--scope<span class="w"> </span>user
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>github:vibepod/vibepod-skills//skills/researcher<span class="w"> </span>--scope<span class="w"> </span>user
 </code></pre></div>
 <p>Use <code>--scope local</code> to install into the current project, or omit it to use the
 normal scope auto-detection. See <a href="../skills/">Skills</a> for scopes, GitHub
@@ -1572,7 +1621,7 @@ URL installs, bundles, and update/sync behavior.</p>
 <a href="https://github.com/VibePod/vibepod-skills"><code>VibePod/vibepod-skills</code></a>.</p>
 <h2 id="view-the-session-log-ui">View the session log UI<a class="headerlink" href="#view-the-session-log-ui" title="Permanent link">&para;</a></h2>
 <p>VibePod records every session and proxied HTTP request. Open the Datasette UI with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>vp<span class="w"> </span>logs<span class="w"> </span>start
 </code></pre></div>
 <p>This starts a Datasette container and opens <code>http://localhost:8001</code> in your browser.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>

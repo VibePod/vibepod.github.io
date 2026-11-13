@@ -127,6 +127,12 @@
       </div>
       <div class="shell news-grid compact">
         <article class="news-card" data-reveal>
+          <p class="news-meta">Nov 13, 2026 · Release · CLI</p>
+          <h3>VibePod CLI 0.25: agents that work through your board</h3>
+          <p><code>vp board work</code> lets an agent take the planned tasks of a vibepod-board project, implement each one on its own branch, and hand it over for review. Plus Cline, Junie, Cursor and Warp as new agents, and <code>vp import</code> for the setup you already have.</p>
+          <a class="card-link" href="news/vibepod-cli-0-25/">Read post</a>
+        </article>
+        <article class="news-card" data-reveal>
           <p class="news-meta">Sep 25, 2026 · Release · CLI</p>
           <h3>VibePod CLI 0.24: bring your own model provider</h3>
           <p>Register any OpenAI- or Anthropic-compatible endpoint or local model server once, import it from the new provider templates repository, and route seven agents to it with <code>--provider</code>. Plus custom volumes and <code>vp skills cache clear</code>.</p>
@@ -137,12 +143,6 @@
           <h3>VibePod CLI 0.23: containerized agents inside your editor</h3>
           <p>ACP mode puts eleven containerized agents in the AI panel of Zed, PyCharm, or VS Code with isolation, profiles, overlays, and proxy metrics intact, and Nous Research's Hermes joins as <code>hermes</code>.</p>
           <a class="card-link" href="news/vibepod-cli-0-23/">Read post</a>
-        </article>
-        <article class="news-card" data-reveal>
-          <p class="news-meta">Sep 4, 2026 · Release · CLI</p>
-          <h3>VibePod CLI 0.22: what every agent call costs</h3>
-          <p>Shipping with vibepod-datasette 0.6.0 and vibepod-proxy 0.5.0: every captured model call is priced from published rates, and the spend is broken down by agent, workspace, credential profile, and single run.</p>
-          <a class="card-link" href="news/vibepod-cli-0-22/">Read post</a>
         </article>
       </div>
     </section>
@@ -205,7 +205,7 @@ vp logs start</code></pre>
         </div>
         <figure class="demo-frame">
 <pre class="code-block"><code>$ vp version
-VibePod CLI: 0.22.0
+VibePod CLI: 0.25.0
 Python:      3.12.3
 Docker:      28.1.1
 

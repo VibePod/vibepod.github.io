@@ -1361,9 +1361,13 @@ needs <code>--with-credentials</code> as well.</p>
 <td><code>cursor</code></td>
 <td><code>~/.cursor</code>, <code>~/.config/cursor</code></td>
 </tr>
+<tr>
+<td><code>warp</code></td>
+<td><code>~/.config/warp-terminal/cli</code>, <code>~/.warp/custom_model_routers</code></td>
+</tr>
 </tbody>
 </table>
-<p>Codex, opencode, Auggie, Tau, jcode, dsh, Hermes, Cline and Cursor also read skills from the
+<p>Codex, opencode, Auggie, Tau, jcode, dsh, Hermes, Cline, Cursor and Warp also read skills from the
 shared <code>~/.agents/skills</code> directory, so their import copies it too (category
 <code>skills</code>). Freebuff reads that directory as well, but outside its persisted
 config mount, so it is not imported for Freebuff.</p>
@@ -1374,7 +1378,10 @@ worktrees under <code>~/.vibe/worktrees</code> are never imported, and MCP OAuth
 keeps in the OS keyring cannot be copied: log in again inside the pod.</p>
 <p>Junie honours <code>JUNIE_HOME</code> the same way. <code>~/.cursor</code> is shared with the Cursor
 IDE, so <code>vp import cursor</code> copies only the CLI's own files and never the IDE's
-<code>~/.cursor/extensions</code>.</p>
+<code>~/.cursor/extensions</code>. <code>~/.config/warp-terminal</code> is likewise shared with the
+Warp terminal app, so <code>vp import warp</code> copies only the Agent CLI's <code>cli</code>
+subdirectory and the custom model routers. On macOS the Agent CLI keeps its
+settings in <code>~/.warp_cli</code> instead, which is not imported.</p>
 <h2 id="profiles">Profiles<a class="headerlink" href="#profiles" title="Permanent link">&para;</a></h2>
 <p>By default the import writes into the active <a href="../profiles/">profile</a>. To send it
 somewhere else, or to copy between profiles:</p>
@@ -1432,7 +1439,10 @@ files under <code>~/.config/jcode</code>), Freebuff
 (<code>~/.junie/secure_credentials.json</code>) and the Cursor CLI on Linux
 (<code>~/.config/cursor/auth.json</code>) do keep credentials on disk, so
 <code>--with-credentials</code> works for them. On macOS the Cursor CLI and Junie may use
-the Keychain instead; log in inside the pod when nothing is copied.</p>
+the Keychain instead; log in inside the pod when nothing is copied. The Warp
+Agent CLI keeps its login only in the system keychain (Secret Service on Linux,
+Keychain on macOS) on every platform, so there is never a credential file to
+copy: log in inside the pod.</p>
 <h2 id="model-providers">Model providers<a class="headerlink" href="#model-providers" title="Permanent link">&para;</a></h2>
 <p>The <code>models</code> category copies each agent's own provider files (Pi's
 <code>models.json</code>, Tau's <code>providers.json</code> and <code>catalog.toml</code>, …) as they are. To

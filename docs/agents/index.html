@@ -1049,6 +1049,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#warp-agent-cli-warp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warp Agent CLI (Warp)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2274,6 +2285,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#warp-agent-cli-warp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warp Agent CLI (Warp)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2435,6 +2457,12 @@
 <td>Anysphere</td>
 <td><code>vp cu</code></td>
 <td><code>vibepod/cursor:latest</code></td>
+</tr>
+<tr>
+<td><code>warp</code></td>
+<td>Warp</td>
+<td><code>vp w</code></td>
+<td><code>vibepod/warp:latest</code></td>
 </tr>
 </tbody>
 </table>
@@ -2693,7 +2721,7 @@ project env settings, or pass them explicitly with <code>vp run -e KEY=value</co
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myorg/my-claude:dev</span>
 </code></pre></div>
 <h2 id="image-customization-workflows">Image customization workflows<a class="headerlink" href="#image-customization-workflows" title="Permanent link">&para;</a></h2>
-<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>vibe</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>, <code>cline</code>, <code>junie</code>, <code>cursor</code>). The CLI also supports the aliases <code>devstral</code> (→ <code>vibe</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
+<p>VibePod has a fixed set of supported agent IDs (<code>claude</code>, <code>gemini</code>, <code>opencode</code>, <code>vibe</code>, <code>auggie</code>, <code>copilot</code>, <code>codex</code>, <code>pi</code>, <code>agy</code>, <code>tau</code>, <code>jcode</code>, <code>freebuff</code>, <code>qwen</code>, <code>dsh</code>, <code>hermes</code>, <code>cline</code>, <code>junie</code>, <code>cursor</code>, <code>warp</code>). The CLI also supports the aliases <code>devstral</code> (→ <code>vibe</code>), <code>qwen-cli</code> (→ <code>qwen</code>), and <code>deepseek</code> / <code>deepseek-harness</code> (→ <code>dsh</code>). Image customization means changing the image used for one of those IDs.</p>
 <h3 id="1-extend-an-existing-image-for-an-agent">1. Extend an existing image for an agent<a class="headerlink" href="#1-extend-an-existing-image-for-an-agent" title="Permanent link">&para;</a></h3>
 <p>Example: add tools to the default Claude image.</p>
 <ol>
@@ -2850,6 +2878,10 @@ Codex both accept model flags, but their exact flag names and values differ.</p>
 <tr>
 <td><code>cursor</code></td>
 <td><code>--force</code></td>
+</tr>
+<tr>
+<td><code>warp</code></td>
+<td><code>--auto-approve</code></td>
 </tr>
 </tbody>
 </table>
@@ -3044,7 +3076,7 @@ example:</p>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>claude --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
 </code></pre></div>
 <p>When VibePod recognizes such a hint in the session output (supported for
-Claude, Codex, Pi, Copilot, Jcode, Freebuff, Hermes, Cline, Junie, and Cursor), it
+Claude, Codex, Pi, Copilot, Jcode, Freebuff, Hermes, Cline, Junie, Cursor, and Warp), it
 prints the equivalent VibePod command after the agent exits:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>Resume this session with:
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>  vp run claude -- --resume 39bf1a93-ea1f-4b0a-a894-0a662e5a1d4e
@@ -3932,6 +3964,84 @@ and <code>~/.claude/skills/</code>), so skills installed via <code>vp skills</co
 every start. That is the CLI's only switch for its background self-update,
 which would otherwise download each new ~550 MB package into the config mount
 while the image keeps running its own pinned copy.</p>
+<h3 id="warp-agent-cli-warp">Warp Agent CLI (Warp)<a class="headerlink" href="#warp-agent-cli-warp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp<span class="w"> </span>run<span class="w"> </span>warp<span class="w">   </span><span class="c1"># or: vp w</span>
+</code></pre></div>
+<p><img alt="Warp Agent CLI started by vp run warp, signed in, with the workspace's AGENTS.md and a skill loaded" src="../assets/warp.png" /></p>
+<p>The Warp Agent CLI (<code>warp</code>) runs the agent from the Warp terminal app in any
+terminal. It is closed source and ships as a single binary from
+<code>releases.warp.dev</code>; the image pins one build and tracks new ones from Warp's
+download endpoint. Models are served through your Warp account (<code>/model</code>), and
+its bring-your-own-key support (<code>/api-keys</code>) takes OpenAI, Anthropic and Google
+keys but no custom endpoint, so VibePod's global <code>llm</code> settings and
+<code>--provider</code> do not apply to it. State is persisted under
+<code>~/.config/vibepod/agents/warp/</code>, mounted at <code>/config</code> inside the container
+(<code>HOME=/config</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Path in container</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config/.config/warp-terminal/cli/settings.toml</code></td>
+<td>CLI settings and execution profiles (permissions, command denylist)</td>
+</tr>
+<tr>
+<td><code>/config/.local/state/warp-terminal/</code></td>
+<td>Conversation database and logs (<code>warp-cli/warp.log</code>)</td>
+</tr>
+<tr>
+<td><code>/config/.local/share/keyrings/</code></td>
+<td>Keyring holding the login, provider API keys and MCP credentials</td>
+</tr>
+<tr>
+<td><code>/config/.agents/skills/</code>, <code>/config/.agents/AGENTS.md</code></td>
+<td>Personal skills and global rules</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication.</strong> Start the agent and follow the device login: the CLI shows
+a verification link and a code, and opening the link in the host browser is
+enough (no callback port is involved). The login is remembered across runs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>vp<span class="w"> </span>run<span class="w"> </span>warp
+</code></pre></div>
+<p>Or use a Warp API key instead, which skips the login:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-98-2" name="__codelineno-98-2" href="#__codelineno-98-2"></a><span class="w">  </span><span class="nt">warp</span><span class="p">:</span>
+<a id="__codelineno-98-3" name="__codelineno-98-3" href="#__codelineno-98-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-98-4" name="__codelineno-98-4" href="#__codelineno-98-4"></a><span class="w">      </span><span class="nt">WARP_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-api-key&gt;</span>
+</code></pre></div>
+<p>Or per run: <code>vp run warp -e WARP_API_KEY=&lt;your-api-key&gt;</code>.</p>
+<p><strong>Keyring.</strong> Warp stores its login only in the Secret Service keyring and has
+no file fallback, and a container has neither a session bus nor a keyring. The
+image therefore starts a private D-Bus session bus and a GNOME keyring (secrets
+component only) before the agent, unlocked automatically, with its files on
+the config mount. That keyring is protected by the permissions of the config
+directory, like the credential files other agents keep there. Set
+<code>VP_WARP_KEYRING=0</code> to run without it; Warp then asks for the login on every
+start unless <code>WARP_API_KEY</code> is set.</p>
+<p><strong>Proxy and TLS.</strong> Warp honours <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code> and <code>SSL_CERT_FILE</code>
+natively, which VibePod supplies when the proxy is enabled. Besides its own
+API, Warp sends telemetry to RudderStack and Sentry on start; both show up in
+the proxy log and can be blocked with the proxy filter.</p>
+<p><strong>IKWID mode.</strong> <code>--ikwid</code> adds <code>--auto-approve</code>, which starts every new
+conversation with auto-approve on. By default that also bypasses Warp's command
+denylist; set <code>auto_approve_bypasses_command_denylist = false</code> under
+<code>[agents.warp_agent.other]</code> in <code>settings.toml</code> to keep the denylist in force:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>vp<span class="w"> </span>run<span class="w"> </span>warp<span class="w"> </span>--ikwid
+</code></pre></div>
+<p><strong>Interactive only.</strong> The Warp Agent CLI takes no prompt argument and has no
+print mode or ACP server, so task mode (<code>vp task create warp</code>) and
+<code>vp run warp --acp</code> are not available.</p>
+<p><strong>Skills.</strong> Warp scans <code>~/.agents/skills/</code>, so skills installed via
+<code>vp skills</code> are mounted at <code>/config/.agents/skills/&lt;id&gt;</code> and picked up
+automatically.</p>
+<p>VibePod sets <code>WARP_TUI_DISABLE_AUTOUPDATE=1</code>. The background self-update would
+otherwise stage each new ~250 MB build into the config mount while the image
+keeps running its own pinned copy.</p>
 <h2 id="hermes-agent-hermes-developer-preview">Hermes Agent (<code>hermes</code>) — developer preview<a class="headerlink" href="#hermes-agent-hermes-developer-preview" title="Permanent link">&para;</a></h2>
 <p>Hermes is Nous Research's self-improving agent: it keeps cross-session memory,
 writes its own skills, and is not primarily a coding TUI. VibePod runs its
@@ -3971,7 +4081,7 @@ you on the host. An explicit <code>HERMES_UID</code>/<code>HERMES_GID</code> (or
 other than <code>10000</code> is rejected there, since Hermes would drop to a UID
 outside that mapping.</p>
 <p><strong>Headless one-shot:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"summarize this repository"</span>
 </code></pre></div>
 <p><strong>Write sandbox.</strong> Hermes restricts its <code>write_file</code>/<code>patch</code> tools to the
 directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image ships
@@ -3979,10 +4089,10 @@ directory prefixes in <code>HERMES_WRITE_SAFE_ROOT</code>. The official image sh
 sets <code>/opt/data:/workspace</code>. With <code>--acp</code> the workspace host path is appended
 too, because editors send absolute host paths. To widen it further, extend the
 value rather than replacing it — VibePod appends to whatever you set:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a><span class="nt">agents</span><span class="p">:</span>
-<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
-<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-101-2" name="__codelineno-101-2" href="#__codelineno-101-2"></a><span class="w">  </span><span class="nt">hermes</span><span class="p">:</span>
+<a id="__codelineno-101-3" name="__codelineno-101-3" href="#__codelineno-101-3"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-101-4" name="__codelineno-101-4" href="#__codelineno-101-4"></a><span class="w">      </span><span class="nt">HERMES_WRITE_SAFE_ROOT</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/data:/workspace:/extra/path"</span>
 </code></pre></div>
 <p><strong>Editor integration.</strong> Hermes ships its own ACP adapter as the separate
 <code>hermes-acp</code> console script, which the official image already provides, so
@@ -3995,8 +4105,8 @@ Editing <code>external_dirs</code> yourself disables the seeding; VibePod never
 overwrites a value you set.</p>
 <p><strong>IKWID mode.</strong> Hermes auto-approves tool calls in YOLO mode, which <code>--ikwid</code>
 enables via <code>--yolo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
-<a id="__codelineno-98-2" name="__codelineno-98-2" href="#__codelineno-98-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>vp<span class="w"> </span>run<span class="w"> </span>hermes<span class="w"> </span>--ikwid
+<a id="__codelineno-102-2" name="__codelineno-102-2" href="#__codelineno-102-2"></a>vp<span class="w"> </span>task<span class="w"> </span>create<span class="w"> </span>hermes<span class="w"> </span><span class="s2">"fix the failing test"</span><span class="w"> </span>--ikwid
 </code></pre></div>
 
 

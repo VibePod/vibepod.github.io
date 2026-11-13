@@ -347,7 +347,8 @@ if (lightbox) {
     { cmd: "hermes", name: "Hermes Agent" },
     { cmd: "cline", name: "Cline" },
     { cmd: "junie", name: "JetBrains Junie" },
-    { cmd: "cursor", name: "Cursor CLI" }
+    { cmd: "cursor", name: "Cursor CLI" },
+    { cmd: "warp", name: "Warp Agent CLI" }
   ];
 
   const buildScript = (agent) => [

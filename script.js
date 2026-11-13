@@ -80,7 +80,10 @@ if (prefersReducedMotion) {
     },
     {
       root: null,
-      threshold: 0.14,
+      // Reveal as soon as a block's top edge is on screen. A ratio threshold
+      // never fires for a block more than ~7 times the viewport height, such
+      // as a long release post on a phone, so that block stayed invisible.
+      threshold: 0,
       rootMargin: "0px 0px -24px 0px"
     }
   );
